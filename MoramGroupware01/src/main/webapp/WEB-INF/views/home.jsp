@@ -19,8 +19,14 @@
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css' />
+	
+	<!-- 날씨 css -->
+<link href="<c:url value="/resources/assets/css/weather.css"/>"
+	rel="stylesheet" />
+	
 </head>
 <body>
+	<div id="login_id" data-id="${id }" style="display: hidden;"></div>
 	<div id="wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="adjust-nav">
@@ -139,24 +145,60 @@
 				<div class="row">
 					<div class="col-md-12">
 						      <h2>${name}님,</h2>   
-                        <h5> ♡반갑습니당. 오늘하루도 힘내십시오 ♡ </h5>
+                        <h5> ♡★시공의 폭풍★시공의 폭풍으로 당신을 초대합니다!♠하스스톤 뒷면♠&☞레전더리 高級레스토랑☜의 음식 지급! 지금 이 기회를 놓지지 마세요!☞ ☎ h t t p://k r. b a t t l e . n e t /h e r e s/☎ ♡ </h5>
 					</div>
 				</div>
 				<!-- /. ROW  -->
 				<hr />
 				
+				
+				
 				<div class="row">
 					<div class="col-md-3 col-sm-6 col-xs-6">
 						<div class="panel panel-back noti-box">
-							<span class="icon-box bg-color-red set-icon"> <i
-								class="fa fa-envelope-o"></i>
-							</span>
-							<div class="text-box">
-								<p class="main-text">1 New</p>
-								<p class="text-muted">E-mail</p>
+							<div id = "check-inout">
+							<div id = "margin-box-weather">
+								<button class="check-in" id="check-in">입실</button>
+								<button class="check-out" id="check-out">퇴실</button>
+								<div>
+									<p id="font-garo" style="margin-top: 20px;">입실 시간 : <a id="check-in-text"></a></p>
+									
+									<p id="font-garo" style="margin-top: -10px;">퇴실 시간 : <a id="check-out-text"></a></p>
+									
+								</div>
+							</div>
 							</div>
 						</div>
 					</div>
+					
+				
+					<div id="margin-box2">
+						<div class="panel panel-back noti-box">
+<!-- 							<span class="icon-box bg-color-red set-icon"> <i
+								class="fa fa-envelope-o"></i>
+							</span> -->
+							<div style="margin-left: 10px;">
+								
+								<div class="text-box1">
+									<img id="main_img" alt="이메일" src="resources/assets/img/home_img/email.png"/>
+									<!-- <img id="main_img" alt="이메일" src="resources/assets/img/home_img/heos.png"/> -->
+									<a class="text-line1">New</a>
+								</div>
+								
+								
+								<div class="text-box2">
+									<img id="main_img" alt="리스트" src="resources/assets/img/home_img/list.png"/>
+									<a class="text-line1">뉴</a>
+								</div>
+							
+								<div class="text-box3">
+									<img id="main_img" alt="벨" src="resources/assets/img/home_img/bell.png"/>
+									<a class="text-line1">쀼</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				
 					<!-- div 추가해줘야 함.  -->
 					<!--  <div class="col-md-3 col-sm-3 col-xs-6">
                         <h5>Widget Box One</h5>
@@ -208,23 +250,40 @@
 				<!-- /. ROW  -->
 				<hr />
 				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
+					<div id="col4-layout" style="display: inline-block; float: left;">
+						<!-- <div class="form-group">
 							<label>Text Input Example</label> <input class="form-control" />
 							<p class="help-block">Help text here.</p>
+						</div> -->
+						<div class="panel panel-back noti-box">
+							<div href="#" class="weather" style="width: 300px; height: 75px;">
+								<table id="weather" style="width: 150px"></table>
+							</div>
+							
+							
+						<!-- 원형그래프 -->
+							<div class="box-layout" id="pie-chart-layout">
+								<div >
+									<div id="chart_div"></div>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+					
+					<!-- 막대그래프 -->
+					<div>
+						<div class="box-layout" id="graph-layout">
+							<div id="box-inner-items">
+								<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<label>Click to see blank page</label> <a href="blank.html"
-							target="_blank" class="btn btn-danger btn-lg btn-block">BLANK
-							PAGE</a>
-					</div>
-					<div class="col-md-4">
-						For More Examples Please visit official bootstrap website <a
-							href="http://getbootstrap.com" target="_blank">getbootstrap.com</a>
-					</div>
+	
 				</div>
 				<hr />
+				
+				<!-- 게시판 -->
 				<div class="row">
 					<div class="col-md-6">
 						<h5>Table Sample One</h5>
@@ -438,16 +497,9 @@
 					</div>
 				</div>
 				<!-- /. ROW  -->
-
-			</div>
-			<div id="test_input" class="test">
-				<input type="text">
-			</div>
-			
-			<div id="test_input1" class="test">
-				이거지요?
 			</div>
 			<!-- /. PAGE INNER  -->
+
 		</div>
 		<!-- /. PAGE WRAPPER  -->
 	</div>
@@ -466,6 +518,17 @@
 	<script src="<c:url value='resources/assets/js/jquery.metisMenu.js'/>" /></script>
 	<!-- CUSTOM SCRIPTS -->
 	<script src="<c:url value='resources/assets/js/custom.js'/>" /></script>
+	
+	
+	<!-- 날씨 정보 css,js -->
+	<script src="<c:url value='resources/assets/js/weather.js'/>" /></script>
+	
+	<!-- 파이 -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	<!-- 막대 -->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	
 	<script type="text/javascript">
 	function tabSetting() {

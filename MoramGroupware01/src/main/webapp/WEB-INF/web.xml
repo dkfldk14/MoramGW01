@@ -32,4 +32,18 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+      <!-- GET/POST 방식 이외에 
+    REST에서 사용하는 PUT, DELETE 등의 요청 방식(request method)를
+    처리하기 위한 필터 -->
+    <filter>
+        <filter-name>httpMethod</filter-name>
+        <filter-class>
+        org.springframework.web.filter.HiddenHttpMethodFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>httpMethod</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
