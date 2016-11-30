@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- SQL 문장들을 작성하는 XML 파일 -->
+  <mapper namespace="project.spring.groupware.MemberMapper">
+  
+  <select id="id_check" resultType="String">
+  	select id from moram_member where id = #{userid}
+  </select>
+  
+  <insert id="member_join">
+  	insert into moram_member(id, pwd, name, gender, birth, telephone, cellphone, address, email, mailno, addaddress, groupemail ) values(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{telephone}, #{cellphone}, #{address}, #{email}, #{mailno}, #{addaddress}, #{groupmail}) 
+  </insert>
+  
+  <select id="login_check" resultType="project.spring.groupware.member.domain.LoginVO">
+  	select id, pwd from moram_member where id = #{userid}
+  </select>
+  
+  <select id="name_select" resultType="String">
+  	select name from moram_member where id = #{userid}
+  </select>
+  </mapper>
