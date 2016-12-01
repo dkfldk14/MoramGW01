@@ -21,12 +21,13 @@ $(document).ready(function(){
 	var lon = 'lon=127.031639&';
 	var apikey = 'APPID=d91d27ae8f843ec1ae68d02ceff0d127';
 	
+	// json 날씨정보를 받을 url
 	var url='http://api.openweathermap.org/data/2.5/weather?'
 			+lat // 경도
 			+lon // 위도
 			+apikey; //api키
 	
-	$("#user-name").html(id);
+	
 	getWeather();
 	getTime();
 	
@@ -41,24 +42,25 @@ $(document).ready(function(){
 				var dateString = date.toLocaleDateString();
 				console.log(dateString);
 				
-		list += 
-		'<tr><td rowspan="5">'
-		+'<img src="resources/assets/img/ic_weather/ic_'
-		+ this.weather[0].icon 
-		+'.png"/>'
-		+'</td></tr>'
-		+ '<tr><td>'
-		+ '온도 : ' + (this.main.temp - 273.15).toFixed(1)+'℃'
-		 + '</td></tr>'
-		 + '<tr><td>'
-		 + '습도 : ' + this.main.humidity +' %'
-		 + '</td></tr>'
-		 + '<tr><td>'
-		 + '기압 : ' + this.main.pressure +' hPa'
-		 + '</td></tr>'
-		 + '<tr><td>'
-		 + '바람 : ' + this.wind.speed + ' mps'
-		 + '</td></tr>';
+				// table 안쪽에 rowspan을 줘서  1(날씨 아이콘) : 5(날씨정보)를 넣어줌 
+				list += 
+					'<tr><td rowspan="5">'
+					+'<img src="resources/assets/img/ic_weather/ic_'
+					+ this.weather[0].icon 
+					+'.png"/>'
+					+'</td></tr>'
+					+ '<tr><td>'
+					+ '온도 : ' + (this.main.temp - 273.15).toFixed(1)+'℃'
+					+ '</td></tr>'
+					+ '<tr><td>'
+					+ '습도 : ' + this.main.humidity +' %'
+					+ '</td></tr>'
+					+ '<tr><td>'
+					+ '기압 : ' + this.main.pressure +' hPa'
+					+ '</td></tr>'
+					+ '<tr><td>'
+					+ '바람 : ' + this.wind.speed + ' mps'
+					+ '</td></tr>';
 				
 			$('#weather').html(list);
 			
@@ -78,23 +80,33 @@ $(document).ready(function(){
 			var enter_time = '';
 			var leave_time = '';
 			
-			/* data의 개수만큼 function()의 내용을 반복해서 수행 */
+			// 오늘자 id에 해당하는 enter, leave가 있는지 검색
 			$(result).each(function() {
 				enter_time=this.enter;
 				leave_time=this.leave;	
-			}); /* 데이터 개수에 따른 반복문 처리 끝 */
+			}); 
 			
-			
+			// enter_time 값이 있을 경우 값을 형식을 변환해 입실버튼에 값을 넣어줌
 			if (enter_time!=''&&enter_time!=null){
 				var text = enter_time.substring(11,13)+'시 '+enter_time.substring(14,16)+'분';
+				
 				$('#check-in-text').html(text);
+				
+				// 값이 있으므로 disabled속성을 추가해 버튼 클릭을 못하게 막음
 				$("#check-in").attr("disabled","disabled");
+				
+				// enter_time 값을 초로 환산해 저장  
+				// 없어도 되는듯?? (실험전)
 				check_in_time = (enter_time.substring(11,13)*3600) + 
 									(enter_time.substring(14,16)*60);
 			}
+			
+			// leave_time 값이 있을 경우 값을 형식을 변환해 퇴실버튼에 값을 넣어줌
 			if (leave_time!=''&&enter_time!=null){
 				var text = leave_time.substring(11,13)+'시 '+leave_time.substring(14,16)+'분';
+				
 				$('#check-out-text').html(text)
+				// 값이 있으므로 disabled속성을 추가해 버튼 클릭을 못하게 막음
 				$("#check-out").attr("disabled","disabled");
 			}
 			
@@ -146,17 +158,9 @@ $(document).ready(function(){
 	
 	
 	//	check-in, out 버튼 처리
-	/*var text = $('h1').text(); 속성값 부를때 */	
 	$(".check-in").click(function(){
-		
-		
-		
-		Now = new Date();
-		time = ' '+Now.getHours()+'시 '+Now.getMinutes()+'분';
-		
-		check_in_time = (Now.getHours()*3600) + (Now.getMinutes()*60) + Now.getSeconds();
 
-		/*================================*/
+		/*======REST  post방식으로 값을 넣어 db에 insert ======*/
 		$.ajax({
 			type: 'post',
 			url: '/groupware/checktime',
@@ -174,32 +178,50 @@ $(document).ready(function(){
 				}
 			}
 		});
-		/*================================*/
+		/*===========================================*/
 		
+		//현재 시간 정보를 가져와 넣어줌
+		Now = new Date();
+		time = ' '+Now.getHours()+'시 '+Now.getMinutes()+'분';
+		
+		check_in_time = (Now.getHours()*3600) + (Now.getMinutes()*60) + Now.getSeconds();
+		
+		// 현재 시간정보를 check-in-text에 넣어줌
 		$("#check-in-text").text('');
 		$("#check-in-text").text(time);
+		// 넣었으니 disabled
 		$("#check-in").attr("disabled","disabled")
 		
 	});
 	
 	$(".check-out").click(function(){
+		// check-in-text에 시간 정보가 들어있는지 확인
 		var nulltest = $("#check-in-text").text();
+		
+		// 입실 정보가 없는 경우
 		if(nulltest==""){
 			alert("출근을 찍어주세요");
+		
+		// 입실 정보가 있는 경우
 		} else {
+			
+		//현재 시간 저장
 		Now = new Date();
 		time = ' '+Now.getHours()+'시 '+Now.getMinutes()+'분';
 		
+		// 입실 값이 들어가 있는 경우 시간을 저장
 		var check_in_check;
 		var check_in_h=0;
 		var check_in_m=0;
 		var check_in_s=0;
 		
+		// 오늘자 출석정보중 아이디가 일치하는 정보를 검색 
 		var url = '/groupware/checktime/all/today';
 		$.getJSON(url, function(result) {
 
 			$(result).each(function() {
 				
+				// 아이디가 일치할 경우 시간정보만 가져옴
 				if(id == this.id){
 					check_in_check = this.enter;
 					check_in_h = check_in_check.substring(11, 13);
@@ -209,17 +231,24 @@ $(document).ready(function(){
 					
 			});
 			
+			// 지각, 정상출근, 결석 여부
 			var attendance='';
 			
+			// 입실, 퇴실 시간 초로 환산
 			check_in_time = (check_in_h*3600) + (check_in_m*60);
 			check_out_time = (Now.getHours()*3600) + (Now.getMinutes()*60) + Now.getSeconds();
 			
+			// 9:30부터 카운트 시작
 			if(check_in_time <= 34200){
 				check_in_time = 34200;
 			}
+			// 18:30까지만 카운트
 			if(check_out_time >= 66600){
 				check_out_time = 66600;
 			}
+			
+			/*근무시간, 정상출근여부 저장*/
+			
 			// 정상출근 범위
 			if(check_in_time==34200 && check_out_time==66600){
 				business_time = 32400;
@@ -248,8 +277,10 @@ $(document).ready(function(){
 			} 
 			//alert('근무시간 : ' + check_in_time + ' || ' + check_out_time);
 			
+			// 근무시간 계산
 			business_time = check_out_time - check_in_time;
 			
+			// 새벽에 출, 퇴근을 누를경우 마이너스가 출력되는 버그 수정
 			if(business_time <= 0){
 				business_time = 0;
 			}
@@ -257,26 +288,29 @@ $(document).ready(function(){
 			
 			
 			/*================================*/
+			// 근무시간을 key value로 보내야하기 때문에 이름 변환
 			var statetime= business_time;
+			// 점수 계산
 			var score;
 			
-
-			if(statetime/3600>=9){
+			
+			if(statetime/3600>=9){//9시간 이상일 경우
 				score=5;
-			}else if(statetime/3600>=8){
+			}else if(statetime/3600>=8){//8시간 이상일 경우
 				score=4;
-			}else if(statetime/3600>=6){
+			}else if(statetime/3600>=6){//6시간 이상일 경우
 				score=3;
-			}else if(statetime/3600>=5){
+			}else if(statetime/3600>=5){// 5시간 이상일 경우
 				score=2;
-			}else if(statetime/3600>=4.5){
+			}else if(statetime/3600>=4.5){// 4시 반 이상일 경우
 				score=1;
-			}else{
+			}else{// 결석처리
 				score=0;
 			}
 			
 			console.log('statetime = ' + statetime + ', score=' + score);
 			
+			// id 정보를 찾아 업데이트
 			$.ajax({
 				type: 'put',
 				url: '/groupware/checktime/' + id,
@@ -302,6 +336,7 @@ $(document).ready(function(){
 		});
 		/*================================*/
 		
+		// 현재 시간정보를 check-in-text에 넣어줌
 		$("#check-out-text").text('');
 		$("#check-out-text").text(time);
 		$("#check-out").attr("disabled","disabled");
@@ -325,14 +360,16 @@ $(document).ready(function(){
     // instantiates the pie chart, passes in the data and
     // draws it.
     function drawChart() {
+    	// 출석체크한 전체 인원을 넣을 변수 선언
     	var size= 0;
+    	// 오늘자 출석체크한 정보들을 가져옴
     	var url = '/groupware/checktime/all/today';
 		$.getJSON(url, function(result) {
 
 			var i = 0;
 			$(result).each(function() {
+				// length값만 가져와 size에 적용
 				size = result.length;
-					
 			});
 			
 		      // Create the data table.
@@ -340,17 +377,20 @@ $(document).ready(function(){
 		      data.addColumn('string', 'Topping');
 		      data.addColumn('number', 'Slices');
 		      data.addRows([
-		        ['출근', size],
-		        ['결석', 29-size],
+		        ['출석', size],//출석인원
+		        ['결석', 29-size],//결석인원
 		        ['호준', 1]
 		      ]);
 
+		      // 타이틀, 높이, 길이 정보
 		      // Set chart options
 		      var options = {'title':'파이챠트',
 		                     'width':285,
 		                     'height':260};
 
 		      // Instantiate and draw our chart, passing in some options.
+		     
+		      // 해당 아이디에 적용
 		      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
 		      chart.draw(data, options);
 		});
@@ -361,17 +401,21 @@ $(document).ready(function(){
     
     // 막대그래프
     $(function () {
-    	
+    	// 해당 요일의 length값을 계산에 넣어줌
     	var mon=0; var tue=0; var wed=0; var thu=0; var fri=0;
     	
+    	// 로그인된 아이디와 일치하는 경우 if문에서 score를 뽑아내기 위해서 사용할 변수
     	var mon_id=''; var tue_id=''; var wed_id=''; var thu_id=''; var fri_id='';
 
-    	var enter_mon=''; var enter_tue = ''; var enter_wed = ''; var enter_thu = ''; var enter_fri = '';
+    	// 출석 요일의 년,월,일 정보를 저장할 변수
+    	var enter_mon=''; var enter_fri = '';
     	
+    	// 전체 스코어
     	var mon_score=0; var tue_score=0; var wed_score=0; var thu_score=0; var fri_score=0;
+    	// 내 아이디와 일치한 스코어
     	var mon_id_score=0; var tue_id_score=0; var wed_id_score=0; var thu_id_score=0; var fri_id_score=0;
     	
-    	
+    	// 저번주 정보만 빼와서 적용
     	var url = '/groupware/checktime/all/seven';
 		$.getJSON(url, function(result) {
 
@@ -380,8 +424,11 @@ $(document).ready(function(){
 				
 				// 꺼내온 값이 월요일일 경우
 				if (this.to_char == "월요일"){
+					// 월요일자 전체 스코어
 					mon_score += this.score;
+					// 월요일 출석 인원수
 					mon+=1;
+					// 월요일 일수 계산
 					enter_mon = this.enter;
 					// 꺼내온 값이 현재 로그인된 아이디와 같을 경우
 					if(this.id==id){
@@ -391,24 +438,24 @@ $(document).ready(function(){
 				}else if (this.to_char == "화요일"){
 					tue_score += this.score;
 					tue +=1;
-					enter_tue = this.enter;
 					if(this.id==id){
 						tue_id_score = this.score;
 					}
+				// 꺼내온 값이 수요일일 경우	
 				}else if (this.to_char== "수요일"){
 					wed_score += this.score;
 					wed +=1;
-					enter_wed = this.enter;
 					if(this.id==id){
 						wed_id_score = this.score;
 					}
+				// 꺼내온 값이 목요일일 경우
 				}else if (this.to_char == "목요일"){
 					thu_score += this.score;
 					thu +=1;
-					enter_thu = this.enter;
 					if(this.id==id){
 						thu_id_score = this.score;
 					}
+				// 꺼내온 값이 금요일일 경우
 				}else if (this.to_char == "금요일"){
 					fri_score += this.score;
 					fri +=1;
@@ -420,6 +467,7 @@ $(document).ready(function(){
 				
 			}); /* 데이터 개수에 따른 반복문 처리 끝 */
 
+			// 전체 스코어의 평균 계산
 			var mon_score_average = mon_score/mon;
 			var tue_score_average = tue_score/mon;
 			var wed_score_average = wed_score/mon;
@@ -427,24 +475,25 @@ $(document).ready(function(){
 			var fri_score_average = fri_score/mon;
 			
 			
-			
-			var mon_start = 0;
+			// 월, 일만 빼서 적용
+			var mon_start = 0; 
 			var mon_end = 11;
 			
-			var title = enter_mon.substring(mon_start, mon_end) + '(월)  ~  ' 
+			// 부제
+			var subtitle = enter_mon.substring(mon_start, mon_end) + '(월)  ~  ' 
 						+ enter_fri.substring(mon_start, mon_end) + '(금)';
 			 Highcharts.chart('container', {
 		            chart: {
 		                type: 'column'
 		            },
 		            title: {
-		                text: '노예의 낙인'
+		                text: '노예의 낙인' // 주제
 		            },
 		            subtitle: {
-		                text: title
+		                text: subtitle // 부제
 		            },
 		            xAxis: {
-		                categories: [
+		                categories: [ // 가로
 		                    'MON',
 		                    'TUE',
 		                    'WED',
@@ -455,7 +504,7 @@ $(document).ready(function(){
 		            },
 		            yAxis: {
 		                min: 0,
-		                title: {
+		                title: { // 세로 타이틀
 		                    text: '언놈이 늦었을까'
 		                }
 		            },
@@ -473,10 +522,10 @@ $(document).ready(function(){
 		                    borderWidth: 0
 		                }
 		            },
-		            series: [{
+		            series: [{// 내 스코어
 		                name: '나 너',
 		                data: [mon_id_score, tue_id_score, wed_id_score, thu_id_score, fri_id_score]
-		            }, {
+		            }, {// 평균 스코어
 		                name: '우리',
 		                data: [mon_score_average, tue_score_average, wed_score_average, thu_score_average, fri_score_average]
 		            }]

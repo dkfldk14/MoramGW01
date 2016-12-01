@@ -1,4 +1,4 @@
-package project.spring.groupware.member.interceptor;
+package project.spring.groupware.member.service;
 
 import java.util.List;
 
@@ -16,8 +16,7 @@ public class MainCheckServiceImpl implements MainCheckService {
 	
 	@Override
 	public int create(MainCheckVO vo) {
-		int result = mainDAO.create(vo);
-		return result;
+		return mainDAO.create(vo);
 	}
 
 	@Override
@@ -43,7 +42,6 @@ public class MainCheckServiceImpl implements MainCheckService {
 	
 	@Override
 	public List<MainCheckVO> selecttodayall() {
-		// TODO Auto-generated method stub
 		return mainDAO.selecttodayall();
 	}
 
