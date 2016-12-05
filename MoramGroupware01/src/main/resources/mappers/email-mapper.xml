@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+  <!-- SQL 문장들을 작성하는 XML 파일 -->
+ 
+ <mapper namespace="project.spring.groupware.EmailMapper">
+ <!-- Insert SQL 문 -->
+ <insert id="emailsend-insert">
+ insert into MORAM_GROUP_EMAIL(num, from_email, to_email, subject, content, state)
+ values(#{num}, #{from_email}, #{to_email}, #{subject}, #{content}, #{state})
+ 
+ </insert>
+ <select id="find_gwmail" resultType="project.spring.groupware.member.domain.MemberVO"> 
+ select * from moram_member
+where id = #{id}
+</select>
+
+<select id="send_emailList" resultType="project.spring.groupware.email.domain.EmailVO">
+select * from moram_group_email
+where from_email = #{groupemail} and state = 1 order by num desc
+ </select>
+ 
+<select id="delete_emailList" resultType="project.spring.groupware.email.domain.EmailVO">
+select * from moram_group_email
+where from_email = #{groupemail} and state = 2
+ </select>
+ 
+ <select id="adressList" resultType="project.spring.groupware.email.domain.EmailVO">
+	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=#{state} order by num desc) a 
+	)b where rn between #{start} and #{end}
+	</select>
+
+<select id="EmailTotalct" resultType="Integer">
+ select count(*) from moram_group_email where state=#{state} and from_email=#{from_email}
+	
+</select>
+ 
+ 
+ 
+ 
+
+ 
+ 
+ </mapper>

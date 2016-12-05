@@ -72,9 +72,10 @@
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">받은 메일함1</a></li>
-							<li><a href="#">보낸 메일함</a></li>
-							<li><a href="#">휴지통</a></li>
+							<li><a href="email/list">받은 메일함</a></li>
+							<li><a href="email/write">편지쓰기</a></li>
+							<li><a href="email/send-mailbox">보낸 메일함</a></li>
+							<li><a href="email/delete-mailbox">휴지통</a></li>
 							<li><a href="#">주소록</a></li>
 						</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
