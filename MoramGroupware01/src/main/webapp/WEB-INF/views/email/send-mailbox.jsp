@@ -363,7 +363,7 @@ div.center {text-align: center;}
 								<div class="center">
 								<ul class="pagination">
 									<c:if test="${pageMaker.hasPrev }">
-										<li><a href="${pageMaker.startPageNum -1}" >&laquo;이전</a></li>
+										<li><a href="${pageMaker.startPageNum -1}" >이전</a></li>
 									</c:if>
 
 									<c:forEach begin="${pageMaker.startPageNum }"
@@ -372,7 +372,7 @@ div.center {text-align: center;}
 									</c:forEach>
 										
 									<c:if test="${pageMaker.hasNext }">
-										<li><a href="${pageMaker.endPageNum +1 }" >다음&raquo;</a></li>
+										<li><a href="${pageMaker.endPageNum +1 }" >다음</a></li>
 									</c:if>
 								</ul>
 								</div>

@@ -48,6 +48,7 @@ public class EmailController {
 	@Autowired
 	private emailServiceDAO emailServiceDAO;
 	List<EmailVO> emaillist=null;
+	
 //	private EmailVO =new EmailVO();
 
 	private static final Logger logger = LoggerFactory.getLogger(EmailController.class);
@@ -55,7 +56,7 @@ public class EmailController {
 	private final String HOST="192.168.11.100";
 	private final String mailStoreType="pop3";
 	private final String Pwd="6557";
-	
+	private String gwEmail=null;
 	
 	@RequestMapping(value="/list")
 	public void EmailList(Model model,HttpServletRequest request){
@@ -64,7 +65,7 @@ public class EmailController {
 		model.addAttribute("userid", userid);
 		logger.info("userid"+userid);
 		MemberVO mvo=emailServiceDAO.member_one(userid);
-		String gwEmail=mvo.getGroupemail();
+		gwEmail=mvo.getGroupemail();
 		logger.info("gwEmail :  "+gwEmail);
 		
 		emaillist = new ArrayList<EmailVO>();
@@ -192,7 +193,7 @@ public class EmailController {
 		*/
 			
 			
-			delete(valueArrTest,model);
+			delete(valueArrTest,model,gwEmail);
 		
 		}
 	
@@ -204,12 +205,12 @@ public class EmailController {
 		
 	}
 	
-	private void delete(List<Integer> valueArrTest,Model model) {
+	private void delete(List<Integer> valueArrTest,Model model,String gwEmail) {
 		
 		String host = "192.168.11.100";// change accordingly
 			String mailStoreType = "pop3";
-			String user = "dkfldk14@moram.com";// change accordingly
-			String password = "dkfldk14";
+			//String user = "dkfldk14@moram.com";// change accordingly
+			//String password = "dkfldk14";
 			try {
 				// get the session object
 				Properties properties = new Properties();
@@ -223,7 +224,7 @@ public class EmailController {
 				// create the POP3 store object and connect with the pop server
 				Store store = emailSession.getStore("pop3");
 
-				store.connect(host, user, password);
+				store.connect(host, gwEmail, Pwd);
 
 				// create the folder object and open it
 				Folder emailFolder = store.getFolder("INBOX");
@@ -381,7 +382,7 @@ public class EmailController {
 		//todo- session 아이디 가져와서 하기 
 		
 		
-		String gwMail="dkfldk14@moram.com";
+		/*String gwMail="dkfldk14@moram.com";*/
 		logger.info("listpage (): page="+page);
 		   PaginationCriteria c=new PaginationCriteria();
 		   if(page!=null){
@@ -398,7 +399,7 @@ public class EmailController {
 	   	//▼ 몇번째 페이지를 보여줄것인지 조건
 	   	maker.setCriteria(c);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
-	   	maker.setTotalCount(emailServiceDAO.totalEmailct("1", gwMail));
+	   	maker.setTotalCount(emailServiceDAO.totalEmailct("1", gwEmail));
 	   	//▼ pageMaker 의 함수를 호출
 	   	maker.setPageDate();
 	   	//모델객체에 pageMaker 넘겨줌. 
@@ -415,7 +416,7 @@ public class EmailController {
 		//todo- session 아이디 가져와서 하기 
 		
 		
-		String gwMail="dkfldk14@moram.com";
+		//String gwMail="dkfldk14@moram.com";
 		logger.info("listpage (): page="+page);
 		   PaginationCriteria c=new PaginationCriteria();
 		   if(page!=null){
@@ -432,7 +433,7 @@ public class EmailController {
 	   	//▼ 몇번째 페이지를 보여줄것인지 조건
 	   	maker.setCriteria(c);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
-	   	maker.setTotalCount(emailServiceDAO.totalEmailct("2", gwMail));
+	   	maker.setTotalCount(emailServiceDAO.totalEmailct("2", gwEmail));
 	   	//▼ pageMaker 의 함수를 호출
 	   	maker.setPageDate();
 	   	//모델객체에 pageMaker 넘겨줌. 
