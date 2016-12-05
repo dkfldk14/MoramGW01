@@ -1,4 +1,4 @@
-package project.spring.groupware;
+package project.spring.groupware.member.controller;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.spring.groupware.member.domain.MainCheckVO;
-import project.spring.groupware.member.interceptor.MainCheckService;
+import project.spring.groupware.member.service.MainCheckService;
 
 
 @RestController

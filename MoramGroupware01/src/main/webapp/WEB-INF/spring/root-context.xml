@@ -50,5 +50,5 @@
 	<context:component-scan base-package="project.spring.groupware.persistence"></context:component-scan>
 	<context:component-scan base-package="project.spring.groupware.service"></context:component-scan>
 	<context:component-scan base-package="project.spring.groupware.aop"></context:component-scan>
-
+	
 </beans>
