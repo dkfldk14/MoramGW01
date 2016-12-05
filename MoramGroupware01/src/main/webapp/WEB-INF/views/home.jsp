@@ -26,7 +26,9 @@
 	
 </head>
 <body>
-	<div id="login_id" data-id="${id }" style="display: hidden;"></div>
+<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<%-- <% String id = String.valueOf(session.getAttribute("login_id")); %> --%>
+	<div id="login_id" data-id=${id } style="display: hidden;"></div>
 	<div id="wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="adjust-nav">
@@ -42,7 +44,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">See Website</a></li>
 						<li><a href="#">Open Ticket</a></li>
-						<li><a href="#">Report Bug</a></li>
+						<li><a href="/groupware/member_login/logOut">Log outs</a></li>
 					</ul>
 				</div>
 
@@ -57,13 +59,13 @@
 						align="center" /> <class ="img-responsive" /></li>
 
 
-					<li id="test" class="current"><a href="#page-inner"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
-					<li><a href="#"><i class="fa fa-edit "></i>결제<span
+					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
+					<li><a href=""><i class="fa fa-edit "></i>결제<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li id="test"><a href="#test_input">나의 결재함page</a></li>
-							<li><a href="#test_input1">미결함</a></li>
-							<li id="test"><a href="#test_input">반려함</a></li>
+							<li id="test" class="childTab"><a href="#test_input">나의 결재함page</a></li>
+							<li class="childTab"><a href="#test_input1">미결함</a></li>
+							<li id="test" class="childTab"><a href="/groupware/member_manage">반려함</a></li>
 							<li><a href="#">기결함</a></li>
 						</ul></li>
 
@@ -117,13 +119,12 @@
 							<li><a href="#">나의 이력서</a></li>
 							<li><a href="#">나의 이력관리</a></li>
 						</ul></li>
-					<li><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
+					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">사용자관리</a></li>
+							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
 							<li><a href="#">권한관리</a></li>
 							<li><a href="#">문서함관리</a></li>
-
 							<li><a href="#">결재함관리</a></li>
 						</ul></li>
 
@@ -144,7 +145,7 @@
 			<div id="page-inner" class="test">
 				<div class="row">
 					<div class="col-md-12">
-						      <h2>${name}님,</h2>   
+						      <h2>${name}님,<%=type %></h2>   
                         <h5> ♡★시공의 폭풍★시공의 폭풍으로 당신을 초대합니다!♠하스스톤 뒷면♠&☞레전더리 高級레스토랑☜의 음식 지급! 지금 이 기회를 놓지지 마세요!☞ ☎ h t t p://k r. b a t t l e . n e t /h e r e s/☎ ♡ </h5>
 					</div>
 				</div>
@@ -498,8 +499,12 @@
 				</div>
 				<!-- /. ROW  -->
 			</div>
+			
+			
+			
 			<!-- /. PAGE INNER  -->
-
+			
+			
 		</div>
 		<!-- /. PAGE WRAPPER  -->
 	</div>
@@ -531,44 +536,69 @@
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	
 	<script type="text/javascript">
+	
+	var admin = <%=type%>
 	function tabSetting() {
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
-		$('.test').hide();
-		$($('.current').find('a').attr('href')).show();
- 
-		
+		/* $('.test').hide();
+		$($('.current').find('a').attr('href')).show(); */
+ 		
+		console.log("값:"+admin);
+		if(admin != 1){
+			$('#admin').hide();	
+		}
+				
+		if(admin==0){
+			$('.childTab').click(function () {
+				alert('승인 후 이용해주세요');
+				return false;
+			})
+		}
+	}
 		// Tab 메뉴 클릭 이벤트 생성
-		$('li').click(function (event) {
-			var tagName = event.target.tagName; // 현재 선택된 태그네임
-			var selectedLiTag = (tagName.toString() == 'A') ? $(event.target).parent('li') : $(event.target); // A태그일 경우 상위 Li태그 선택, Li태그일 경우 그대로 태그 객체
-			var currentLiTag = $('li[class~=current]'); // 현재 current 클래그를 가진 탭
-			var isCurrent = false;  
+		/* $('.childTab').click(function (event) { */
+			/* var tagName = event.target.tagName; // 현재 선택된 태그네임
+			var selectedLiTag = (tagName.toString() == 'A') ? $(event.target).parent('li') : $(event.target); // A태그일 경우 상위 Li태그 선택, Li태그일 경우 그대로 태그 객체 */
+			/* var currentLiTag = $('li[class~=current]'); // 현재 current 클래그를 가진 탭
+			var isCurrent = false;   */
 			 
-			// 현재 클릭된 탭이 current를 가졌는지 확인
-			isCurrent = $(selectedLiTag).hasClass('current');
 			
-			if($(selectedLiTag).find('a').attr('href') != '#'){
+			// 현재 클릭된 탭이 current를 가졌는지 확인
+			/* isCurrent = $(selectedLiTag).hasClass('current'); */
+			
+			/* console.log(isCurrent); */
+			
+			
+			/* if($(selectedLiTag).find('a').attr('href') != ''){
+				
+				if($(selectedLiTag).find('a').attr('href') != '#page-inner'){
+				if(admin == 0){
+					alert('승인 후 이용하세요');
+					return false;
+				}} */
 				// current를 가지지 않았을 경우만 실행
-				if (!isCurrent) {
+			/* 	if (!isCurrent) {
 					$($(currentLiTag).find('a').attr('href')).hide();
 					$(currentLiTag).removeClass('current');
 	 				
 					$(selectedLiTag).addClass('current');
 					$($(selectedLiTag).find('a').attr('href')).show();
-				}
+				} */
+				
 
-			}else{
+			/* } *//* else{
 				$($(currentLiTag).find('a').attr('href')).show();
-			}
+	/* 		} */
 			 
-			return false;
-		});
-	}
+	/* 		return false;
+		}); */ 
+		
+	
  
-	$(function () {
+	/* $(function () { */
 		// 탭 초기화 및 설정
 		tabSetting();
-	});
+	/* }); */
 	
 	</script>
 

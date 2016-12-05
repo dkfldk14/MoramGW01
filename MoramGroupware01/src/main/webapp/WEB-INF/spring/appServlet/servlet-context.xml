@@ -37,4 +37,12 @@
 			<beans:ref bean="LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
+	<beans:bean id="LogoutInterceptor" class="project.spring.groupware.member.interceptor.LogoutInterceptor"></beans:bean>
+	<interceptors>
+		<interceptor>
+			<mapping path="/member_login/logOut"/>
+			<beans:ref bean="LogoutInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

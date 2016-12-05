@@ -46,10 +46,28 @@ public class MemberServiceImple implements MemberService {
 	}
 
 	@Override
-	public String selectName(String userid) {
+	public MemberVO selectName(String userid) {
 		// TODO Auto-generated method stub
 		logger.info("서비스");
 		return dao.selectName(userid);
+	}
+	
+	@Override
+	public List<MemberVO> manageMember() {
+		// TODO Auto-generated method stub
+		return dao.manageMember();
+	}
+	
+	@Override
+	public int adminUudateMem(String id, String dept, String usertype) {
+		// TODO Auto-generated method stub
+		return dao.adminUpdateMem(id, dept, usertype);
+	}
+	
+	@Override
+	public MemberVO selectAdminMem(String userid) {
+		// TODO Auto-generated method stub
+		return dao.selectAdminMem(userid);
 	}
 
 }

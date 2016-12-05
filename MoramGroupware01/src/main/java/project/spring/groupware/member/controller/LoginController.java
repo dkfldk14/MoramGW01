@@ -121,4 +121,12 @@ public class LoginController {
 			}
 		}
 	}
+	
+	@RequestMapping(value="/logOut")
+	public String logOut(){
+		
+		return "redirect:/";
+	}
+	
+	
 }

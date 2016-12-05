@@ -19,7 +19,19 @@
   	select id, pwd from moram_member where id = #{userid}
   </select>
   
-  <select id="name_select" resultType="String">
-  	select name from moram_member where id = #{userid}
+  <select id="name_select" resultType="project.spring.groupware.member.domain.MemberVO">
+  	select name, usertype from moram_member where id = #{userid}
+  </select>
+  
+   <select id="admin_manage_member" resultType="project.spring.groupware.member.domain.MemberVO">
+  	select id, name, dept, usertype from moram_member
+  </select>
+  
+  <update id="admin_update_member">
+  	update moram_member set dept = #{dept}, usertype = #{usertype} where id = #{id} 
+  </update>
+  
+  <select id="member_detail" resultType="project.spring.groupware.member.domain.MemberVO">
+  	select id, name, gender, birth, telephone, cellphone, address, email, mailno, addaddress from moram_member where id = #{userid}
   </select>
   </mapper>

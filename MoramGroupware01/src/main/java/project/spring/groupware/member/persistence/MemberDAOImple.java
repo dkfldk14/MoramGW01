@@ -2,7 +2,9 @@ package project.spring.groupware.member.persistence;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -49,13 +51,41 @@ public class MemberDAOImple implements MemberDAO {
 	}
 
 	@Override
-	public String selectName(String userid) {
+	public MemberVO selectName(String userid) {
 		// TODO Auto-generated method stub
 		
 		
-		String name = sqlsession.selectOne(NAMESPACE+".name_select", userid);
-		logger.info("찍혔나"+name);
-		return name;
+		MemberVO vo = sqlsession.selectOne(NAMESPACE+".name_select", userid);
+		logger.info("찍혔나"+vo.getUsertype());
+		return vo;
+	}
+	
+	@Override
+	public List<MemberVO> manageMember() {
+		// TODO Auto-generated method stub
+		
+		List<MemberVO> list = sqlsession.selectList(NAMESPACE+".admin_manage_member");
+		
+		return list;
+	}
+	@Override
+	public int adminUpdateMem(String id, String dept, String usertype) {
+		// TODO Auto-generated method stub
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("id", id);
+		map.put("dept", dept);
+		map.put("usertype", usertype);
+		
+		int result = sqlsession.update(NAMESPACE+".admin_update_member", map);
+		return result;
+	}
+	
+	@Override
+	public MemberVO selectAdminMem(String userid) {
+		// TODO Auto-generated method stub
+		MemberVO vo = sqlsession.selectOne(NAMESPACE+".member_detail", userid);
+		return vo;
 	}
 
 }

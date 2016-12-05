@@ -48,11 +48,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		// 콘트롤러에서 MemberVO 타입을 전달했기 때문에
 		// ModelAndView에서 꺼낸 attribute를 MemberVO로 형변환(casting)
 		String id = (String) mav.getModel().get("id");
-		
+		String type = (String) mav.getModel().get("type");
 		logger.info("아이디:"+id);
 		if(id != null){ //DB에 일치하는 id/pw 정보와 일치
 			logger.info("새로운 로그인 성공");
 			session.setAttribute(SESSION_ATTR_ID, id);
+			session.setAttribute("usertype", type);
 		}
 	} // end postHandle()
 }
