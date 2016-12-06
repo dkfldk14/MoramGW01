@@ -23,13 +23,13 @@
 	</update>
 	
 	<!-- 모든 입퇴실 정보 -->
-	<select id="selectall" resultType="project.spring.groupware.main.domain.MainCheckVO"> 
+	<select id="selectall" resultType="project.spring.groupware.member.domain.MainCheckVO"> 
 	select * from moram_attendance 
 	</select>
 
 
 	<!-- id가 일치하는 오늘자 출퇴근 정보를 검색  -->
-	<select id="selecttodayid" resultType="project.spring.groupware.main.domain.MainCheckVO"> 
+	<select id="selecttodayid" resultType="project.spring.groupware.member.domain.MainCheckVO"> 
 	SELECT * from moram_attendance 
 	where enter between TO_CHAR(SYSDATE,'YYYY/MM/DD') 
 	and TO_CHAR(SYSDATE,'YYYY/MM/DD HH24:MI:SS') 
@@ -43,7 +43,7 @@
 	
 	<!-- TO_CHAR(TRUNC(sysdate, 'iw') 이번주만 검색-->
 	<!-- TO_CHAR(TRUNC(sysdate, 'iw') - 7 , -1  저번주 월요일~일요일 검색  -->
-	<select id="selectsevendays" resultType="project.spring.groupware.main.domain.MainCheckVO">
+	<select id="selectsevendays" resultType="project.spring.groupware.member.domain.MainCheckVO">
 	SELECT id , enter , leave , statetime , attendance , score , to_char(enter,'day') as to_char 
 	from moram_attendance 
 	where enter between TO_CHAR(TRUNC(sysdate, 'iw') - 7, 'yyyymmdd') 
@@ -51,13 +51,13 @@
 	</select> 
 	
 	<!-- 오늘자 모든 입실 정보를 뽑아냄 -->
-	<select id="selecttodayall" resultType="project.spring.groupware.main.domain.MainCheckVO"> 
+	<select id="selecttodayall" resultType="project.spring.groupware.member.domain.MainCheckVO"> 
 	SELECT * from moram_attendance where enter 
 	between TO_CHAR(SYSDATE,'YYYY/MM/DD') 
 	and TO_CHAR(SYSDATE,'YYYY/MM/DD HH24:MI:SS') 
 	</select>
 	
-	<select id="selectallweek" resultType="project.spring.groupware.main.domain.MainCheckVO">
+	<select id="selectallweek" resultType="project.spring.groupware.member.domain.MainCheckVO">
 	SELECT id , enter , leave , statetime , attendance , score , to_char(enter,'day') as to_char 
 	from moram_attendance order by enter ASC 
 	</select>
