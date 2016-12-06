@@ -166,6 +166,10 @@ public class EmailController {
 		String gwemail=vo.getGroupemail();
 		model.addAttribute("name", name);
 		model.addAttribute("gwemail", gwemail);
+		List<MemberVO> memberList=emailServiceDAO.member_adress();
+		logger.info("size MemberList:" +memberList.size());
+		model.addAttribute("memberList", memberList);
+		
 		//int result=emailServiceDAO.insert(vo);
 		
 	}

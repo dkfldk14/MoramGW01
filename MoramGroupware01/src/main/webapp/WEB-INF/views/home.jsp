@@ -76,7 +76,7 @@
 							<li class="childTab"><a href="email/write">편지쓰기</a></li>
 							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
 							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
-							<li class="childTab"><a href="#">주소록</a></li>
+							
 
 						</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span

@@ -191,7 +191,7 @@ div.center {text-align: center;}
 						align="center" /> <class ="img-responsive" /></li>
 
 
-					<li><a href="#"><i class="fa fa-desktop "></i>메인</a></li>
+					<li><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN1</a></li>
 					<li><a href="#"><i class="fa fa-edit "></i>전자결재<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -205,21 +205,20 @@ div.center {text-align: center;}
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="list">받은 메일함</a></li>
-							<li><a href="write">편지쓰기</a></li>
-							<li><a href="#">보낸 메일함</a></li>
-							<li><a href="#">휴지통</a></li>
-							<li><a href="#">주소록</a></li>
-						</ul></li>
+						<li><a href="list">받은 메일함</a></li>
+						<li><a href="write">편지쓰기</a></li>
+						<li><a href="send-mailbox">보낸 메일함</a></li>
+						<li><a href="delete-mailbox">휴지통</a></li>
+					</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
 
 						<ul class="nav nav-second-level">
-							<li><a href="#">공지게시</a></li>
-							<li><a href="#">수업자료</a></li>
-							<li><a href="#">IT news</a></li>
-							<li><a href="#">면접후기</a></li>
-
+			<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
+							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
+							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
+							<li class="childTab"><a href="groupware/interview_board/list">면접후기</a></li>
+						
 						</ul></li>
 
 

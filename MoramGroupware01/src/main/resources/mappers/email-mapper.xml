@@ -37,6 +37,9 @@ where from_email = #{groupemail} and state = 2
 	
 </select>
  
+ <select id="EmailAdressBox" resultType="project.spring.groupware.member.domain.MemberVO">
+ select * from moram_member
+ </select>
  
  
  
