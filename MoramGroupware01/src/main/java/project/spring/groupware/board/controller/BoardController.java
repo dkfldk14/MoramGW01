@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +42,14 @@ public class BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
+	
+	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public void listPage(Integer page, Integer bno, Model model){
+	public void listPage(Integer page, Integer bno, Model model, HttpServletRequest request){
+		HttpSession session = request.getSession();
+		String name = (String)session.getAttribute("name");
+		logger.info("name : " + name);
+		model.addAttribute("name", name);
 		
 		//페이징을 위한 구문
 		PaginationCriteria c = new PaginationCriteria();
