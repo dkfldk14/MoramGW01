@@ -83,4 +83,10 @@ public class BoardServiceImpl implements BoardService {
 		return dao.viewcnt(bno);
 	}
 
+	@Override
+	public int getSearchNumOfRecords(SearchCriteria c) {
+		
+		return dao.getSearchNumOfRecords(c);
+	}
+
 }

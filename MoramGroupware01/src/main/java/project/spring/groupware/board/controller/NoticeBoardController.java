@@ -64,6 +64,8 @@ public class NoticeBoardController {
 		
 		PageMaker maker = new PageMaker();
 		maker.setSearchCriteria(searchCriteria);
+		maker.setTotalCount(boardService.getSearchNumOfRecords(searchCriteria));
+		maker.setSearchPageDate();
 		model.addAttribute("pageMaker", maker);
 		
 	}

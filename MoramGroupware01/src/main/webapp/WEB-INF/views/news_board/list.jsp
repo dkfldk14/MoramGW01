@@ -119,9 +119,9 @@ li {
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">시나브로</a></li>
-                     <li><a href="#">그냥2조</a></li>
-                     <li><a href="#">성준이네</a></li>
+                     <li><a href="../team_one_board/list">시나브로</a></li>
+                     <li><a href="../team_two_board/list">그냥2조</a></li>
+                     <li><a href="../team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -306,6 +306,8 @@ li {
 			event.preventDefault();				
 			//검색옵션 값 가지고 오기
 			var searchType = $("select[name=searchType]").val();
+			//검색했을 때 쿼리 page 값을 항상 1로 나타내줘야 , 어느 페이지에서든 검색 결과가 나온다
+			frm.find('[name="page"]').val(1);
 			frm.find('[name="searchType"]').val(searchType);
 			frm.find('[name="keyword"]').val(keyword);
 			frm.attr('action', 'searchList');

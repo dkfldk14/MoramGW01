@@ -95,9 +95,9 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">시나브로</a></li>
-                     <li><a href="#">그냥2조</a></li>
-                     <li><a href="#">성준이네</a></li>
+                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+                     <li><a href="/../groupware/team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">

@@ -35,4 +35,7 @@ public interface NewsBoardService {
 
 	//조회수를 위한 함수
 	public int viewcnt (int bno);
+	
+	//게시글 검색할 때 필요한 페이징
+	public abstract int getSearchNumOfRecords(SearchCriteria c);
 }
