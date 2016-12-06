@@ -16,6 +16,7 @@ public interface emailServiceDAO {
 	public abstract List<EmailVO> adressList(int state,PaginationCriteria c);	
 
 	public abstract int totalEmailct(String state,String groupemail);
-
+	public abstract List<MemberVO> member_adress();
+	
 }
 

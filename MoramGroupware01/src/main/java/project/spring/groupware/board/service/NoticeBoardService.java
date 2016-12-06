@@ -21,4 +21,7 @@ public interface NoticeBoardService {
 	public List<BoardVO> listSearchCriteria(SearchCriteria c);
 	
 	public int viewcnt(int bno);
+	
+	//게시글 검색할 때 필요한 페이징
+	public abstract int getSearchNumOfRecords(SearchCriteria c);
 }

@@ -76,25 +76,30 @@
 							<li class="childTab"><a href="email/write">편지쓰기</a></li>
 							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
 							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
-							<li class="childTab"><a href="#">주소록</a></li>
+							
 
 						</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
-							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
-							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
-							<li class="childTab"><a href="groupware/interview_board/list">면접후기</a></li>
+
+							<li><a href="/groupware/notice_board/list">공지게시</a></li>
+							<li><a href="/groupware/lecture_board/list">수업자료</a></li>
+							<li><a href="/groupware/news_board/list">IT news</a></li>
+							<li><a href="/groupware/interview_board/list">면접후기</a></li>
+
+
 						</ul></li>
 
 
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="#">시나브로</a></li>
-							<li class="childTab"><a href="#">그냥2조</a></li>
-							<li class="childTab"><a href="#">성준이네</a></li>
+
+							<li><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li><a href="/groupware/team_three_board/list">성준이네</a></li>
+
 							<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">

@@ -98,6 +98,12 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.update(NAMESPACE + ".viewcnt", bno);		
 	}
+
+	@Override
+	public int getSearchNumOfRecords(SearchCriteria c) {
+		
+		return sqlSession.selectOne(NAMESPACE + ".searchTotalCount", c);
+	}
 	
 	
 }

@@ -56,4 +56,10 @@ public int totalEmailct(String state, String groupemail) {
 	public List<EmailVO> adressList(int state, PaginationCriteria c) {
 		return dao.adressList(state, c);
 	}
+	
+	
+	@Override
+	public List<MemberVO> member_adress() {
+		return dao.member_adress();
+	}
 }

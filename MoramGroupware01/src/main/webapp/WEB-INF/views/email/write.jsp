@@ -20,6 +20,33 @@
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css' />
+	
+	
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script type="text/javascript">
+jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+    return this;
+}
+showPopup = function() {
+$("#popLayer").show();
+/* $("#popLayer").center(); */
+ 
+ var  disableDivObj = document.getElementById("disableDiv");
+ disableDivObj.style.display = "";
+
+
+ 
+ 
+ 
+ }
+
+</script>
+
 <style>
 body, td {
 	font-size: 13px
@@ -165,82 +192,62 @@ th, td {
 	padding: 0;
 }
 
-/* body {
-  margin: 100px;
-} */
+.div1 {
+   display: inline-block;
+}
+#tableaddress {
+   border-collapse: collapse;
+   width: 100%;
+   table-layout: fixed;
+}
+.traddress, td, th{
+  padding: 8px;
+   text-align: left;
+   border-bottom: 1px solid #ddd;
 
-/* .pop-layer .pop-container {
-  padding: 20px 25px;
 }
 
-.pop-layer p.ctxt {
-  color: #666;
-  line-height: 25px;
+[class^="popLayer"] {
+   overflow: hidden;
+   position: fixed;
+   top: 30%;
+   left: 30%;
+   width: 600px;
+   background: #fff;
+   z-index: 10001;
+   border: 1px solid #896e4a;
+   
 }
 
-.pop-layer .btn-r {
-  width: 100%;
-  margin: 10px 0 20px;
-  padding-top: 10px;
-  border-top: 1px solid #DDD;
-  text-align: right;
+.pop-header {
+   position: relative;
+   height: 58px;
+   padding-top :15px;
+   padding-left: 25px;
+   color: #000;
+   font-size: 22px;
+   line-height: 240%;
+   
 }
 
-.pop-layer {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 410px;
-  height: auto;
-  background-color: #fff;
-  border: 5px solid #3571B5;
-  z-index: 10;
+.pop-header .btnp-close {
+   position: absolute;
+   right: 15px;
+   top: 15px;
+   font-size: 16px;
 }
 
-.dim-layer {
-  display: none;
-  position: fixed;
-  _position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
+.pop-cont {
+   padding: 25px;
 }
 
-.dim-layer .dimBg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  opacity: .5;
-  filter: alpha(opacity=50);
+.pop-msg{
+   overflow:auto;
+   width: 550x;
+   height : 300px;
 }
 
-.dim-layer .pop-layer {
-  display: block;
-}
 
-a.btn-layerClose {
-  display: inline-block;
-  height: 25px;
-  padding: 0 14px 0;
-  border: 1px solid #304a8a;
-  background-color: #3f5a9d;
-  font-size: 13px;
-  color: #fff;
-  line-height: 25px;
-}
-
-a.btn-layerClose:hover {
-  border: 1px solid #091940;
-  background-color: #1f326a;
-  color: #fff;
-}
- */
 </style>
 </head>
 <body>
@@ -283,7 +290,7 @@ a.btn-layerClose:hover {
 					align="center" /> <class ="img-responsive" /></li>
 
 
-				<li><a href="#"><i class="fa fa-desktop "></i>메인</a></li>
+				<li><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN1</a></li>
 				<li><a href="#"><i class="fa fa-edit "></i>전자결재<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
@@ -297,21 +304,19 @@ a.btn-layerClose:hover {
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="list">받은 메일함</a></li>
-
 						<li><a href="write">편지쓰기</a></li>
 						<li><a href="send-mailbox">보낸 메일함</a></li>
-						<li><a href="#">휴지통</a></li>
-						<li><a href="#">주소록</a></li>
+						<li><a href="delete-mailbox">휴지통</a></li>
 					</ul></li>
 				<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 						class="fa arrow"></span></a>
 
 					<ul class="nav nav-second-level">
-						<li><a href="#">공지게시</a></li>
-						<li><a href="#">수업자료</a></li>
-						<li><a href="#">IT news</a></li>
-						<li><a href="#">면접후기</a></li>
-
+						<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
+							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
+							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
+							<li class="childTab"><a href="groupware/interview_board/list">면접후기</a></li>
+						
 					</ul></li>
 
 
@@ -353,9 +358,7 @@ a.btn-layerClose:hover {
 
 		<div id="page-wrapper">
 
-
 			<div id="page-inner">
-
 
 				<form id="emailaction" method="post" action="email-doing">
 					<div class="row">
@@ -379,8 +382,8 @@ a.btn-layerClose:hover {
 								<tr class="trstyle">
 									<th style="width: 80px" align="center">받는사람</th>
 									<td class="tdstyle"><input type="text"
-										style="width: 860px" name="to_email"></input></td>
-									<td><button>주소록</button></td>
+										style="width: 860px" name="to_email" id="textInput"></input></td>
+									<td><a href="javascript:;" onclick="javascript:showPopup()">주소록</a></td>
 
 								</tr>
 								<tr class="trstyle">
@@ -442,43 +445,52 @@ a.btn-layerClose:hover {
 	<script src="<c:url value='../resources/assets/js/custom.js'/>" /></script>
 
 	<!-- jQuery CDN -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<dl>
-			<dt class="pop-header">
-				주소록<a href="#none" class="btnp-close">팝업창 닫힘</a>
-			</dt>
-			<dd class="pop-box">
-				<div class="pop-cont">
-					<div class="pop-msg">
-						<table>
-							<tr>
-								<th><input type="checkbox" name="checkb" id="ch"></th>
-								<th>이름</th>
-								<th>E-mail</th>
-								<th>소속</th>
-							</tr>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		
+<!-- 		<script src="dist/js/checkbix.min.js"></script>
+   --> <div class="popLayer" id="popLayer" style="display:none;">
+      <dl>
+         <dt class="pop-header">주소록</dt>
+         <dd class="pop-box">
+            <div class="pop-cont">
+               <div class="pop-msg">
+                  <table id="tableaddress">
+                     <tr class="traddress">
+                        <th style="width: 50px;"><input type="checkbox" name="checkb" class="checkid"></th>
+                        <th style="width: 120px;">이름</th>
+                        <th style="width: 200px;">E-mail</th>
+                        <th style="width: 150px;">소속</th>
+                     </tr>
+						
+				  <c:forEach var="memberList" items="${memberList }">
+                     <tr>
+                        <td style="width: 50px;"><input type="checkbox" name="checkb" class="checkid"
+                           value="${memberList.groupemail }"></td>
+                        <td style="width: 120px;">${memberList.name}</td>
+                        <td style="width: 200px;">${memberList.groupemail }</td>
+                        <td style="width: 150px;">${memberList.dept }팀</td>
+                     </tr>
+                     </c:forEach>  
+                     
+                  </table>
+               </div>
+            </div>
+         </dd>
+            
+         <div class="pop-cont">
+            <input type="button" onclick='javascript1()' value="적용">
+            <input type="button" onclick='javascript2()' value="취소">
 
-
-
-							<tr></tr>
-
-						</table>
-					</div>
-				</div>
-
-				<div class="pop-noti">
-					<div>
-						<input type="checkbox" name="" id="daychk01" /> <label
-							for="daychk01">1주일간 보지 않기</label>
-					</div>
-					<form>
-						<input type="checkbox" />dd
-					</form>
-				</div>
-			</dd>
-		</dl>
-		-->
+   </div>
+   </dl>
+      
+         </div>
+		
+		
+		
+		
+		
+		
 		<div id="disableDiv" class="disableDiv" style="display: none"></div>
 
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -486,46 +498,63 @@ a.btn-layerClose:hover {
 
 		<script>
 
-/* function wrapWindowByMask(){
-	//화면의 높이와 너비를 구한다.
-	var maskHeight = $(document).height();  
-	var maskWidth = $(window).width();
-
-	//마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-	$('#loading').css({'width':maskWidth,'height':maskHeight});  
-//마스크의 투명도 처리
-      $('loading').fadeTo("slow",0.8);    
-}
- */
-
-$(document).ready(function(){
-	
 
 
-$('#send').click(function () {
-    // add loading image to div
-    $('#loadingDiv').show();
-    var  disableDivObj = document.getElementById("disableDiv");
-    disableDivObj.style.display = "";
-    var  loadingDiv = document.getElementById("loadingDiv");
-    loadingDiv.style.display = "";
-   
-    
- /*   // $('#loading').html('<img src="http://couponsedge.com/img/processing.gif">'); */
-    
-    // run ajax request
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "http://localhost:8181/groupware/email/write",
-        success: function (d) {
-            // replace div's content with returned data
-            $('#loading').html(d);
-        }
-    });
-});
 
-});
-</script>
+		
+
+				$('#send').click(function() {
+					// add loading image to div
+					$('#loadingDiv').show();
+					var disableDivObj = document.getElementById("disableDiv");
+					disableDivObj.style.display = "";
+					var loadingDiv = document.getElementById("loadingDiv");
+					loadingDiv.style.display = "";
+
+					/*   // $('#loading').html('<img src="http://couponsedge.com/img/processing.gif">'); */
+
+					// run ajax request
+					$.ajax({
+						type : "GET",
+						dataType : "json",
+						url : "http://localhost:8181/groupware/email/write"
+					/* 	success : function(d) {
+							// replace div's content with returned data
+							$('#loading').html(d);
+						} */
+					});
+				});
+
+			
+
+			function javascript1() {
+				var adress = "";
+				var size = document.getElementsByName("checkb").length;
+				for (var i = 0; i < size; i++) {
+					if (document.getElementsByName("checkb")[i].checked == true) {
+						adress += document.getElementsByName("checkb")[i].value
+								+ " ,";
+						alert(adress);
+
+					}
+
+					$("#popLayer").hide();
+
+					$("#textInput").attr("value", adress);
+					$("#disableDiv").hide();
+				}
+			}
+
+			function javascript2() {
+				$("#popLayer").hide();
+				$("#disableDiv").hide();
+			}
+			
+			
+		</script>
+           <!-- jQuery CDN -->
+            <script
+               src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 </body>
 </html>

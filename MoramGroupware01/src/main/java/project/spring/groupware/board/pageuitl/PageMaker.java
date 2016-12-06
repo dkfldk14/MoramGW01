@@ -134,6 +134,34 @@ public class PageMaker {
 		
 	}
 	
+	public void setSearchPageDate(){
+		int maxPageLink =
+				(int)Math.ceil(totalCount/(double)searchCriteria.getPerPage());
+		int temp = 
+				(int)(Math.ceil(searchCriteria.getPage()/(double)numOfPageLink)*numOfPageLink);
+		
+		if(temp<maxPageLink){
+			endPageNum = temp;
+			
+		}else{
+			endPageNum = maxPageLink;
+		}
+		
+		startPageNum = (endPageNum - 1)/ numOfPageLink*numOfPageLink+1;
+		
+		if(startPageNum == 1){
+			hasPrev = false;
+		}else{
+			hasPrev = true;
+		}
+		
+		if(endPageNum * searchCriteria.getPerPage() < totalCount){
+			hasNext = true;
+		}else{
+			hasNext = false;
+		}
+		
+	}
 
 	
 	

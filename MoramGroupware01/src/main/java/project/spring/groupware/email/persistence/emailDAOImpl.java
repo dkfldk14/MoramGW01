@@ -76,4 +76,9 @@ public class emailDAOImpl implements emailDAO {
 		return SqlSession.selectOne(NAMESPACE+".EmailTotalct",element);
 	}
 	
+	@Override
+	public List<MemberVO> member_adress() {
+		return SqlSession.selectList(NAMESPACE+".EmailAdressBox");
+	}
+	
 }

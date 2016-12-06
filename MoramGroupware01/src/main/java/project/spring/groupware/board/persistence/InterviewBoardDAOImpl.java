@@ -87,4 +87,11 @@ public class InterviewBoardDAOImpl implements InterviewBoardDAO {
 				
 		return result;
 	}
+	
+	@Override
+	public int getSearchNumOfRecords(SearchCriteria c) {
+		
+		return sqlSession.selectOne(NAMESPACE + ".searchTotalCount", c);
+	}
+	
 }
