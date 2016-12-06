@@ -144,5 +144,12 @@ public class MainController {
 	}
 	
 	
+	@RequestMapping(value="my_page", method =RequestMethod.GET)
+	public String mypage(/*Integer page, Model model*/) {
+		System.out.println("마잉");
+		
+		return "/mypage/my_page";
+	}
+	
 
 }

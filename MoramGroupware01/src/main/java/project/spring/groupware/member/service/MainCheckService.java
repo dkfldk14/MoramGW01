@@ -20,4 +20,8 @@ public interface MainCheckService {
 	public abstract List<MainCheckVO> selectsevendays();
 	// 오늘자 원형그래프에서 사용할 select
 	public abstract List<MainCheckVO> selecttodayall();
+	
+	public abstract List<MainCheckVO> selectallweek();
+	
+	public abstract List<MainCheckVO> selectlistpage();
 }

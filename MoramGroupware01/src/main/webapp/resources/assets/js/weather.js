@@ -467,21 +467,55 @@ $(document).ready(function(){
 				
 			}); /* 데이터 개수에 따른 반복문 처리 끝 */
 
+			/*alert(thu_score);*/
+			
 			// 전체 스코어의 평균 계산
 			var mon_score_average = mon_score/mon;
-			var tue_score_average = tue_score/mon;
-			var wed_score_average = wed_score/mon;
-			var thu_score_average = thu_score/mon;
-			var fri_score_average = fri_score/mon;
+			var tue_score_average = tue_score/tue;
+			var wed_score_average = wed_score/wed;
+			var thu_score_average = thu_score/thu;
+			var fri_score_average = fri_score/fri;
 			
 			
-			// 월, 일만 빼서 적용
+			// 년, 월, 일만 빼서 적용
 			var mon_start = 0; 
 			var mon_end = 11;
 			
 			// 부제
-			var subtitle = enter_mon.substring(mon_start, mon_end) + '(월)  ~  ' 
-						+ enter_fri.substring(mon_start, mon_end) + '(금)';
+			if(enter_mon!=null&&enter_mon!=''){
+				var subtitle = enter_mon.substring(mon_start, mon_end) + '(월)  ~  ' 
+								+ enter_fri.substring(mon_start, mon_end) + '(금)';
+			} else {
+				var friyear = enter_fri.substring(0, 4);
+				var frimon = enter_fri.substring(5, 7);
+				var friday = enter_fri.substring(8, 10);
+				
+				/*alert(friyear +"-" +frimon+"-"+friday);*/
+				
+				var yy=friyear;
+				var mm=frimon;
+				var dd=friday.valueOf()-5;
+				
+				var zzz = new Date(yy,mm,dd);
+				
+				var zzzyy=zzz.getFullYear();
+				var zzzmm = zzz.getMonth();
+				var zzzdd = zzz.getDate();
+				
+				/*alert(zzzdd);*/
+				
+				if (zzzdd.toString().length ===1){
+					zzzdd = "0"+zzzdd.toString();
+				}
+				if (zzzmm.toString().length ===1){
+					zzzmm = "0"+zzzmm.toString();
+				}
+				
+				var subtitle = zzz.getFullYear()+ "-" + zzzmm + "-" + zzzdd + ' (월)  ~  ' 
+								+ enter_fri.substring(mon_start, mon_end) + '(금)';
+				/*alert("으음? "+subtitle);*/
+			}
+			
 			 Highcharts.chart('container', {
 		            chart: {
 		                type: 'column'
@@ -533,5 +567,6 @@ $(document).ready(function(){
 		}); /* 서버에서 전달된 JSON 데이터 처리 끝 */
 		
     });
+   
 	
 });
