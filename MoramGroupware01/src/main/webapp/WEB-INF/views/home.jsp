@@ -72,7 +72,7 @@
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list">받은 메일함</a></li>
+							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
 							<li class="childTab"><a href="email/write">편지쓰기</a></li>
 							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
 							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
@@ -122,7 +122,7 @@
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
-							<li class="childTab"><a href="#">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
@@ -150,7 +150,7 @@
 			<div id="page-inner" class="test">
 				<div class="row">
 					<div class="col-md-12">
-						      <h2>${name}님,<%=type %></h2>   
+						      <h2>${name}님,<%-- <%=type %> --%></h2>   
                         <h5> ♡★시공의 폭풍★시공의 폭풍으로 당신을 초대합니다!♠하스스톤 뒷면♠&☞레전더리 高級레스토랑☜의 음식 지급! 지금 이 기회를 놓지지 마세요!☞ ☎ h t t p://k r. b a t t l e . n e t /h e r e s/☎ ♡ </h5>
 					</div>
 				</div>

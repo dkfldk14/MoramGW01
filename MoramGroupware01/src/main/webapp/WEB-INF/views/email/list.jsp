@@ -205,7 +205,7 @@ div.center {text-align: center;}
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-						<li><a href="list">받은 메일함</a></li>
+						<li><a href="list?page=1">받은 메일함</a></li>
 						<li><a href="write">편지쓰기</a></li>
 						<li><a href="send-mailbox">보낸 메일함</a></li>
 						<li><a href="delete-mailbox">휴지통</a></li>
@@ -341,14 +341,18 @@ div.center {text-align: center;}
 
 <div class="center">
   <ul class="pagination">
-    <li><a href="#">«</a></li>
-    <li><a href="#">1</a></li>
-    <li><a class="active" href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
+	
+	<c:if test="${pageMaker.hasPrev }">
+   		  <li><a href="${pageMaker.startPageNum - 1 }">«</a></li>
+    </c:if>
 
-    <li><a href="#">»</a></li>
+	 <c:forEach begin="${pageMaker.startPageNum }" end="${pageMaker.endPageNum-1 }" var="num">
+		<li><a href="list?page=${num }">${num }</a></li>
+	</c:forEach> 
+	
+	    <c:if test="${pageMaker.hasNext }">
+    <li><a href="${pageMaker.endPageNum + 1 }">»</a></li>
+    </c:if>
   </ul>
 </div>
 							</div>

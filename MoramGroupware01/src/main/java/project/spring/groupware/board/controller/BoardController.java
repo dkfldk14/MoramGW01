@@ -41,7 +41,7 @@ public class BoardController {
 	private ReplyService replyService;
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public void listPage(Integer page, Integer bno, Model model){
+	public void listPage(Integer page, Integer bno, String id, Model model){
 		
 		//페이징을 위한 구문
 		PaginationCriteria c = new PaginationCriteria();
@@ -62,6 +62,8 @@ public class BoardController {
 		SearchCriteria searchCriteria = new SearchCriteria();
 		List<BoardVO>searchList = boardService.listSearchCriteria(searchCriteria);
 		model.addAttribute("searchList", searchList);
+		
+		System.out.println(id);
 		
 		//여기다가 replycnt 값을 출력하려고 했지만 로그에 replycnt가 0으로 찍힌다.
 		for (BoardVO vo : list){
