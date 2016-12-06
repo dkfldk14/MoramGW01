@@ -59,7 +59,7 @@ public class EmailController {
 	private String gwEmail=null;
 	
 	@RequestMapping(value="/list")
-	public void EmailList(Model model,HttpServletRequest request){
+	public void EmailList(Integer page,Model model,HttpServletRequest request){
 		HttpSession session=request.getSession();
 		String userid=(String) session.getAttribute("login_id");
 		model.addAttribute("userid", userid);
@@ -88,29 +88,23 @@ public class EmailController {
 		logger.info("count : "+emailFolder.getMessageCount());
 		
 		Message[] messages=emailFolder.getMessages();
-	/*	Message[] messages = emailFolder.getMessages(11, 20);*/
+
+		PaginationCriteria c = new PaginationCriteria();
+		int paging = page;
+		int start = c.getStart() + 10 * paging -1;
+		System.out.println("엔드엔드"+c.getEnd());
+		int end = c.getEnd() + 10 * paging -1;
+		System.out.println("페이징 넘버 " + paging);
 		
-		/*int num=totalMessages.length;
-		int numofnum=num/10;
-		int startNum=num;
-		int endNum=(num-10);
-		for(int i=0; i<numofnum; num++){
-			messages=emailFolder.getMessages(startNum, endNum);
-			
-		}*/
+		if (messages.length<=end){
+			end = messages.length;
+		}
 		
-/*		
-		
-		System.out.println("num : "+num);
-		
-		System.out.println("message.totla--"+totalMessages.length);
-		
-		System.out.println("messages.length---" + messages.length);
-		*/
-		
-		for (int i = 0, n = messages.length; i < n; i++) {
+		for (int i = end, n = start; i >= n; i--) {
 			EmailVO vo = new EmailVO();
-			Message message = messages[i];
+			
+			Message message = messages[i-1];
+			
 			System.out.println("---------------------------------");
 			System.out.println("message number:" + message.getMessageNumber());
 			System.out.println("Date:" + message.getSentDate());
@@ -126,12 +120,35 @@ public class EmailController {
 			vo.setContent(message.getContent().toString());
 			vo.setFrom_email(message.getFrom()[0].toString());
 
+			if (i <= start) {
+				i = n;
+			}
 			
 			emaillist.add(vo);
-
 		}
 		System.out.println("/////////////////////////////");
 		model.addAttribute("email", emaillist);
+	
+		c.setPage(page);
+		
+		
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(messages.length);
+		maker.setPageDate();
+		model.addAttribute("pageMaker", maker);
+		
+		
+		System.out.println(page + " + " + maker.getTotalCount() + " + " + emaillist.size());
+		
+		System.out.println(maker.getNumOfPageLink());
+		System.out.println("start = " +maker.getStartPageNum());
+		System.out.println("end = "+maker.getEndPageNum());
+		
+	
+		
+		
+		
 		emailFolder.close(false);
 		store.close();
 
@@ -438,6 +455,8 @@ public class EmailController {
 	   	maker.setCriteria(c);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
 	   	maker.setTotalCount(emailServiceDAO.totalEmailct("2", gwEmail));
+	   	// 역시 범인은 당신이야!											↑ null 들어가고 있사옵니다!
+	   	
 	   	//▼ pageMaker 의 함수를 호출
 	   	maker.setPageDate();
 	   	//모델객체에 pageMaker 넘겨줌. 
