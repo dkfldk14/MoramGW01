@@ -5,7 +5,31 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>bootstrap template</title>
+<link href='<c:url value="/resources/assets/css/bootstrap.min.css"/>'
+	rel="stylesheet" />
+<!-- Bootstrap -->
+<!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- font awesome -->
+<link rel="stylesheet"
+	href='<c:url value="/resources/assets/css/font-awesome.min.css"/>'
+	media="screen" title="no title" charset="utf-8">
+<!-- Custom style -->
+<link rel="stylesheet"
+	href='<c:url value="/resources/assets/css/style.css"/>' media="screen"
+	title="no title" charset="utf-8">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Free Bootstrap Admin Template : Main-Home</title>
@@ -140,14 +164,14 @@ li{
 					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="/groupware/member_update">개인정보수정</a></li>
+							<li><a href="#">개인정보수정</a></li>
 							<li><a href="#">나의 이력서</a></li>
 							<li><a href="#">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
+							<li class="childTab"><a href="#test_input1">사용자관리</a></li>
 							<li><a href="#">권한관리</a></li>
 							<li><a href="#">문서함관리</a></li>
 
@@ -169,43 +193,11 @@ li{
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<div id="page-inner" class="test">
-
-				<table>
-					<tr>
-						<th>아이디</th>
-						<th>이름</th>
-						<th>부서</th>
-						<th>승인여부</th>
-						<th></th>
-						
-					</tr>
-
-					<c:forEach var="vo" items="${member_list }" varStatus="no">
-						<tr>
-							<td id="id_${no.index }">${vo.id }</td>
-							<td id="name_${no.index }"><a href="/groupware/admin_member_detail?userid=${vo.id }">${vo.name }</a></td>
-							<td id="dept_${no.index }">
-								<select id="dept_select_${no.index }">
-									<option>0</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-								</select>
-							</td>
-							<td id="usertype_${no.index }">
-								<select id="usertype_select_${no.index }">
-									<option>0</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-								</select>
-							</td>
-							<td><input type="button" id="${no.index }" class="btn" value="저장"></td>
-						</tr>
-					</c:forEach>
-				</table>
+				
+				 
+				 비밀번호 입력
+				<input type="password" name="pwd" id="pwd"><br>
+				<input type="button" id="pwd_btn" name="pwd_btn" value="확인">
 				<!-- /. PAGE INNER  -->
 			</div>
 		<!-- /. PAGE WRAPPER  -->
@@ -215,7 +207,14 @@ li{
 	<!-- JQUERY SCRIPTS -->
 
 
-
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!-- 우편번호 검색 CDN -->
+	<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed-->
+	<!-- <script src="/groupware/resources/assets/js/bootstrap.min.js"></script> -->
+	
 
 	<script src="<c:url value='resources/assets/js/jquery-1.10.2.js'/>" /></script>
 	<!-- BOOTSTRAP SCRIPTS -->
@@ -243,55 +242,25 @@ li{
 					})
 				}
 			}
-			
-			$(document).ready(function() {
-				var i = 0;
-				var listSize = ${member_list.size()};
-				console.log("listSize:" + listSize);
-				
-				
-				//db에 저장된 dept와 usertype으로 값들을 셋팅
-				<c:forEach items="${member_list}" var = "vo">	
-				$('#dept_select_'+i).val('${vo.dept}');
-				$('#usertype_select_'+i).val('${vo.usertype}');
-				i++;
-				</c:forEach>
-			});
-			
 			tabSetting();
 			
-			$('.btn').click(function(event){
-				//선택된 태그
-				var selectTag=event.target;
-				//선택된 태그의 id값
-				var num=$(selectTag).attr('id');
-				
-				var id = $('#id_'+num).text();
-				
-				var name = $('#name_'+num).text();
-				
-				var dept = $('#dept_select_'+num+' option:selected').val();
-				
-				var usertype = $('#usertype_select_'+num+' option:selected').val();
-				
-				
+			
+			$('#pwd_btn').click(function(){
+				var pwd = $('#pwd').val();
 				$.ajax({
 					type: 'post',
-					url: '/groupware/admin_update_member',
+					url: '/groupware/update_Authpwd',
 					data: {
-						id:id,
-						dept:dept,
-						usertype:usertype
+						password: pwd
 					},
 					success: function(res, status, xhr){
 						if(res=='OK'){
-							alert('저장됨');
-						}else{
-							alert('다시 시도하세요');
+							alert('비밀번호 확인!');
+							location = '/groupware/member_update_detail';
 						}
 					}
 				});
-			})
+			});
 			
 			
 		</script></body>

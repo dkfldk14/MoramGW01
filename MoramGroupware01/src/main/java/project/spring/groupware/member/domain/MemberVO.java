@@ -14,14 +14,14 @@ public class MemberVO {
 	String usertype;
 	String mailno;
 	String addaddress;
-	String groupmail;
+	String groupemail;
 	//TODO 사내메일도 입력받아요?
 	
 	public MemberVO(){}
 
 	public MemberVO(String id, String pwd, String name, String dept, String gender, String birth, String telephone,
 			String cellphone, String address, String email, String usertype, String mailno, String addaddress,
-			String groupmail) {
+			String groupemail) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -36,7 +36,7 @@ public class MemberVO {
 		this.usertype = usertype;
 		this.mailno = mailno;
 		this.addaddress = addaddress;
-		this.groupmail = groupmail;
+		this.groupemail = groupemail;
 	}
 
 	public String getId() {
@@ -143,13 +143,14 @@ public class MemberVO {
 		this.addaddress = addaddress;
 	}
 
-	public String getGroupmail() {
-		return groupmail;
+	public String getGroupemail() {
+		return groupemail;
 	}
 
-	public void setGroupmail(String groupmail) {
-		this.groupmail = groupmail;
+	public void setGroupemail(String groupemail) {
+		this.groupemail = groupemail;
 	}
+
 	
 	
 }

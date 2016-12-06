@@ -46,10 +46,8 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
 	rel='stylesheet' type='text/css' />
 	
-	<!-- 날씨 css -->
-<link href="<c:url value="/resources/assets/css/weather.css"/>"
-	rel="stylesheet" />
-	
+<link href='<c:url value="/resources/assets/css/bootstrap.min.css"/>'
+	rel="stylesheet" />	
 <style>
 table, th, td{
 	border-bottom:1px solid gray;
@@ -164,14 +162,14 @@ li{
 					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">개인정보수정</a></li>
+							<li><a href="/groupware/member_update">개인정보수정</a></li>
 							<li><a href="#">나의 이력서</a></li>
 							<li><a href="#">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="#test_input1">사용자관리</a></li>
+							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
 							<li><a href="#">권한관리</a></li>
 							<li><a href="#">문서함관리</a></li>
 
@@ -189,7 +187,6 @@ li{
 			</div>
 
 		</nav>
-	
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<div id="page-inner" class="test">
@@ -251,11 +248,8 @@ li{
 						class="form-control" id="email" value="${MemberVO.email }" readonly>
 				</div>
 				<div class="form-group text-center">
-					<button type="button" id="join_btn" class="btn btn-info">
-						회원가입<i class="fa fa-check spaceLeft"></i>
-					</button>
-					<button type="button" id="cancel_btn" class="btn btn-warning">
-						가입취소<i class="fa fa-times spaceLeft"></i>
+					<button type="button" id="memberList_btn" class="btn btn-info">
+						회원 목록<i class="fa fa-check spaceLeft"></i>
 					</button>
 				</div>
 			</form>
@@ -316,5 +310,9 @@ li{
 			}else{
 				$('input:checkbox[id="sexinfo1"]').prop("checked", true);
 			}
+			
+			$('#memberList_btn').click(function(){
+				location = '/groupware/member_manage';
+			})
 		</script></body>
 </html>

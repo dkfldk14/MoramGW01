@@ -94,13 +94,33 @@ public class MemberJoinsecretAop {
 	
 	@Around("execution(* project.spring.groupware.member.service.MemberService.loginCheck(..))")
 	public LoginVO afterPassword(ProceedingJoinPoint jp) throws Throwable{
+		logger.info("복호화임2");
+		
+		Object obj= jp.proceed();
+		if(obj==null){
+			return null;
+		}else{
+			LoginVO vo = (LoginVO) obj;
+			logger.info("값은?"+vo.getPwd());
+			
+			AesAuthkey auth = new AesAuthkey(key);
+			URLCodec codec = new URLCodec();
+			
+			vo.setPwd(auth.aesDecode(codec.decode(vo.getPwd())));
+			
+			return vo;
+		}
+	}
+	
+	@Around("execution(* project.spring.groupware.member.service.MemberService.selectAdminMem(..))")
+	public MemberVO updatepwd(ProceedingJoinPoint jp) throws Throwable{
 		logger.info("복호화임");
 		
 		Object obj= jp.proceed();
 		if(obj==null){
 			return null;
 		}else{
-		LoginVO vo = (LoginVO) obj;
+		MemberVO vo = (MemberVO) obj;
 		logger.info("값은?"+vo.getPwd());
 		
 		AesAuthkey auth = new AesAuthkey(key);
@@ -110,5 +130,55 @@ public class MemberJoinsecretAop {
 		
 		return vo;
 		}
+	}
+	
+	@Before("execution(int project.spring.groupware.member.service.MemberService.updateMemberInfo(..))")//클래스 주소가 joinpoint(execution(int...)앞에 타입은 메소드 리턴타입)
+	//매개변수 찍기 귀찮으면 ..
+	public void update_insert(JoinPoint jp){
+		logger.info("-----------------");
+		logger.info("beforecreate()호출");
+		logger.info("-----------------");
+		logger.info(Arrays.toString(jp.getArgs())); //배열에 있는 원소 하나하나를 찍으려면 arrays.tostring해야함
+		//조인포인트(실행될 메서드)의 매개변수가 args
+		//매개변수중 배열의 0번째 즉 1번째 매개변수를 꺼내서 Vo 타입으로 변환.
+		Object[] obj = jp.getArgs();
+		MemberVO vo = (MemberVO) obj[0];
+		logger.info(vo.getPwd());
+		ps=vo.getPwd();
+		
+		
+		try {
+			AesAuthkey auth = new AesAuthkey(key);
+			URLCodec codec = new URLCodec();
+			
+			ps1 = codec.encode(auth.aesEncode(ps));
+			logger.info(ps1);
+			vo.setPwd(ps1);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidAlgorithmParameterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalBlockSizeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EncoderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
