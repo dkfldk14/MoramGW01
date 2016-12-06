@@ -12,7 +12,7 @@
   </select>
   
   <insert id="member_join">
-  	insert into moram_member(id, pwd, name, gender, birth, telephone, cellphone, address, email, mailno, addaddress, groupemail ) values(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{telephone}, #{cellphone}, #{address}, #{email}, #{mailno}, #{addaddress}, #{groupmail}) 
+  	insert into moram_member(id, pwd, name, gender, birth, telephone, cellphone, address, email, mailno, addaddress, groupemail ) values(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{telephone}, #{cellphone}, #{address}, #{email}, #{mailno}, #{addaddress}, #{groupemail}) 
   </insert>
   
   <select id="login_check" resultType="project.spring.groupware.member.domain.LoginVO">

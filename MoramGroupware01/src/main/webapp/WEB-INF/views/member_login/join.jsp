@@ -367,7 +367,7 @@
 								email: $('#email').val(),
 								mailno: $('#post_num').val(),
 								addaddress: $('#another_ad2').val(),
-								groupmail: $('#UserId').val()+"@moram.com"
+								groupemail: $('#UserId').val()+"@moram.com"
 							}),
 							success:function(result){ 
 								if(result!=null){

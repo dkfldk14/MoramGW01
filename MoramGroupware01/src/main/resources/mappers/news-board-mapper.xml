@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace = "NewsMapper">
+	<insert id = "insert">
+	insert into Moram_ITNews_Board(title, content, userid)
+	values(#{title}, #{content}, #{userid})
+	</insert>	
+	
+	<select id = "selectAll" resultType="project.spring.groupware.board.domain.BoardVO">
+	select * from Moram_ITNews_Board
+	order by bno desc
+	</select>
+	
+	<select id="selectByBno" resultType="project.spring.groupware.board.domain.BoardVO">
+	select*from Moram_ITNews_Board
+	where bno = #{bno}
+	</select>
+	
+	<update id="update">
+	update Moram_ITNews_Board set title=#{title}, content=#{content}, regdate=sysdate
+	where bno=#{bno}
+	</update>
+	
+	<delete id="delete">
+	delete from Moram_ITNews_Board where bno = #{bno}
+	</delete>
+	
+	
+	<!-- 테이블의 전체 레코드 개수를 검색 -->
+	<select id = "totalCount" resultType="Integer">
+	select count(*) from Moram_ITNews_Board
+	</select>
+	
+	<!-- 페이징 처리를 위한 SQL -->
+	<select id="listPage" resultType="project.spring.groupware.board.domain.BoardVO">
+	select b.bno, b.title, b.content, b.userid, b.regdate, b.replycnt, b.viewcnt
+	from(
+		select rownum rn, a.* from(
+			select * from Moram_ITNews_Board
+			order by bno desc
+		) a
+		
+	) b
+	where rn between #{start} and #{end}
+	
+	</select>
+	
+	
+	<!-- 댓글 업데이트를 위한 SQL문 -->
+	<update id="replycnt">
+	update Moram_ITNews_Board set replycnt = (select count(*) from Moram_ITNews_comment where bno=#{bno})
+	where bno = #{bno}
+	</update>
+	
+	<!-- 게시글 검색을 위한 SQL문 -->
+	<sql id="dynamicSearchCondition">
+		<if test = "searchType != null">
+			<if test = "searchType == 't'.toString()">
+			where title like '%'||#{keyword}||'%'
+			</if>
+			<if test = "searchType == 'u'.toString()">
+			where userid like '%'||#{keyword}||'%'
+			</if>
+		</if>
+	</sql>
+	
+	<select id="listSearchCriteria" resultType = "project.spring.groupware.board.domain.BoardVO">
+	select b.*
+	from(
+		select rownum rn, a.* from(
+			select * from Moram_ITNews_Board
+			order by bno desc
+		) a	
+	<include refid="dynamicSearchCondition"/>	
+	) b	
+	where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 조회수 카운트를 위한 SQL 문 -->
+	<update id="viewcnt">
+	update Moram_ITNews_Board set viewcnt = viewcnt+1
+	where bno = #{bno}
+	</update>
+	
+</mapper>
