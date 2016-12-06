@@ -72,6 +72,10 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 		return result;
 	}
 	
-	
+	@Override
+	public int getSearchNumOfRecords(SearchCriteria c) {
+		
+		return dao.getSearchNumOfRecords(c);
+	}
 
 }

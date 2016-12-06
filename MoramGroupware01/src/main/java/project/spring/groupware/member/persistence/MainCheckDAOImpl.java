@@ -51,5 +51,16 @@ public class MainCheckDAOImpl implements MainCheckDAO {
 	public List<MainCheckVO> selecttodayall() {
 		return sqlSession.selectList(NAMESPACE+".selecttodayall");
 	}
+	
+	@Override
+	public List<MainCheckVO> selectallweek() {
+		return sqlSession.selectList(NAMESPACE+".selectallweek");
+	}
+
+	@Override
+	public List<MainCheckVO> selectlistpage() {
+		return sqlSession.selectList(NAMESPACE+".selectlistpage");
+	}
+
 
 }

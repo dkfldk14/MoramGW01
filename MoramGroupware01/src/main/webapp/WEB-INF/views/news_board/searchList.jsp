@@ -110,9 +110,9 @@ li {
 				<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">시나브로</a></li>
-						<li><a href="#">그냥2조</a></li>
-						<li><a href="#">성준이네</a></li>
+						<li><a href="/../groupware/team_one_board/list">시나브로</a></li>
+						<li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+						<li><a href="/../groupware/team_three_board/list">성준이네</a></li>
 						<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -203,11 +203,11 @@ li {
 				</table>
 
 				<ul class="pageLinks">
-					<c:if test="${pakeMaker.hasPrev }">
+					<c:if test="${pageMaker.hasPrev }">
 						<li><a href="${pageMaker.startPageNum - 1 }">Prev</a></li>
 					</c:if>
 
-					<c:forEach begin="${pageMkaer.startPageNum }"
+					<c:forEach begin="${pageMaker.startPageNum }"
 						end="${pageMaker.endPageNum }" var="num">
 						<li><a href="${num }">${num }</a></li>
 
@@ -223,6 +223,10 @@ li {
 					<input type="hidden" name="page"
 						value="${pageMaker.searchCriteria.page }" /> <input type="hidden"
 						name="bno" />
+								<input type="hidden" name="searchType"
+					value="${pageMaker.searchCriteria.searchType }"/>
+					<input type="hidden" name="keyword"
+					value="${pageMaker.searchCriteria.keyword }"/>
 				</form>
 			</div>
 		</div>
@@ -245,6 +249,10 @@ li {
 			event.preventDefault();
 			var targetPage = $(this).attr('href');
 			frm.find('[name="page"]').val(targetPage);
+			frm.find('[name="bno"]').val();
+			frm.find('[name=searchType]').val();
+			frm.find('[name=keyword]').val();
+			
 			frm.attr('action', 'searchList');
 			frm.attr('method', 'get');
 			frm.submit();

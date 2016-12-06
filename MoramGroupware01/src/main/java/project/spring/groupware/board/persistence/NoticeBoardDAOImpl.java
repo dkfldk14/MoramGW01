@@ -73,6 +73,10 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO {
 		return result;
 	}
 	
-	
+	@Override
+	public int getSearchNumOfRecords(SearchCriteria c) {
+		
+		return sqlSession.selectOne(NAMESPACE + ".searchTotalCount", c);
+	}
 
 }

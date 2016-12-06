@@ -133,4 +133,38 @@ public class MainCheckRESTController {
 		return entity;
 	}
 	
+	@RequestMapping (value= "/all/allweek", method=RequestMethod.GET)
+	public ResponseEntity<List<MainCheckVO>> selectallweek(){
+		logger.info("selectallweek");
+		
+		List<MainCheckVO> list = service.selectallweek();
+		
+		ResponseEntity<List<MainCheckVO>> entity = null;
+		
+		if(list != null){
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} else{
+			entity = new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping (value= "/all/listPage", method=RequestMethod.GET)
+	public ResponseEntity<List<MainCheckVO>> selectlistPage(){
+		logger.info("selectallweek");
+		
+		List<MainCheckVO> list = service.selectlistpage();
+		
+		ResponseEntity<List<MainCheckVO>> entity = null;
+		
+		if(list != null){
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} else{
+			entity = new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
 }

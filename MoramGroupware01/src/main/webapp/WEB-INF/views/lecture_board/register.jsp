@@ -100,9 +100,9 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">시나브로</a></li>
-                     <li><a href="#">그냥2조</a></li>
-                     <li><a href="#">성준이네</a></li>
+                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+                     <li><a href="/../groupware/team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -162,7 +162,7 @@ display: inline-block;
 		Content<br/>
 		<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea><br/>
 		UserID<br/>
-		<input type="text" name="userid" required/><br/>
+		<input type="hidden" name="userid" value="${id}" readonly/><br/>
 		
 		<input type="submit" id = "savebutton" value="complete" required/>
 	</form>
@@ -186,6 +186,7 @@ display: inline-block;
 	
 	<script>
 	$(document).ready(function(){
+		
 		//전역 변수
 		var obj = [];
 		//스마트에디터 프레임생성

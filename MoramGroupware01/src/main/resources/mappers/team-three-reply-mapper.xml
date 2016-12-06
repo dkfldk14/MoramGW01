@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace ="TeamthreeReplyMapper">
+	<select id="numOfReplies" resultType="Integer">
+		select count(*)from Moram_Team_Three_Comment
+	</select>
+	
+	<select id="numOfRepliesByBno" resultType="Integer">
+		select count(*)from Moram_Team_Three_Comment where bno = #{bno}
+	</select>
+	
+	<insert id="insert">
+	insert into Moram_Team_Three_Comment(bno,rtext,replier)
+	values(#{bno},#{rtext},#{replier})
+	</insert>
+	
+	<select id="select" resultType="project.spring.groupware.board.domain.BoardVO">
+		select*from Moram_Team_Three_Comment
+		where bno = #{bno}
+		order by rno desc
+	</select>
+	
+	<update id="update">
+	update Moram_Team_Three_Comment
+	set rtext = #{rtext}, regdate = sysdate
+	where rno = #{rno}
+	</update>
+	
+	<delete id="delete">
+	delete from Moram_Team_Three_Comment where rno = #{rno}
+	</delete>
+	
+	<delete id="deleteByBno">
+	delete from Moram_Team_Three_Comment where bno = #{bno}
+	</delete>
+	
+</mapper>

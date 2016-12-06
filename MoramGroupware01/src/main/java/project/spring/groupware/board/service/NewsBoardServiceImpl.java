@@ -82,5 +82,11 @@ public class NewsBoardServiceImpl implements NewsBoardService {
 		int result = dao.viewcnt(bno);
 		return result;
 	}
+	
+	@Override
+	public int getSearchNumOfRecords(SearchCriteria c) {
+		
+		return dao.getSearchNumOfRecords(c);
+	}
 
 }

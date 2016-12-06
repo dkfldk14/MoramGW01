@@ -82,19 +82,24 @@
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
-							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
-							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
-							<li class="childTab"><a href="groupware/interview_board/list">면접후기</a></li>
+
+							<li><a href="/groupware/notice_board/list">공지게시</a></li>
+							<li><a href="/groupware/lecture_board/list">수업자료</a></li>
+							<li><a href="/groupware/news_board/list">IT news</a></li>
+							<li><a href="/groupware/interview_board/list">면접후기</a></li>
+
+
 						</ul></li>
 
 
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="#">시나브로</a></li>
-							<li class="childTab"><a href="#">그냥2조</a></li>
-							<li class="childTab"><a href="#">성준이네</a></li>
+
+							<li><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li><a href="/groupware/team_three_board/list">성준이네</a></li>
+
 							<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -117,7 +122,7 @@
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
-							<li class="childTab"><a href="#">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
@@ -145,7 +150,7 @@
 			<div id="page-inner" class="test">
 				<div class="row">
 					<div class="col-md-12">
-						      <h2>${name}님,<%=type %></h2>   
+						      <h2>${name}님,<%-- <%=type %> --%></h2>   
                         <h5> ♡★시공의 폭풍★시공의 폭풍으로 당신을 초대합니다!♠하스스톤 뒷면♠&☞레전더리 高級레스토랑☜의 음식 지급! 지금 이 기회를 놓지지 마세요!☞ ☎ h t t p://k r. b a t t l e . n e t /h e r e s/☎ ♡ </h5>
 					</div>
 				</div>

@@ -30,4 +30,7 @@ public interface InterviewBoardDAO {
 	
 	//조회수 카운트를 위한 메소드
 	public abstract int viewcnt(int bno);	
+	
+	//게시글 검색을 위한 페이징 처리
+	public abstract int getSearchNumOfRecords(SearchCriteria c);
 }

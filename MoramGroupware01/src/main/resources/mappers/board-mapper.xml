@@ -87,4 +87,10 @@
 	where bno = #{bno}
 	</update>
 	
+   <!-- 검색했을 때 페이징 -->
+   <select id="searchTotalCount" resultType="Integer">
+   select count(*) from Moram_Lecture_Board
+   <include refid="dynamicSearchCondition"/>
+   </select>
+	
 </mapper>

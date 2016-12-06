@@ -46,6 +46,7 @@ public class MainController {
 		String usertype = vo.getUsertype();
 		model.addAttribute("type", usertype);
 		
+		
 		return "home";
 	}
 	//로그인이 되어있는 상태에서는 로그인 페이지가 접속 불가능하도록 메인 화면으로 연결
@@ -143,6 +144,13 @@ public class MainController {
 		return "/mypage/detail";
 	}
 	
+	
+	@RequestMapping(value="my_page", method =RequestMethod.GET)
+	public String mypage(/*Integer page, Model model*/) {
+		System.out.println("마잉");
+		
+		return "/mypage/my_page";
+	}
 	
 
 }
