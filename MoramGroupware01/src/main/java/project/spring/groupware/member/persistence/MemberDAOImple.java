@@ -87,5 +87,13 @@ public class MemberDAOImple implements MemberDAO {
 		MemberVO vo = sqlsession.selectOne(NAMESPACE+".member_detail", userid);
 		return vo;
 	}
+	
+	@Override
+	public int updateMemberInfo(MemberVO vo) {
+		// TODO Auto-generated method stub
+		
+		int result = sqlsession.update(NAMESPACE+".member_info_update", vo);
+		return result;
+	}
 
 }

@@ -32,6 +32,10 @@
   </update>
   
   <select id="member_detail" resultType="project.spring.groupware.member.domain.MemberVO">
-  	select id, name, gender, birth, telephone, cellphone, address, email, mailno, addaddress from moram_member where id = #{userid}
+  	select id, name, pwd, gender, birth, telephone, cellphone, address, email, mailno, addaddress from moram_member where id = #{userid}
   </select>
+  
+  <update id="member_info_update">
+  	update moram_member set pwd=#{pwd}, name=#{name}, gender=#{gender}, birth=#{birth}, telephone=#{telephone}, cellphone=#{cellphone}, address=#{address}, mailno=#{mailno}, addaddress=#{addaddress}, email=#{email} where id = #{id}
+  </update>
   </mapper>

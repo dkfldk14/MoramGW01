@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.spring.groupware.member.domain.LoginVO;
 import project.spring.groupware.member.domain.MemberVO;
 import project.spring.groupware.member.service.MemberService;
 
@@ -105,6 +106,41 @@ public class MainController {
 		MemberVO vo = service.selectAdminMem(userid);
 		model.addAttribute("MemberVO", vo);
 		return "admin/admin_member_detail";
+	}
+	
+	@RequestMapping(value="member_update")
+	public String memberUpdate(){
+		logger.info("개인정보수정");
+		
+		return "/mypage/member_update";
+	}
+	
+	@RequestMapping(value="update_Authpwd", method=RequestMethod.POST)
+	public void updateAuthpwd(String password, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		logger.info("비번확인 불림"+password);
+		
+		HttpSession session = request.getSession();
+		String userid = String.valueOf(session.getAttribute("login_id"));
+		
+		LoginVO vo = service.loginCheck(userid);
+		
+		PrintWriter out = response.getWriter();
+		
+		if(password.equals(vo.getPwd())){
+			out.print("OK");
+		}
+	}
+	
+	@RequestMapping(value="member_update_detail")
+	public String memberUpdatedetail(HttpServletRequest request, HttpServletResponse response, Model model){
+		
+		HttpSession session = request.getSession();
+		String userid = String.valueOf(session.getAttribute("login_id"));
+		
+		MemberVO vo = service.selectAdminMem(userid);
+		model.addAttribute("MemberVO", vo);
+		
+		return "/mypage/detail";
 	}
 	
 	

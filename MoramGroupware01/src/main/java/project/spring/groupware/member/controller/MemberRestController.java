@@ -51,4 +51,21 @@ public class MemberRestController {
 		return entity;
 	}
 	
+	@RequestMapping(value="update_member_info", method=RequestMethod.PUT)
+	public ResponseEntity<String> updateMemInfo(@RequestBody MemberVO vo){
+		logger.info("업데이트 콘트롤러");
+		
+		ResponseEntity<String> entity = null;
+		
+		int result = service.updateMemberInfo(vo);
+		
+		if(result == 1){
+			entity = new ResponseEntity<String>("OK", HttpStatus.OK);
+		}else{
+			entity = new ResponseEntity<String>("NOK", HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
 }

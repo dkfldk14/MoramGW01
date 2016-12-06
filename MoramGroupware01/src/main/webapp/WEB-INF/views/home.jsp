@@ -63,28 +63,28 @@
 					<li><a href=""><i class="fa fa-edit "></i>결제<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li id="test" class="childTab"><a href="#test_input">나의 결재함page</a></li>
-							<li class="childTab"><a href="#test_input1">미결함</a></li>
+							<li id="test" class="childTab"><a href="">나의 결재함page</a></li>
+							<li class="childTab"><a href="">미결함</a></li>
 							<li id="test" class="childTab"><a href="/groupware/member_manage">반려함</a></li>
-							<li><a href="#">기결함</a></li>
+							<li class="childTab"><a href="#">기결함</a></li>
 						</ul></li>
 
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">받은 메일함1</a></li>
-							<li><a href="#">보낸 메일함</a></li>
-							<li><a href="#">휴지통</a></li>
-							<li><a href="#">주소록</a></li>
+							<li class="childTab"><a href="#">받은 메일함1</a></li>
+							<li class="childTab"><a href="#">보낸 메일함</a></li>
+							<li class="childTab"><a href="#">휴지통</a></li>
+							<li class="childTab"><a href="#">주소록</a></li>
 						</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
 
 						<ul class="nav nav-second-level">
-							<li><a href="#">공지게시</a></li>
-							<li><a href="#">수업자료</a></li>
-							<li><a href="#">IT news</a></li>
-							<li><a href="#">면접후기</a></li>
+							<li class="childTab"><a href="#">공지게시</a></li>
+							<li class="childTab"><a href="#">수업자료</a></li>
+							<li class="childTab"><a href="#">IT news</a></li>
+							<li class="childTab"><a href="#">면접후기</a></li>
 
 						</ul></li>
 
@@ -92,9 +92,9 @@
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">시나브로</a></li>
-							<li><a href="#">그냥2조</a></li>
-							<li><a href="#">성준이네</a></li>
+							<li class="childTab"><a href="#">시나브로</a></li>
+							<li class="childTab"><a href="#">그냥2조</a></li>
+							<li class="childTab"><a href="#">성준이네</a></li>
 							<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -115,17 +115,17 @@
 					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">개인정보수정</a></li>
-							<li><a href="#">나의 이력서</a></li>
-							<li><a href="#">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
+							<li class="childTab"><a href="#">나의 이력서</a></li>
+							<li class="childTab"><a href="#">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
-							<li><a href="#">권한관리</a></li>
-							<li><a href="#">문서함관리</a></li>
-							<li><a href="#">결재함관리</a></li>
+							<li class="childTab"><a href="#">권한관리</a></li>
+							<li class="childTab"><a href="#">문서함관리</a></li>
+							<li class="childTab"><a href="#">결재함관리</a></li>
 						</ul></li>
 
 					<!--  <li>

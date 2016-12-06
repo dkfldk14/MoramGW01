@@ -69,5 +69,11 @@ public class MemberServiceImple implements MemberService {
 		// TODO Auto-generated method stub
 		return dao.selectAdminMem(userid);
 	}
+	
+	@Override
+	public int updateMemberInfo(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return dao.updateMemberInfo(vo);
+	}
 
 }
