@@ -64,13 +64,13 @@
 			where title like '%'||#{keyword}||'%'
 			</if>
 			<if test = "searchType == 'u'.toString()">
-			where userid like '%'||#{keyword}||'%'
+			where name like '%'||#{keyword}||'%'
 			</if>
 		</if>
 	</sql>
 	
-	<select id="listSearchCriteria" resultType = "project.spring.groupware.board.domain.BoardVO">
-	select b.*
+	<select id="listSearchCriteria" resultType = "project.spring.groupware.board.domain.BoardAddNameVO">
+	<!-- select b.*
 	from(
 		select rownum rn, a.* from(
 			select * from Moram_Lecture_Board
@@ -78,7 +78,19 @@
 		) a	
 	<include refid="dynamicSearchCondition"/>	
 	) b	
+	where rn between #{start} and #{end} -->
+		select d.bno, d.title, d.content, d.regdate, d.replycnt, d.viewcnt, d.name 
+	from (
+ 	 select rownum rn, c.*
+  		from (
+   			 select a.*, b.* from moram_lecture_board a, moram_member b
+    		 where a.userid = b.id
+   			 order by bno desc
+ 	 	) c
+ 	<include refid="dynamicSearchCondition"/>
+	)d
 	where rn between #{start} and #{end}
+	
 	</select>
 	
 	<!-- 조회수 카운트를 위한 SQL 문 -->
@@ -89,8 +101,41 @@
 	
    <!-- 검색했을 때 페이징 -->
    <select id="searchTotalCount" resultType="Integer">
-   select count(*) from Moram_Lecture_Board
-   <include refid="dynamicSearchCondition"/>
+   <!-- select count(*) from Moram_Lecture_Board
+   <include refid="dynamicSearchCondition"/> -->
+  select count (*) from(
+	select d.bno, d.title, d.content, d.regdate, d.replycnt, d.viewcnt, d.name 
+	from (
+ 		 select rownum rn, c.*
+ 		 from (
+   		 select a.*, b.* from moram_lecture_board a, moram_member b
+    	 where a.userid = b.id
+   		 order by bno desc
+  		) c
+  	<include refid="dynamicSearchCondition"/>
+	)d
+  )
+   </select>
+   
+   <!-- userid를 작성자 이름으로 바꾸는 SQL문 ........ -->
+   <select id="useridToChangeName" resultType="project.spring.groupware.board.domain.BoardAddNameVO">
+	select a.bno, a.title, a.content, b.name, a.regdate, a.replycnt, a.viewcnt from moram_lecture_board a left outer join moram_member b
+	on userid = id and id = #{userid}
    </select>
 	
+	<!-- userid를 이름으로 페이징 처리를 위한 SQL -->
+	<select id="listPageName" resultType="project.spring.groupware.board.domain.BoardAddNameVO">
+	select d.bno, d.title, d.content, d.regdate, d.replycnt, d.viewcnt, d.name 
+	from (
+ 	 select rownum rn, c.*
+  		from (
+   			 select a.*, b.* from moram_lecture_board a, moram_member b
+    		 where a.userid = b.id
+   			 order by bno desc
+ 	 	) c
+	)d
+	where rn between #{start} and #{end}	
+	</select>
+	
+		
 </mapper>

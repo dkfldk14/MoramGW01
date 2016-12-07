@@ -47,7 +47,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">See Website</a></li>
 						<li><a href="#">Open Ticket</a></li>
-						<li><a href="#">Report Bug</a></li>
+						<li><a href="/groupware/member_login/logOut">Log outs</a></li>
 					</ul>
 				</div>
 

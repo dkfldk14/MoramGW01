@@ -162,7 +162,7 @@ display: inline-block;
 		Content<br/>
 		<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea><br/>
 		UserID<br/>
-		<input type="text" name="userid" required/><br/>
+		<input type="text" name="userid" value="${login_id }" readonly/><br/>
 		
 		<input type="submit" id = "savebutton" value="complete" required/>
 	</form>

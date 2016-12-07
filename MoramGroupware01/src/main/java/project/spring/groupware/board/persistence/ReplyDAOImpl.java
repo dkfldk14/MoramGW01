@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.groupware.board.domain.ReplyAddNameVO;
 import project.spring.groupware.board.domain.ReplyVO;
 
 
@@ -44,5 +45,11 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public int deleteByBno(int bno) {
 		int result = sqlSession.delete(NAMESPACE + ".deleteByBno", bno);
 		return result;
+	}
+	
+	@Override
+	public List<ReplyAddNameVO> selectName(ReplyAddNameVO vo) {
+		
+		return sqlSession.selectList(NAMESPACE + ".selectName", vo);
 	}
 }

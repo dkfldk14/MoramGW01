@@ -191,7 +191,9 @@ display: inline-block;
 		<input type="text" value="${dateString }" readonly /> <br/>
 		
 		<button type="button" id="btnList">Go to List</button>
+		<c:if test="${boardVO.userid eq id }">
 		<button type="submit" id="updatebutton">Update</button>
+		</c:if> 
 		<input type="hidden" name="page" value="${page }" />
 			
 	</form>
