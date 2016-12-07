@@ -257,7 +257,7 @@ th, td {
 
 
 
-
+<% String type = String.valueOf(session.getAttribute("usertype")); %>
 	<!-- 위의 탭 버튼들을 나타냄 -->
 	<div id="wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
@@ -274,7 +274,7 @@ th, td {
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">See Website</a></li>
 						<li><a href="#">Open Ticket</a></li>
-						<li><a href="#">Report Bug</a></li>
+						<li><a href="/groupware/member_login/logOut">Log outs</a></li>
 					</ul>
 				</div>
 
@@ -294,19 +294,19 @@ th, td {
 				<li><a href="#"><i class="fa fa-edit "></i>전자결재<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">나의 결재함</a></li>
-						<li><a href="#">미결함</a></li>
-						<li><a href="#">반려함</a></li>
-						<li><a href="#">기결함</a></li>
+						<li class="childTab"><a href="#">나의 결재함</a></li>
+						<li class="childTab"><a href="#">미결함</a></li>
+						<li class="childTab"><a href="#">반려함</a></li>
+						<li class="childTab"><a href="#">기결함</a></li>
 					</ul></li>
 
 				<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="list?page=1">받은 메일함</a></li>
-						<li><a href="write">편지쓰기</a></li>
-						<li><a href="send-mailbox">보낸 메일함</a></li>
-						<li><a href="delete-mailbox">휴지통</a></li>
+						<li class="childTab"><a href="list?page=1">받은 메일함</a></li>
+						<li class="childTab"><a href="write">편지쓰기</a></li>
+						<li class="childTab"><a href="send-mailbox">보낸 메일함</a></li>
+						<li class="childTab"><a href="delete-mailbox">휴지통</a></li>
 					</ul></li>
 				<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 						class="fa arrow"></span></a>
@@ -323,26 +323,26 @@ th, td {
 				<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">시나브로</a></li>
-						<li><a href="#">그냥2조</a></li>
-						<li><a href="#">성준이네</a></li>
+						<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
+						<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+						<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
 					
 					</ul></li>
 				<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">개인정보수정</a></li>
-						<li><a href="#">나의 이력서</a></li>
-						<li><a href="#">나의 이력관리</a></li>
+						<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
+						<li class="childTab"><a href="#">나의 이력서</a></li>
+						<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
 					</ul></li>
-				<li><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
+				<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">사용자관리</a></li>
-						<li><a href="#">권한관리</a></li>
-						<li><a href="#">문서함관리</a></li>
+						<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
+						<li class="childTab"><a href="#">권한관리</a></li>
+						<li class="childTab"><a href="#">문서함관리</a></li>
 
-						<li><a href="#">결재함관리</a></li>
+						<li class="childTab"><a href="#">결재함관리</a></li>
 					</ul></li>
 
 					</ul>
@@ -498,8 +498,26 @@ th, td {
 
 		<script>
 
-
-
+		var admin = <%=type%>
+		function tabSetting() {
+			// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
+			/* $('.test').hide();
+			$($('.current').find('a').attr('href')).show(); */
+	 		
+			console.log("값:"+admin);
+			if(admin != 1){
+				$('#admin').hide();	
+			}
+					
+			if(admin==0){
+				$('.childTab').click(function () {
+					alert('승인 후 이용해주세요');
+					return false;
+				})
+			}
+		}
+		
+		tabSetting();
 
 		
 
