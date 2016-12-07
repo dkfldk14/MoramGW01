@@ -701,6 +701,7 @@ code {
   color: #c7254e;
   white-space: nowrap;
   background-color: #f9f2f4;
+  
   border-radius: 4px;
 }
 kbd {
@@ -3665,24 +3666,33 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   overflow-x: visible;
   -webkit-overflow-scrolling: touch;
   border-top: 1px solid transparent;
+  background-color : #59dfdf;
+  
+
+  
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1);
 }
 .navbar-collapse.in {
+
   overflow-y: auto;
 }
 @media (min-width: 768px) {
   .navbar-collapse {
+ 
     width: auto;
     border-top: 0;
     box-shadow: none;
   }
   .navbar-collapse.collapse {
+ 
     display: block !important;
     height: auto !important;
     padding-bottom: 0;
+
     overflow: visible !important;
   }
   .navbar-collapse.in {
+   background-color : #3fc3c4;
     overflow-y: visible;
   }
   .navbar-fixed-top .navbar-collapse,
@@ -3941,7 +3951,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #f8f8f8;
+  background-color: #748c8a;
   border-color: #e7e7e7;
 }
 .navbar-default .navbar-brand {
