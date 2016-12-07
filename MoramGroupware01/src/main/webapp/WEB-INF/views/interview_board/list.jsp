@@ -191,15 +191,15 @@ li {
 			<th>조회수</th>
 		</tr>
 				
-		<c:forEach var = "vo" items="${boardList }">
+		<c:forEach var = "vo2" items="${listName }">
 			<tr>
-				<td>${vo.bno }</td>
-				<td><a href="${vo.bno}">${vo.title }(${vo.replycnt})</a></td>
-				<td>${vo.userid }</td>
-				<td><fmt:formatDate value="${vo.regdate }"
+				<td>${vo2.bno }</td>
+				<td><a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a></td>
+				<td>${vo2.name }</td>
+				<td><fmt:formatDate value="${vo2.regdate }"
 					pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
-				<td>${vo.viewcnt }</td>
+				<td>${vo2.viewcnt }</td>
 			</tr>
 		</c:forEach>
 			
@@ -230,7 +230,7 @@ li {
 		<option id="t" value="t" <c:out value="${pageMaker.searchCriteria.searchType == 't'? 'selected' : '' }"/>>
 		제목</option>
 		<option id="u" value="u"<c:out value="${pageMaker.searchCriteria.searchType =='u'? 'selected' : '' }"/>>
-		ID</option>
+		작성자</option>
 	</select>	
 	<input type="text" id="keyword" name="keyword" value="${pageMaker.searchCriteria.keyword }"/> <!-- value 값을 설정해야함 -->
 		

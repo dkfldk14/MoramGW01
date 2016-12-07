@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.groupware.board.domain.BoardAddNameVO;
 import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.board.pageuitl.PaginationCriteria;
 import project.spring.groupware.board.searchutil.SearchCriteria;
@@ -84,12 +85,12 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	@Override
-	public List<BoardVO> listSearchCriteria(SearchCriteria c) {
+	public List<BoardAddNameVO> listSearchCriteria(SearchCriteria c) {
 		logger.info("searchType: " + c.getSearchType());
 		logger.info("keyword: " + c.getKeyword());
 		logger.info("start: " + c.getStart());
 		logger.info("end: " + c.getEnd());
-		
+				
 		return sqlSession.selectList(NAMESPACE+".listSearchCriteria", c);
 	}
 	
@@ -104,6 +105,17 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.selectOne(NAMESPACE + ".searchTotalCount", c);
 	}
+
+	@Override
+	public List<BoardAddNameVO> selectName(String userid) {
+		
+		return sqlSession.selectList(NAMESPACE + ".useridToChangeName", userid);
+	}
 	
+	@Override
+	public List<BoardAddNameVO> listPageName(PaginationCriteria c) {
+		
+		return sqlSession.selectList(NAMESPACE + ".listPageName" , c);
+	}
 	
 }

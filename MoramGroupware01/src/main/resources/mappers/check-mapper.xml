@@ -5,7 +5,7 @@
 
 <mapper namespace="project.spring.groupware.CheckMapper">
 
-	<!-- 입실처리 -->
+		<!-- 입실처리 -->
 	<insert id="insert-checkin"> 
 	INSERT INTO MORAM_ATTENDANCE (ID) VALUES (#{id})
 	</insert>
@@ -42,7 +42,7 @@
 	to_char(enter, 'day')로 이름이 지정되어 변수 이름으로 key value를 못찾기 떄문에 to_char라는 별명을 지정해줌 -->
 	
 	<!-- TO_CHAR(TRUNC(sysdate, 'iw') 이번주만 검색-->
-	<!-- TO_CHAR(TRUNC(sysdate, 'iw') - 7 저번주만 검색  -->
+	<!-- TO_CHAR(TRUNC(sysdate, 'iw') - 7 , -1  저번주 월요일~일요일 검색  -->
 	<select id="selectsevendays" resultType="project.spring.groupware.member.domain.MainCheckVO">
 	SELECT id , enter , leave , statetime , attendance , score , to_char(enter,'day') as to_char 
 	from moram_attendance 
@@ -55,6 +55,11 @@
 	SELECT * from moram_attendance where enter 
 	between TO_CHAR(SYSDATE,'YYYY/MM/DD') 
 	and TO_CHAR(SYSDATE,'YYYY/MM/DD HH24:MI:SS') 
+	</select>
+	
+	<select id="selectallweek" resultType="project.spring.groupware.member.domain.MainCheckVO">
+	SELECT id , enter , leave , statetime , attendance , score , to_char(enter,'day') as to_char 
+	from moram_attendance order by enter ASC 
 	</select>
 
 </mapper>

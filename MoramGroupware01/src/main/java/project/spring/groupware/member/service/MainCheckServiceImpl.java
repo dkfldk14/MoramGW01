@@ -44,5 +44,16 @@ public class MainCheckServiceImpl implements MainCheckService {
 	public List<MainCheckVO> selecttodayall() {
 		return mainDAO.selecttodayall();
 	}
+	
+	@Override
+	public List<MainCheckVO> selectallweek() {
+		return mainDAO.selectallweek();
+	}
+
+	@Override
+	public List<MainCheckVO> selectlistpage() {
+		return mainDAO.selectlistpage();
+	}
+
 
 }

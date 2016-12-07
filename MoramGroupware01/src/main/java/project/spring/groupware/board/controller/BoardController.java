@@ -21,12 +21,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import project.spring.groupware.board.domain.BoardAddNameVO;
 import project.spring.groupware.board.domain.BoardVO;
+import project.spring.groupware.board.domain.ReplyAddNameVO;
 import project.spring.groupware.board.pageuitl.PageMaker;
 import project.spring.groupware.board.pageuitl.PaginationCriteria;
 import project.spring.groupware.board.searchutil.SearchCriteria;
 import project.spring.groupware.board.service.BoardService;
 import project.spring.groupware.board.service.ReplyService;
+import project.spring.groupware.member.domain.MemberVO;
 
 
 
@@ -45,31 +48,46 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
+
 	public void listPage(Integer page, Integer bno, Model model, HttpServletRequest request){
+		//아이디에 맞는 이름을 받아오기
 		HttpSession session = request.getSession();
 		String name = (String)session.getAttribute("name");
+		
+		//userid 를 이름으로 변경
+		List<BoardAddNameVO> listname = null;
+		
 		logger.info("name : " + name);
 		model.addAttribute("name", name);
-		
+
 		//페이징을 위한 구문
 		PaginationCriteria c = new PaginationCriteria();
-				
-		logger.info("c1 : " + c);
+		
 		if(page != null){
 			c.setPage(page);
 		}
 		
-		logger.info("c2 : " + c);
 		List<BoardVO>list = boardService.read(c);
-		
-		logger.info("list : " + list);
-		
+				
+		for(BoardVO vo : list){
+			listname = boardService.selectName(vo.getUserid());
+		}
 		model.addAttribute("boardList", list);
+
+		listname = boardService.listPageName(c);
+		
+		
+		//이름을 나타내주기 위한 메소드		
+		model.addAttribute("listName", listname);
+		for(BoardAddNameVO vo : listname){
+		logger.info("list에 있는 name : " + vo.getName());
+		}
 		
 		//검색기능을 위한 구문
 		SearchCriteria searchCriteria = new SearchCriteria();
-		List<BoardVO>searchList = boardService.listSearchCriteria(searchCriteria);
+		List<BoardAddNameVO>searchList = boardService.listSearchCriteria(searchCriteria);
 		model.addAttribute("searchList", searchList);
+		
 		
 		//여기다가 replycnt 값을 출력하려고 했지만 로그에 replycnt가 0으로 찍힌다.
 		for (BoardVO vo : list){
@@ -80,7 +98,7 @@ public class BoardController {
 //			model.addAttribute("countNum", count);
 		}		
 		
-		//�������� ��ũ�� ��� ǥ������
+		//페이징을 위한 pageMaker를 불러옴
 		PageMaker maker = new PageMaker();
 		//페이지를 위한 셋
 		maker.setCriteria(c);
@@ -100,11 +118,12 @@ public class BoardController {
 		logger.info("page : " + page);
 		
 		SearchCriteria searchCriteria = new SearchCriteria(searchType, keyword);
+		searchCriteria.setPage(page);
 		
-		List<BoardVO> searchList = boardService.listSearchCriteria(searchCriteria);
+		List<BoardAddNameVO> searchList = boardService.listSearchCriteria(searchCriteria);
 		logger.info("searchList : " + searchList);
 		
-		for(BoardVO vo : searchList){
+		for(BoardAddNameVO vo : searchList){
 			logger.info("bno : " + vo.getBno());
 			logger.info("title : " + vo.getTitle());
 			logger.info("content : " + vo.getContent());
@@ -127,12 +146,12 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/register", method = RequestMethod.POST)
-	public String registerToList(BoardVO vo, RedirectAttributes attr){
+	public String registerToList(BoardVO vo, RedirectAttributes attr, Model model){
 		
 		int result = boardService.create(vo);
 		
 		logger.info("id : " + vo.getUserid());
-		
+				
 		if(result == 1){ //success
 			attr.addFlashAttribute("insert_result", "success");
 			attr.addAttribute("editor", "editor");
@@ -146,8 +165,23 @@ public class BoardController {
 	
 	@RequestMapping(value ="/detail", method=RequestMethod.GET)
 	public void detail(int bno, 
-			@ModelAttribute("page") int page, Model model){
+			@ModelAttribute("page") int page, ReplyAddNameVO replyvo, Model model, HttpServletRequest request){
 		logger.info("detail(): bno=" + bno);
+		//session 값 가지고 오기
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("login_id");
+		model.addAttribute("id", id);
+		//System.out.println("id : " + id);
+		
+		/*//reply id 값을 모델에 저장
+		List<ReplyAddNameVO> replyNameList = replyService.selectName(replyvo);
+		
+		//String reply id
+		String replierName = null;
+		for(ReplyAddNameVO vo2 : replyNameList){
+			replierName = vo2.getRname();
+		}
+		model.addAttribute("replyName", replierName );*/
 		
 		//조회수 증가
 		boardService.viewcnt(bno);

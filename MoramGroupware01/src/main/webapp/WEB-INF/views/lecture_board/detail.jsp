@@ -191,7 +191,15 @@ display: inline-block;
 		<input type="text" value="${dateString }" readonly /> <br/>
 		
 		<button type="button" id="btnList">Go to List</button>
+		
+		<!-- userid 랑 session에 있는 id가 같을 때만 update 버튼을 보여주기 -->
+		
+		
+		
+		<c:if test="${boardVO.userid eq id }">
 		<button type="submit" id="updatebutton">Update</button>
+		</c:if> 
+		
 		<input type="hidden" name="page" value="${page }" />
 			
 	</form>
@@ -201,7 +209,7 @@ display: inline-block;
 		<input type = "text" name="rtext" id="rtext"
 			placeholder ="write it" required/>
 		<input type = "text" name="replier" id="replier"
-			placeholder="ID" required/>
+			placeholder="ID" value = "${name }" readonly/>
 		<button type = "button" id="btnCreate">Write Comments</button>	
 	</div>
 	<br/>
@@ -284,14 +292,23 @@ display: inline-block;
 				var url = '/spring/replies/all/'+bno;
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
+					console.log("userid : " + "${boardVO.userid }");
+					console.log("id :" + "${id}");
+					
+					//이름 값들을 받아노느 변수를 선언
 					var list = '';
+					var username = '';
+					var name = "${name}";
+					
 					//data의 개수 만큼 function의 내용을 반복해서 수행
 					$(data).each(function(){
 						var date = new Date(this.regdate);
 						var dateString = date.toLocaleDateString();
 						console.log(dateString);
 					
-					
+					username=this.replier;
+					//alert(userid +" userid " + id + "id");
+					if(username == name){
 					list += '<li class ="reply_list" data-rno="'
 						+ this.rno
 						+'">'
@@ -304,10 +321,29 @@ display: inline-block;
 						+"</span>"
 						+'<span class="regdate">'
 						+dateString+' '
-						+'</span>'
-						+'<button>수정</button>'
+						+'</span>'						
+						+ '<button>수정</button>'						
 						+'</li>';
+						
+						}else{
+							list += '<li class ="reply_list" data-rno="'
+								+ this.rno
+								+'">'
+								+'#'+this.rno+' '
+								+'<span class="replier">'
+								+this.replier + ' '
+								+'</span>'
+								+ '<span class = "rtext">'
+								+this.rtext + ' '
+								+"</span>"
+								+'<span class="regdate">'
+								+dateString+' '
+								+'</span>'
+								+'</li>';
+						
+						}
 					});
+					
 				
 					$('#replies').html(list);
 				});			

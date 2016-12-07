@@ -162,6 +162,7 @@ display: inline-block;
 		Content<br/>
 		<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea><br/>
 		UserID<br/>
+
 		<input type="text" name="userid" value="${login_id }" readonly/><br/>
 		
 		<input type="submit" id = "savebutton" value="complete" required/>
@@ -186,6 +187,7 @@ display: inline-block;
 	
 	<script>
 	$(document).ready(function(){
+		
 		//전역 변수
 		var obj = [];
 		//스마트에디터 프레임생성
