@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.spring.groupware.board.domain.BoardAddNameVO;
 import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.board.pageuitl.PaginationCriteria;
 import project.spring.groupware.board.persistence.BoardDAO;
@@ -72,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<BoardVO> listSearchCriteria(SearchCriteria c) {
+	public List<BoardAddNameVO> listSearchCriteria(SearchCriteria c) {
 		
 		return dao.listSearchCriteria(c);
 	}
@@ -89,4 +90,15 @@ public class BoardServiceImpl implements BoardService {
 		return dao.getSearchNumOfRecords(c);
 	}
 
+	@Override
+	public List<BoardAddNameVO> selectName(String userid) {
+		
+		return dao.selectName(userid);
+	}
+
+	@Override
+	public List<BoardAddNameVO> listPageName(PaginationCriteria c) {
+		
+		return dao.listPageName(c);
+	}
 }

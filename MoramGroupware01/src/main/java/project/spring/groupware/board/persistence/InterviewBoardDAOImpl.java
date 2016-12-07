@@ -3,27 +3,30 @@ package project.spring.groupware.board.persistence;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.groupware.board.domain.BoardAddNameVO;
 import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.board.pageuitl.PaginationCriteria;
 import project.spring.groupware.board.searchutil.SearchCriteria;
 
-
 @Repository
 public class InterviewBoardDAOImpl implements InterviewBoardDAO {
-
 	private static final String NAMESPACE = "InterviewMapper";
 	private static final String NAMESPACEFORREPLY = "InterviewReplyMapper";
 	
+	private static Logger logger =
+			LoggerFactory.getLogger(BoardDAOImpl.class);
 	
 	@Autowired
 	private SqlSession sqlSession;
-
+	
 	@Override
 	public int inert(BoardVO vo) {
-		int result = sqlSession.insert(NAMESPACE + ".insert", vo);
+		int result = sqlSession.insert(NAMESPACE + ".insert", vo); 
 		return result;
 	}
 
@@ -67,31 +70,47 @@ public class InterviewBoardDAOImpl implements InterviewBoardDAO {
 	public int count(int bno) {
 		int result = sqlSession.selectOne(NAMESPACEFORREPLY + ".numOfRepliesByBno", bno);
 		return result;
-	}
 
-	@Override
-	public int totalReplycnt(int bno) {
-		int result = sqlSession.update(NAMESPACE + ".replycnt", bno);
-		return result;
-	}
-
-	@Override
-	public List<BoardVO> listSearchCriteria(SearchCriteria c) {
-		List<BoardVO> list = sqlSession.selectList(NAMESPACE + ".listSearchCriteria", c);
-		return list;
-	}
-
-	@Override
-	public int viewcnt(int bno) {
-		int result = sqlSession.update(NAMESPACE + ".viewcnt", bno);
-				
-		return result;
 	}
 	
+	@Override
+	public int totalReplycnt(int bno) {
+			
+		return sqlSession.update(NAMESPACE + ".replycnt", bno);
+	}
+	
+	@Override
+	public List<BoardAddNameVO> listSearchCriteria(SearchCriteria c) {
+		logger.info("searchType: " + c.getSearchType());
+		logger.info("keyword: " + c.getKeyword());
+		logger.info("start: " + c.getStart());
+		logger.info("end: " + c.getEnd());
+				
+		return sqlSession.selectList(NAMESPACE+".listSearchCriteria", c);
+	}
+	
+	@Override
+	public int viewcnt(int bno) {
+		
+		return sqlSession.update(NAMESPACE + ".viewcnt", bno);		
+	}
+
 	@Override
 	public int getSearchNumOfRecords(SearchCriteria c) {
 		
 		return sqlSession.selectOne(NAMESPACE + ".searchTotalCount", c);
+	}
+
+	@Override
+	public List<BoardAddNameVO> selectName(String userid) {
+		
+		return sqlSession.selectList(NAMESPACE + ".useridToChangeName", userid);
+	}
+	
+	@Override
+	public List<BoardAddNameVO> listPageName(PaginationCriteria c) {
+		
+		return sqlSession.selectList(NAMESPACE + ".listPageName" , c);
 	}
 	
 }
