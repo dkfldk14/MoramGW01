@@ -59,20 +59,20 @@
 						align="center" /> <class ="img-responsive" /></li>
 
 
-					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
+					<li class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
 					<li><a href=""><i class="fa fa-edit "></i>결제<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li id="test" class="childTab"><a href="">나의 결재함page</a></li>
+							<li class="childTab"><a href="">나의 결재함page</a></li>
 							<li class="childTab"><a href="">미결함</a></li>
-							<li id="test" class="childTab"><a href="/groupware/member_manage">반려함</a></li>
+							<li class="childTab"><a href="">반려함</a></li>
 							<li class="childTab"><a href="#">기결함</a></li>
 						</ul></li>
 
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list">받은 메일함</a></li>
+							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
 							<li class="childTab"><a href="email/write">편지쓰기</a></li>
 							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
 							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
@@ -83,10 +83,10 @@
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 
-							<li><a href="/groupware/notice_board/list">공지게시</a></li>
-							<li><a href="/groupware/lecture_board/list">수업자료</a></li>
-							<li><a href="/groupware/news_board/list">IT news</a></li>
-							<li><a href="/groupware/interview_board/list">면접후기</a></li>
+							<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
+							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
+							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
+							<li class="childTab"><a href="/groupware/interview_board/list">면접후기</a></li>
 
 
 						</ul></li>
@@ -96,9 +96,9 @@
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 
-							<li><a href="/groupware/team_one_board/list">시나브로</a></li>
-							<li><a href="/groupware/team_two_board/list">그냥2조</a></li>
-							<li><a href="/groupware/team_three_board/list">성준이네</a></li>
+							<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
 
 							<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>

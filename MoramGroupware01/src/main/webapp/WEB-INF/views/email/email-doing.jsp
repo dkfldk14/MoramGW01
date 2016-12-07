@@ -47,7 +47,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#">See Website</a></li>
 						<li><a href="#">Open Ticket</a></li>
-						<li><a href="#">Report Bug</a></li>
+						<li><a href="/groupware/member_login/logOut">Log outs</a></li>
 					</ul>
 				</div>
 
@@ -76,7 +76,7 @@
 				<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-		<li><a href="list">받은 메일함</a></li>
+		<li><a href="list?page=1">받은 메일함</a></li>
 						<li><a href="write">편지쓰기</a></li>
 						<li><a href="send-mailbox">보낸 메일함</a></li>
 						<li><a href="delete-mailbox">휴지통</a></li>
