@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.Spliterators;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Flags;
 import javax.mail.Folder;
@@ -317,33 +321,52 @@ public class EmailController {
 		String to_mail=vo.getTo_email();
 		String from_mail=vo.getFrom_email();
 		String content=vo.getContent();
-		*/
-		EmailVO emailvo=new EmailVO(1, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), vo.getTo_email(), null, 1);
-		emailServiceDAO.insert(emailvo);
-		logger.info("vo 값 : "+vo.getSubject() );
-		logger.info("vo값 : "+vo.getFrom_email());
-		logger.info("vo값 : "+vo.getTo_email());
-	 sendEmail(vo);
+		강호준<jun@moram.com>, 방수용<qkdtyd12@moram.com>, 조승현<seunghyun123@moram.com>, 김성준<sjkim123@moram.com>, */
+		
+		
+	
+		sendEmail(vo);
 	   
 	   
 		
 	}
 	
 	
-	private void sendEmail(final EmailVO vo){
+	private void sendEmail(EmailVO vo){
+		
+		String[] address=new String[10];
+		
+		String addressList=vo.getTo_email();
+		
+		Matcher matcher = Pattern.compile("<[^>]+>").matcher(addressList);
+		int i = 0;
+		while( matcher.find() ) {
+				
+				String group = matcher.group();
+				address[i] = group.substring(1, group.length()-1);
+					logger.info(group.substring(1, group.length()-1));
+					logger.info("주소분리 ? : "+address[i]);
+					
+					i++;
+				
+			}
+	
+
+			
 		
 		
-		String to=vo.getTo_email();
+		
+		/*String to=vo.getTo_email();
 		logger.info("to : "+to);
+		*/
 		String from=vo.getFrom_email();
 		logger.info("from : "+from);
 		
 		/*final String username="dkfldk14@moram.com";
-		*/final String password="6557";
+		*/ String password="6557";
 		
 		
 		String host="192.168.11.100";
-		
 		
 		 Properties props = new Properties();
 	      props.put("mail.smtp.auth", "true");
@@ -351,19 +374,24 @@ public class EmailController {
 	      props.put("mail.smtp.host", host);
 	      props.put("mail.smtp.port", "25");
 				
-	      
+	     
 	      /*Session*/
-
-	      // Get the Session object.
-	      Session session = Session.getInstance(props,
-	    		  new javax.mail.Authenticator() {
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	               return new PasswordAuthentication(vo.getTo_email(), password);
-		   }
-	         });
-
+		for (int z = 0; z < address.length; z++) {
+			if(address[z]!=null){
+			// Get the Session object.
+			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(vo.getFrom_email(), password);
+				}
+			});
 
 	      try {
+	    	  
+	    	
+	    	  
+	    		  
+	    		  logger.info("address 배열 : "+address[z]);
+	    		    
 		   // Create a default MimeMessage object.
 		   Message message = new MimeMessage(session);
 		
@@ -372,7 +400,7 @@ public class EmailController {
 		
 		   // Set To: header field of the header.
 		   message.setRecipients(Message.RecipientType.TO,
-	               InternetAddress.parse(to));
+	               InternetAddress.parse(address[z]));
 		
 		   // Set Subject: header field
 		   message.setSubject(vo.getSubject());
@@ -382,16 +410,26 @@ public class EmailController {
 
 		   // Send message
 		   Transport.send(message);
-
+		   
+			EmailVO emailvo=new EmailVO(1, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), address[z], null, 1);
+			emailServiceDAO.insert(emailvo);
+			logger.info("vo 값 : "+vo.getSubject() );
+			logger.info("vo값 : "+vo.getFrom_email());
+			logger.info("vo값 : "+address[z]);
+		
+		   
+	    	 
 		   System.out.println("Sent message successfully....");
-
+	    	  
+		   
 	      } catch (MessagingException e) {
 	         throw new RuntimeException(e);
 	      }
+			}
 	      logger.info("됏음?");
 	      
 	   }
-
+	}
 
 	@RequestMapping(value="/test")
 	public void test(){

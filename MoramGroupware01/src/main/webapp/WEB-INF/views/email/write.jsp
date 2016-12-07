@@ -465,7 +465,7 @@ th, td {
 				  <c:forEach var="memberList" items="${memberList }">
                      <tr>
                         <td style="width: 50px;"><input type="checkbox" name="checkb" class="checkid"
-                           value="${memberList.groupemail }"></td>
+                           value="${memberList.name}<${memberList.groupemail }>"></td>
                         <td style="width: 120px;">${memberList.name}</td>
                         <td style="width: 200px;">${memberList.groupemail }</td>
                         <td style="width: 150px;">${memberList.dept }팀</td>
@@ -533,7 +533,7 @@ th, td {
 				for (var i = 0; i < size; i++) {
 					if (document.getElementsByName("checkb")[i].checked == true) {
 						adress += document.getElementsByName("checkb")[i].value
-								+ " ,";
+								+ ", ";
 						alert(adress);
 
 					}
