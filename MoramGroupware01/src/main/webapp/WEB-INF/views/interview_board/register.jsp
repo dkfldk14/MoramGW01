@@ -181,7 +181,7 @@ td{
 		<tr>
 			<th>UserID</th>
 			<td>
-				<input type="text" name="userid" value="${login_id }" readonly="readonly"/>
+				<input type="text" name="userid" value="${login_id }"  readonly="readonly"/>
 			</td>
 		</tr>
 		<tr>
