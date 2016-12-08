@@ -39,4 +39,13 @@
 	delete from Moram_Team_Three_Comment where bno = #{bno}
 	</delete>
 	
+		<select id="selectName" resultType="project.spring.groupware.board.domain.ReplyAddNameVO">
+		select a.rno, a.bno, a.rtext, b.name, a.replier, a.regdate
+  		from moram_team_three_comment a left outer join moram_member b
+		on replier = id and id = #{replier}
+		where bno = #{bno}
+		order by rno desc
+	</select>
+	
+	
 </mapper>

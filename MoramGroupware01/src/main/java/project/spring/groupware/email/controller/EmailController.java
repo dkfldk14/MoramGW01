@@ -167,13 +167,15 @@ public class EmailController {
 }
 
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public void emailview(int num, Model model) {
-
+	public void emailview(int num, Model model, EmailVO vo) {
+		logger.info("detail jsp 실행 ");
 		// model.addAttribute("email", vo);
 		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
-		EmailVO vo = emaillist.get(num - 1);
-		logger.info(vo.getContent());
-		logger.info("num:" + vo.getNum());
+		/*EmailVO vo = emaillist.get(num - 1);
+		logger.info("detail에 있는 vo 값 : " + vo.getContent());
+		logger.info("num:" + vo.getNum());*/
+		vo = emailServiceDAO.detailEmail(num);	
+		logger.info("detail subject : " + vo.getSubject());
 		model.addAttribute("emaildetail", vo);
 	}
 	

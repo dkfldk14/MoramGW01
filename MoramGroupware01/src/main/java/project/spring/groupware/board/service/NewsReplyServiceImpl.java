@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.spring.groupware.board.domain.ReplyAddNameVO;
 import project.spring.groupware.board.domain.ReplyVO;
 import project.spring.groupware.board.persistence.NewsReplyDAO;
 
@@ -43,6 +44,12 @@ public class NewsReplyServiceImpl implements NewsReplyService{
 	public int deleteByBno(int bno) {
 		int result = dao.deleteByBno(bno);
 		return result;
+	}
+
+	@Override
+	public List<ReplyAddNameVO> selectName(int bno) {
+		
+		return dao.selectName(bno);
 	}
 
 	

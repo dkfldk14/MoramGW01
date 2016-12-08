@@ -24,6 +24,33 @@
 display: inline-block;
 
 }
+th{
+	width: 200px;
+}
+
+tbody tr td input, tbody tr th input{
+	width: 400px;
+	border:none;
+	border-right:0px; 
+	border-top:0px; 
+	boder-left:0px; 
+	boder-bottom:0px;
+}
+
+td{
+text-align: left;
+}
+textarea{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+tr{
+border:1px solid #ddd; 
+border-left: 1px solid white;
+border-right: 1px solid white;
+}
+
 </style>
 </head>
 <body>
@@ -151,19 +178,40 @@ display: inline-block;
 	<div id="page-wrapper">
 	<div id="page-inner">
 	<h1>게시글/수정 삭제 페이지</h1>
-	<form id = "frm">
-	<input type = "hidden" name ="bno" value="${boardVO.bno }" /><br/>
-	Title<br/>
-	<input type="text" name="title" value="${boardVO.title }"/> <br/>
-	Content<br/>
-	<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required>
-	${boardVO.content }</textarea><br/>
-	Writer ID <br/>
-	<input type = "text" name="userid" value="${boardVO.userid }" readonly/><br/>
+	<!--  수정  -->
+	<form id="frm">	
+	<table style="position: relative;" width="875px">
+	<tbody>
 	
-	<input type = "hidden" name="page" value="${page }"/>
 	
+		<tr>
+			
+			<th>Title</th>
+			<td>
+				<input type="text" name="title" value="${boardVO.title }"/>
+				<input type = "hidden" name ="bno" value="${boardVO.bno }" />
+			</td>
+		</tr>
+		
+		<tr>
+			<th>Content</th>
+			<td>
+			<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required>${boardVO.content }</textarea>
+			</td>	
+		</tr>
+		<tr>
+			<th>Writer ID</th>
+			<td>
+				<input type = "text" name="userid" value="${boardVO.userid }" readonly/>
+			</td>
+		</tr>
+	</tbody>
+	</table>
+		<input type="submit" id = "savebutton" value="complete" required/>
+		<input type = "hidden" name="page" value="${page }"/>
 	</form>
+	<!--  -------------------  -->
+	
 	
 	<button type = "submit" id = "btnUpdate">Update</button>
 	<button type = "submit" id = "btnDelete">Delete</button>
@@ -189,7 +237,7 @@ display: inline-block;
 	
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="/spring/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="/groupware/resources/js/HuskyEZCreator2.js" charset="utf-8"></script>
 	
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> -->
 		
@@ -201,7 +249,7 @@ display: inline-block;
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef:obj,
 			elPlaceHolder:"editor",
-			sSkinURI:"/spring/resources/SmartEditor2Skin.html",
+			sSkinURI:"/groupware/resources/SmartEditor2Skin.html",
 			htParams : {
 				//Using toolbar
 				bUseToolbar : true,

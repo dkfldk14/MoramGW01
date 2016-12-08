@@ -48,8 +48,8 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 	
 	@Override
-	public List<ReplyAddNameVO> selectName(ReplyAddNameVO vo) {
+	public List<ReplyAddNameVO> selectName(int bno) {
 		
-		return sqlSession.selectList(NAMESPACE + ".selectName", vo);
+		return sqlSession.selectList(NAMESPACE + ".selectName", bno);
 	}
 }

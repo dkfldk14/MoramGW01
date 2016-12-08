@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.spring.groupware.board.domain.BoardVO;
+import project.spring.groupware.board.domain.ReplyAddNameVO;
 import project.spring.groupware.board.domain.ReplyVO;
 import project.spring.groupware.board.service.TeamOneBoardService;
 import project.spring.groupware.board.service.TeamOneReplyService;
 
 @RestController
-@RequestMapping(value="teamone_replies")
+@RequestMapping(value="/teamoneReplies")
 public class TeamOneReplyRESTController {
 	private static final Logger logger =
 			LoggerFactory.getLogger(ReplyRESTController.class);
@@ -49,20 +50,35 @@ public class TeamOneReplyRESTController {
 	}
 	
 	@RequestMapping(value = "all/{no}", method=RequestMethod.GET)
-	public ResponseEntity<List<ReplyVO>>readReplies(
-			@PathVariable("no") Integer bno){
+/*	public ResponseEntity<List<ReplyVO>>readReplies(
+	@PathVariable("no") Integer bno){
+
+List<ReplyVO> list =service.read(bno);
 		
-		List<ReplyVO> list =service.read(bno);
-		ResponseEntity<List<ReplyVO>>entity = null;
-		
-		if(list != null){
-			entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
-		}else{
-			entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.BAD_REQUEST);
+ResponseEntity<List<ReplyVO>>entity = null;
+if(list != null){
+	entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
+}else{
+	entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.BAD_REQUEST);
+}
+
+return entity;
+}*/
+	
+	public ResponseEntity<List<ReplyAddNameVO>>readNameReplies(
+			@PathVariable("no")Integer bno){
+			
+			List<ReplyAddNameVO> list = service.selectName(bno);
+			logger.info("list : " + list);
+			ResponseEntity<List<ReplyAddNameVO>>entity = null;
+			if(list != null){
+				entity = new ResponseEntity<List<ReplyAddNameVO>>(list, HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<List<ReplyAddNameVO>>(list, HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;				
 		}
-		
-		return entity;
-	}
 	
 	@RequestMapping(value = "/{no}", method = RequestMethod.PUT)
 	public ResponseEntity<String>updateReply(

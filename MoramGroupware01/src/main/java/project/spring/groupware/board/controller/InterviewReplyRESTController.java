@@ -53,9 +53,9 @@ public class InterviewReplyRESTController {
 	
 	@RequestMapping(value = "all/{no}", method=RequestMethod.GET)
 	public ResponseEntity<List<ReplyAddNameVO>>readNameReplies(
-			@PathVariable("no") ReplyAddNameVO vo){
+			@PathVariable("no") Integer bno){
 			
-			List<ReplyAddNameVO> list = service.selectName(vo);
+			List<ReplyAddNameVO> list = service.selectName(bno);
 			
 			ResponseEntity<List<ReplyAddNameVO>>entity = null;
 			if(list != null){

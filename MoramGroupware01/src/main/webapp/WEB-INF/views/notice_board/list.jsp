@@ -197,7 +197,7 @@ li {
 		<c:forEach var = "vo2" items="${listName }">
 			<tr>
 				<td>${vo2.bno }</td>
-				<td><a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a></td>
+				<td><a href="${vo2.bno}">${vo2.title }</a></td>
 				<td>${vo2.name }</td>
 				<td><fmt:formatDate value="${vo2.regdate }"
 					pattern="yyyy-MM-dd HH:mm:ss"/>

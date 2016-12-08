@@ -210,6 +210,14 @@ border-right: 1px solid white;
 			</th>	
 		</tr>
 		
+<<<<<<< HEAD
+		<button type="button" id="btnList">Go to List</button>
+		<c:if test="${boardVO.userid eq id }">
+		<button type="submit" id="updatebutton">Update</button>
+		</c:if> 
+		<input type="hidden" name="page" value="${page }" />
+			
+=======
 		<tr>
 			<td>
 				<!-- Writer -->
@@ -221,7 +229,7 @@ border-right: 1px solid white;
 		<tr>
 			<td>
 				<!-- content -->
-				<div style="width:766px; height:412px;">${boardVO.content}</div>
+				<div style="width:800px; margin-bottom: 50px; margin-top: 50px;">${boardVO.content}</div>
 			</td>
 		</tr>
 
@@ -239,6 +247,7 @@ border-right: 1px solid white;
 	</tbody>
 	</table>
 	
+>>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 	</form>
 	<!-- ---------------------------- -->
 	
@@ -248,7 +257,7 @@ border-right: 1px solid white;
 		<input type = "text" name="rtext" id="rtext"
 			placeholder ="write it" required/>
 		<input type = "text" name="replier" id="replier"
-			placeholder="ID" required/>
+			placeholder="ID" value = "${name }" readonly/>
 		<button type = "button" id="btnCreate">Write Comments</button>	
 	</div>
 	<br/>
@@ -264,7 +273,7 @@ border-right: 1px solid white;
 		<input type="text" name="rtext" id="rtext_mod">
 		<br>
 		<button id="btn_delete">Delete</button>
-		<button id="btn_update">Update</button>
+			<button id="btn_update">Update</button>
 		<button id="btn_cancel">Cancel</button>
 	</div>
 	
@@ -283,30 +292,12 @@ border-right: 1px solid white;
    <!-- CUSTOM SCRIPTS -->
    <script src="<c:url value='../resources/assets/js/custom.js'/>" /></script>	
 	
-	
-	<script src="../resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			
-			var obj = [];
-			//스마트에디터 프레임생성
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef:obj,
-				elPlaceHolder:"editor",
-				sSkinURI:"../resources/SmartEditor2Skin.html",
-				htParams : {
-					bUseToolbar:false,
-					bUseVerticalResizer : true,
-					bUseModeChanger:false,
-				
-				},
-			 	
-			});
-			
-						
 			$("#updatebutton").click(function(){
 				obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 				
@@ -328,10 +319,12 @@ border-right: 1px solid white;
 				//data(선택 파라미터) : 요청과 함께 서버로 보내는 데이터
 				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
 				
-				var url = '/spring/teamthree_replies/all/'+bno;
+				var url = '/groupware/teamthree_replies/all/'+bno;
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
 					var list = '';
+					var username = '';
+					var name = "${name}";
 					//data의 개수 만큼 function의 내용을 반복해서 수행
 					$(data).each(function(){
 						var date = new Date(this.regdate);
@@ -339,21 +332,42 @@ border-right: 1px solid white;
 						console.log(dateString);
 					
 					
-					list += '<li class ="reply_list" data-rno="'
-						+ this.rno
-						+'">'
-						+'#'+this.rno+' '
-						+'<span class="replier">'
-						+this.replier + ' '
-						+'</span>'
-						+ '<span class = "rtext">'
-						+this.rtext + ' '
-						+"</span>"
-						+'<span class="regdate">'
-						+dateString+' '
-						+'</span>'
-						+'<button>수정</button>'
-						+'</li>';
+						username=this.replier;
+						//alert(userid +" userid " + id + "id");
+						if(username == name){
+						list += '<li class ="reply_list" data-rno="'
+							+ this.rno
+							+'">'
+							+'#'+this.rno+' '
+							+'<span class="replier">'
+							+this.replier + ' '
+							+'</span>'
+							+ '<span class = "rtext">'
+							+this.rtext + ' '
+							+"</span>"
+							+'<span class="regdate">'
+							+dateString+' '
+							+'</span>'						
+							+ '<button>수정</button>'						
+							+'</li>';
+							
+							}else{
+								list += '<li class ="reply_list" data-rno="'
+									+ this.rno
+									+'">'
+									+'#'+this.rno+' '
+									+'<span class="replier">'
+									+this.replier + ' '
+									+'</span>'
+									+ '<span class = "rtext">'
+									+this.rtext + ' '
+									+"</span>"
+									+'<span class="regdate">'
+									+dateString+' '
+									+'</span>'
+									+'</li>';
+							
+							}
 					});
 				
 					$('#replies').html(list);
@@ -367,7 +381,7 @@ border-right: 1px solid white;
 				
 				$.ajax({
 					type: 'post',
-					url: '/spring/teamthree_replies',
+					url: '/groupware/teamthree_replies',
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'POST'
@@ -412,7 +426,7 @@ border-right: 1px solid white;
 					var bno = $('#bno_mod').val();
 					$.ajax({
 						type : 'delete',
-						url : '/spring/teamthree_replies/'+rno,
+						url : '/groupware/teamthree_replies/'+rno,
 						headers : {
 							'Content-Type' : 'application/json',
 							'X-HTTP-Method-Override' : 'DELETE'
@@ -436,7 +450,7 @@ border-right: 1px solid white;
 				var text = $('#rtext_mod').val();
 				$.ajax({
 					type : 'put',
-					url : '/spring/teamthree_replies/'+rno,
+					url : '/groupware/teamthree_replies/'+rno,
 					headers:{
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'

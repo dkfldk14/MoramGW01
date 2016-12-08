@@ -191,7 +191,7 @@ li {
 		<c:forEach var = "vo" items="${searchList }">
 			<tr>
 				<td>${vo.bno }</td>
-				<td><a href="${vo.bno}">${vo.title }(${vo.replycnt})</a></td>
+				<td><a href="${vo.bno}">${vo.title }</a></td>
 				<td>${vo.name }</td>
 				<td><fmt:formatDate value="${vo.regdate }"
 					pattern="yyyy-MM-dd HH:mm:ss"/>

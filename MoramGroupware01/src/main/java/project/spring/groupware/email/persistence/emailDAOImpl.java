@@ -80,5 +80,11 @@ public class emailDAOImpl implements emailDAO {
 	public List<MemberVO> member_adress() {
 		return SqlSession.selectList(NAMESPACE+".EmailAdressBox");
 	}
+
+	@Override
+	public EmailVO detailEmail(int num) {
+		
+		return SqlSession.selectOne(NAMESPACE + ".detail_Email", num);
+	}
 	
 }

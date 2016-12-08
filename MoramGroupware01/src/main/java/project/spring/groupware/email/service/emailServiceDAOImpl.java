@@ -62,4 +62,11 @@ public int totalEmailct(String state, String groupemail) {
 	public List<MemberVO> member_adress() {
 		return dao.member_adress();
 	}
+
+
+	@Override
+	public EmailVO detailEmail(int num) {
+		// TODO Auto-generated method stub
+		return dao.detailEmail(num);
+	}
 }
