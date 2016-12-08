@@ -211,10 +211,10 @@ div.center {text-align: center;}
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li class="childTab"><a href="/groupware/email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/delete-mailbox">휴지통</a></li>
 				</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
@@ -319,20 +319,19 @@ div.center {text-align: center;}
 
 
 									<c:forEach var="email" items="${email}">
-
+										
+										
 										<tr style="height: 30px" id="tr_inner">
 											<td style="width: 50px"><label
 												class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
 													type="checkbox" name="RowCheck"
-													class="mail-group-checkbox row-check-box"
-													value="${email.num }" /><span></span></label></td>
+													class="mail-group-checkbox row-check-box" value="${email.num }" /><span></span></label></td>
 											<td style="width: 150px">${email.senddate }</td>
-											<td style="width: 300px">${email.from_email }</td>
-											
-											<!-- 여기 수정 부분 -->
+											<td style="width: 300px">${email.to_email }</td>	
 											<td style="width: 700px">
 											<a	href="${email.num }">${email.subject }</a></td>
 										</tr>
+										
 									</c:forEach>
 
 
@@ -398,6 +397,8 @@ div.center {text-align: center;}
 			<script
 				src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 			<script>
+			
+			console.log("${Gemail}")
 			var admin = <%=type%>
 			function tabSetting() {
 				// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show

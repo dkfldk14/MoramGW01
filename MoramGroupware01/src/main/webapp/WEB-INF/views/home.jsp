@@ -252,7 +252,7 @@ margin: 10px;
 							
 								<div class="text-box3">
 									<img id="main_img" alt="벨" src="resources/assets/img/home_img/bell.png"/>
-									<a class="text-line1">쀼</a>
+									<a class="text-line1">${count }</a>
 								</div>
 							</div>
 						</div>
