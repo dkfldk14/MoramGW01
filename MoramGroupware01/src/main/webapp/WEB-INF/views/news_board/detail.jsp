@@ -187,7 +187,7 @@ border-right: 1px solid white;
 	<div id="page-inner">
 	<h1>detail</h1>
 	
-		
+	
 	<!-- 수정 -->
 	<form action = "update" id="frm">
 	
@@ -208,7 +208,6 @@ border-right: 1px solid white;
 				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
 			</th>	
 		</tr>
-		
 		<tr>
 			<td>
 				<!-- Writer -->
@@ -227,7 +226,9 @@ border-right: 1px solid white;
 		<tr>
 			<td style="height: 50px;">
 				<button type="button" id="btnList">Go to List</button>
+				<c:if test="${boardVO.userid eq id }">
 				<button type="submit" id="updatebutton">Update</button>
+				</c:if> 
 				<input type="hidden" name="page" value="${page }" />
 			</td>
 		</tr>
@@ -247,7 +248,7 @@ border-right: 1px solid white;
 		<input type = "text" name="rtext" id="rtext"
 			placeholder ="write it" required/>
 		<input type = "text" name="replier" id="replier"
-			placeholder="ID" required/>
+			placeholder="ID" value = "${name }" readonly/>
 		<button type = "button" id="btnCreate">Write Comments</button>	
 	</div>
 	<br/>
@@ -327,32 +328,54 @@ border-right: 1px solid white;
 				//data(선택 파라미터) : 요청과 함께 서버로 보내는 데이터
 				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
 				
-				var url = '/spring/news_replies/all/'+bno;
+				var url = '/spring/interview_replies/all/'+bno;
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
+					//이름 값들을 받아노느 변수를 선언
 					var list = '';
+					var username = '';
+					var name = "${name}";
 					//data의 개수 만큼 function의 내용을 반복해서 수행
 					$(data).each(function(){
 						var date = new Date(this.regdate);
 						var dateString = date.toLocaleDateString();
 						console.log(dateString);
 					
-					
-					list += '<li class ="reply_list" data-rno="'
-						+ this.rno
-						+'">'
-						+'#'+this.rno+' '
-						+'<span class="replier">'
-						+this.replier + ' '
-						+'</span>'
-						+ '<span class = "rtext">'
-						+this.rtext + ' '
-						+"</span>"
-						+'<span class="regdate">'
-						+dateString+' '
-						+'</span>'
-						+'<button>수정</button>'
-						+'</li>';
+					username=this.replier;
+					if(username == name){
+						list += '<li class ="reply_list" data-rno="'
+							+ this.rno
+							+'">'
+							+'#'+this.rno+' '
+							+'<span class="replier">'
+							+this.replier + ' '
+							+'</span>'
+							+ '<span class = "rtext">'
+							+this.rtext + ' '
+							+"</span>"
+							+'<span class="regdate">'
+							+dateString+' '
+							+'</span>'						
+							+ '<button>수정</button>'						
+							+'</li>';
+							
+							}else{
+								list += '<li class ="reply_list" data-rno="'
+									+ this.rno
+									+'">'
+									+'#'+this.rno+' '
+									+'<span class="replier">'
+									+this.replier + ' '
+									+'</span>'
+									+ '<span class = "rtext">'
+									+this.rtext + ' '
+									+"</span>"
+									+'<span class="regdate">'
+									+dateString+' '
+									+'</span>'
+									+'</li>';
+							
+							}
 					});
 				
 					$('#replies').html(list);
@@ -366,7 +389,7 @@ border-right: 1px solid white;
 				
 				$.ajax({
 					type: 'post',
-					url: '/spring/news_replies',
+					url: '/spring/interview_replies',
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'POST'
@@ -411,7 +434,7 @@ border-right: 1px solid white;
 					var bno = $('#bno_mod').val();
 					$.ajax({
 						type : 'delete',
-						url : '/spring/news_replies/'+rno,
+						url : '/spring/interview_replies/'+rno,
 						headers : {
 							'Content-Type' : 'application/json',
 							'X-HTTP-Method-Override' : 'DELETE'
@@ -435,7 +458,7 @@ border-right: 1px solid white;
 				var text = $('#rtext_mod').val();
 				$.ajax({
 					type : 'put',
-					url : '/spring/news_replies/'+rno,
+					url : '/spring/interview_replies/'+rno,
 					headers:{
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'

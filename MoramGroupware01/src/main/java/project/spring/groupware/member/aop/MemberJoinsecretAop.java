@@ -114,7 +114,7 @@ public class MemberJoinsecretAop {
 	
 	@Around("execution(* project.spring.groupware.member.service.MemberService.selectAdminMem(..))")
 	public MemberVO updatepwd(ProceedingJoinPoint jp) throws Throwable{
-		logger.info("복호화임");
+		logger.info("복호화임1");
 		
 		Object obj= jp.proceed();
 		if(obj==null){
@@ -126,6 +126,7 @@ public class MemberJoinsecretAop {
 		AesAuthkey auth = new AesAuthkey(key);
 		URLCodec codec = new URLCodec();
 		
+		logger.info("복호화된 값:"+auth.aesDecode(codec.decode(vo.getPwd())));
 		vo.setPwd(auth.aesDecode(codec.decode(vo.getPwd())));
 		
 		return vo;

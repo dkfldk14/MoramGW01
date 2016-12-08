@@ -201,7 +201,7 @@ li {
 						<tr>
 							<td>${vo.bno }</td>
 							<td><a href="${vo.bno}">${vo.title }(${vo.replycnt})</a></td>
-							<td>${vo.userid }</td>
+							<td>${vo.name }</td>
 							<td><fmt:formatDate value="${vo.regdate }"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 							<td>${vo.viewcnt }</td>
@@ -229,10 +229,13 @@ li {
 
 				<form id="pageForm">
 					<input type="hidden" name="page"
-						value="${pageMaker.searchCriteria.page }" /> <input type="hidden"
-						name="bno" />
-							<input type="hidden" name="searchType"
+						value="${pageMaker.searchCriteria.page }" />
+						
+					<input type="hidden" name="bno" />
+					
+					<input type="hidden" name="searchType"
 					value="${pageMaker.searchCriteria.searchType }"/>
+					
 					<input type="hidden" name="keyword"
 					value="${pageMaker.searchCriteria.keyword }"/>
 				</form>

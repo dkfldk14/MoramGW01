@@ -25,7 +25,6 @@
 display: inline-block;
 
 }
-
 td{
 	height: 50px;
 }
@@ -160,6 +159,7 @@ td{
 	<div id="page-wrapper">
 	<div id="page-inner">
 	<h1>Test Register Page</h1>
+
 		
 	<!--  수정  -->
 	<form method="post" id="frm">	
@@ -181,7 +181,7 @@ td{
 		<tr>
 			<th>UserID</th>
 			<td>
-				<input type="text" name="userid" required/>
+				<input type="text" name="userid" value="${login_id }"  readonly="readonly"/>
 			</td>
 		</tr>
 		<tr>
@@ -195,6 +195,10 @@ td{
 	</table>
 	</form>
 	<!--  -------------------  -->
+	
+	
+	
+	
 	  </div>
     </div>
   	

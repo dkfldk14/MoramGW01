@@ -25,7 +25,6 @@
 display: inline-block;
 
 }
-
 td{
 	height: 50px;
 }
@@ -93,10 +92,10 @@ td{
                      class="fa arrow"></span></a>
 
                   <ul class="nav nav-second-level">
-                     <li><a href="../notice_board/list">공지게시</a></li>
-                     <li><a href="../lecture_board/list">수업자료</a></li>
-                     <li><a href="../news_board/list">IT news</a></li>
-                     <li><a href="../interview_board/list">면접후기</a></li>
+                     <li><a href="/../groupware/notice_board/list">공지게시</a></li>
+                     <li><a href="/../groupware/lecture_board/list">수업자료</a></li>
+                     <li><a href="/../groupware/news_board/list">IT news</a></li>
+                     <li><a href="/../groupware/interview_board/list">면접후기</a></li>
 
                   </ul></li>
 
@@ -104,9 +103,9 @@ td{
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="../team_one_board/list">시나브로</a></li>
-                     <li><a href="../team_two_board/list">그냥2조</a></li>
-                     <li><a href="../team_three_board/list">성준이네</a></li>
+                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+                     <li><a href="/../groupware/team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -160,6 +159,7 @@ td{
 	<div id="page-wrapper">
 	<div id="page-inner">
 	<h1>Test Register Page</h1>
+
 		
 	<!--  수정  -->
 	<form method="post" id="frm">	
@@ -181,7 +181,7 @@ td{
 		<tr>
 			<th>UserID</th>
 			<td>
-				<input type="text" name="userid" required/>
+				<input type="text" name="userid" value="${login_id }"  readonly="readonly"/>
 			</td>
 		</tr>
 		<tr>
@@ -195,6 +195,10 @@ td{
 	</table>
 	</form>
 	<!--  -------------------  -->
+	
+	
+	
+	
 	  </div>
     </div>
   	
@@ -211,7 +215,7 @@ td{
 	
 	<!-- jQuery CDN -->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="../resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="/spring/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -221,7 +225,7 @@ td{
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef:obj,
 			elPlaceHolder:"editor",
-			sSkinURI:"../resources/js/SmartEditor2Skin.html",
+			sSkinURI:"/spring/resources/SmartEditor2Skin.html",
 			htParams : {
 				//Using toolbar
 				bUseToolbar : true,

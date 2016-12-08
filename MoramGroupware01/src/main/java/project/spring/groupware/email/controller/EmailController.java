@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.Spliterators;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Flags;
 import javax.mail.Folder;
@@ -59,7 +63,7 @@ public class EmailController {
 	private String gwEmail=null;
 	
 	@RequestMapping(value="/list")
-	public void EmailList(Model model,HttpServletRequest request){
+	public void EmailList(Integer page,Model model,HttpServletRequest request){
 		HttpSession session=request.getSession();
 		String userid=(String) session.getAttribute("login_id");
 		model.addAttribute("userid", userid);
@@ -88,29 +92,23 @@ public class EmailController {
 		logger.info("count : "+emailFolder.getMessageCount());
 		
 		Message[] messages=emailFolder.getMessages();
-	/*	Message[] messages = emailFolder.getMessages(11, 20);*/
+
+		PaginationCriteria c = new PaginationCriteria();
+		int paging = page;
+		int start = c.getStart() + 10 * paging -1;
+		System.out.println("엔드엔드"+c.getEnd());
+		int end = c.getEnd() + 10 * paging -1;
+		System.out.println("페이징 넘버 " + paging);
 		
-		/*int num=totalMessages.length;
-		int numofnum=num/10;
-		int startNum=num;
-		int endNum=(num-10);
-		for(int i=0; i<numofnum; num++){
-			messages=emailFolder.getMessages(startNum, endNum);
-			
-		}*/
+		if (messages.length<=end){
+			end = messages.length;
+		}
 		
-/*		
-		
-		System.out.println("num : "+num);
-		
-		System.out.println("message.totla--"+totalMessages.length);
-		
-		System.out.println("messages.length---" + messages.length);
-		*/
-		
-		for (int i = 0, n = messages.length; i < n; i++) {
+		for (int i = end, n = start; i >= n; i--) {
 			EmailVO vo = new EmailVO();
-			Message message = messages[i];
+			
+			Message message = messages[i-1];
+			
 			System.out.println("---------------------------------");
 			System.out.println("message number:" + message.getMessageNumber());
 			System.out.println("Date:" + message.getSentDate());
@@ -126,12 +124,35 @@ public class EmailController {
 			vo.setContent(message.getContent().toString());
 			vo.setFrom_email(message.getFrom()[0].toString());
 
+			if (i <= start) {
+				i = n;
+			}
 			
 			emaillist.add(vo);
-
 		}
 		System.out.println("/////////////////////////////");
 		model.addAttribute("email", emaillist);
+	
+		c.setPage(page);
+		
+		
+		PageMaker maker = new PageMaker();
+		maker.setCriteria(c);
+		maker.setTotalCount(messages.length);
+		maker.setPageDate();
+		model.addAttribute("pageMaker", maker);
+		
+		
+		System.out.println(page + " + " + maker.getTotalCount() + " + " + emaillist.size());
+		
+		System.out.println(maker.getNumOfPageLink());
+		System.out.println("start = " +maker.getStartPageNum());
+		System.out.println("end = "+maker.getEndPageNum());
+		
+	
+		
+		
+		
 		emailFolder.close(false);
 		store.close();
 
@@ -148,7 +169,7 @@ public class EmailController {
 	public void emailview(int num, Model model) {
 
 		// model.addAttribute("email", vo);
-
+		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
 		EmailVO vo = emaillist.get(num - 1);
 		logger.info(vo.getContent());
 		logger.info("num:" + vo.getNum());
@@ -300,33 +321,52 @@ public class EmailController {
 		String to_mail=vo.getTo_email();
 		String from_mail=vo.getFrom_email();
 		String content=vo.getContent();
-		*/
-		EmailVO emailvo=new EmailVO(1, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), vo.getTo_email(), null, 1);
-		emailServiceDAO.insert(emailvo);
-		logger.info("vo 값 : "+vo.getSubject() );
-		logger.info("vo값 : "+vo.getFrom_email());
-		logger.info("vo값 : "+vo.getTo_email());
-	 sendEmail(vo);
+		강호준<jun@moram.com>, 방수용<qkdtyd12@moram.com>, 조승현<seunghyun123@moram.com>, 김성준<sjkim123@moram.com>, */
+		
+		
+	
+		sendEmail(vo);
 	   
 	   
 		
 	}
 	
 	
-	private void sendEmail(final EmailVO vo){
+	private void sendEmail(EmailVO vo){
+		
+		String[] address=new String[10];
+		
+		String addressList=vo.getTo_email();
+		
+		Matcher matcher = Pattern.compile("<[^>]+>").matcher(addressList);
+		int i = 0;
+		while( matcher.find() ) {
+				
+				String group = matcher.group();
+				address[i] = group.substring(1, group.length()-1);
+					logger.info(group.substring(1, group.length()-1));
+					logger.info("주소분리 ? : "+address[i]);
+					
+					i++;
+				
+			}
+	
+
+			
 		
 		
-		String to=vo.getTo_email();
+		
+		/*String to=vo.getTo_email();
 		logger.info("to : "+to);
+		*/
 		String from=vo.getFrom_email();
 		logger.info("from : "+from);
 		
 		/*final String username="dkfldk14@moram.com";
-		*/final String password="6557";
+		*/ String password="6557";
 		
 		
 		String host="192.168.11.100";
-		
 		
 		 Properties props = new Properties();
 	      props.put("mail.smtp.auth", "true");
@@ -334,19 +374,24 @@ public class EmailController {
 	      props.put("mail.smtp.host", host);
 	      props.put("mail.smtp.port", "25");
 				
-	      
+	     
 	      /*Session*/
-
-	      // Get the Session object.
-	      Session session = Session.getInstance(props,
-	    		  new javax.mail.Authenticator() {
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	               return new PasswordAuthentication(vo.getTo_email(), password);
-		   }
-	         });
-
+		for (int z = 0; z < address.length; z++) {
+			if(address[z]!=null){
+			// Get the Session object.
+			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(vo.getFrom_email(), password);
+				}
+			});
 
 	      try {
+	    	  
+	    	
+	    	  
+	    		  
+	    		  logger.info("address 배열 : "+address[z]);
+	    		    
 		   // Create a default MimeMessage object.
 		   Message message = new MimeMessage(session);
 		
@@ -355,7 +400,7 @@ public class EmailController {
 		
 		   // Set To: header field of the header.
 		   message.setRecipients(Message.RecipientType.TO,
-	               InternetAddress.parse(to));
+	               InternetAddress.parse(address[z]));
 		
 		   // Set Subject: header field
 		   message.setSubject(vo.getSubject());
@@ -365,16 +410,26 @@ public class EmailController {
 
 		   // Send message
 		   Transport.send(message);
-
+		   
+			EmailVO emailvo=new EmailVO(1, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), address[z], null, 1);
+			emailServiceDAO.insert(emailvo);
+			logger.info("vo 값 : "+vo.getSubject() );
+			logger.info("vo값 : "+vo.getFrom_email());
+			logger.info("vo값 : "+address[z]);
+		
+		   
+	    	 
 		   System.out.println("Sent message successfully....");
-
+	    	  
+		   
 	      } catch (MessagingException e) {
 	         throw new RuntimeException(e);
 	      }
+			}
 	      logger.info("됏음?");
 	      
 	   }
-
+	}
 
 	@RequestMapping(value="/test")
 	public void test(){
@@ -438,6 +493,8 @@ public class EmailController {
 	   	maker.setCriteria(c);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
 	   	maker.setTotalCount(emailServiceDAO.totalEmailct("2", gwEmail));
+	   	// 역시 범인은 당신이야!											↑ null 들어가고 있사옵니다!
+	   	
 	   	//▼ pageMaker 의 함수를 호출
 	   	maker.setPageDate();
 	   	//모델객체에 pageMaker 넘겨줌. 
