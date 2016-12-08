@@ -130,10 +130,11 @@ public class EmailController {
 			}
 			
 			emaillist.add(vo);
+		
 		}
 		System.out.println("/////////////////////////////");
 		model.addAttribute("email", emaillist);
-	
+		model.addAttribute("messages",messages.length);
 		c.setPage(page);
 		
 		
@@ -142,7 +143,7 @@ public class EmailController {
 		maker.setTotalCount(messages.length);
 		maker.setPageDate();
 		model.addAttribute("pageMaker", maker);
-		
+			
 		
 		System.out.println(page + " + " + maker.getTotalCount() + " + " + emaillist.size());
 		
@@ -167,17 +168,25 @@ public class EmailController {
 }
 
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public void emailview(int num, Model model, EmailVO vo) {
+	public void emailview(int num, int page, Model model, EmailVO vo) {
 		logger.info("detail jsp 실행 ");
 		// model.addAttribute("email", vo);
 		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
 		/*EmailVO vo = emaillist.get(num - 1);
 		logger.info("detail에 있는 vo 값 : " + vo.getContent());
 		logger.info("num:" + vo.getNum());*/
-		vo = emailServiceDAO.detailEmail(num);	
+		logger.info("num : "+num);
+		logger.info("page : "+page);
+		int emailNum=num-(page-1) * 10;
+		EmailVO vo1=emaillist.get(emailNum-1);
+		model.addAttribute("emaildetail", vo1);
+		vo = emailServiceDAO.detailEmail(emailNum);	
 		logger.info("detail subject : " + vo.getSubject());
-		model.addAttribute("emaildetail", vo);
+		//model.addAttribute("emaildetail", vo);
 	}
+	
+
+	
 	
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)

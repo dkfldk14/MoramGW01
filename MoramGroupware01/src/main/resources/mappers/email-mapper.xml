@@ -47,6 +47,6 @@ where from_email = #{groupemail} and state = 2
  where num = #{num} and state = 1
  </select>
 
- 
+
  
  </mapper>

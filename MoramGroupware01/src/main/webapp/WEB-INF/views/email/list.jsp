@@ -317,82 +317,103 @@ div.center {text-align: center;}
 
 						<div>
 
-						
 
 
-							<div>
-								<div style="padding-bottom: 10px;">
-								<input type="text" id="keyword" name="keyword" style="height: 35px; width : 250px;"/> <!-- value 값을 설정해야함 -->
-		
-							<button id="searchBtn" value="메일 검색">검색</button> 
-							<div><span style="font-size: 12px; font-weight: 600;">받은메일함</span></div>
-							</div>
-	
-								<div style="padding-bottom: 10px;">
-									<button class="buttondelete" onclick="fn_userDel(this);">삭제</button>
-									<button class="buttonreturn">답장</button>
-									<button class="buttonforward">전달</button>
 
+						<div>
+							<div style="padding-bottom: 10px;  ">
+								<input type="text" id="keyword" name="keyword" placeholder=" 이메일 검색"
+									style="height: 35px; width: 250px;" />
+								<!-- value 값을 설정해야함 -->
 
+								<button id="searchBtn" value="메일 검색" >검색</button>
+								<div style="display: inline-block;">
+									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;">받은메일함</span>
+									<span> | </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${messages}</span>
+									<span> ／ </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${messages}</span>
+									
+									
 								</div>
-							
-				
-								<table style="height: 50px" id="myTable">
-									<tr style="height: 30px" id="tr_header">
-										<td style="width: 50px"><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" id="mail-group-checkbox" onclick="allChk(this);"/><span></span></label></td>
-										<th style="width: 150px">Date</th>
-										<th style="width: 300px">From</th>
-										<th style="width: 700px">Title</th>
-									</tr>
+							</div>
 
-<!-- 
+							<div style="padding-bottom: 10px;">
+								<button class="buttondelete" onclick="fn_userDel(this);">삭제</button>
+								<button class="buttonreturn">답장</button>
+								<button class="buttonforward">전달</button>
+
+
+							</div>
+
+
+							<table style="height: 50px" id="myTable">
+								<tr style="height: 30px" id="tr_header">
+									<td style="width: 50px"><label
+										class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
+											type="checkbox" id="mail-group-checkbox"
+											onclick="allChk(this);" /><span></span></label></td>
+									<th style="width: 150px">Date</th>
+									<th style="width: 300px">From</th>
+									<th style="width: 1000px">Title</th>
+								</tr>
+
+								<!-- 
 					   <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
          <input type="checkbox" class="mail-group-checkbox"> <span></span>
       </label>
  -->
 
-									<c:forEach var="email" items="${email}">
+								<c:forEach var="email" items="${email}">
 
-										<tr style="height: 30px" id="tr_inner">
-											<td style="width: 50px"><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="RowCheck"  class="mail-group-checkbox row-check-box" value="${email.num }"/><span></span></label></td>
-											<td style="width: 150px">${email.senddate }</td>
-											<td style="width: 300px"><a href="write?to_email=${email.from_email}">${email.from_email }</td>
-											<td style="width: 700px"><a
-												href="detail?num=${email.num }">${email.subject }</a></td>
+									<tr style="height: 30px" id="tr_inner">
+										<td style="width: 50px"><label
+											class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
+												type="checkbox" name="RowCheck"
+												class="mail-group-checkbox row-check-box"
+												value="${email.num }" /><span></span></label></td>
+										<td style="width: 150px">${email.senddate }</td>
+										<td style="width: 300px"><a
+											href="write?to_email=${email.from_email}">${email.from_email }</td>
+										<td style="width: 1000px"><a
+											href="detail?num=${email.num }&page=${pageMaker.criteria.page}">${email.subject }</a></td>
 
 
-										</tr>
-									</c:forEach>
-
-
-
-
-								</table>
+									</tr>
+								</c:forEach>
 								
-								<p>
-		<div id="labelcenter">
-   <label for="1"></label>
-
-   <label class="text" for="1"> </label>
 
 
-<div class="center">
-  <ul class="pagination">
+
+
+							</table>
+
 	
-	<c:if test="${pageMaker.hasPrev }">
-   		  <li><a href="${pageMaker.startPageNum - 1 }">«</a></li>
-    </c:if>
+							<p>
+							<div id="labelcenter">
+								<label for="1"></label> <label class="text" for="1"> </label>
 
-	 <c:forEach begin="${pageMaker.startPageNum }" end="${pageMaker.endPageNum-1 }" var="num">
-		<li><a href="list?page=${num }">${num }</a></li>
-	</c:forEach> 
-	
-	    <c:if test="${pageMaker.hasNext }">
-    <li><a href="${pageMaker.endPageNum + 1 }">»</a></li>
-    </c:if>
-  </ul>
-</div>
-							</div>
+
+								<div class="center">
+									<ul class="pagination">
+							
+
+										<c:if test="${pageMaker.hasPrev }">
+											<li><a href="${pageMaker.startPageNum - 1 }">«</a></li>
+										</c:if>
+
+										<c:forEach begin="${pageMaker.startPageNum }"
+											end="${pageMaker.endPageNum-1 }" var="num">
+											<li><a href="list?page=${num }">${num }</a></li>
+										</c:forEach>
+
+										<c:if test="${pageMaker.hasNext }">
+											<li><a href="${pageMaker.endPageNum + 1 }">»</a></li>
+										</c:if>
+									</ul>
+								</div>
+								
+				</div>
 
 
 						</div>
@@ -400,6 +421,7 @@ div.center {text-align: center;}
 				</div>
 			
 			</div>
+
 
 
 		</div>
@@ -480,7 +502,8 @@ div.center {text-align: center;}
 		
 		
 		</script>
-				
+	
+		
 	<!-- 
 		/* 	if(listsize==0){
 					alert("삭제할 이메일이 없어용..");
