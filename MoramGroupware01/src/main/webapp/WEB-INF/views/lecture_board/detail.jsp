@@ -292,7 +292,7 @@ border-right: 1px solid white;
 	<script>
 		$(document).ready(function(){
 			
-			var obj = [];
+			 var obj = [];
 			//스마트에디터 프레임생성
 			nhn.husky.EZCreator.createInIFrame({
 				oAppRef:obj,
@@ -305,7 +305,7 @@ border-right: 1px solid white;
 				
 				},
 			 	
-			});
+			}); 
 			
 						
 			$("#updatebutton").click(function(){
