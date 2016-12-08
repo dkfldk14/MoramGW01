@@ -61,55 +61,84 @@ table {
 	color: #0B233f;
 }
 button {
-   background-color: #A5DBCE; /* Green */
-   border: none;
    color: white;
    padding: 8px 16px;
    text-align: center;
    text-decoration: none;
    display: inline-block;
-   font-size: 10px;
+  
    margin: 4px 2px;
    -webkit-transition-duration: 0.4s; /* Safari */
    transition-duration: 0.4s;
    cursor: pointer;
+     color: black;
+   border: 1px solid #d6d6d6;
+  
+   
+     background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+   
+   
 }
 
 .buttondelete {
   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+   color: #a8abad;
+   
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 
+#searchbtn{
+  background-color: white;
+   color: #a8abad;
+     font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+
+}
 
 .buttondelete:hover {
-  background-color: #8fb73a;
-   color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .buttonreturn {
-   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+  background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 .buttonreturn:hover {
-   background-color: #8fb73a;
-   color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .buttonforward {
-   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+  background-color: white;
+      color: #a8abad;
+     font-weight : 850;
+   border: 1px solid #d6d6d6;
+   font-size: 13px;
+	
 }
 
 
 
 .buttonforward:hover {
-   background-color: #8fb73a;
-   color: white;
+   background-color: #edf8ff;
+   color: #3a3939;
+   font-weight: 900;
 }
 
 label input {
@@ -276,15 +305,13 @@ div.center {text-align: center;}
 
 
 				<div class="row">
-				<hr/>
 				<!-- 	<div class="col-md-12">
 						<h2>손동민님,</h2>
 						<h5>♡반갑습니당. 오늘하루도 힘내십시오 ♡</h5>
 					</div> -->
 				</div>
 				<!-- /. ROW  -->
-				<hr />
-
+			
 				<div class="row">
 					<div class="col-md-12">
 
@@ -294,13 +321,22 @@ div.center {text-align: center;}
 
 
 							<div>
-								<div style="padding-bottom: 10px">
+								<div style="padding-bottom: 10px;">
+								<input type="text" id="keyword" name="keyword" style="height: 35px; width : 250px;"/> <!-- value 값을 설정해야함 -->
+		
+							<button id="searchBtn" value="메일 검색">검색</button> 
+							<div><span style="font-size: 12px; font-weight: 600;">받은메일함</span></div>
+							</div>
+	
+								<div style="padding-bottom: 10px;">
 									<button class="buttondelete" onclick="fn_userDel(this);">삭제</button>
 									<button class="buttonreturn">답장</button>
 									<button class="buttonforward">전달</button>
 
 
 								</div>
+							
+				
 								<table style="height: 50px" id="myTable">
 									<tr style="height: 30px" id="tr_header">
 										<td style="width: 50px"><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" id="mail-group-checkbox" onclick="allChk(this);"/><span></span></label></td>
@@ -320,7 +356,7 @@ div.center {text-align: center;}
 										<tr style="height: 30px" id="tr_inner">
 											<td style="width: 50px"><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="RowCheck"  class="mail-group-checkbox row-check-box" value="${email.num }"/><span></span></label></td>
 											<td style="width: 150px">${email.senddate }</td>
-											<td style="width: 300px">${email.from_email }</td>
+											<td style="width: 300px"><a href="write?to_email=${email.from_email}">${email.from_email }</td>
 											<td style="width: 700px"><a
 												href="detail?num=${email.num }">${email.subject }</a></td>
 
