@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.spring.groupware.board.domain.BoardVO;
+import project.spring.groupware.board.domain.ReplyAddNameVO;
 import project.spring.groupware.board.domain.ReplyVO;
 import project.spring.groupware.board.service.NewsBoardService;
 import project.spring.groupware.board.service.NewsReplyService;
@@ -50,20 +51,20 @@ public class NewsReplyRESTController {
 	}
 	
 	@RequestMapping(value = "all/{no}", method=RequestMethod.GET)
-	public ResponseEntity<List<ReplyVO>>readReplies(
+	public ResponseEntity<List<ReplyAddNameVO>>readNameReplies(
 			@PathVariable("no") Integer bno){
-		
-		List<ReplyVO> list =service.read(bno);
-		ResponseEntity<List<ReplyVO>>entity = null;
-		
-		if(list != null){
-			entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
-		}else{
-			entity = new ResponseEntity<List<ReplyVO>>(list, HttpStatus.BAD_REQUEST);
+			
+			List<ReplyAddNameVO> list = service.selectName(bno);
+			
+			ResponseEntity<List<ReplyAddNameVO>>entity = null;
+			if(list != null){
+				entity = new ResponseEntity<List<ReplyAddNameVO>>(list, HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<List<ReplyAddNameVO>>(list, HttpStatus.BAD_REQUEST);
+			}
+			
+			return entity;				
 		}
-		
-		return entity;
-	}
 	
 	@RequestMapping(value = "/{no}", method = RequestMethod.PUT)
 	public ResponseEntity<String>updateReply(

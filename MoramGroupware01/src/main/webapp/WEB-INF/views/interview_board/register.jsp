@@ -182,7 +182,7 @@ display: inline-block;
 	
 	<!-- jQuery CDN -->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="/spring/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="/groupware/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -192,7 +192,7 @@ display: inline-block;
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef:obj,
 			elPlaceHolder:"editor",
-			sSkinURI:"/spring/resources/SmartEditor2Skin.html",
+			sSkinURI:"/groupware/resources/SmartEditor2Skin.html",
 			htParams : {
 				//Using toolbar
 				bUseToolbar : true,

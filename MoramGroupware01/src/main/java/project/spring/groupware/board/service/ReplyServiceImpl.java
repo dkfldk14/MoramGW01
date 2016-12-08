@@ -48,9 +48,9 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public List<ReplyAddNameVO> selectName(ReplyAddNameVO vo) {
+	public List<ReplyAddNameVO> selectName(int bno) {
 		
-		return dao.selectName(vo);
+		return dao.selectName(bno);
 	}
 
 }

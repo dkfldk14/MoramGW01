@@ -283,7 +283,7 @@ display: inline-block;
 				//data(선택 파라미터) : 요청과 함께 서버로 보내는 데이터
 				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
 				
-				var url = '/spring/interview_replies/all/'+bno;
+				var url = '/groupware/interview_replies/all/'+bno;
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
 					//이름 값들을 받아노느 변수를 선언
@@ -344,7 +344,7 @@ display: inline-block;
 				
 				$.ajax({
 					type: 'post',
-					url: '/spring/interview_replies',
+					url: '/groupware/interview_replies',
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'POST'
@@ -389,7 +389,7 @@ display: inline-block;
 					var bno = $('#bno_mod').val();
 					$.ajax({
 						type : 'delete',
-						url : '/spring/interview_replies/'+rno,
+						url : '/groupware/interview_replies/'+rno,
 						headers : {
 							'Content-Type' : 'application/json',
 							'X-HTTP-Method-Override' : 'DELETE'
@@ -413,7 +413,7 @@ display: inline-block;
 				var text = $('#rtext_mod').val();
 				$.ajax({
 					type : 'put',
-					url : '/spring/interview_replies/'+rno,
+					url : '/groupware/interview_replies/'+rno,
 					headers:{
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'
