@@ -326,11 +326,12 @@ div.center {text-align: center;}
 												class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
 													type="checkbox" name="RowCheck"
 													class="mail-group-checkbox row-check-box"
-													value="${list.num }" /><span></span></label></td>
-											<td style="width: 150px">${list.senddate }</td>
-											<td style="width: 300px">${list.to_email }</td>
-											<td style="width: 700px"><a
-												href="detail?num=${list.num }">${list.subject }</a></td>
+													value="${email.num }" /><span></span></label></td>
+											<td style="width: 150px">${email.senddate }</td>
+											<td style="width: 300px">${email.to_email }</td>	
+											<!-- 여기 수정 부분 -->
+											<td style="width: 700px">
+											<a	href="${email.num }">${email.subject }</a></td>
 										</tr>
 										
 									</c:forEach>
@@ -383,10 +384,9 @@ div.center {text-align: center;}
 						</div>
 					</div>
 					<form id="pageForm">
-						<input type="hidden" name="num" /> <input type="hidden"
-							name="page" value="${pageMaker.criteria.page}" /> <input
-							type="hidden" name="perPage"
-							value="${pageMaker.criteria.perPage }" />
+						<input type="hidden" name="num" /> 
+						<input type="hidden" name="page" value="${pageMaker.criteria.page}" /> 
+						<input type="hidden" name="perPage" value="${pageMaker.criteria.perPage }" />
 
 					</form>
 				</div>
@@ -431,7 +431,7 @@ div.center {text-align: center;}
 						var bno = $(this).attr('href');
 						//페이지가 바뀌지 않기 때문에 아래랑 조금 다름/ 
 						frm.find('[name="num"]').val(bno);
-						frm.attr('action', 'detail');
+						frm.attr('action', '/groupware/email/detail');
 						frm.attr('method', 'get');
 						frm.submit();
 

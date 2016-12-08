@@ -206,7 +206,7 @@ border-right: 1px solid white;
 		<tr>
 			<th>
 				<!-- title -->
-				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
+				<input style="height: 25px;" type="text" value="[수업] ${boardVO.title }" name="title" readonly/>
 			</th>	
 		</tr>
 		<tr>
@@ -220,7 +220,7 @@ border-right: 1px solid white;
 		<tr>
 			<td>
 				<!-- content -->
-				<div style="width:766px; height:412px;">${boardVO.content}</div>
+				<div style="width:800px; margin-bottom: 50px; margin-top: 50px;">${boardVO.content}</div>
 			</td>
 		</tr>
 
@@ -292,7 +292,7 @@ border-right: 1px solid white;
 	<script>
 		$(document).ready(function(){
 			
-			var obj = [];
+			 var obj = [];
 			//스마트에디터 프레임생성
 			nhn.husky.EZCreator.createInIFrame({
 				oAppRef:obj,
@@ -305,7 +305,7 @@ border-right: 1px solid white;
 				
 				},
 			 	
-			});
+			}); 
 			
 						
 			$("#updatebutton").click(function(){

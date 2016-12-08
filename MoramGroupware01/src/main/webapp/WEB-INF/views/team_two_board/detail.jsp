@@ -230,7 +230,7 @@ border-right: 1px solid white;
 		<tr>
 			<td>
 				<!-- content -->
-				<div style="width:766px; height:412px;">${boardVO.content}</div>
+				<div style="width:800px; margin-bottom: 50px; margin-top: 50px;">${boardVO.content}</div>
 			</td>
 		</tr>
 
@@ -293,30 +293,12 @@ border-right: 1px solid white;
    <!-- CUSTOM SCRIPTS -->
    <script src="<c:url value='../resources/assets/js/custom.js'/>" /></script>	
 	
-	
-	<script src="../resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			
-			var obj = [];
-			//스마트에디터 프레임생성
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef:obj,
-				elPlaceHolder:"editor",
-				sSkinURI:"../resources/SmartEditor2Skin.html",
-				htParams : {
-					bUseToolbar:false,
-					bUseVerticalResizer : true,
-					bUseModeChanger:false,
-				
-				},
-			 	
-			});
-			
-						
 			$("#updatebutton").click(function(){
 				obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 				

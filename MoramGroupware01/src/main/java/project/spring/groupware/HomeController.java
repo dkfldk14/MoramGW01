@@ -42,7 +42,7 @@ public class HomeController {
 		//logger.info(id.toString());
 		if(id!=null){
 			
-			return "redirect:main";
+			return "redirect:main1";
 		}
 		
 		return "member_login/login";

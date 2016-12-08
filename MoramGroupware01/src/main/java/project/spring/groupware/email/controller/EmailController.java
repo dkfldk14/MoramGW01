@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -166,19 +167,21 @@ public class EmailController {
 }
 
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public void emailview(int num, Model model) {
-
+	public void emailview(int num, Model model, EmailVO vo) {
+		logger.info("detail jsp 실행 ");
 		// model.addAttribute("email", vo);
 		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
-		EmailVO vo = emaillist.get(num - 1);
-		logger.info(vo.getContent());
-		logger.info("num:" + vo.getNum());
+		/*EmailVO vo = emaillist.get(num - 1);
+		logger.info("detail에 있는 vo 값 : " + vo.getContent());
+		logger.info("num:" + vo.getNum());*/
+		vo = emailServiceDAO.detailEmail(num);	
+		logger.info("detail subject : " + vo.getSubject());
 		model.addAttribute("emaildetail", vo);
 	}
 	
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public void emailwrite(Model model,HttpServletRequest request){
+	public void emailwrite(Model model,HttpServletRequest request,@ModelAttribute("to_email")String to_email){
 		HttpSession session = request.getSession();
 		String userid = (String) session.getAttribute("login_id");
 		MemberVO vo = emailServiceDAO.member_one(userid);
