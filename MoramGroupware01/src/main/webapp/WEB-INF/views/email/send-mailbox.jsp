@@ -318,18 +318,16 @@ div.center {text-align: center;}
 									</tr>
 
 
-									<c:forEach var="list" items="${email}">
+									<c:forEach var="email" items="${email}">
 										
 										
 										<tr style="height: 30px" id="tr_inner">
 											<td style="width: 50px"><label
 												class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
 													type="checkbox" name="RowCheck"
-													class="mail-group-checkbox row-check-box"
-													value="${email.num }" /><span></span></label></td>
+													class="mail-group-checkbox row-check-box" value="${email.num }" /><span></span></label></td>
 											<td style="width: 150px">${email.senddate }</td>
 											<td style="width: 300px">${email.to_email }</td>	
-											<!-- 여기 수정 부분 -->
 											<td style="width: 700px">
 											<a	href="${email.num }">${email.subject }</a></td>
 										</tr>
