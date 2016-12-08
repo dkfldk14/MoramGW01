@@ -42,7 +42,10 @@ where from_email = #{groupemail} and state = 2
  </select>
  
  
- 
+ <select id="detail_Email" resultType="project.spring.groupware.email.domain.EmailVO">
+ select  * from moram_group_email
+ where num = #{num} and state = 1
+ </select>
 
  
  

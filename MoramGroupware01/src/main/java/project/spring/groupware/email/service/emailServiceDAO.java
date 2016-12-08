@@ -18,5 +18,7 @@ public interface emailServiceDAO {
 	public abstract int totalEmailct(String state,String groupemail);
 	public abstract List<MemberVO> member_adress();
 	
+	//detail에서 보여주기 위한 것
+	public abstract EmailVO detailEmail(int num);
 }
 
