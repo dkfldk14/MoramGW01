@@ -19,6 +19,7 @@ body {
  #wrapper {
     width: 100%;
     margin-top:50px;
+    background-color: #424a5d;
 }
 
 #page-wrapper {
@@ -28,6 +29,7 @@ body {
    
 }
 #page-inner {
+	
     width:100%;
     margin:10px 20px 10px 0px;
     background-color:#fff!important;
@@ -39,7 +41,7 @@ body {
     text-align:center;
 }
 .user-image-back {
-    background-color:#8B7BFF;
+	 background-color : #424a5d;
 }
 h5,.h5 {
     font-size: 14px;
@@ -84,31 +86,38 @@ color: #06F;
     padding-left: 55px;
 }
 .sidebar-collapse , .sidebar-collapse .nav{
-	background:none;
+	 /* background:none; */
+	 background-color: gray;
+	
 }
 .sidebar-collapse .nav {
 	padding:0;
+	background-color: #424a5d;
 }
 .sidebar-collapse .nav > li > a {
-background: #FFFFFF;
+ background-color: #424a5d;
+ border: 7px solid #424a5d;
 text-shadow: none;
-color:#0000FF;
+color:#808080;
 }
 .sidebar-collapse > .nav > li > a {
 	padding:15px 10px;
 }
 .sidebar-collapse > .nav > li {
-	border-bottom: 1px solid rgba(240, 240, 240, 1) !important;
+	border-bottom: 0px solid gray; !important;
 }
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
 	
-	background:#F3F3F3;
+	background:#68dff0;
 	outline:0;
+	color:#ffffff;
+	font: #CFCFCF;
 }
 .nav-second-level  > li:last-child > a:after,
 .nav-third-level  > li:last-child > a:after {
 	height:50%;
+	background-color: #424a5d;
 }
 .nav-third-level > li > a:after,
 .nav-third-level > li > a:before  {
@@ -127,17 +136,18 @@ border-color: #D3D3D3;
 
 .navbar-default {
 border:0px solid #DDDDDD;
+background-color: #424a5d;
      
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
 background-color: #B40101;
 }
 .navbar-default .navbar-toggle {
-border-color: #fff;
+border-color: #424a5d;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-background-color: #FFF;
+background-color: #424a5d;
 }
 .nav > li > a > i {
     margin-right:10px;
@@ -161,6 +171,7 @@ background-color: #8B7BFF;
 }
 .adjust-nav {
     padding-left:20px;padding-right:20px;
+	 background-color : #59dfdf;
 }
 .navbar-toggle {
     background-color: #8B7BFF;
@@ -225,6 +236,7 @@ border-radius: 0px;
                margin: 0 0 0 260px;
         padding: 15px 30px;
         min-height: 1200px;
+         background-color : #FFFFFF;
 		
     }
 	

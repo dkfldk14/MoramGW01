@@ -25,6 +25,9 @@
 display: inline-block;
 
 }
+td{
+	height: 50px;
+}
 </style>
 </head>
 <body>
@@ -156,16 +159,41 @@ display: inline-block;
 	<div id="page-wrapper">
 	<div id="page-inner">
 	<h1>Test Register Page</h1>
+
+	<!--  수정  -->
 	<form method="post" id="frm">	
-		Title<br/>
-		<input type="text" name="title" required/><br/>
-		Content<br/>
-		<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea><br/>
-		UserID<br/>
-		<input type="text" name="userid" value="${login_id }" readonly/><br/>
+	<table>
+	<tbody>
+	
+	
+		<tr>
+			<th>Title</th>
+			<td><input type="text" name="title" required/></td>
+		</tr>
 		
-		<input type="submit" id = "savebutton" value="complete" required/>
+		<tr>
+			<th>Content</th>
+			<td>
+			<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea>
+			</td>	
+		</tr>
+		<tr>
+			<th>UserID</th>
+			<td>
+				<input type="text" name="userid" value="${login_id }" readonly/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type="submit" id = "savebutton" value="complete" required/>
+			</td>
+		</tr>
+	
+	
+	</tbody>
+	</table>
 	</form>
+	<!--  -------------------  -->
 	  </div>
     </div>
   	

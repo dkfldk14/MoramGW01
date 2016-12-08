@@ -44,6 +44,21 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 display: inline-block;
 
 }
+tbody tr td input, tbody tr th input{
+	width: 400px;
+	border:none;
+	border-right:0px; 
+	border-top:0px; 
+	boder-left:0px; 
+	boder-bottom:0px;
+}
+
+tr{
+border:1px solid #ddd; 
+border-left: 1px solid white;
+border-right: 1px solid white;
+}
+
 
 </style>
 <title>Insert title here</title>
@@ -167,42 +182,67 @@ display: inline-block;
       </nav>
 
 
+
 <!-- 내가한 코드 -->
 <div id="page-wrapper">
 	<div id="page-inner">
 	<h1>detail</h1>
 	
+	
+	<!-- 수정 -->
 	<form action = "update" id="frm">
-		number of content<br/>
-		<input type="text" value="${boardVO.bno }" name="bno" id="bno_mod" readonly/><br/>
-		Title<br/>
-		<input type="text" value="${boardVO.title }" name="title" readonly/><br/>
-		Content<br/>
-		<!-- <?=htmlspecialchars_decode($test['b_contents'])?> -->
-		<textarea id="editor" name="content" rows="10" cols="100" style="width:766px; height:412px;">
-		${boardVO.content}
-		</textarea><br/>
-		
-		Writer<br/>
-		<input type = "text" value="${boardVO.userid}" name="userid" readonly/><br/>
-		Writer date<br/>
-		<fmt:formatDate value="${boardVO.regdate }"
+	
+	<!-- bno -->
+	<input type="hidden" value="${boardVO.bno }" name="bno" id="bno_mod" readonly/>
+	
+	<!-- Writer date -->
+	<fmt:formatDate value="${boardVO.regdate }"
 		pattern="yyyy-MM-dd HH:mm:ss" var="dateString"/>
-		<input type="text" value="${dateString }" readonly /> <br/>
+	<input style="font-style: gray;" type="hidden" value="${dateString }" readonly /> 
+	<br/>
+	
+	<table>
+	<tbody>
+		<tr>
+			<th>
+				<!-- title -->
+				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
+			</th>	
+		</tr>
+		<tr>
+			<td>
+				<!-- Writer -->
+				<input type = "text" value="글쓴이 : ${boardVO.userid}" name="userid" readonly/>작성일 : ${dateString }
+			</td>
+		</tr>
 		
-		<button type="button" id="btnList">Go to List</button>
+		<!-- <?=htmlspecialchars_decode($test['b_contents'])?> -->
+		<tr>
+			<td>
+				<!-- content -->
+				<div style="width:766px; height:412px;">${boardVO.content}</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td style="height: 50px;">
+				<button type="button" id="btnList">Go to List</button>
+				<c:if test="${boardVO.userid eq id }">
+				<button type="submit" id="updatebutton">Update</button>
+				</c:if> 
+				<input type="hidden" name="page" value="${page }" />
+			</td>
+		</tr>
 		
-		<!-- userid 랑 session에 있는 id가 같을 때만 update 버튼을 보여주기 -->
-		
-		
-		
-		<c:if test="${boardVO.userid eq id }">
-		<button type="submit" id="updatebutton">Update</button>
-		</c:if> 
-		
-		<input type="hidden" name="page" value="${page }" />
-			
+		<tr>
+			<td style="border: 1px solid #a5a5a5;"></td>
+		</tr>
+	</tbody>
+	</table>
+	
 	</form>
+	<!-- ---------------------------- -->
+	
 	<br/>
 	
 	<div>
@@ -248,7 +288,7 @@ display: inline-block;
 	<script src="../resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
-<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			
@@ -289,17 +329,14 @@ display: inline-block;
 				//data(선택 파라미터) : 요청과 함께 서버로 보내는 데이터
 				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
 				
+
 				var url = '/groupware/replies/all/'+bno;
+
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
-					console.log("userid : " + "${boardVO.userid }");
-					console.log("id :" + "${id}");
-					
-					//이름 값들을 받아노느 변수를 선언
 					var list = '';
 					var username = '';
 					var name = "${name}";
-					
 					//data의 개수 만큼 function의 내용을 반복해서 수행
 					$(data).each(function(){
 						var date = new Date(this.regdate);
@@ -307,43 +344,41 @@ display: inline-block;
 						console.log(dateString);
 					
 					username=this.replier;
-					//alert(userid +" userid " + id + "id");
 					if(username == name){
-					list += '<li class ="reply_list" data-rno="'
-						+ this.rno
-						+'">'
-						+'#'+this.rno+' '
-						+'<span class="replier">'
-						+this.replier + ' '
-						+'</span>'
-						+ '<span class = "rtext">'
-						+this.rtext + ' '
-						+"</span>"
-						+'<span class="regdate">'
-						+dateString+' '
-						+'</span>'						
-						+ '<button>수정</button>'						
-						+'</li>';
-						
-						}else{
-							list += '<li class ="reply_list" data-rno="'
-								+ this.rno
-								+'">'
-								+'#'+this.rno+' '
-								+'<span class="replier">'
-								+this.replier + ' '
-								+'</span>'
-								+ '<span class = "rtext">'
-								+this.rtext + ' '
-								+"</span>"
-								+'<span class="regdate">'
-								+dateString+' '
-								+'</span>'
-								+'</li>';
-						
-						}
+						list += '<li class ="reply_list" data-rno="'
+							+ this.rno
+							+'">'
+							+'#'+this.rno+' '
+							+'<span class="replier">'
+							+this.replier + ' '
+							+'</span>'
+							+ '<span class = "rtext">'
+							+this.rtext + ' '
+							+"</span>"
+							+'<span class="regdate">'
+							+dateString+' '
+							+'</span>'						
+							+ '<button>수정</button>'						
+							+'</li>';
+							
+							}else{
+								list += '<li class ="reply_list" data-rno="'
+									+ this.rno
+									+'">'
+									+'#'+this.rno+' '
+									+'<span class="replier">'
+									+this.replier + ' '
+									+'</span>'
+									+ '<span class = "rtext">'
+									+this.rtext + ' '
+									+"</span>"
+									+'<span class="regdate">'
+									+dateString+' '
+									+'</span>'
+									+'</li>';
+							
+							}
 					});
-					
 				
 					$('#replies').html(list);
 				});			
@@ -356,7 +391,9 @@ display: inline-block;
 				
 				$.ajax({
 					type: 'post',
+
 					url: '/groupware/replies',
+
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'POST'
@@ -401,7 +438,9 @@ display: inline-block;
 					var bno = $('#bno_mod').val();
 					$.ajax({
 						type : 'delete',
+
 						url : '/groupware/replies/'+rno,
+
 						headers : {
 							'Content-Type' : 'application/json',
 							'X-HTTP-Method-Override' : 'DELETE'
@@ -425,7 +464,9 @@ display: inline-block;
 				var text = $('#rtext_mod').val();
 				$.ajax({
 					type : 'put',
+
 					url : '/groupware/replies/'+rno,
+
 					headers:{
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'

@@ -24,15 +24,59 @@
 <link href="<c:url value="/resources/assets/css/weather.css"/>"
 	rel="stylesheet" />
 	
+<<<<<<< HEAD
+	<style>
+#logoutButton{
+background-color: #ffd777;
+border: 1px solid #3fc3c4;
+color: #3f3f3f;
+font-size: 110%;
+padding: 7px;
+margin: 10px;
+}
+
+#logoutButton:hover {
+	background-color: #3fc3c4;
+	border: 1px solid #ffd777;
+	color: #ffffff;
+}
+	</style>
+	
+	
+=======
+	
+<style>
+#logoutButton{
+background-color: #ffd777;
+border: 1px solid #3fc3c4;
+color: #3f3f3f;
+font-size: 110%;
+padding: 7px;
+margin: 10px;
+}
+
+#logoutButton:hover {
+	background-color: #3fc3c4;
+	border: 1px solid #ffd777;
+	color: #ffffff;
+}
+
+
+
+</style>	
+>>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 </head>
 <body>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
 	<%-- <% String id = String.valueOf(session.getAttribute("login_id")); %> --%>
 	<div id="login_id" data-id=${id } style="display: hidden;"></div>
-	<div id="wrapper">
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="adjust-nav">
-				<div class="navbar-header">
+
+		<div id="wrapper">
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="adjust-nav">
+					<div class="navbar-header">
+						<span id="moramHeader">Moram</span>
+
 					<button type="button" class="navbar-toggle" data-toggle="collapse"
 						data-target=".sidebar-collapse">
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -42,31 +86,38 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">See Website</a></li>
-						<li><a href="#">Open Ticket</a></li>
-						<li><a href="/groupware/member_login/logOut">Log outs</a></li>
+						<li><button id="logoutButton" onclick="logout();">Logout</button></li>
 					</ul>
 				</div>
 
+				</div>
 			</div>
 		</div>
 		<!-- /. NAV TOP  -->
-		<nav class="navbar-default navbar-side" role="navigation">
+		<nav id = "navPM" class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
+					
+					<li>
+						<div>
+							<br/>
+							<button id="hide"><img width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
+							<button id="show"><img style="margin-left: 260px;" width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
+						</div>
+					</li>
+				
 					<li class="text-center user-image-back"><img
 						src="<c:url value="resources/assets/img/find_user.png"/>"
 						align="center" /> <class ="img-responsive" /></li>
 
 
-					<li class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
-					<li><a href=""><i class="fa fa-edit "></i>결제<span
-							class="fa arrow"></span></a>
+					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
+					<li><a href=""><i class="fa fa-edit "></i>결재<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="">나의 결재함page</a></li>
-							<li class="childTab"><a href="">미결함</a></li>
-							<li class="childTab"><a href="">반려함</a></li>
-							<li class="childTab"><a href="#">기결함</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함page</a></li>
+							<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-return">반려함</a></li>
+							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 						</ul></li>
 
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
@@ -374,132 +425,17 @@
 					</div>
 				</div>
 				<!-- /. ROW  -->
-				<hr />
-
+			
 
 				<div class="row">
 					<div class="col-md-4">
-						<h5>Panel Sample</h5>
-						<div class="panel panel-primary">
-							<div class="panel-heading">Default Panel</div>
-							<div class="panel-body">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-									Vestibulum tincidunt est vitae ultrices accumsan. Aliquam
-									ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-							</div>
-							<div class="panel-footer">Panel Footer</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<h5>Accordion Sample</h5>
-						<div class="panel-group" id="accordion">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion"
-											href="#collapseOne" class="collapsed">Collapsible Group
-											Item #1</a>
-									</h4>
-								</div>
-								<div id="collapseOne" class="panel-collapse collapse"
-									style="height: 0px;">
-									<div class="panel-body">Lorem ipsum dolor sit amet,
-										consectetur adipisicing elit, sed do eiusmod tempor
-										incididunt.</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion"
-											href="#collapseTwo">Collapsible Group Item #2</a>
-									</h4>
-								</div>
-								<div id="collapseTwo" class="panel-collapse in"
-									style="height: auto;">
-									<div class="panel-body">Lorem ipsum dolor sit amet,
-										consectetur adipisicing elit, sed do eiusmod tempor
-										incididunt.</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordion"
-											href="#collapseThree" class="collapsed">Collapsible Group
-											Item #3</a>
-									</h4>
-								</div>
-								<div id="collapseThree" class="panel-collapse collapse">
-
-
-									<div class="panel-body">Lorem ipsum dolor sit amet,
-										consectetur adipisicing elit, sed do eiusmod tempor
-										incididunt.</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<h5>Tabs Sample</h5>
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#home" data-toggle="tab">Home</a>
-							</li>
-							<li class=""><a href="#profile" data-toggle="tab">Profile</a>
-							</li>
-							<li class=""><a href="#messages" data-toggle="tab">Messages</a>
-							</li>
-
-						</ul>
-						<div class="tab-content">
-							<div class="tab-pane fade active in" id="home">
-								<h4>Home Tab</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit
-									eserunt mollit anim id est laborum. Lorem ipsum dolor sit amet,
-									consectetur adipisicing elit eserunt mollit anim id est
-									laborum. Lorem ipsum dolor sit amet, consectetur adipisicing
-									elit eserunt mollit anim id est laborum.</p>
-							</div>
-							<div class="tab-pane fade" id="profile">
-								<h4>Profile Tab</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit
-									eserunt mollit anim id est laborum. Lorem ipsum dolor sit amet,
-									consectetur adipisicing elit eserunt mollit anim id est
-									laborum. Lorem ipsum dolor sit amet, consectetur adipisicing
-									elit eserunt mollit anim id est laborum.</p>
-
-							</div>
-							<div class="tab-pane fade" id="messages">
-								<h4>Messages Tab</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit
-									eserunt mollit anim id est laborum. Lorem ipsum dolor sit amet,
-									consectetur adipisicing elit eserunt mollit anim id est
-									laborum. Lorem ipsum dolor sit amet, consectetur adipisicing
-									elit eserunt mollit anim id est laborum.</p>
-
-							</div>
-
-						</div>
-					</div>
-
+					
 				</div>
 				<!-- /. ROW  -->
 				<hr />
 				<div class="row">
 					<div class="col-md-12">
-						<h5>Information</h5>
-						This is a type of bare admin that means you can customize your own
-						admin using this admin structured template . For More Examples of
-						bootstrap elements or components please visit official bootstrap
-						website <a href="http://getbootstrap.com" target="_blank">getbootstrap.com</a>
-						. And if you want full template please download <a
-							href="http://www.binarytheme.com/bootstrap-free-admin-dashboard-template/"
-							target="_blank">FREE BCORE ADMIN </a>&nbsp;,&nbsp; <a
-							href="http://www.binarytheme.com/free-bootstrap-admin-template-siminta/"
-							target="_blank">FREE SIMINTA ADMIN</a> and <a
-							href="http://binarycart.com/" target="_blank">FREE BINARY
-							ADMIN</a>.
-
+			
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -559,7 +495,16 @@
 				return false;
 			})
 		}
+		
+	
 	}
+		 function logout(){
+			 location="/groupware/member_login/logOut";
+		 }
+
+		</script>
+		<script>
+
 		// Tab 메뉴 클릭 이벤트 생성
 		/* $('.childTab').click(function (event) { */
 			/* var tagName = event.target.tagName; // 현재 선택된 태그네임
@@ -606,6 +551,8 @@
 	/* }); */
 	
 	</script>
+
+
 
 
 </body>

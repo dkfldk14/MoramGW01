@@ -169,7 +169,7 @@ public class EmailController {
 	public void emailview(int num, Model model) {
 
 		// model.addAttribute("email", vo);
-
+		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
 		EmailVO vo = emaillist.get(num - 1);
 		logger.info(vo.getContent());
 		logger.info("num:" + vo.getNum());
