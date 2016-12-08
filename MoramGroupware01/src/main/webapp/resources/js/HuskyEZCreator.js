@@ -59,6 +59,7 @@ nhn.husky.EZCreator = new (function(){
 		
 		elIFrame.style.width = "1px";
 		elIFrame.style.height = "1px";
+
 		
 		///////////////////////////////////////////////////////////////////////////////
 		//elPlaceHolder.parentNode.insertBefore(elIFrame, elPlaceHolder.nextSibling);
