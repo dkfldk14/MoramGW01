@@ -205,7 +205,7 @@ border-right: 1px solid white;
 		<tr>
 			<th>
 				<!-- title -->
-				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
+				<input style="height: 25px;" type="text" value="[후기] ${boardVO.title }" name="title" readonly/>
 			</th>	
 		</tr>
 		<tr>
@@ -219,7 +219,7 @@ border-right: 1px solid white;
 		<tr>
 			<td>
 				<!-- content -->
-				<div style="width:766px; height:412px;">${boardVO.content}</div>
+				<div style="width:800px; margin-bottom: 50px; margin-top: 50px;">${boardVO.content}</div>
 			</td>
 		</tr>
 
@@ -283,29 +283,10 @@ border-right: 1px solid white;
    <!-- CUSTOM SCRIPTS -->
    <script src="<c:url value='../resources/assets/js/custom.js'/>" /></script>	
 	
-	
-	<script src="../resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
-			
-			var obj = [];
-			//스마트에디터 프레임생성
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef:obj,
-				elPlaceHolder:"editor",
-				sSkinURI:"../resources/SmartEditor2Skin.html",
-				htParams : {
-					bUseToolbar:false,
-					bUseVerticalResizer : true,
-					bUseModeChanger:false,
-				
-				},
-			 	
-			});
-			
 						
 			$("#updatebutton").click(function(){
 				obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -328,7 +309,7 @@ border-right: 1px solid white;
 				//data(선택 파라미터) : 요청과 함께 서버로 보내는 데이터
 				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
 				
-				var url = '/spring/interview_replies/all/'+bno;
+				var url = '/groupware/interview_replies/all/'+bno;
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
 					//이름 값들을 받아노느 변수를 선언
@@ -389,7 +370,7 @@ border-right: 1px solid white;
 				
 				$.ajax({
 					type: 'post',
-					url: '/spring/interview_replies',
+					url: '/groupware/interview_replies',
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'POST'
@@ -434,7 +415,7 @@ border-right: 1px solid white;
 					var bno = $('#bno_mod').val();
 					$.ajax({
 						type : 'delete',
-						url : '/spring/interview_replies/'+rno,
+						url : '/groupware/interview_replies/'+rno,
 						headers : {
 							'Content-Type' : 'application/json',
 							'X-HTTP-Method-Override' : 'DELETE'
@@ -458,7 +439,7 @@ border-right: 1px solid white;
 				var text = $('#rtext_mod').val();
 				$.ajax({
 					type : 'put',
-					url : '/spring/interview_replies/'+rno,
+					url : '/groupware/interview_replies/'+rno,
 					headers:{
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'

@@ -205,7 +205,7 @@ border-right: 1px solid white;
 		<tr>
 			<th>
 				<!-- title -->
-				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
+				<input style="height: 25px;" type="text" value="[시나] ${boardVO.title }" name="title" readonly/>
 			</th>	
 		</tr>
 		
@@ -281,30 +281,11 @@ border-right: 1px solid white;
    <script src="<c:url value='../resources/assets/js/jquery.metisMenu.js'/>" /></script>
    <!-- CUSTOM SCRIPTS -->
    <script src="<c:url value='../resources/assets/js/custom.js'/>" /></script>	
-	
-	
-	<script src="../resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+   
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
-			
-			var obj = [];
-			//스마트에디터 프레임생성
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef:obj,
-				elPlaceHolder:"editor",
-				sSkinURI:"../resources/SmartEditor2Skin.html",
-				htParams : {
-					bUseToolbar:false,
-					bUseVerticalResizer : true,
-					bUseModeChanger:false,
-				
-				},
-			 	
-			});
-			
 						
 			$("#updatebutton").click(function(){
 				obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
