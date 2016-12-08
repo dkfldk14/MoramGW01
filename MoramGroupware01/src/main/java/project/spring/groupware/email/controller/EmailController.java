@@ -437,9 +437,13 @@ public class EmailController {
 	}
 
 	@RequestMapping(value="/send-mailbox", method=RequestMethod.GET)
-	public void send_mailbox(Integer page,Model model){
+	public void send_mailbox(Integer page,Model model, HttpServletRequest request){
 		//todo- session 아이디 가져와서 하기 
 		
+		HttpSession session=request.getSession();
+		String userid=(String) session.getAttribute("login_id");
+		MemberVO mvo=emailServiceDAO.member_one(userid);
+		logger.info("이메일:"+mvo.getGroupemail());
 		
 		/*String gwMail="dkfldk14@moram.com";*/
 		logger.info("listpage (): page="+page);
@@ -450,7 +454,7 @@ public class EmailController {
 			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌. 
 		   }
 		
-		List<EmailVO> vo=emailServiceDAO.adressList(1, c);
+		List<EmailVO> vo=emailServiceDAO.send_emailList(mvo.getGroupemail());
 		model.addAttribute("email", vo);
 	 	
 	   	//페이지메이커 
@@ -458,12 +462,12 @@ public class EmailController {
 	   	//▼ 몇번째 페이지를 보여줄것인지 조건
 	   	maker.setCriteria(c);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
-	   	maker.setTotalCount(emailServiceDAO.totalEmailct("1", gwEmail));
+	   	maker.setTotalCount(emailServiceDAO.totalEmailct("1", mvo.getGroupemail()));
 	   	//▼ pageMaker 의 함수를 호출
 	   	maker.setPageDate();
 	   	//모델객체에 pageMaker 넘겨줌. 
 	   	model.addAttribute("pageMaker", maker);
-  
+	   	model.addAttribute("Gemail", mvo.getGroupemail());
 	
 	
 	}
@@ -471,9 +475,12 @@ public class EmailController {
 	
 	
 	@RequestMapping(value="/delete-mailbox",method=RequestMethod.GET)
-	public void delete_mailbox(Integer page,Model model){
+	public void delete_mailbox(Integer page,Model model, HttpServletRequest request){
 		//todo- session 아이디 가져와서 하기 
 		
+		HttpSession session=request.getSession();
+		String userid=(String) session.getAttribute("login_id");
+		MemberVO mvo=emailServiceDAO.member_one(userid);
 		
 		//String gwMail="dkfldk14@moram.com";
 		logger.info("listpage (): page="+page);
@@ -484,7 +491,7 @@ public class EmailController {
 			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌. 
 		   }
 		
-		List<EmailVO> vo=emailServiceDAO.adressList(2, c);
+		List<EmailVO> vo=emailServiceDAO.delete_emailList(mvo.getGroupemail());
 		model.addAttribute("email", vo);
 	 	
 	   	//페이지메이커 

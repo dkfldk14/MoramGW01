@@ -137,5 +137,10 @@
 	where rn between #{start} and #{end}	
 	</select>
 	
+	<select id="info_board_count" resultType="Integer">
+		select count(*) from moram_info_board
+   where REGDATE between TO_CHAR(SYSDATE,'YYYY/MM/DD') 
+   and TO_CHAR(SYSDATE,'YYYY/MM/DD HH24:MI:SS')
+	</select>
 		
 </mapper>

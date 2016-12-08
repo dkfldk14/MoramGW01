@@ -326,7 +326,7 @@ div.center {text-align: center;}
 													class="mail-group-checkbox row-check-box"
 													value="${email.num }" /><span></span></label></td>
 											<td style="width: 150px">${email.senddate }</td>
-											<td style="width: 300px">${email.from_email }</td>
+											<td style="width: 300px">${email.to_email }</td>
 											<td style="width: 700px"><a
 												href="detail?num=${email.num }">${email.subject }</a></td>
 										</tr>
