@@ -237,7 +237,7 @@ border-right: 1px solid white;
 	
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="/spring/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="/groupware/resources/js/HuskyEZCreator2.js" charset="utf-8"></script>
 	
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> -->
 		
@@ -249,7 +249,7 @@ border-right: 1px solid white;
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef:obj,
 			elPlaceHolder:"editor",
-			sSkinURI:"/spring/resources/SmartEditor2Skin.html",
+			sSkinURI:"/groupware/resources/SmartEditor2Skin.html",
 			htParams : {
 				//Using toolbar
 				bUseToolbar : true,

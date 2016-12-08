@@ -2,6 +2,7 @@ package project.spring.groupware.board.persistence;
 
 import java.util.List;
 
+import project.spring.groupware.board.domain.ReplyAddNameVO;
 import project.spring.groupware.board.domain.ReplyVO;
 
 public interface TeamThreeReplyDAO {
@@ -11,4 +12,6 @@ public interface TeamThreeReplyDAO {
 	public abstract int delete(int rno);
 	//게시글을 지울때 댓글도 같이 지워지는 함수
 	public abstract int deleteByBno(int bno);
+	//이름으로 댓글을 보여줄때
+	public abstract List<ReplyAddNameVO>selectName(int bno);
 }

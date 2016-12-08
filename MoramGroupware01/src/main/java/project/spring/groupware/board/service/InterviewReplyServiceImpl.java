@@ -48,8 +48,8 @@ public class InterviewReplyServiceImpl implements InterviewReplyService {
 	}
 
 	@Override
-	public List<ReplyAddNameVO> selectName(ReplyAddNameVO vo) {
+	public List<ReplyAddNameVO> selectName(int bno) {
 		// TODO Auto-generated method stub
-		return dao.selectName(vo);
+		return dao.selectName(bno);
 	}
 }

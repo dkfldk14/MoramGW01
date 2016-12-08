@@ -15,5 +15,5 @@ public interface ReplyService {
 	public abstract int deleteByBno(int bno);
 	
 	//이름으로 댓글을 보여줄때
-	public abstract List<ReplyAddNameVO>selectName(ReplyAddNameVO vo);
+	public abstract List<ReplyAddNameVO>selectName(int bno);
 }

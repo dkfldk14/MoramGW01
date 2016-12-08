@@ -209,6 +209,14 @@ border-right: 1px solid white;
 			</th>	
 		</tr>
 		
+<<<<<<< HEAD
+		<button type="button" id="btnList">Go to List</button>
+		<c:if test="${boardVO.userid eq id }">
+		<button type="submit" id="updatebutton">Update</button>
+		</c:if> 
+		<input type="hidden" name="page" value="${page }" />
+			
+=======
 		<tr>
 			<td>
 				<!-- Writer -->
@@ -238,6 +246,7 @@ border-right: 1px solid white;
 	</tbody>
 	</table>
 	
+>>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 	</form>
 	<!-- ---------------------------- -->
 	
@@ -247,7 +256,7 @@ border-right: 1px solid white;
 		<input type = "text" name="rtext" id="rtext"
 			placeholder ="write it" required/>
 		<input type = "text" name="replier" id="replier"
-			placeholder="ID" required/>
+			placeholder="ID" value = "${name }" readonly/>
 		<button type = "button" id="btnCreate">Write Comments</button>	
 	</div>
 	<br/>
@@ -308,10 +317,12 @@ border-right: 1px solid white;
 				//data(선택 파라미터) : 요청과 함께 서버로 보내는 데이터
 				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
 				
-				var url = '/spring/teamone_replies/all/'+bno;
+				var url = '/groupware/teamoneReplies/all/'+bno;
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
 					var list = '';
+					var username = '';
+					var name = "${name}";
 					//data의 개수 만큼 function의 내용을 반복해서 수행
 					$(data).each(function(){
 						var date = new Date(this.regdate);
@@ -319,21 +330,42 @@ border-right: 1px solid white;
 						console.log(dateString);
 					
 					
-					list += '<li class ="reply_list" data-rno="'
-						+ this.rno
-						+'">'
-						+'#'+this.rno+' '
-						+'<span class="replier">'
-						+this.replier + ' '
-						+'</span>'
-						+ '<span class = "rtext">'
-						+this.rtext + ' '
-						+"</span>"
-						+'<span class="regdate">'
-						+dateString+' '
-						+'</span>'
-						+'<button>수정</button>'
-						+'</li>';
+						username=this.replier;
+						//alert(userid +" userid " + id + "id");
+						if(username == name){
+						list += '<li class ="reply_list" data-rno="'
+							+ this.rno
+							+'">'
+							+'#'+this.rno+' '
+							+'<span class="replier">'
+							+this.replier + ' '
+							+'</span>'
+							+ '<span class = "rtext">'
+							+this.rtext + ' '
+							+"</span>"
+							+'<span class="regdate">'
+							+dateString+' '
+							+'</span>'						
+							+ '<button>수정</button>'						
+							+'</li>';
+							
+							}else{
+								list += '<li class ="reply_list" data-rno="'
+									+ this.rno
+									+'">'
+									+'#'+this.rno+' '
+									+'<span class="replier">'
+									+this.replier + ' '
+									+'</span>'
+									+ '<span class = "rtext">'
+									+this.rtext + ' '
+									+"</span>"
+									+'<span class="regdate">'
+									+dateString+' '
+									+'</span>'
+									+'</li>';
+							
+							}
 					});
 				
 					$('#replies').html(list);
@@ -342,12 +374,13 @@ border-right: 1px solid white;
 			};
 			
 			$('#btnCreate').click(function(){
+								
 				var rtextString = $('#rtext').val();
 				var replierString = $('#replier').val();
 				
 				$.ajax({
 					type: 'post',
-					url: '/spring/teamone_replies',
+					url: '/groupware/teamoneReplies',
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'POST'
@@ -392,7 +425,7 @@ border-right: 1px solid white;
 					var bno = $('#bno_mod').val();
 					$.ajax({
 						type : 'delete',
-						url : '/spring/teamone_replies/'+rno,
+						url : '/groupware/teamoneReplies/'+rno,
 						headers : {
 							'Content-Type' : 'application/json',
 							'X-HTTP-Method-Override' : 'DELETE'
@@ -416,7 +449,7 @@ border-right: 1px solid white;
 				var text = $('#rtext_mod').val();
 				$.ajax({
 					type : 'put',
-					url : '/spring/teamone_replies/'+rno,
+					url : '/groupware/teamoneReplies/'+rno,
 					headers:{
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'
