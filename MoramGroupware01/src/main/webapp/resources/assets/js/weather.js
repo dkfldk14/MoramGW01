@@ -567,6 +567,18 @@ $(document).ready(function(){
 		}); /* 서버에서 전달된 JSON 데이터 처리 끝 */
 		
     });
+    
+    //나머진 show hide로 버튼 위치만 조정
+	$("#hide").click(function() {
+		$('#navPM').css('margin-left', '-260px');
+		$('#page-wrapper').css('margin-left', '0px');
+	});
+	
+	$("#show").click(function() {
+		$('#navPM').css('margin-left', '0px');
+		$('#page-wrapper').css('margin-left', '260px');
+	});
+	
    
 	
 });

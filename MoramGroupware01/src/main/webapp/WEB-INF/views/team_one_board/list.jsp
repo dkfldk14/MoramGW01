@@ -9,15 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
 
-<!-- BOOTSTRAP STYLES-->
-<link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
-   rel="stylesheet" />
-<!-- FONTAWESOME STYLES-->
-<link href="<c:url value="/resources/assets/css/font-awesome.css"/>"
-   rel="stylesheet" />
-<!-- CUSTOM STYLES-->
-<link href="<c:url value="/resources/assets/css/custom.css"/>"
-   rel="stylesheet" />
+<link rel="stylesheet" href="resources/assets/css/bootstrap.css" />
+<link rel="stylesheet" href="resources/assets/css/font-awesome.css" />
+<link rel="stylesheet" href="resources/assets/css/custom.css" />
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />

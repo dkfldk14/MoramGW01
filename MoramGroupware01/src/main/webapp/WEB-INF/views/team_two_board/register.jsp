@@ -25,6 +25,10 @@
 display: inline-block;
 
 }
+td{
+	height: 50px;
+}
+
 </style>
 </head>
 <body>
@@ -156,16 +160,41 @@ display: inline-block;
 	<div id="page-wrapper">
 	<div id="page-inner">
 	<h1>Test Register Page</h1>
-	<form method="post" id="frm">	
-		Title<br/>
-		<input type="text" name="title" required/><br/>
-		Content<br/>
-		<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea><br/>
-		UserID<br/>
-		<input type="text" name="userid" required/><br/>
 		
-		<input type="submit" id = "savebutton" value="complete" required/>
+	<!--  수정  -->
+	<form method="post" id="frm">	
+	<table>
+	<tbody>
+	
+	
+		<tr>
+			<th>Title</th>
+			<td><input type="text" name="title" required/></td>
+		</tr>
+		
+		<tr>
+			<th>Content</th>
+			<td>
+			<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea>
+			</td>	
+		</tr>
+		<tr>
+			<th>UserID</th>
+			<td>
+				<input type="text" name="userid" required/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type="submit" id = "savebutton" value="complete" required/>
+			</td>
+		</tr>
+	
+	
+	</tbody>
+	</table>
 	</form>
+	<!--  -------------------  -->
 	  </div>
     </div>
   	
@@ -182,7 +211,7 @@ display: inline-block;
 	
 	<!-- jQuery CDN -->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="/spring/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="../resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -192,7 +221,7 @@ display: inline-block;
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef:obj,
 			elPlaceHolder:"editor",
-			sSkinURI:"/spring/resources/SmartEditor2Skin.html",
+			sSkinURI:"../resources/SmartEditor2Skin.html",
 			htParams : {
 				//Using toolbar
 				bUseToolbar : true,

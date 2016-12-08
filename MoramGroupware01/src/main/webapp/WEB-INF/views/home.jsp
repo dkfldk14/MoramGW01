@@ -24,15 +24,34 @@
 <link href="<c:url value="/resources/assets/css/weather.css"/>"
 	rel="stylesheet" />
 	
+	<style>
+#logoutButton{
+background-color: #ffd777;
+border: 1px solid #3fc3c4;
+color: #3f3f3f;
+font-size: 110%;
+padding: 7px;
+margin: 10px;
+}
+
+#logoutButton:hover {
+	background-color: #3fc3c4;
+	border: 1px solid #ffd777;
+	color: #ffffff;
+}
+	</style>
+	
+	
 </head>
 <body>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
 	<%-- <% String id = String.valueOf(session.getAttribute("login_id")); %> --%>
 	<div id="login_id" data-id=${id } style="display: hidden;"></div>
-	<div id="wrapper">
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="adjust-nav">
-				<div class="navbar-header">
+		<div id="wrapper">
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="adjust-nav">
+					<div class="navbar-header">
+						<span id="moramHeader">Moram</span>
 					<button type="button" class="navbar-toggle" data-toggle="collapse"
 						data-target=".sidebar-collapse">
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -42,18 +61,26 @@
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">See Website</a></li>
-						<li><a href="#">Open Ticket</a></li>
-						<li><a href="/groupware/member_login/logOut">Log outs</a></li>
+						<li><button id="logoutButton" onclick="logout();">Logout</button></li>
 					</ul>
 				</div>
 
+				</div>
 			</div>
 		</div>
 		<!-- /. NAV TOP  -->
-		<nav class="navbar-default navbar-side" role="navigation">
+		<nav id = "navPM" class="navbar-default navbar-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="main-menu">
+					
+					<li>
+						<div>
+							<br/>
+							<button id="hide"><img width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
+							<button id="show"><img style="margin-left: 260px;" width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
+						</div>
+					</li>
+				
 					<li class="text-center user-image-back"><img
 						src="<c:url value="resources/assets/img/find_user.png"/>"
 						align="center" /> <class ="img-responsive" /></li>

@@ -30,6 +30,12 @@
 <link href='<c:url value="/resources/assets/css/bootstrap.min.css"/>'
 	rel="stylesheet" />	
 	
+	<style type="text/css">
+	.form-group{
+	 	
+	}
+	</style>
+	
 </head>
 <body>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
@@ -149,7 +155,7 @@
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<article class="container">
-		<div class="page-header">
+		<div class="page-header" style="width: 60%;">
 			<h1>개인 정보 수정</h1>
 		</div>
 		<div class="col-md-6 col-md-offset-3">

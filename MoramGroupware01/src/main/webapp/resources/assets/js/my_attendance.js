@@ -14,6 +14,10 @@ $(document).ready(function(){
 			var date='';
 			var tochar='';
 			var val=1;
+
+			var enter = '';
+			var leave = '';
+			var attendance = '';
 			$(result).each(function() {
 				if(this.id==loginid){
 					if(this.enter!=''&&this.enter!=null){
@@ -22,6 +26,7 @@ $(document).ready(function(){
 					tochar = tochar.substring(0, 1);
 					date = date.substring(0, 10)+' ('+tochar+')';
 					
+				if(this.leave!=null&&this.leave!=''){
 					list +=
 					'<tr>'
 					+'<th>'+ val +'</th>'
@@ -36,8 +41,26 @@ $(document).ready(function(){
 					+'</td>'
 					+'<td>'
 					+this.attendance
-					+'</td>';
-					+'</tr>'
+					+'</td>'
+					+'</tr>';
+				} else {
+					list +=
+						'<tr>'
+						+'<th>'+ val +'</th>'
+						+'<th scope="row">'
+						+date
+						+'</th>'
+						+'<td>'
+						+this.enter
+						+'</td>'
+						+'<td>'
+						+'-'
+						+'</td>'
+						+'<td>'
+						+'결석'
+						+'</td>'
+						+'</tr>';
+				}
 				
 					$('#check_all').html(list);
 					

@@ -194,9 +194,8 @@ li{
 		<div id="page-wrapper">
 			<div id="page-inner" class="test">
 				
-				 
-				 비밀번호 입력
-				<input type="password" name="pwd" id="pwd"><br>
+				<img width="23px" height="23px" alt="비밀번호" src="<c:url value="resources/assets/img/lock.png"/>"/>
+				<input type="password" name="pwd" id="pwd" placeholder="비밀번호를 입력하세요">
 				<input type="button" id="pwd_btn" name="pwd_btn" value="확인">
 				<!-- /. PAGE INNER  -->
 			</div>
