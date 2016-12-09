@@ -53,7 +53,10 @@ public class MainController {
 		model.addAttribute("name", name);
 		logger.info(name);
 		
+		
+		//각 조별 게시판으로 들어가도록 usertype을 받아옴
 		String usertype = vo.getUsertype();
+		logger.info("MainController usertype : " + usertype);
 		model.addAttribute("type", usertype);
 		
 		String profileimage=vo.getProfileimage();
@@ -80,7 +83,10 @@ public class MainController {
 		model.addAttribute("name", name);
 		logger.info(name);
 		
-		model.addAttribute("type", vo.getUsertype());
+		//각 조별 게시판으로 들어가도록 usertype을 받아옴
+		String usertype = vo.getUsertype();
+		logger.info("MainController 1 usertype : " + usertype);
+		model.addAttribute("type", usertype);
 		
 		model.addAttribute("count", count);
 		

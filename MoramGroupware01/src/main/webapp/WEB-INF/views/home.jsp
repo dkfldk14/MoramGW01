@@ -126,10 +126,11 @@ margin: 10px;
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-
-							<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
-							<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
-							<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
+							
+							<!-- authorization은 각 조별 게시판에 들어가도록 권한을 부여 -->
+							<li class="childTab" id = "authorization1"><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 
 							<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
@@ -416,6 +417,10 @@ margin: 10px;
 		console.log("값:"+admin);
 		if(admin != 1){
 			$('#admin').hide();	
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다.');
+				return false;
+			})
 		}
 				
 		if(admin==0){
@@ -425,6 +430,19 @@ margin: 10px;
 			})
 		}
 		
+		if(admin != 2){
+			$('#authorization2').click(function() {
+				alert('당신은 2조가 아닙니다.');
+				return false;
+			})
+		}
+		
+		if(admin != 3){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다.');
+				return false;
+			})
+		}
 	
 	}
 		 function logout(){
