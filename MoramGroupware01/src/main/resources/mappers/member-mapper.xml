@@ -36,6 +36,6 @@
   </select>
   
   <update id="member_info_update">
-  	update moram_member set pwd=#{pwd}, name=#{name}, gender=#{gender}, birth=#{birth}, telephone=#{telephone}, cellphone=#{cellphone}, address=#{address}, mailno=#{mailno}, addaddress=#{addaddress}, email=#{email} where id = #{id}
+  	update moram_member set pwd=#{pwd}, name=#{name}, gender=#{gender}, birth=#{birth}, telephone=#{telephone}, cellphone=#{cellphone}, address=#{address}, mailno=#{mailno}, addaddress=#{addaddress}, email=#{email}, profileimage=#{profileimage} where id = #{id}
   </update>
   </mapper>

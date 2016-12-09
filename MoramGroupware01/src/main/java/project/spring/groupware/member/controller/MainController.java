@@ -90,6 +90,9 @@ public class MainController {
 		
 		model.addAttribute("count", count);
 		
+		String profileimage=vo.getProfileimage();
+		model.addAttribute("profileimage", profileimage);
+		
 		return "home";
 	}
 	

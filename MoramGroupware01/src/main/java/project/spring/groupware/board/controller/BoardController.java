@@ -54,6 +54,9 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		String name = (String)session.getAttribute("name");
 		
+		String profileimage=(String)session.getAttribute("profileimage");
+		System.out.println("profile image : " +profileimage);
+		
 		//userid 를 이름으로 변경
 		List<BoardAddNameVO> listname = null;
 		
