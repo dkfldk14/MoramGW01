@@ -403,7 +403,7 @@ div.center {text-align: center;}
 										</c:if>
 
 										<c:forEach begin="${pageMaker.startPageNum }"
-											end="${pageMaker.endPageNum-1 }" var="num">
+											end="${pageMaker.endPageNum }" var="num">
 											<li><a href="list?page=${num }">${num }</a></li>
 										</c:forEach>
 
@@ -490,9 +490,12 @@ div.center {text-align: center;}
 					,type:'post'				
 					,dataType:'text'
 					,data : {valueArrTest:checkArr},
-					success : function(){
-						location.reload();
-					
+					success : function(data){
+						if(data=='OK'){
+
+							alert("test");
+							location = 'list?page=1';
+						}
 					}});
 				}
 					
@@ -502,40 +505,7 @@ div.center {text-align: center;}
 		
 		
 		</script>
-	
-		
-	<!-- 
-		/* 	if(listsize==0){
-					alert("삭제할 이메일이 없어용..");
-				}else{ */
-				
-	/* 			var userid = "";
-				var eamilList = document.getElementsByName("RowCheck");
-				var chked = false;
-				var indexid = false;
-				for (i = 0; i < emailList.length; i++) {
-					
-					if (emailList[i].checked) {
-						if (indexid) {
-							userid = userid + '-';
-						}
-						userid = userid + memberChk[i].value;
-						indexid = true;
-					}
-				}
-				if (!indexid) {
-					alert("삭제할 사용자를 체크해 주세요");
-					return;
-				}
-				document.userForm.delUserid.value = userid; // 체크된 사용자 아이디를 '-'로 묶은 userid 를     
-				//   document.userForm.delUserid 의 value로 저장 
-
-				var agree = confirm("삭제 하시겠습니까?");
-				if (agree) {
-					document.userForm.execute.value = "userDel";
-					document.userForm.submit();
-				}
-			 */ -->﻿
+﻿
 
 
 

@@ -231,7 +231,8 @@ ul {
 
 										<hr />
 									</div>
-
+										<input type="hidden" name="page" value="${page }" />
+			
 
 								</div>
 								<div>${emaildetail.content }</div>

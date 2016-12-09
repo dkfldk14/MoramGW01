@@ -28,8 +28,8 @@ where from_email = #{groupemail} and state = 2 order by senddate desc
  </select>
  
  <select id="adressList" resultType="project.spring.groupware.email.domain.EmailVO">
-	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=#{state} order by num desc) a 
-	)b where rn between #{start} and #{end}
+	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=#{Element.state} and from_email = #{from_email} order by senddate desc) a 
+	)b where rn between #{Element.start} and #{Element.end}
 	</select>
 
 <select id="EmailTotalct" resultType="Integer">
@@ -43,10 +43,17 @@ where from_email = #{groupemail} and state = 2 order by senddate desc
  
  
  <select id="detail_Email" resultType="project.spring.groupware.email.domain.EmailVO">
- select  * from moram_group_email
+ select * from moram_group_email
  where num = #{num} and state = 1
  </select>
+<!-- 
+<select id="selectByBno" resultType="project.spring.groupware.email.domain.EmailVO">
+	select*from moram_group_email
+	where num = #{num}
+	</select> -->
 
-
+ <update id="delete_change">
+ update moram_group_email set state=0 where num = #{num}
+	 </update>
  
  </mapper>
