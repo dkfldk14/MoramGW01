@@ -84,7 +84,7 @@ li {
                   align="center" /> <class ="img-responsive" /></li>
 
 
-               <li><a href="../"><i class="fa fa-desktop "></i>메인</a></li>
+               <li><a href="/groupware/main1"><i class="fa fa-desktop "></i>메인</a></li>
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">

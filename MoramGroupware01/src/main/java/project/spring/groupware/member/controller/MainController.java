@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import project.spring.groupware.board.service.BoardService;
 import project.spring.groupware.member.domain.LoginVO;
 import project.spring.groupware.member.domain.MemberVO;
 import project.spring.groupware.member.service.MemberService;
@@ -36,6 +37,10 @@ public class MainController {
 	
 	@Autowired
 	private MypageBoardService mypageBoardService;
+	
+	@Autowired
+	BoardService boardservice;
+
 	
 	@RequestMapping(value="main", method=RequestMethod.POST)
 	public String mainConnect(String user, Model model){
@@ -67,6 +72,7 @@ public class MainController {
 		logger.info("이름 불러오기");
 		
 		MemberVO vo = service.selectName(obj.toString());
+		int count = boardservice.infoCount();
 		
 		String name = vo.getName();
 		
@@ -74,6 +80,8 @@ public class MainController {
 		logger.info(name);
 		
 		model.addAttribute("type", vo.getUsertype());
+		
+		model.addAttribute("count", count);
 		
 		return "home";
 	}

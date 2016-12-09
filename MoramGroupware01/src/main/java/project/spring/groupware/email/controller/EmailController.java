@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -129,10 +130,11 @@ public class EmailController {
 			}
 			
 			emaillist.add(vo);
+		
 		}
 		System.out.println("/////////////////////////////");
 		model.addAttribute("email", emaillist);
-	
+		model.addAttribute("messages",messages.length);
 		c.setPage(page);
 		
 		
@@ -141,7 +143,7 @@ public class EmailController {
 		maker.setTotalCount(messages.length);
 		maker.setPageDate();
 		model.addAttribute("pageMaker", maker);
-		
+			
 		
 		System.out.println(page + " + " + maker.getTotalCount() + " + " + emaillist.size());
 		
@@ -166,21 +168,29 @@ public class EmailController {
 }
 
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public void emailview(int num, Model model, EmailVO vo) {
+	public void emailview(int num, int page, Model model, EmailVO vo) {
 		logger.info("detail jsp 실행 ");
 		// model.addAttribute("email", vo);
 		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
 		/*EmailVO vo = emaillist.get(num - 1);
 		logger.info("detail에 있는 vo 값 : " + vo.getContent());
 		logger.info("num:" + vo.getNum());*/
-		vo = emailServiceDAO.detailEmail(num);	
+		logger.info("num : "+num);
+		logger.info("page : "+page);
+		int emailNum=num-(page-1) * 10;
+		EmailVO vo1=emaillist.get(emailNum-1);
+		model.addAttribute("emaildetail", vo1);
+		vo = emailServiceDAO.detailEmail(emailNum);	
 		logger.info("detail subject : " + vo.getSubject());
-		model.addAttribute("emaildetail", vo);
+		//model.addAttribute("emaildetail", vo);
 	}
+	
+
+	
 	
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
-	public void emailwrite(Model model,HttpServletRequest request){
+	public void emailwrite(Model model,HttpServletRequest request,@ModelAttribute("to_email")String to_email){
 		HttpSession session = request.getSession();
 		String userid = (String) session.getAttribute("login_id");
 		MemberVO vo = emailServiceDAO.member_one(userid);
@@ -439,9 +449,13 @@ public class EmailController {
 	}
 
 	@RequestMapping(value="/send-mailbox", method=RequestMethod.GET)
-	public void send_mailbox(Integer page,Model model){
+	public void send_mailbox(Integer page,Model model, HttpServletRequest request){
 		//todo- session 아이디 가져와서 하기 
 		
+		HttpSession session=request.getSession();
+		String userid=(String) session.getAttribute("login_id");
+		MemberVO mvo=emailServiceDAO.member_one(userid);
+		logger.info("이메일:"+mvo.getGroupemail());
 		
 		/*String gwMail="dkfldk14@moram.com";*/
 		logger.info("listpage (): page="+page);
@@ -452,7 +466,7 @@ public class EmailController {
 			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌. 
 		   }
 		
-		List<EmailVO> vo=emailServiceDAO.adressList(1, c);
+		List<EmailVO> vo=emailServiceDAO.send_emailList(mvo.getGroupemail());
 		model.addAttribute("email", vo);
 	 	
 	   	//페이지메이커 
@@ -460,12 +474,12 @@ public class EmailController {
 	   	//▼ 몇번째 페이지를 보여줄것인지 조건
 	   	maker.setCriteria(c);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
-	   	maker.setTotalCount(emailServiceDAO.totalEmailct("1", gwEmail));
+	   	maker.setTotalCount(emailServiceDAO.totalEmailct("1", mvo.getGroupemail()));
 	   	//▼ pageMaker 의 함수를 호출
 	   	maker.setPageDate();
 	   	//모델객체에 pageMaker 넘겨줌. 
 	   	model.addAttribute("pageMaker", maker);
-  
+	   	model.addAttribute("Gemail", mvo.getGroupemail());
 	
 	
 	}
@@ -473,9 +487,12 @@ public class EmailController {
 	
 	
 	@RequestMapping(value="/delete-mailbox",method=RequestMethod.GET)
-	public void delete_mailbox(Integer page,Model model){
+	public void delete_mailbox(Integer page,Model model, HttpServletRequest request){
 		//todo- session 아이디 가져와서 하기 
 		
+		HttpSession session=request.getSession();
+		String userid=(String) session.getAttribute("login_id");
+		MemberVO mvo=emailServiceDAO.member_one(userid);
 		
 		//String gwMail="dkfldk14@moram.com";
 		logger.info("listpage (): page="+page);
@@ -486,7 +503,7 @@ public class EmailController {
 			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌. 
 		   }
 		
-		List<EmailVO> vo=emailServiceDAO.adressList(2, c);
+		List<EmailVO> vo=emailServiceDAO.delete_emailList(mvo.getGroupemail());
 		model.addAttribute("email", vo);
 	 	
 	   	//페이지메이커 

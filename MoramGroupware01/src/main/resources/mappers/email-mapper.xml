@@ -19,12 +19,12 @@ where id = #{id}
 
 <select id="send_emailList" resultType="project.spring.groupware.email.domain.EmailVO">
 select * from moram_group_email
-where from_email = #{groupemail} and state = 1 order by num desc
+where from_email = #{groupemail} and state = 1 order by senddate desc
  </select>
  
 <select id="delete_emailList" resultType="project.spring.groupware.email.domain.EmailVO">
 select * from moram_group_email
-where from_email = #{groupemail} and state = 2
+where from_email = #{groupemail} and state = 2 order by senddate desc
  </select>
  
  <select id="adressList" resultType="project.spring.groupware.email.domain.EmailVO">
@@ -47,6 +47,6 @@ where from_email = #{groupemail} and state = 2
  where num = #{num} and state = 1
  </select>
 
- 
+
  
  </mapper>

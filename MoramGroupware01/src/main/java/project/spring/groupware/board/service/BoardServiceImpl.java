@@ -101,4 +101,10 @@ public class BoardServiceImpl implements BoardService {
 		
 		return dao.listPageName(c);
 	}
+	
+	@Override
+	public int infoCount() {
+		// TODO Auto-generated method stub
+		return dao.infoCount();
+	}
 }
