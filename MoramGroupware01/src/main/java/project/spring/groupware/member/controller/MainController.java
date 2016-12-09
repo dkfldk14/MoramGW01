@@ -101,10 +101,7 @@ public class MainController {
 		model.addAttribute("profileimage", profileimage);
 		
 		model.addAttribute("count", count);
-		
-		String profileimage=vo.getProfileimage();
-		model.addAttribute("profileimage", profileimage);
-		
+	
 		return "home";
 	}
 	

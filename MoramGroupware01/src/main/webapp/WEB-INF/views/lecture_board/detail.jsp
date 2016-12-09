@@ -66,13 +66,8 @@ tr {
 </head>
 <body>
 
-	<%
-		String type = String.valueOf(session.getAttribute("usertype"));
-	%>
-	<%
-		String dept = String.valueOf(session.getAttribute("dept"));
-	%>
-	
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
 	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
 
 	<!-- 위의 탭 버튼들을 나타냄 -->
@@ -321,8 +316,8 @@ tr {
 										});
 								///////////////팀 별 게시판 권한 부여 ////////////////////
 								var dept = <%=dept%>;
-								var profileimage = '<%=profileimage%>';
-								alert('profileimage : ' + profileimage);
+								
+								//alert('profileimage : ' + profileimage);
 								if(dept != 1 && dept != 5){
 									$('#authorization1').click(function(){
 										alert('당신은 1조가 아닙니다');
