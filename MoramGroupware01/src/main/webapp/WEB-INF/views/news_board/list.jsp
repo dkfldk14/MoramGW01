@@ -51,7 +51,7 @@ li {
 </style>
 </head>
 <body>
-
+<% String type = String.valueOf(session.getAttribute("usertype")); %>
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
       <div class="navbar navbar-inverse navbar-fixed-top">
@@ -81,7 +81,7 @@ li {
             <ul class="nav" id="main-menu">
                <li class="text-center user-image-back"><img
                   src="<c:url value="../resources/assets/img/find_user.png"/>"
-                  align="center" /> <class ="img-responsive" /></li>
+                  align="center" id="profileimage" width="128px" height="128px" /> <class ="img-responsive" /></li>
 
 
                <li><a href="../"><i class="fa fa-desktop "></i>메인</a></li>
@@ -321,7 +321,10 @@ li {
 	});
 
 	
-	
+	var profileimage= '${profileimage}';
+	if(profileimage !=null && profileimage!=''){
+		$("#profileimage").attr('src', profileimage);
+	}
 	</script>
 	
 	
