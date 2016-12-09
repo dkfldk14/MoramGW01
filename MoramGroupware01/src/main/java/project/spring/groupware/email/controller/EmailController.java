@@ -93,7 +93,7 @@ public class EmailController {
 		// create the folder object and open it
 		Folder emailFolder = store.getFolder("INBOX");
 		emailFolder.open(Folder.READ_ONLY);
-
+		
 		logger.info("count : "+emailFolder.getMessageCount());
 		
 		Message[] messages=emailFolder.getMessages();
@@ -173,6 +173,12 @@ public class EmailController {
 		*/
 		System.out.println("/////////////////////////////");
 		model.addAttribute("email", emaillist);
+		if(messages.length==0){
+			model.addAttribute("messages",0);
+//			
+		}
+		
+		
 		model.addAttribute("messages",messages.length);
 //		c.setPage(page);
 		
@@ -229,9 +235,12 @@ public class EmailController {
 		//model.addAttribute("emaildetail", vo);
 	}
 	
-	@RequestMapping(value = "/detail", method = RequestMethod.POST)
+	@RequestMapping(value = "/detail-receive", method = RequestMethod.GET)
 	public void detail(int num, int page, Model model, EmailVO vo) {
 		logger.info("detail jsp 실행 ");
+			EmailVO volist=emaillist.get(num-2);
+			model.addAttribute("emaildetail", volist);
+			
 /*		// model.addAttribute("email", vo);
 		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
 		EmailVO vo = emaillist.get(num - 1);
@@ -365,15 +374,17 @@ public class EmailController {
 					System.out.println("Subject: " + message1.getSubject());
 					EmailVO vo=new EmailVO();
 					vo.setNum(message1.getMessageNumber());
-					vo.setFrom_email(message1.getFrom().toString());
+					vo.setFrom_email(message1.getFrom()[i].toString());
+					
 					vo.setSubject(message1.getSubject());
 					Date date=message1.getSentDate();
 					SimpleDateFormat df=new SimpleDateFormat("yy/MM/dd hh:mm");
 					vo.setSenddate(df.format(date).toString());
 					vo.setContent(message1.getContent().toString());
 					vo.setState(2);
-					vo.setTo_email("sera@joycool.com");
+					vo.setTo_email(gwEmail);
 					emailServiceDAO.insert(vo);
+				/*	emailServiceDAO.delete_emailList(gwMail);*/
 						// set the DELETE flag to true
 					message1.setFlag(Flags.Flag.DELETED, true);
 					logger.info("끝!");

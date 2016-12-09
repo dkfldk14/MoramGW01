@@ -333,8 +333,8 @@ div.center {text-align: center;}
 									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${messages}</span>
 									<span> ／ </span> 
 									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${messages}</span>
-									
-									
+			
+									<a href="list?page=1"><img src="df"></a>
 								</div>
 							</div>
 
@@ -376,7 +376,7 @@ div.center {text-align: center;}
 										<td style="width: 300px"><a
 											href="write?to_email=${email.from_email}">${email.from_email }</td>
 										<td style="width: 1000px"><a
-											href="detail?num=${email.num }&page=${pageMaker.criteria.page}">${email.subject }</a></td>
+											href="detail-receive?num=${email.num }&page=${pageMaker.criteria.page}">${email.subject }</a></td>
 
 
 									</tr>

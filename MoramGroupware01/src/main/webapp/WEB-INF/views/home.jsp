@@ -40,6 +40,12 @@ margin: 10px;
 	border: 1px solid #ffd777;
 	color: #ffffff;
 }
+#profileimage{
+border-radius: 70px;
+-moz-border-radius: 7px;
+-khtml-border-radius: 7px;
+-webkit-border-radius: 7px;
+}
 </style>
 	
 
@@ -90,7 +96,8 @@ margin: 10px;
 					
 					<li class="text-center user-image-back"><img
 						src="<c:url value="resources/assets/img/find_user.png"/>"
-						align="center" id="profileimage" width="128px" height="128px"/> <class ="img-responsive" /></li>
+						align="center" id="profileimage" width="128px" height="128px"/> 
+						<span>Moram 소속 1팀 </span><class ="img-responsive" /></li>
 
 
 					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
