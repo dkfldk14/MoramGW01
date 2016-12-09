@@ -52,9 +52,7 @@ public class MemberDAOImple implements MemberDAO {
 
 	@Override
 	public MemberVO selectName(String userid) {
-		// TODO Auto-generated method stub
-		
-		
+
 		MemberVO vo = sqlsession.selectOne(NAMESPACE+".name_select", userid);
 		logger.info("찍혔나"+vo.getUsertype());
 		return vo;

@@ -206,18 +206,10 @@ border-right: 1px solid white;
 		<tr>
 			<th>
 				<!-- title -->
-				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
+				<input style="height: 25px;" type="text" value="[성준] ${boardVO.title }" name="title" readonly/>
 			</th>	
 		</tr>
-		
-<<<<<<< HEAD
-		<button type="button" id="btnList">Go to List</button>
-		<c:if test="${boardVO.userid eq id }">
-		<button type="submit" id="updatebutton">Update</button>
-		</c:if> 
-		<input type="hidden" name="page" value="${page }" />
-			
-=======
+
 		<tr>
 			<td>
 				<!-- Writer -->
@@ -236,7 +228,9 @@ border-right: 1px solid white;
 		<tr>
 			<td style="height: 50px;">
 				<button type="button" id="btnList">Go to List</button>
+				<c:if test="${boardVO.userid eq id }">
 				<button type="submit" id="updatebutton">Update</button>
+				</c:if> 
 				<input type="hidden" name="page" value="${page }" />
 			</td>
 		</tr>
@@ -246,8 +240,6 @@ border-right: 1px solid white;
 		</tr>
 	</tbody>
 	</table>
-	
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 	</form>
 	<!-- ---------------------------- -->
 	
@@ -369,6 +361,9 @@ border-right: 1px solid white;
 							
 							}
 					});
+					
+					var a =  "asdfggh";
+					
 				
 					$('#replies').html(list);
 				});			

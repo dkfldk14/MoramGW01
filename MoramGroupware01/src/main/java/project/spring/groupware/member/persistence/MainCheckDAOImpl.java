@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.member.domain.MainCheckVO;
 
 @Repository
@@ -60,6 +61,16 @@ public class MainCheckDAOImpl implements MainCheckDAO {
 	@Override
 	public List<MainCheckVO> selectlistpage() {
 		return sqlSession.selectList(NAMESPACE+".selectlistpage");
+	}
+
+	@Override
+	public List<BoardVO> selectITnews() {
+		return sqlSession.selectList(NAMESPACE+".selectITnews");
+	}
+
+	@Override
+	public List<BoardVO> selectnotice() {
+		return sqlSession.selectList(NAMESPACE+".selectInfo");
 	}
 
 

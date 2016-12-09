@@ -26,7 +26,7 @@ display: inline-block;
 }
 
 th{
-	width: 200px;
+	width: 100px;
 }
 
 tbody tr td input, tbody tr th input{
@@ -50,6 +50,10 @@ tr{
 border:1px solid #ddd; 
 border-left: 1px solid white;
 border-right: 1px solid white;
+}
+iframe{
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 </style>
@@ -198,7 +202,7 @@ border-right: 1px solid white;
 		<tr>
 			<th>Content</th>
 			<td>
-				<textarea name="content" id="editor" rows="10" cols="100" style="width:800px; margin-bottom: 50px; margin-top: 50px;" required>${boardVO.content }</textarea>
+				<textarea name="content" id="editor" style="width:750px; height:450px; margin-bottom: 50px; margin-top: 50px;" required>${boardVO.content }</textarea>
 			</td>	
 		</tr>
 		<tr>

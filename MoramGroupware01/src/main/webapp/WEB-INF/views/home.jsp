@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,28 +24,7 @@
 	<!-- 날씨 css -->
 <link href="<c:url value="/resources/assets/css/weather.css"/>"
 	rel="stylesheet" />
-	
-<<<<<<< HEAD
-	<style>
-#logoutButton{
-background-color: #ffd777;
-border: 1px solid #3fc3c4;
-color: #3f3f3f;
-font-size: 110%;
-padding: 7px;
-margin: 10px;
-}
 
-#logoutButton:hover {
-	background-color: #3fc3c4;
-	border: 1px solid #ffd777;
-	color: #ffffff;
-}
-	</style>
-	
-	
-=======
-	
 <style>
 #logoutButton{
 background-color: #ffd777;
@@ -60,11 +40,9 @@ margin: 10px;
 	border: 1px solid #ffd777;
 	color: #ffffff;
 }
+</style>
+	
 
-
-
-</style>	
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 </head>
 <body>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
@@ -105,10 +83,10 @@ margin: 10px;
 							<button id="show"><img style="margin-left: 260px;" width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
 						</div>
 					</li>
-				
+					
 					<li class="text-center user-image-back"><img
 						src="<c:url value="resources/assets/img/find_user.png"/>"
-						align="center" /> <class ="img-responsive" /></li>
+						align="center" id="profileimage" width="128px" height="128px"/> <class ="img-responsive" /></li>
 
 
 					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
@@ -202,7 +180,7 @@ margin: 10px;
 				<div class="row">
 					<div class="col-md-12">
 						      <h2>${name}님,<%-- <%=type %> --%></h2>   
-                        <h5> ♡★시공의 폭풍★시공의 폭풍으로 당신을 초대합니다!♠하스스톤 뒷면♠&☞레전더리 高級레스토랑☜의 음식 지급! 지금 이 기회를 놓지지 마세요!☞ ☎ h t t p://k r. b a t t l e . n e t /h e r e s/☎ ♡ </h5>
+                        <h5> ＜바꿔달라는 요청이 있어서 바꿉니다 ㅠ＞ </h5>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -343,83 +321,32 @@ margin: 10px;
 				<!-- 게시판 -->
 				<div class="row">
 					<div class="col-md-6">
-						<h5>Table Sample One</h5>
+						<h5>IT NEWS</h5>
 						<table class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Username</th>
+									<th>TITLE</th>
+									<th>DATE</th>
+	
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>@fat</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Larry</td>
-									<td>the Bird</td>
-									<td>@twitter</td>
-								</tr>
-							</tbody>
+							<tbody id = "ittablebody"></tbody>
 						</table>
 
 					</div>
 					<div class="col-md-6">
-						<h5>Table Sample Two</h5>
-						<div class="table-responsive">
-							<table class="table">
+						<h5>NOTICE</h5>
+						<div>
+							<table class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>First Name</th>
-										<th>Last Name</th>
-										<th>Username</th>
+										<th>TITLE</th>
+										<th>DATE</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr class="success">
-										<td>1</td>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-									</tr>
-									<tr class="info">
-										<td>2</td>
-										<td>Jacob</td>
-										<td>Thornton</td>
-										<td>@fat</td>
-									</tr>
-									<tr class="warning">
-										<td>3</td>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-									</tr>
-									<tr class="danger">
-										<td>4</td>
-										<td>John</td>
-										<td>Smith</td>
-										<td>@jsmith</td>
-									</tr>
-								</tbody>
+								<tbody id = "noticebody"></tbody>	
 							</table>
 						</div>
 					</div>
@@ -550,6 +477,12 @@ margin: 10px;
 		tabSetting();
 	/* }); */
 	
+	
+	var profileimage= '${profileimage}';
+	if(profileimage !=null && profileimage!=''){
+		$("#profileimage").attr('src', profileimage);
+	}
+	/* alert(profileimage); */
 	</script>
 
 

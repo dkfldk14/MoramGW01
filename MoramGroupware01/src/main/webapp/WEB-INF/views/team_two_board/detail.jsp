@@ -37,7 +37,6 @@
 	width:300px; height:100px;
 	backgroud-color:lightgray;
 	position:absolute;
-	top:30%; left:30%;
 	display:none;
 }
 .div1{
@@ -61,6 +60,26 @@ border-right: 1px solid white;
 }
 
 
+ul{
+	list-style:none;
+}
+ul.mylist li {
+	margin-left:-40px;
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 12px;
+}
+.regdate{
+	text-align: right;
+}
+
+#updateReply{
+	
+}
+#modify input {
+	margin: 2px;
+}
 
 </style>
 <title>Insert title here</title>
@@ -210,15 +229,7 @@ border-right: 1px solid white;
 				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
 			</th>	
 		</tr>
-		
-<<<<<<< HEAD
-		<button type="button" id="btnList">Go to List</button>
-			<c:if test="${boardVO.userid eq id }">
-		<button type="submit" id="updatebutton">Update</button>
-		</c:if> 
-		<input type="hidden" name="page" value="${page }" />
-			
-=======
+	
 		<tr>
 			<td>
 				<!-- Writer -->
@@ -236,9 +247,11 @@ border-right: 1px solid white;
 
 		<tr>
 			<td style="height: 50px;">
-				<button type="button" id="btnList">Go to List</button>
-				<button type="submit" id="updatebutton">Update</button>
-				<input type="hidden" name="page" value="${page }" />
+		<button type="button" id="btnList">Go to List</button>
+			<c:if test="${boardVO.userid eq id }">
+		<button type="submit" id="updatebutton">Update</button>
+		</c:if> 
+		<input type="hidden" name="page" value="${page }" />
 			</td>
 		</tr>
 		
@@ -248,7 +261,6 @@ border-right: 1px solid white;
 	</tbody>
 	</table>
 	
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 	</form>
 	<!-- ---------------------------- -->
 	
@@ -264,7 +276,7 @@ border-right: 1px solid white;
 	<br/>
 	
 	<div>
-		<ul id="replies"></ul>
+		<ul class="mylist" id="replies"></ul>
 	</div>
 	<br/>
 	
@@ -314,6 +326,13 @@ border-right: 1px solid white;
 			
 			getAllReplies();
 			
+			
+			/* var update = $("#updateReply");
+            
+			var divX = update.offset().right;
+			var divY = update.offset().top; */
+
+			
 			function getAllReplies(){
 				//$.getJSON(url, data, callback):HTTP GET 요청을 사용해서 JSON 데이터를 로드하는 Ajax 함수
 				//url(필수 파라미터):요청을 보내는 주소
@@ -349,7 +368,7 @@ border-right: 1px solid white;
 							+'<span class="regdate">'
 							+dateString+' '
 							+'</span>'						
-							+ '<button>수정</button>'						
+							+ '<button id="updateReply">수정</button>'						
 							+'</li>';
 							
 							}else{
@@ -405,7 +424,20 @@ border-right: 1px solid white;
 			});//end btnCreate		
 			
 			$('#replies').on('click', '.reply_list button', function(){
+				var update = $("#updateReply");
+				
+				
+				var divY = update.offset().top;
+				var divX = update.offset().left;
+/* 				$('#modify').offset({top:divY});
+				$('#modify').offset({right:divX}); */
+				var modify = $("#modify");
+				modify.offset({top:divY});
+				modify.offset({left:divX});
 				$('#modify').show();
+				
+	            
+				
 				
 				var reply=$(this).parent();
 				var rno = $(reply).attr('data-rno');

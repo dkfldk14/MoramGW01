@@ -208,15 +208,6 @@ border-right: 1px solid white;
 				<input style="height: 25px;" type="text" value="[시나] ${boardVO.title }" name="title" readonly/>
 			</th>	
 		</tr>
-		
-<<<<<<< HEAD
-		<button type="button" id="btnList">Go to List</button>
-		<c:if test="${boardVO.userid eq id }">
-		<button type="submit" id="updatebutton">Update</button>
-		</c:if> 
-		<input type="hidden" name="page" value="${page }" />
-			
-=======
 		<tr>
 			<td>
 				<!-- Writer -->
@@ -234,9 +225,11 @@ border-right: 1px solid white;
 
 		<tr>
 			<td style="height: 50px;">
-				<button type="button" id="btnList">Go to List</button>
-				<button type="submit" id="updatebutton">Update</button>
-				<input type="hidden" name="page" value="${page }" />
+		<button type="button" id="btnList">Go to List</button>
+		<c:if test="${boardVO.userid eq id }">
+		<button type="submit" id="updatebutton">Update</button>
+		</c:if> 
+		<input type="hidden" name="page" value="${page }" />
 			</td>
 		</tr>
 		
@@ -246,7 +239,6 @@ border-right: 1px solid white;
 	</tbody>
 	</table>
 	
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 	</form>
 	<!-- ---------------------------- -->
 	
