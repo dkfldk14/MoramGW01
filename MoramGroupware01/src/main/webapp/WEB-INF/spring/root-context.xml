@@ -46,6 +46,7 @@
 		</props>
 	</property>
 </bean>
+	<context:component-scan base-package="project.spring.groupware.draft"></context:component-scan>
 	<context:component-scan base-package="project.spring.groupware.draft.persistence"></context:component-scan>
 	<context:component-scan base-package="project.spring.groupware.mypage.service"></context:component-scan>
 	<context:component-scan base-package="project.spring.groupware.mypage.persistence"></context:component-scan>
