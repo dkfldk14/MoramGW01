@@ -484,7 +484,6 @@ margin: 10px;
 	if(profileimage !=null && profileimage!=''){
 		$("#profileimage").attr('src', profileimage);
 	}
-	/* alert(profileimage); */
 	</script>
 
 
