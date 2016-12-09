@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import project.spring.groupware.member.domain.LoginVO;
 import project.spring.groupware.member.domain.MemberVO;
 import project.spring.groupware.member.service.MemberService;
+import project.spring.groupware.mypage.domain.MyPageBoardVO;
+import project.spring.groupware.mypage.service.MypageBoardService;
 
 @Controller
 public class MainController {
@@ -31,6 +33,9 @@ public class MainController {
 	
 	@Autowired
 	MemberService service;
+	
+	@Autowired
+	private MypageBoardService mypageBoardService;
 	
 	@RequestMapping(value="main", method=RequestMethod.POST)
 	public String mainConnect(String user, Model model){
@@ -145,12 +150,23 @@ public class MainController {
 	}
 	
 	
-	@RequestMapping(value="my_page", method =RequestMethod.GET)
-	public String mypage(/*Integer page, Model model*/) {
-		System.out.println("마잉");
+/*	@RequestMapping(value="my_page", method =RequestMethod.GET)
+	public void mypagelist(HttpServletRequest request, Model model){
 		
-		return "/mypage/my_page";
-	}
+		HttpSession session = request.getSession();
+		String userid = (String)session.getAttribute("login_id");
+		
+		logger.info("mypage userid : " +userid);
+		
+		List<MyPageBoardVO> list = mypageBoardService.mypagelist(userid);
+		for(MyPageBoardVO vo : list){		
+			logger.info("mypage vo userid : " + vo.getUserid());
+		}
+		
+		model.addAttribute("mypage", list);
+		
+		
+	}*/
 	
 
 }
