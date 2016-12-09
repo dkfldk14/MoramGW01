@@ -211,10 +211,10 @@ div.center {text-align: center;}
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li class="childTab"><a href="/groupware/email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/delete-mailbox">휴지통</a></li>
 				</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
@@ -319,18 +319,19 @@ div.center {text-align: center;}
 
 
 									<c:forEach var="email" items="${email}">
-
+										
+										
 										<tr style="height: 30px" id="tr_inner">
 											<td style="width: 50px"><label
 												class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
 													type="checkbox" name="RowCheck"
-													class="mail-group-checkbox row-check-box"
-													value="${email.num }" /><span></span></label></td>
+													class="mail-group-checkbox row-check-box" value="${email.num }" /><span></span></label></td>
 											<td style="width: 150px">${email.senddate }</td>
-											<td style="width: 300px">${email.from_email }</td>
-											<td style="width: 700px"><a
-												href="detail?num=${email.num }">${email.subject }</a></td>
+											<td style="width: 300px">${email.to_email }</td>	
+											<td style="width: 700px">
+											<a	href="${email.num }">${email.subject }</a></td>
 										</tr>
+										
 									</c:forEach>
 
 
@@ -381,10 +382,9 @@ div.center {text-align: center;}
 						</div>
 					</div>
 					<form id="pageForm">
-						<input type="hidden" name="num" /> <input type="hidden"
-							name="page" value="${pageMaker.criteria.page}" /> <input
-							type="hidden" name="perPage"
-							value="${pageMaker.criteria.perPage }" />
+						<input type="hidden" name="num" /> 
+						<input type="hidden" name="page" value="${pageMaker.criteria.page}" /> 
+						<input type="hidden" name="perPage" value="${pageMaker.criteria.perPage }" />
 
 					</form>
 				</div>
@@ -397,6 +397,8 @@ div.center {text-align: center;}
 			<script
 				src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 			<script>
+			
+			console.log("${Gemail}")
 			var admin = <%=type%>
 			function tabSetting() {
 				// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
@@ -427,7 +429,7 @@ div.center {text-align: center;}
 						var bno = $(this).attr('href');
 						//페이지가 바뀌지 않기 때문에 아래랑 조금 다름/ 
 						frm.find('[name="num"]').val(bno);
-						frm.attr('action', 'detail');
+						frm.attr('action', '/groupware/email/detail');
 						frm.attr('method', 'get');
 						frm.submit();
 

@@ -48,4 +48,7 @@ public interface BoardService {
 	//아이디를 이름으로 바꿀때 페이지 
 	public abstract List<BoardAddNameVO> listPageName(PaginationCriteria c);
 	
+	//게시글 카운트
+	public abstract int infoCount();
+	
 }

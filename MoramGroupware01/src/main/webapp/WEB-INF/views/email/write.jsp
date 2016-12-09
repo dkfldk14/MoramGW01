@@ -98,39 +98,46 @@ button {
 }
 
 #send {
-	background-color: #fbffe0;
-	color: black;
-	border: 2px solid #a8bf73;
-	font-size: 12px;
+  background-color: white;
+   color: black;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 #send:hover {
-	background-color: #a8bf73;
-	color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 #preview {
-	background-color: white;
-	color: black;
-	border: 2px solid #00836d;
-	font-size: 12px;
+  background-color: white;
+   color: black;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 #preview:hover {
-	background-color: #00836d;
-	color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 #saveas {
-	background-color: white;
-	color: black;
-	border: 2px solid #00836d;
-	font-size: 12px;
+  background-color: white;
+   color: black;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 #saveas:hover {
-	background-color: #00836d;
-	color: white;
+ background-color: #edf8ff
+;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .emailli {
@@ -382,9 +389,10 @@ th, td {
 								<tr class="trstyle">
 									<th style="width: 80px" align="center">받는사람</th>
 									<td class="tdstyle"><input type="text"
-										style="width: 860px" name="to_email" id="textInput"></input></td>
-									<td><a href="javascript:;" onclick="javascript:showPopup()">주소록</a></td>
-
+										style="width: 860px" name="to_email" id="textInput" value="${to_email }"></input></td>
+									<td><a href="javascript:;" onclick="javascript:showPopup()">주소록</a>
+								</td>
+							
 								</tr>
 								<tr class="trstyle">
 									<th style="width: 80px" align="center">제목</th>
@@ -411,8 +419,9 @@ th, td {
 								<textarea id="editor" rows="10" cols="100"
 									style="width: 1030px; height: 412px;" name="content">
 										</textarea>
-								<input type="hidden" name="from_email" value="${gwemail }">
 								<br />
+								<input type="hidden" name="from_email" value="${gwemail }">
+								
 							</form>
 						</div>
 

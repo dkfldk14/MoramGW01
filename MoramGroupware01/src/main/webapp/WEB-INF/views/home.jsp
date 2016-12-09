@@ -54,7 +54,10 @@ margin: 10px;
 				<div class="adjust-nav">
 					<div class="navbar-header">
 						<span id="moramHeader">Moram</span>
-
+							<button id="hide"><img width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
+							<button id="show"><img style="margin-left: 0px;" width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
+							
+					
 					<button type="button" class="navbar-toggle" data-toggle="collapse"
 						data-target=".sidebar-collapse">
 						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -65,6 +68,7 @@ margin: 10px;
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><button id="logoutButton" onclick="logout();">Logout</button></li>
+					
 					</ul>
 				</div>
 
@@ -79,8 +83,6 @@ margin: 10px;
 					<li>
 						<div>
 							<br/>
-							<button id="hide"><img width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
-							<button id="show"><img style="margin-left: 260px;" width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
 						</div>
 					</li>
 					
@@ -151,7 +153,7 @@ margin: 10px;
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
-							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
@@ -228,7 +230,7 @@ margin: 10px;
 							
 								<div class="text-box3">
 									<img id="main_img" alt="벨" src="resources/assets/img/home_img/bell.png"/>
-									<a class="text-line1">쀼</a>
+									<a class="text-line1">${count }</a>
 								</div>
 							</div>
 						</div>

@@ -63,6 +63,8 @@ public class BoardController {
 		//페이징을 위한 구문
 		PaginationCriteria c = new PaginationCriteria();
 		
+		logger.info("Board parameter page : " + page);
+		
 		if(page != null){
 			c.setPage(page);
 		}

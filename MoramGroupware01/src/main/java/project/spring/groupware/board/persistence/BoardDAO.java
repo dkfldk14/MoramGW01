@@ -42,4 +42,7 @@ public interface BoardDAO {
 	
 	//아이디를 이름으로 바꿔서 보여주는 게시판
 	public abstract List<BoardAddNameVO> listPageName(PaginationCriteria c);
+	
+	//게시글 카운트
+	public abstract int infoCount();
 }
