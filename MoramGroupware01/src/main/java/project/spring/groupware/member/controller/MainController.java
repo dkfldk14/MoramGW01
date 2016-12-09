@@ -54,11 +54,15 @@ public class MainController {
 		logger.info(name);
 		
 		
-		//각 조별 게시판으로 들어가도록 usertype을 받아옴
+		//각 조별 게시판으로 들어가도록 dept을 받아옴
+		String dept = vo.getDept();
+		model.addAttribute("dept", dept);
+		
 		String usertype = vo.getUsertype();
 		logger.info("MainController usertype : " + usertype);
 		model.addAttribute("type", usertype);
 		
+		//프로필 이미지 가지고 오기
 		String profileimage=vo.getProfileimage();
 		model.addAttribute("profileimage", profileimage);
 		return "home";
@@ -82,11 +86,19 @@ public class MainController {
 		
 		model.addAttribute("name", name);
 		logger.info(name);
+				
+		//각 조별 게시판으로 들어가도록 dept을 받아옴
+		String dept = vo.getDept();
+		model.addAttribute("dept", dept);
+		logger.info("dept : " + dept);
 		
-		//각 조별 게시판으로 들어가도록 usertype을 받아옴
 		String usertype = vo.getUsertype();
 		logger.info("MainController 1 usertype : " + usertype);
 		model.addAttribute("type", usertype);
+		
+		//프로필 이미지 가지고 오기
+		String profileimage=vo.getProfileimage();
+		model.addAttribute("profileimage", profileimage);
 		
 		model.addAttribute("count", count);
 		

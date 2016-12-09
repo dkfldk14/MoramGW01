@@ -43,9 +43,11 @@ margin: 10px;
 </style>
 	
 
-</head>
+</head>  
 <body>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
+<% String dept = String.valueOf(session.getAttribute("dept"));%>
+
 	<%-- <% String id = String.valueOf(session.getAttribute("login_id")); %> --%>
 	<div id="login_id" data-id=${id } style="display: hidden;"></div>
 
@@ -409,6 +411,7 @@ margin: 10px;
 	<script type="text/javascript">
 	
 	var admin = <%=type%>
+	var dept = <%=dept%>
 	function tabSetting() {
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 		/* $('.test').hide();
@@ -416,11 +419,7 @@ margin: 10px;
  		
 		console.log("값:"+admin);
 		if(admin != 1){
-			$('#admin').hide();	
-			$('#authorization1').click(function(){
-				alert('당신은 1조가 아닙니다.');
-				return false;
-			})
+			$('#admin').hide();			
 		}
 				
 		if(admin==0){
@@ -430,14 +429,24 @@ margin: 10px;
 			})
 		}
 		
-		if(admin != 2){
+		//팀별 게시판에 각 팀원 들이 들어가게끔 수정해야한다.
+		//오쌤은 dept 값이 5번이므로 모든 팀프로젝트 게시판에 들어가야한다.
+		
+		if(dept != 1 && dept != 5){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다.');
+				return false;
+			})
+		}
+		
+		if(dept != 2 && dept != 5){
 			$('#authorization2').click(function() {
 				alert('당신은 2조가 아닙니다.');
 				return false;
 			})
 		}
 		
-		if(admin != 3){
+		if(dept != 3 && dept != 5){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다.');
 				return false;

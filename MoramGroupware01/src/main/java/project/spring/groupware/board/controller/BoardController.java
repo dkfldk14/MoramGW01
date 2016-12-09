@@ -30,6 +30,7 @@ import project.spring.groupware.board.searchutil.SearchCriteria;
 import project.spring.groupware.board.service.BoardService;
 import project.spring.groupware.board.service.ReplyService;
 import project.spring.groupware.member.domain.MemberVO;
+import project.spring.groupware.member.service.MemberService;
 
 
 
@@ -174,23 +175,18 @@ public class BoardController {
 		String id = (String)session.getAttribute("login_id");
 		model.addAttribute("id", id);
 		//System.out.println("id : " + id);
-		
-		/*//reply id 값을 모델에 저장
-		List<ReplyAddNameVO> replyNameList = replyService.selectName(replyvo);
-		
-		//String reply id
-		String replierName = null;
-		for(ReplyAddNameVO vo2 : replyNameList){
-			replierName = vo2.getRname();
-		}
-		model.addAttribute("replyName", replierName );*/
-		
+				
 		//조회수 증가
 		boardService.viewcnt(bno);
 		
 		BoardVO vo = boardService.read(bno);
 		
 		model.addAttribute("boardVO", vo);
+		
+		//각 조별 게시판으로 들어가도록 dept을 받아옴
+		/*MemberVO membervo = memberService.selectName(id);
+		String dept = membervo.getDept();
+		model.addAttribute("dept", dept);*/
 				
 	}
 	
