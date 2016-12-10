@@ -100,8 +100,8 @@ border-radius: 70px;
 						<span>Moram 소속 1팀 </span><class ="img-responsive" /></li>
 
 
-					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
-					<li><a href=""><i class="fa fa-edit "></i>결재<span class="fa arrow"></span></a>
+					<li id="test" class="current"><a href="/groupware/main1"><img alt="" src="resources/assets/img/main.png"/> MAIN PAGE</a></li>
+					<li><a href=""><img alt="" src="resources/assets/img/approval.png"/> 결재<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함page</a></li>
 							<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
@@ -109,7 +109,7 @@ border-radius: 70px;
 							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 						</ul></li>
 
-					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
+					<li><a href="#"><img alt="" src="resources/assets/img/email.png"/> 전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
@@ -132,7 +132,7 @@ border-radius: 70px;
 						</ul></li>
 
 
-					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
+					<li><a href="#"><img alt="" src="resources/assets/img/teamproject.png"/> Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							
@@ -158,14 +158,14 @@ border-radius: 70px;
 
                             </li> -->
 						</ul></li>
-					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
+					<li><a href="#"><img alt="" src="resources/assets/img/mypage.png"/> 마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
 							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
-					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
+					<li id="admin"><a href="#"><img alt="" src="resources/assets/img/manager.png"/> 관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>

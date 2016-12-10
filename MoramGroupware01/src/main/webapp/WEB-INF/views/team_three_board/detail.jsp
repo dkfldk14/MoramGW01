@@ -61,6 +61,26 @@ border-right: 1px solid white;
 }
 
 
+ul{
+	list-style:none;
+}
+ul.mylist li {
+	margin-left:-40px;
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 12px;
+}
+.regdate{
+	text-align: right;
+}
+
+#updateReply{
+	
+}
+#modify input {
+	margin: 2px;
+}
 </style>
 <title>Insert title here</title>
 </head>
@@ -259,7 +279,7 @@ border-right: 1px solid white;
 	<br/>
 	
 	<div>
-		<ul id="replies"></ul>
+		<ul class="mylist" id="replies"></ul>
 	</div>
 	<br/>
 	
