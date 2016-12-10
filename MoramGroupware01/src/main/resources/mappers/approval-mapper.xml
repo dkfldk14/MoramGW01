@@ -9,6 +9,10 @@
 	select * from moram_member
 	where id = #{id}
 </select>  
+<select id="selectAll" resultType = "project.spring.groupware.member.domain.MemberVO">
+	select * from moram_member
+	where usertype = 2 or usertype = 3
+</select>
 
 <select id="selectID" resultType="project.spring.groupware.draft.domain.ApprovalVO">
 	select * from moram_approval_drafter
@@ -60,17 +64,17 @@
 
 <insert id="insertReturn">
 	insert into moram_approval_return(id, name, dept, approvalno, title, approvalname, progress, content, final_id1, final_id2, final_id3, final_id4, final_id5, finalize, draft_index, usedatestart, usedateend, final_id)
-	values (#{id}, #{name}, #{dept}, #{approvalno}, #{title}, #{approvalname}, #{progress}, #{content}, #{final_id1}, #{final_id2}, #{final_id3}, #{final_id4}, #{final_id5}, #{finalize}, #{draft_index}, #{usedatestart}, #{usedateend}, #{id})
+	values (#{id}, #{name}, #{dept}, #{approvalno}, #{title}, #{approvalname}, #{progress}, #{content}, #{final_id1}, #{final_id2}, #{final_id3}, #{final_id4}, #{final_id5}, #{finalize}, #{draft_index}, #{usedatestart}, #{usedateend}, #{final_id})
 </insert>
 
 <insert id = "insertFinishReturn">
 	insert into moram_approval_finish(id, name, dept, approvalno, title, approvalname, progress, content, final_id1, final_id2, final_id3, final_id4, final_id5, finalize, draft_index, returndate, usedatestart, usedateend, final_id)
-	values (#{id}, #{name}, #{dept}, #{approvalno}, #{title}, #{approvalname}, #{progress}, #{content}, #{final_id1}, #{final_id2}, #{final_id3}, #{final_id4}, #{final_id5}, #{finalize}, #{draft_index}, sysdate, #{usedatestart}, #{usedateend}, #{id})
+	values (#{id}, #{name}, #{dept}, #{approvalno}, #{title}, #{approvalname}, #{progress}, #{content}, #{final_id1}, #{final_id2}, #{final_id3}, #{final_id4}, #{final_id5}, #{finalize}, #{draft_index}, sysdate, #{usedatestart}, #{usedateend}, #{final_id})
 </insert>
 
 <insert id = "insertFinish">
 	insert into moram_approval_finish(id, name, dept, approvalno, title, approvalname, progress, content, final_id1, final_id2, final_id3, final_id4, final_id5, finalize, draft_index, enddate, usedatestart, usedateend, final_id)
-	values (#{id}, #{name}, #{dept}, #{approvalno}, #{title}, #{approvalname}, #{progress}, #{content}, #{final_id1}, #{final_id2}, #{final_id3}, #{final_id4}, #{final_id5}, #{finalize}, #{draft_index}, sysdate, #{usedatestart}, #{usedateend}, #{id})
+	values (#{id}, #{name}, #{dept}, #{approvalno}, #{title}, #{approvalname}, #{progress}, #{content}, #{final_id1}, #{final_id2}, #{final_id3}, #{final_id4}, #{final_id5}, #{finalize}, #{draft_index}, sysdate, #{usedatestart}, #{usedateend}, #{final_id})
 </insert>
 
 <insert id = "insertOrder">
@@ -196,22 +200,49 @@
 	order by a.draft_index
 	</select>
 	
-	<select id="selectForFinalid" resultType="project.spring.groupware.draft.domain.DrafterDTO"> <!-- 미결함 리스트 -->
+	<select id="selectForFinalize" resultType="project.spring.groupware.draft.domain.DrafterDTO"> <!-- 미결함 리스트 -->
 	select a.draft_index, a.approvalname, a.title, a.draftdate, a.name aname, c.name cname, a.progress from moram_approval_drafter a, moram_approval_order b, moram_member c
 	where a.draft_index = b.draft_index and b.final_id = #{final_id} and b.final_id = c.id
 	order by a.draft_index
 	</select>
 
-	<select id="selectForReturnid" resultType="project.spring.groupware.draft.domain.ReturnDTO"> <!-- 반려함 리스트 -->
-	select a.draft_index, a.approvalname, a.title, a.draftdate, a.name aname, a.progress, a.returndate from moram_approval_return a, moram_member b
-	where a.id = #{id} and a.id = b.id
-	order by a.draft_index
+	<select id="selectForReturn" resultType="project.spring.groupware.draft.domain.ReturnDTO"> <!-- 반려함 리스트 -->
+	select a.draft_index, a.approvalname, a.title, a.draftdate, a.name aname, c.name cname, a.returndate from moram_approval_return a, moram_member c
+	where (a.id = #{id} or a.final_id1 = #{final_id1} or a.final_id2 = #{final_id2} or a.final_id3 = #{final_id3} or a.final_id4 = #{final_id4} or a.final_id5 = #{final_id5}) and a.final_id = c.id
+   	order by a.draft_index
 	</select>
 
-	<select id="selectForFinishid" resultType="project.spring.groupware.draft.domain.DrafterDTO"> <!-- 기결함 리스트 -->
-	select a.draft_index, a.approvalname, a.title, a.draftdate, a.name aname, c.name cname, a.progress from moram_approval_drafter a, moram_approval_order b, moram_member c
-	where a.draft_index = b.draft_index and b.final_id = #{final_id} and b.final_id = c.id
-	order by a.draft_index
+	<select id="selectForFinish" resultType="project.spring.groupware.draft.domain.FinishDTO"> <!-- 기결함 리스트 -->
+	select a.draft_index, a.approvalname, a.title, a.draftdate, a.name aname, c.name cname, a.progress from moram_approval_finish a, moram_member c
+	where (a.id = #{id} or a.final_id1 = #{final_id1} or a.final_id2 = #{final_id2} or a.final_id3 = #{final_id3} or a.final_id4 = #{final_id4} or a.final_id5 = #{final_id5}) and a.final_id = c.id
+  	 order by a.draft_index
 	</select>	
+	
+	<select id="selectForFinalid" resultType="String">
+	select final_id from moram_approval_order
+	where draft_index = #{draft_index}
+	</select>
+	
+	<select id="selectID_final_id1" resultType="String">
+	select id from moram_member
+	where name = #{name}
+	</select>
+	
+		<select id="selectID_final_id2" resultType="String">
+	select id from moram_member
+	where name = #{name}
+	</select>
+		<select id="selectID_final_id3" resultType="String">
+	select id from moram_member
+	where name = #{name} 
+	</select>
+		<select id="selectID_final_id4" resultType="String">
+	select id from moram_member
+	where name = #{name}
+	</select>
+		<select id="selectID_final_id5" resultType="String">
+	select id from moram_member
+	where name = #{name}
+	</select>
 
 </mapper>

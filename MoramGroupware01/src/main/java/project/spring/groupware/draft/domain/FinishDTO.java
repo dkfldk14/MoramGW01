@@ -1,27 +1,26 @@
 package project.spring.groupware.draft.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
-public class ReturnDTO {
+public class FinishDTO {
 	private String draft_index;
 	private String approvalname;
 	private String title;
 	private Date draftdate;
 	private String aname;
 	private String cname;
-	private String returndate;
-	
-	public ReturnDTO() {}
-	public ReturnDTO(String draft_index, String approvalname, String title, Date draftdate, String aname, String cname,
-			String returndate) {
-		super();
+	private String progress;
+	public FinishDTO() {
+	}
+	public FinishDTO(String draft_index, String approvalname, String title, Date draftdate, String aname, String cname,
+			String progress) {
 		this.draft_index = draft_index;
 		this.approvalname = approvalname;
 		this.title = title;
 		this.draftdate = draftdate;
 		this.aname = aname;
 		this.cname = cname;
-		this.returndate = returndate;
+		this.progress = progress;
 	}
 	public String getDraft_index() {
 		return draft_index;
@@ -59,13 +58,12 @@ public class ReturnDTO {
 	public void setCname(String cname) {
 		this.cname = cname;
 	}
-	public String getReturndate() {
-		return returndate;
+	public String getProgress() {
+		return progress;
 	}
-	public void setReturndate(String returndate) {
-		this.returndate = returndate;
+	public void setProgress(String progress) {
+		this.progress = progress;
 	}
-	
-	
+
 	
 }

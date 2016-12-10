@@ -81,7 +81,7 @@ margin: 10px;
 					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
 					<li><a href=""><i class="fa fa-edit "></i>결재<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함page</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
 							<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
 							<li id="test" class="childTab"><a href="/groupware/draft/approval-return">반려함</a></li>
 							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>

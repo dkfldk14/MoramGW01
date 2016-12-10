@@ -4,8 +4,10 @@ import java.util.List;
 
 import project.spring.groupware.draft.domain.ApprovalVO;
 import project.spring.groupware.draft.domain.DrafterDTO;
+import project.spring.groupware.draft.domain.FinishDTO;
 import project.spring.groupware.draft.domain.ReturnDTO;
 import project.spring.groupware.draft.pageutil.PaginationCriteria;
+import project.spring.groupware.member.domain.MemberVO;
 
 
 public interface approvalDAO {
@@ -37,10 +39,19 @@ public interface approvalDAO {
 	public abstract String selectName3Finalize(String draft_index);
 	public abstract String selectName4Finalize(String draft_index);
 	public abstract String selectName5Finalize(String draft_index);
-	
+	public abstract String selectFinalid(String draft_index);
+	public abstract String selectFinal_id1(String name);
+	public abstract String selectFinal_id2(String name);
+	public abstract String selectFinal_id3(String name);
+	public abstract String selectFinal_id4(String name);
+	public abstract String selectFinal_id5(String name);
+		
 	public abstract List<DrafterDTO> selectForDrafterId(String id);
 	public abstract List<DrafterDTO> selectForFinalizerId(String id);
 	public abstract List<ReturnDTO> selectForReturnId(String id);
+	public abstract List<FinishDTO> selectForFinishId(String id);
+	public abstract List<MemberVO> selectForPopup();
+	
 	// 페이징 처리
 	public abstract int getNumOfRecords();
 	public abstract List<ApprovalVO> select(String id, PaginationCriteria c);
