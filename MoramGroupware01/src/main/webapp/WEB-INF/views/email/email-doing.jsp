@@ -157,7 +157,7 @@
 					메세지 전송이 완료되었습니다.</div>
 				<div
 					style="border: 1px dashed white; background-color: white; width: 340px; height: 285px; margin-left: auto; margin-right: auto; padding: 0px; text-align: center; line-height: 1px;">
-					<a href="list">받은편지함</a> <a href="write">편지쓰기</a>
+					<a href="list?page=1">받은편지함</a> <a href="write">편지쓰기</a>
 					<div></div>
 				</div>
 			</div>

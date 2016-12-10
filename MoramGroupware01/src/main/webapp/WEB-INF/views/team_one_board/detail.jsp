@@ -44,11 +44,30 @@
 display: inline-block;
 
 }
+tbody tr td input, tbody tr th input{
+	width: 400px;
+	border:none;
+	border-right:0px; 
+	border-top:0px; 
+	boder-left:0px; 
+	boder-bottom:0px;
+}
+
+tr{
+border:1px solid #ddd; 
+border-left: 1px solid white;
+border-right: 1px solid white;
+}
+
 
 </style>
 <title>Insert title here</title>
 </head>
 <body>
+
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
 
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
@@ -117,9 +136,9 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
-                     <li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
-                     <li><a href="/../groupware/team_three_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="/../groupware/team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -172,36 +191,68 @@ display: inline-block;
 	<div id="page-inner">
 	<h1>detail</h1>
 	
+		
+	<!-- 수정 -->
 	<form action = "update" id="frm">
-		number of content<br/>
-		<input type="text" value="${boardVO.bno }" name="bno" id="bno_mod" readonly/><br/>
-		Title<br/>
-		<input type="text" value="${boardVO.title }" name="title" readonly/><br/>
-		Content<br/>
-		<!-- <?=htmlspecialchars_decode($test['b_contents'])?> -->
-		<textarea id="editor" name="content" rows="10" cols="100" style="width:766px; height:412px;">
-		${boardVO.content}
-		</textarea><br/>
-		
-		Writer<br/>
-		<input type = "text" value="${boardVO.userid}" name="userid" readonly/><br/>
-		Writer date<br/>
-		<fmt:formatDate value="${boardVO.regdate }"
+	
+	<!-- bno -->
+	<input type="hidden" value="${boardVO.bno }" name="bno" id="bno_mod" readonly/>
+	
+	<!-- Writer date -->
+	<fmt:formatDate value="${boardVO.regdate }"
 		pattern="yyyy-MM-dd HH:mm:ss" var="dateString"/>
-		<input type="text" value="${dateString }" readonly /> <br/>
+	<input style="font-style: gray;" type="hidden" value="${dateString }" readonly /> 
+	<br/>
+	
+	<table>
+	<tbody>
+		<tr>
+			<th>
+				<!-- title -->
+				<input style="height: 25px;" type="text" value="[시나] ${boardVO.title }" name="title" readonly/>
+			</th>	
+		</tr>
+		<tr>
+			<td>
+				<!-- Writer -->
+				<input type = "text" value="글쓴이 : ${boardVO.userid}" name="userid" readonly/>작성일 : ${dateString }
+			</td>
+		</tr>
 		
+		<!-- <?=htmlspecialchars_decode($test['b_contents'])?> -->
+		<tr>
+			<td>
+				<!-- content -->
+				<div style="width:766px; height:412px;">${boardVO.content}</div>
+			</td>
+		</tr>
+
+		<tr>
+			<td style="height: 50px;">
 		<button type="button" id="btnList">Go to List</button>
+		<c:if test="${boardVO.userid eq id }">
 		<button type="submit" id="updatebutton">Update</button>
+		</c:if> 
 		<input type="hidden" name="page" value="${page }" />
-			
+			</td>
+		</tr>
+		
+		<tr>
+			<td style="border: 1px solid #a5a5a5;"></td>
+		</tr>
+	</tbody>
+	</table>
+	
 	</form>
+	<!-- ---------------------------- -->
+	
 	<br/>
 	
 	<div>
 		<input type = "text" name="rtext" id="rtext"
 			placeholder ="write it" required/>
 		<input type = "text" name="replier" id="replier"
-			placeholder="ID" required/>
+			placeholder="ID" value = "${name }" readonly/>
 		<button type = "button" id="btnCreate">Write Comments</button>	
 	</div>
 	<br/>
@@ -235,29 +286,38 @@ display: inline-block;
    <script src="<c:url value='../resources/assets/js/jquery.metisMenu.js'/>" /></script>
    <!-- CUSTOM SCRIPTS -->
    <script src="<c:url value='../resources/assets/js/custom.js'/>" /></script>	
-	
-	
-	<script src="../resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+   
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			
-			var obj = [];
-			//스마트에디터 프레임생성
-			nhn.husky.EZCreator.createInIFrame({
-				oAppRef:obj,
-				elPlaceHolder:"editor",
-				sSkinURI:"../resources/SmartEditor2Skin.html",
-				htParams : {
-					bUseToolbar:false,
-					bUseVerticalResizer : true,
-					bUseModeChanger:false,
-				
-				},
-			 	
-			});
+///////////////팀 별 게시판 권한 부여 ////////////////////
+			var dept = <%=dept%>;
+			
+			//alert('profileimage : ' + profileimage);
+			if(dept != 1 && dept != 5){
+				$('#authorization1').click(function(){
+					alert('당신은 1조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != 2 && dept != 5){
+				$('#authorization2').click(function(){
+					alert('당신은 2조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != 3 && dept != 5){
+				$('#authorization3').click(function(){
+					alert('당신은 3조가 아닙니다');
+					return false;
+				});
+			}
+			///////////////////////////////////////////////////////
+			
 			
 						
 			$("#updatebutton").click(function(){
@@ -281,10 +341,12 @@ display: inline-block;
 				//data(선택 파라미터) : 요청과 함께 서버로 보내는 데이터
 				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
 				
-				var url = '/spring/teamone_replies/all/'+bno;
+				var url = '/groupware/teamoneReplies/all/'+bno;
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
 					var list = '';
+					var username = '';
+					var name = "${name}";
 					//data의 개수 만큼 function의 내용을 반복해서 수행
 					$(data).each(function(){
 						var date = new Date(this.regdate);
@@ -292,21 +354,42 @@ display: inline-block;
 						console.log(dateString);
 					
 					
-					list += '<li class ="reply_list" data-rno="'
-						+ this.rno
-						+'">'
-						+'#'+this.rno+' '
-						+'<span class="replier">'
-						+this.replier + ' '
-						+'</span>'
-						+ '<span class = "rtext">'
-						+this.rtext + ' '
-						+"</span>"
-						+'<span class="regdate">'
-						+dateString+' '
-						+'</span>'
-						+'<button>수정</button>'
-						+'</li>';
+						username=this.replier;
+						//alert(userid +" userid " + id + "id");
+						if(username == name){
+						list += '<li class ="reply_list" data-rno="'
+							+ this.rno
+							+'">'
+							+'#'+this.rno+' '
+							+'<span class="replier">'
+							+this.replier + ' '
+							+'</span>'
+							+ '<span class = "rtext">'
+							+this.rtext + ' '
+							+"</span>"
+							+'<span class="regdate">'
+							+dateString+' '
+							+'</span>'						
+							+ '<button>수정</button>'						
+							+'</li>';
+							
+							}else{
+								list += '<li class ="reply_list" data-rno="'
+									+ this.rno
+									+'">'
+									+'#'+this.rno+' '
+									+'<span class="replier">'
+									+this.replier + ' '
+									+'</span>'
+									+ '<span class = "rtext">'
+									+this.rtext + ' '
+									+"</span>"
+									+'<span class="regdate">'
+									+dateString+' '
+									+'</span>'
+									+'</li>';
+							
+							}
 					});
 				
 					$('#replies').html(list);
@@ -315,12 +398,13 @@ display: inline-block;
 			};
 			
 			$('#btnCreate').click(function(){
+								
 				var rtextString = $('#rtext').val();
 				var replierString = $('#replier').val();
 				
 				$.ajax({
 					type: 'post',
-					url: '/spring/teamone_replies',
+					url: '/groupware/teamoneReplies',
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'POST'
@@ -365,7 +449,7 @@ display: inline-block;
 					var bno = $('#bno_mod').val();
 					$.ajax({
 						type : 'delete',
-						url : '/spring/teamone_replies/'+rno,
+						url : '/groupware/teamoneReplies/'+rno,
 						headers : {
 							'Content-Type' : 'application/json',
 							'X-HTTP-Method-Override' : 'DELETE'
@@ -389,7 +473,7 @@ display: inline-block;
 				var text = $('#rtext_mod').val();
 				$.ajax({
 					type : 'put',
-					url : '/spring/teamone_replies/'+rno,
+					url : '/groupware/teamoneReplies/'+rno,
 					headers:{
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'

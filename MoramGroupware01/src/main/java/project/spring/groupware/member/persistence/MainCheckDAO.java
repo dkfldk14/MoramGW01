@@ -2,6 +2,7 @@ package project.spring.groupware.member.persistence;
 
 import java.util.List;
 
+import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.member.domain.MainCheckVO;
 
 
@@ -23,6 +24,10 @@ public interface MainCheckDAO {
 	public abstract List<MainCheckVO> selectallweek();
 	
 	public abstract List<MainCheckVO> selectlistpage();
+	
+	public abstract List<BoardVO> selectITnews();
+	
+	public abstract List<BoardVO> selectnotice();
 } // end interface ReplyDAO
 
 

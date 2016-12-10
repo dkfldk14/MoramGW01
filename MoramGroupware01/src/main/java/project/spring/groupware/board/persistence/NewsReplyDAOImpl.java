@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import project.spring.groupware.board.domain.ReplyAddNameVO;
 import project.spring.groupware.board.domain.ReplyVO;
 
 
@@ -50,6 +51,10 @@ public class NewsReplyDAOImpl implements NewsReplyDAO {
 		return result;
 	}
 	
-
+	@Override
+	public List<ReplyAddNameVO> selectName(int bno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(NAMESPACE + ".selectName", bno);
+	}
 
 }

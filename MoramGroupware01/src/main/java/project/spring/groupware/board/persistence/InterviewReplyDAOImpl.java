@@ -51,9 +51,9 @@ public class InterviewReplyDAOImpl implements InterviewReplyDAO {
 	}
 
 	@Override
-	public List<ReplyAddNameVO> selectName(ReplyAddNameVO vo) {
+	public List<ReplyAddNameVO> selectName(int bno) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE + ".selectName", vo);
+		return sqlSession.selectList(NAMESPACE + ".selectName", bno);
 	}
 	
 }

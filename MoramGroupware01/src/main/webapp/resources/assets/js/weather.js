@@ -27,6 +27,8 @@ $(document).ready(function(){
 			+lon // 위도
 			+apikey; //api키
 	
+	getIT();
+	getNOTICE();
 	
 	getWeather();
 	getTime();
@@ -70,7 +72,80 @@ $(document).ready(function(){
 		
 	}; /* end of getAllReplies() */
 	
+	function getIT() {
+		var iturl= '/groupware/checktime/all/itpage';
+		
+		var val=0;
+		
+		$.getJSON(iturl, function(result) {
+			console.log('result = ', result);
+			var list = '';
+			var date = '';
+			
+			$(result).each(function() {
+				date=this.userid;
+				date=date.substring(0, 17);
+				
+				list += '<tr>'
+					+ '<td>'
+					+ this.bno
+					+ '</td>'
+					+ '<td>'
+					+ '<a href="/groupware/news_board/detail?page=1&bno='+this.bno+'&searchType=&keyword=">'+this.title+'</a>'
+					+ '</td>'
+					+ '<td>'
+					+ date
+					+ '</td>'
+					+ '</tr>';
+					
+			val+=1;
+			$('#ittablebody').html(list);
+				if(val===5){
+					return false;
+				}
+			});
+		});
+	};
 	
+	
+	function getNOTICE() {
+		var iturl= '/groupware/checktime/all/noticepage';
+		
+		var val=0;
+
+		$.getJSON(iturl, function(result) {
+			console.log('result = ', result);
+			var list = '';
+			var date = '';
+			
+			$(result).each(function() {
+				date=this.userid;
+				
+				if(date != null && date!=''){
+					date=date.substring(0, 17);
+					}else{
+						date= '-';
+					}
+				
+				list += '<tr>'
+					+ '<td>'
+					+ this.bno
+					+ '</td>'
+					+ '<td>'
+					+ '<a href="/groupware/notice_board/detail?page=1&bno='+this.bno+'&searchType=&keyword=">'+this.title+'</a>'
+					+ '</td>'
+					+ '<td>'
+					+ date
+					+ '</td>'
+					+ '</tr>';
+			val+=1;
+			$('#noticebody').html(list);
+				if(val===5){
+					return false;
+				}
+			});
+		});
+	};
 	
 	/*id값으로 저장된 시간값이 있으면 출력 메인에 출력*/
 	function getTime(){
@@ -102,7 +177,7 @@ $(document).ready(function(){
 			}
 			
 			// leave_time 값이 있을 경우 값을 형식을 변환해 퇴실버튼에 값을 넣어줌
-			if (leave_time!=''&&enter_time!=null){
+			if (leave_time!=''&&leave_time!=null){
 				var text = leave_time.substring(11,13)+'시 '+leave_time.substring(14,16)+'분';
 				
 				$('#check-out-text').html(text)
@@ -114,6 +189,7 @@ $(document).ready(function(){
 		
 		
 	}
+	
 	
 	
 /*	function test() {
@@ -378,15 +454,18 @@ $(document).ready(function(){
 		      data.addColumn('number', 'Slices');
 		      data.addRows([
 		        ['출석', size],//출석인원
-		        ['결석', 29-size],//결석인원
-		        ['호준', 1]
+		        ['결석', 29-size]//결석인원
 		      ]);
-
+		      
 		      // 타이틀, 높이, 길이 정보
 		      // Set chart options
 		      var options = {'title':'파이챠트',
 		                     'width':285,
-		                     'height':260};
+		                     'height':260,
+		                     slices: {
+		                         0: { color: 'yellow' },
+		                         1: { color: 'green' }
+		                       }};
 
 		      // Instantiate and draw our chart, passing in some options.
 		     
@@ -567,6 +646,18 @@ $(document).ready(function(){
 		}); /* 서버에서 전달된 JSON 데이터 처리 끝 */
 		
     });
+    
+    //나머진 show hide로 버튼 위치만 조정
+	$("#hide").click(function() {
+		$('#navPM').css('margin-left', '-260px');
+		$('#page-wrapper').css('margin-left', '0px');
+	});
+	
+	$("#show").click(function() {
+		$('#navPM').css('margin-left', '0px');
+		$('#page-wrapper').css('margin-left', '260px');
+	});
+	
    
 	
 });

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.member.domain.MainCheckVO;
 import project.spring.groupware.member.service.MainCheckService;
 
@@ -157,6 +158,40 @@ public class MainCheckRESTController {
 		List<MainCheckVO> list = service.selectlistpage();
 		
 		ResponseEntity<List<MainCheckVO>> entity = null;
+		
+		if(list != null){
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} else{
+			entity = new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping (value= "/all/itpage", method=RequestMethod.GET)
+	public ResponseEntity<List<BoardVO>> selectITnews(){
+		logger.info("selectallweek");
+		
+		List<BoardVO> list = service.selectITnews();
+		
+		ResponseEntity<List<BoardVO>> entity = null;
+		
+		if(list != null){
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} else{
+			entity = new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@RequestMapping (value= "/all/noticepage", method=RequestMethod.GET)
+	public ResponseEntity<List<BoardVO>> selectnotice(){
+		logger.info("selectallweek");
+		
+		List<BoardVO> list = service.selectnotice();
+		
+		ResponseEntity<List<BoardVO>> entity = null;
 		
 		if(list != null){
 			entity = new ResponseEntity<>(list, HttpStatus.OK);

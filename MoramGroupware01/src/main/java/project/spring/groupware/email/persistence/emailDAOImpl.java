@@ -53,16 +53,30 @@ public class emailDAOImpl implements emailDAO {
 	}
 	
 	@Override
-	public List<EmailVO> adressList(int state, PaginationCriteria c) {
+	public List<EmailVO> adressList(int state, PaginationCriteria c, String from_email) {
 			Map<String, Integer> element=new HashMap<>();
+			EmailVO vo=new EmailVO();
+			vo.setState(state);
 			element.put("state", state);
 			int start = c.getStart();
 			int end = c.getEnd();
 			logger.info("start: " + start);
 			element.put("start", start);
 			element.put("end", end);
+			/*element.put("from_email", groupmail);
+			*/
+			Map<String,Object> adresslist=new HashMap<>();
+			adresslist.put("Element", element);
+			adresslist.put("from_email", "dkfldk14@moram.com");
 			
-			return	SqlSession.selectList(NAMESPACE+".adressList",element);
+			List<EmailVO> VO=SqlSession.selectList(NAMESPACE+".adressList",adresslist);
+			for(int i=0; i<VO.size();i++){
+				logger.info("vo : "+VO.get(i).getSubject());
+			}
+			
+			
+			
+			return	SqlSession.selectList(NAMESPACE+".adressList",adresslist);
 		 
 	}
 
@@ -80,5 +94,16 @@ public class emailDAOImpl implements emailDAO {
 	public List<MemberVO> member_adress() {
 		return SqlSession.selectList(NAMESPACE+".EmailAdressBox");
 	}
+
+	@Override
+	public EmailVO detailEmail(int num) {
+		return SqlSession.selectOne(NAMESPACE + ".detail_Email", num);
+	}
 	
+	
+	@Override
+	public int delete_change(int num) {
+	  
+		return  SqlSession.update(NAMESPACE+".delete_change", num);
+	}
 }

@@ -59,7 +59,19 @@
 	
 	<select id="selectallweek" resultType="project.spring.groupware.member.domain.MainCheckVO">
 	SELECT id , enter , leave , statetime , attendance , score , to_char(enter,'day') as to_char 
-	from moram_attendance order by enter ASC 
+	from moram_attendance order by enter DESC  
 	</select>
-
+	
+	<select id="selectITnews" resultType="project.spring.groupware.board.domain.BoardVO">
+		select bno, title, to_char(regdate) as userid from moram_itnews_board 
+		order by bno desc 
+	</select>
+	
+	<select id="selectInfo" resultType="project.spring.groupware.board.domain.BoardVO">
+		select bno, title, to_char(regdate) as userid from moram_info_board 
+		order by bno desc 
+	</select>
+	
+	
+	
 </mapper>

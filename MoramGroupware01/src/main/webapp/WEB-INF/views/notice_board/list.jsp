@@ -52,6 +52,10 @@ li {
 </head>
 <body>
 
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
+
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
       <div class="navbar navbar-inverse navbar-fixed-top">
@@ -84,7 +88,7 @@ li {
                   align="center" /> <class ="img-responsive" /></li>
 
 
-               <li><a href="../"><i class="fa fa-desktop "></i>메인</a></li>
+               <li><a href="/groupware/main1"><i class="fa fa-desktop "></i>메인</a></li>
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
@@ -119,9 +123,9 @@ li {
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="../team_one_board/list">시나브로</a></li>
-                     <li><a href="../team_two_board/list">그냥2조</a></li>
-                     <li><a href="../team_three_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="../team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="../team_two_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="../team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -197,7 +201,7 @@ li {
 		<c:forEach var = "vo2" items="${listName }">
 			<tr>
 				<td>${vo2.bno }</td>
-				<td><a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a></td>
+				<td><a href="${vo2.bno}">${vo2.title }</a></td>
 				<td>${vo2.name }</td>
 				<td><fmt:formatDate value="${vo2.regdate }"
 					pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -276,6 +280,32 @@ li {
 			alert("fail, try again");
 		}
 		
+///////////////팀 별 게시판 권한 부여 ////////////////////
+		var dept = <%=dept%>;
+		
+		//alert('profileimage : ' + profileimage);
+		if(dept != 1 && dept != 5){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 2 && dept != 5){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 3 && dept != 5){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
+		
 		
 		var frm = $('#pageForm');
 		$('.pageLinks li a').click(function(){
@@ -324,7 +354,10 @@ li {
 	});
 
 	
-	
+	var profileimage= '${profileimage}';
+	if(profileimage !=null && profileimage!=''){
+		$("#profileimage").attr('src', profileimage);
+	}
 	</script>
 	
 	

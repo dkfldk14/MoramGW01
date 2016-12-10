@@ -53,8 +53,8 @@ public int totalEmailct(String state, String groupemail) {
 }
 	
 	@Override
-	public List<EmailVO> adressList(int state, PaginationCriteria c) {
-		return dao.adressList(state, c);
+	public List<EmailVO> adressList(int state, PaginationCriteria c,String from_email) {
+		return dao.adressList(state, c, from_email);
 	}
 	
 	
@@ -62,4 +62,17 @@ public int totalEmailct(String state, String groupemail) {
 	public List<MemberVO> member_adress() {
 		return dao.member_adress();
 	}
+
+
+	@Override
+	public EmailVO detailEmail(int num) {
+		// TODO Auto-generated method stub
+		return dao.detailEmail(num);
+	}
+	@Override
+	public int delete_change(int num) {
+		
+		return dao.delete_change(num);
+	}
+	
 }

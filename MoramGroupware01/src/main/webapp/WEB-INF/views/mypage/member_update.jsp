@@ -285,6 +285,7 @@ li{
 	
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
+
 		<div id="page-inner" class="test">
 			<section id="login">
 				<div class="container">
@@ -378,7 +379,7 @@ li{
 					}
 				});
 			});
-			
-			
-		</script></body>
+</script>
+
+</body>
 </html>

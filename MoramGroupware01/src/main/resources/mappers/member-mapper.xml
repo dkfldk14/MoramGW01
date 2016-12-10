@@ -12,7 +12,7 @@
   </select>
   
   <insert id="member_join">
-  	insert into moram_member(id, pwd, name, gender, birth, telephone, cellphone, address, email, mailno, addaddress, groupemail ) values(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{telephone}, #{cellphone}, #{address}, #{email}, #{mailno}, #{addaddress}, #{groupemail}) 
+  	insert into moram_member(id, pwd, name, gender, birth, telephone, cellphone, address, email, mailno, addaddress, groupemail, profileimage ) values(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{telephone}, #{cellphone}, #{address}, #{email}, #{mailno}, #{addaddress}, #{groupemail}, #{profileimage} ) 
   </insert>
   
   <select id="login_check" resultType="project.spring.groupware.member.domain.LoginVO">
@@ -20,7 +20,7 @@
   </select>
   
   <select id="name_select" resultType="project.spring.groupware.member.domain.MemberVO">
-  	select name, usertype from moram_member where id = #{userid}
+  	select name, usertype, dept, profileimage from moram_member where id = #{userid}
   </select>
   
    <select id="admin_manage_member" resultType="project.spring.groupware.member.domain.MemberVO">
@@ -36,6 +36,6 @@
   </select>
   
   <update id="member_info_update">
-  	update moram_member set pwd=#{pwd}, name=#{name}, gender=#{gender}, birth=#{birth}, telephone=#{telephone}, cellphone=#{cellphone}, address=#{address}, mailno=#{mailno}, addaddress=#{addaddress}, email=#{email} where id = #{id}
+  	update moram_member set pwd=#{pwd}, name=#{name}, gender=#{gender}, birth=#{birth}, telephone=#{telephone}, cellphone=#{cellphone}, address=#{address}, mailno=#{mailno}, addaddress=#{addaddress}, email=#{email}, profileimage=#{profileimage} where id = #{id}
   </update>
   </mapper>

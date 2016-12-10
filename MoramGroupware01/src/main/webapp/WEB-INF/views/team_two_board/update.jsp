@@ -24,9 +24,45 @@
 display: inline-block;
 
 }
+th{
+	width: 200px;
+}
+
+tbody tr td input, tbody tr th input{
+	width: 400px;
+	border:none;
+	border-right:0px; 
+	border-top:0px; 
+	boder-left:0px; 
+	boder-bottom:0px;
+}
+
+td{
+text-align: left;
+}
+textarea{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+tr{
+border:1px solid #ddd; 
+border-left: 1px solid white;
+border-right: 1px solid white;
+}
+
+iframe{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
 </style>
 </head>
 <body>
+
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
+
 
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
@@ -95,9 +131,9 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
-                     <li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
-                     <li><a href="/../groupware/team_three_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="/../groupware/team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -151,19 +187,39 @@ display: inline-block;
 	<div id="page-wrapper">
 	<div id="page-inner">
 	<h1>게시글/수정 삭제 페이지</h1>
-	<form id = "frm">
-	<input type = "hidden" name ="bno" value="${boardVO.bno }" /><br/>
-	Title<br/>
-	<input type="text" name="title" value="${boardVO.title }"/> <br/>
-	Content<br/>
-	<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required>
-	${boardVO.content }</textarea><br/>
-	Writer ID <br/>
-	<input type = "text" name="userid" value="${boardVO.userid }" readonly/><br/>
+	<!--  수정  -->
+	<form id="frm">	
+	<table style="position: relative;" width="875px">
+	<tbody>
 	
-	<input type = "hidden" name="page" value="${page }"/>
 	
+		<tr>
+			
+			<th>Title</th>
+			<td>
+				<input type="text" name="title" value="${boardVO.title }"/>
+				<input type = "hidden" name ="bno" value="${boardVO.bno }" />
+			</td>
+		</tr>
+		
+		<tr>
+			<th>Content</th>
+			<td>
+				<textarea name="content" id="editor" style="width:750px; height:450px; margin-bottom: 50px; margin-top: 50px;" required>${boardVO.content }</textarea>
+			</td>	
+		</tr>
+		<tr>
+			<th>Writer ID</th>
+			<td>
+				<input type = "text" name="userid" value="${boardVO.userid }" readonly/>
+			</td>
+		</tr>
+	</tbody>
+	</table>
+		<input type="submit" id = "savebutton" value="complete" required/>
+		<input type = "hidden" name="page" value="${page }"/>
 	</form>
+	<!--  -------------------  -->
 	
 	<button type = "submit" id = "btnUpdate">Update</button>
 	<button type = "submit" id = "btnDelete">Delete</button>
@@ -189,7 +245,7 @@ display: inline-block;
 	
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="/spring/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="/groupware/resources/js/HuskyEZCreator2.js" charset="utf-8"></script>
 	
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"> -->
 		
@@ -201,7 +257,7 @@ display: inline-block;
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef:obj,
 			elPlaceHolder:"editor",
-			sSkinURI:"/spring/resources/SmartEditor2Skin.html",
+			sSkinURI:"/groupware/resources/SmartEditor2Skin.html",
 			htParams : {
 				//Using toolbar
 				bUseToolbar : true,
@@ -211,6 +267,33 @@ display: inline-block;
 				bUserModeChanger : true,
 			}
 		});
+		
+///////////////팀 별 게시판 권한 부여 ////////////////////
+		var dept = <%=dept%>;
+		
+		//alert('profileimage : ' + profileimage);
+		if(dept != 1 && dept != 5){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 2 && dept != 5){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 3 && dept != 5){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
+		
 		
 		
 		$('#btnList').click(function(){

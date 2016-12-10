@@ -61,55 +61,84 @@ table {
 	color: #0B233f;
 }
 button {
-   background-color: #A5DBCE; /* Green */
-   border: none;
    color: white;
    padding: 8px 16px;
    text-align: center;
    text-decoration: none;
    display: inline-block;
-   font-size: 10px;
+  
    margin: 4px 2px;
    -webkit-transition-duration: 0.4s; /* Safari */
    transition-duration: 0.4s;
    cursor: pointer;
+     color: black;
+   border: 1px solid #d6d6d6;
+  
+   
+     background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+   
+   
 }
 
 .buttondelete {
   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+   color: #a8abad;
+   
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 
+#searchbtn{
+  background-color: white;
+   color: #a8abad;
+     font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+
+}
 
 .buttondelete:hover {
-  background-color: #8fb73a;
-   color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .buttonreturn {
-   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+  background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 .buttonreturn:hover {
-   background-color: #8fb73a;
-   color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .buttonforward {
-   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+  background-color: white;
+      color: #a8abad;
+     font-weight : 850;
+   border: 1px solid #d6d6d6;
+   font-size: 13px;
+	
 }
 
 
 
 .buttonforward:hover {
-   background-color: #8fb73a;
-   color: white;
+   background-color: #edf8ff;
+   color: #3a3939;
+   font-weight: 900;
 }
 
 label input {
@@ -276,87 +305,115 @@ div.center {text-align: center;}
 
 
 				<div class="row">
-				<hr/>
 				<!-- 	<div class="col-md-12">
 						<h2>손동민님,</h2>
 						<h5>♡반갑습니당. 오늘하루도 힘내십시오 ♡</h5>
 					</div> -->
 				</div>
 				<!-- /. ROW  -->
-				<hr />
-
+			
 				<div class="row">
 					<div class="col-md-12">
 
 						<div>
 
-						
 
 
-							<div>
-								<div style="padding-bottom: 10px">
-									<button class="buttondelete" onclick="fn_userDel(this);">삭제</button>
-									<button class="buttonreturn">답장</button>
-									<button class="buttonforward">전달</button>
 
+						<div>
+							<div style="padding-bottom: 10px;  ">
+								<input type="text" id="keyword" name="keyword" placeholder=" 이메일 검색"
+									style="height: 35px; width: 250px;" />
+								<!-- value 값을 설정해야함 -->
 
+								<button id="searchBtn" value="메일 검색" >검색</button>
+								<div style="display: inline-block;">
+									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;">받은메일함</span>
+									<span> | </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${messages}</span>
+									<span> ／ </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${messages}</span>
+			
+									<a href="list?page=1"><img src="df"></a>
 								</div>
-								<table style="height: 50px" id="myTable">
-									<tr style="height: 30px" id="tr_header">
-										<td style="width: 50px"><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" id="mail-group-checkbox" onclick="allChk(this);"/><span></span></label></td>
-										<th style="width: 150px">Date</th>
-										<th style="width: 300px">From</th>
-										<th style="width: 700px">Title</th>
-									</tr>
+							</div>
 
-<!-- 
+							<div style="padding-bottom: 10px;">
+								<button class="buttondelete" onclick="fn_userDel(this);">삭제</button>
+								<button class="buttonreturn">답장</button>
+								<button class="buttonforward">전달</button>
+
+
+							</div>
+
+
+							<table style="height: 50px" id="myTable">
+								<tr style="height: 30px" id="tr_header">
+									<td style="width: 50px"><label
+										class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
+											type="checkbox" id="mail-group-checkbox"
+											onclick="allChk(this);" /><span></span></label></td>
+									<th style="width: 150px">Date</th>
+									<th style="width: 300px">From</th>
+									<th style="width: 1000px">Title</th>
+								</tr>
+
+								<!-- 
 					   <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
          <input type="checkbox" class="mail-group-checkbox"> <span></span>
       </label>
  -->
 
-									<c:forEach var="email" items="${email}">
+								<c:forEach var="email" items="${email}">
 
-										<tr style="height: 30px" id="tr_inner">
-											<td style="width: 50px"><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="RowCheck"  class="mail-group-checkbox row-check-box" value="${email.num }"/><span></span></label></td>
-											<td style="width: 150px">${email.senddate }</td>
-											<td style="width: 300px">${email.from_email }</td>
-											<td style="width: 700px"><a
-												href="detail?num=${email.num }">${email.subject }</a></td>
+									<tr style="height: 30px" id="tr_inner">
+										<td style="width: 50px"><label
+											class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
+												type="checkbox" name="RowCheck"
+												class="mail-group-checkbox row-check-box"
+												value="${email.num }" /><span></span></label></td>
+										<td style="width: 150px">${email.senddate }</td>
+										<td style="width: 300px"><a
+											href="write?to_email=${email.from_email}">${email.from_email }</td>
+										<td style="width: 1000px"><a
+											href="detail-receive?num=${email.num }&page=${pageMaker.criteria.page}">${email.subject }</a></td>
 
 
-										</tr>
-									</c:forEach>
-
-
-
-
-								</table>
+									</tr>
+								</c:forEach>
 								
-								<p>
-		<div id="labelcenter">
-   <label for="1"></label>
-
-   <label class="text" for="1"> </label>
 
 
-<div class="center">
-  <ul class="pagination">
+
+
+							</table>
+
 	
-	<c:if test="${pageMaker.hasPrev }">
-   		  <li><a href="${pageMaker.startPageNum - 1 }">«</a></li>
-    </c:if>
+							<p>
+							<div id="labelcenter">
+								<label for="1"></label> <label class="text" for="1"> </label>
 
-	 <c:forEach begin="${pageMaker.startPageNum }" end="${pageMaker.endPageNum-1 }" var="num">
-		<li><a href="list?page=${num }">${num }</a></li>
-	</c:forEach> 
-	
-	    <c:if test="${pageMaker.hasNext }">
-    <li><a href="${pageMaker.endPageNum + 1 }">»</a></li>
-    </c:if>
-  </ul>
-</div>
-							</div>
+
+								<div class="center">
+									<ul class="pagination">
+							
+
+										<c:if test="${pageMaker.hasPrev }">
+											<li><a href="${pageMaker.startPageNum - 1 }">«</a></li>
+										</c:if>
+
+										<c:forEach begin="${pageMaker.startPageNum }"
+											end="${pageMaker.endPageNum }" var="num">
+											<li><a href="list?page=${num }">${num }</a></li>
+										</c:forEach>
+
+										<c:if test="${pageMaker.hasNext }">
+											<li><a href="${pageMaker.endPageNum + 1 }">»</a></li>
+										</c:if>
+									</ul>
+								</div>
+								
+				</div>
 
 
 						</div>
@@ -364,6 +421,7 @@ div.center {text-align: center;}
 				</div>
 			
 			</div>
+
 
 
 		</div>
@@ -432,9 +490,12 @@ div.center {text-align: center;}
 					,type:'post'				
 					,dataType:'text'
 					,data : {valueArrTest:checkArr},
-					success : function(){
-						location.reload();
-					
+					success : function(data){
+						if(data=='OK'){
+
+							alert("test");
+							location = 'list?page=1';
+						}
 					}});
 				}
 					
@@ -444,39 +505,7 @@ div.center {text-align: center;}
 		
 		
 		</script>
-				
-	<!-- 
-		/* 	if(listsize==0){
-					alert("삭제할 이메일이 없어용..");
-				}else{ */
-				
-	/* 			var userid = "";
-				var eamilList = document.getElementsByName("RowCheck");
-				var chked = false;
-				var indexid = false;
-				for (i = 0; i < emailList.length; i++) {
-					
-					if (emailList[i].checked) {
-						if (indexid) {
-							userid = userid + '-';
-						}
-						userid = userid + memberChk[i].value;
-						indexid = true;
-					}
-				}
-				if (!indexid) {
-					alert("삭제할 사용자를 체크해 주세요");
-					return;
-				}
-				document.userForm.delUserid.value = userid; // 체크된 사용자 아이디를 '-'로 묶은 userid 를     
-				//   document.userForm.delUserid 의 value로 저장 
-
-				var agree = confirm("삭제 하시겠습니까?");
-				if (agree) {
-					document.userForm.execute.value = "userDel";
-					document.userForm.submit();
-				}
-			 */ -->﻿
+﻿
 
 
 

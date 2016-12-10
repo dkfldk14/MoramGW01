@@ -25,13 +25,18 @@
 display: inline-block;
 
 }
+td{
+	height: 50px;
+}
 </style>
 </head>
 <body>
 
 <body>
 
-
+<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
 
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
@@ -100,9 +105,9 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
-                     <li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
-                     <li><a href="/../groupware/team_three_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="/../groupware/team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -156,17 +161,46 @@ display: inline-block;
 	<div id="page-wrapper">
 	<div id="page-inner">
 	<h1>Test Register Page</h1>
-	<form method="post" id="frm">	
-		Title<br/>
-		<input type="text" name="title" required/><br/>
-		Content<br/>
-		<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea><br/>
-		UserID<br/>
 
-		<input type="text" name="userid" value="${login_id }" readonly/><br/>
 		
-		<input type="submit" id = "savebutton" value="complete" required/>
+	<!--  수정  -->
+	<form method="post" id="frm">	
+	<table>
+	<tbody>
+	
+	
+		<tr>
+			<th>Title</th>
+			<td><input type="text" name="title" required/></td>
+		</tr>
+		
+		<tr>
+			<th>Content</th>
+			<td>
+			<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea>
+			</td>	
+		</tr>
+		<tr>
+			<th>UserID</th>
+			<td>
+				<input type="text" name="userid" value="${login_id }"  readonly="readonly"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type="submit" id = "savebutton" value="complete" required/>
+			</td>
+		</tr>
+	
+	
+	</tbody>
+	</table>
 	</form>
+	<!--  -------------------  -->
+	
+	
+	
+	
 	  </div>
     </div>
   	
@@ -183,18 +217,17 @@ display: inline-block;
 	
 	<!-- jQuery CDN -->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="/spring/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="/groupware/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
 	
 	<script>
 	$(document).ready(function(){
-		
 		//전역 변수
 		var obj = [];
 		//스마트에디터 프레임생성
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef:obj,
 			elPlaceHolder:"editor",
-			sSkinURI:"/spring/resources/SmartEditor2Skin.html",
+			sSkinURI:"/groupware/resources/SmartEditor2Skin.html",
 			htParams : {
 				//Using toolbar
 				bUseToolbar : true,
@@ -205,6 +238,33 @@ display: inline-block;
 			}
 		
 		});
+		
+///////////////팀 별 게시판 권한 부여 ////////////////////
+		var dept = <%=dept%>;
+		
+		//alert('profileimage : ' + profileimage);
+		if(dept != 1 && dept != 5){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 2 && dept != 5){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 3 && dept != 5){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
+		
 		//sending button
 	 	$("#savebutton").click(function(){
 			obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
