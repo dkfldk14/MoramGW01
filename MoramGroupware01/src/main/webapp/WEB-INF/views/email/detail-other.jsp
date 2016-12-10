@@ -67,6 +67,38 @@ ul {
     background-color: #A5DBCE;
 }
 
+.buttonreturn {
+  background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+}
+
+.buttonreturn:hover {
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
+}
+
+.buttonforward {
+  background-color: white;
+      color: #a8abad;
+     font-weight : 850;
+   border: 1px solid #d6d6d6;
+   font-size: 13px;
+	
+}
+
+
+
+.buttonforward:hover {
+   background-color: #edf8ff;
+   color: #3a3939;
+   font-weight: 900;
+}
+
 </style>
 </head>
 <body>
@@ -187,9 +219,11 @@ ul {
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>손동민님,</h2>
-						<h5>♡반갑습니당. 오늘하루도 힘내십시오 ♡</h5>
-
+					
+							<div style="padding-bottom: 10px;">
+								<button class="buttonreturn" id="buttonreturn">답장</button>
+								<button class="buttonforward">전달</button>
+							</div>
 					</div>
 				</div>
 
@@ -270,7 +304,7 @@ ul {
 
 $(document).ready(function(){
     $("#listclick").click(function(){
-        location="list";
+        location="send-mailbox";
     });
     
     $("#listup").click(function(){
@@ -284,6 +318,10 @@ $(document).ready(function(){
     	
     	
     });
+    
+    $("#buttonreturn").click(function(){
+    	location="write?to_email=${emaildetail.from_email}";
+    })
     
 });
 

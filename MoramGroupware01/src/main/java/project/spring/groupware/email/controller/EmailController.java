@@ -40,6 +40,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sun.mail.handlers.message_rfc822;
+
 import project.spring.groupware.email.domain.EmailVO;
 import project.spring.groupware.email.pageutil.PageMaker;
 import project.spring.groupware.email.pageutil.PaginationCriteria;
@@ -66,6 +68,8 @@ public class EmailController {
 	private final String mailStoreType="pop3";
 	private final String Pwd="6557";
 	private String gwEmail=null;
+	private Message[] messages;	
+	private int num=1;
 	
 	@RequestMapping(value="/list")
 	public void EmailList(Integer page,Model model,HttpServletRequest request){
@@ -96,7 +100,7 @@ public class EmailController {
 		
 		logger.info("count : "+emailFolder.getMessageCount());
 		
-		Message[] messages=emailFolder.getMessages();
+		messages=emailFolder.getMessages();
 		/*
 		PaginationCriteria c = new PaginationCriteria();
 		
@@ -126,9 +130,24 @@ public class EmailController {
 		if (end > messages.length) {
 			end = messages.length;
 		}
-		for (int i = start; i < end; i++) {
+		
+//		for (int i = start; i < end; i++) {
+//			EmailVO vo = new EmailVO();
+//			Message message = messages[i];
+//			vo.setNum(message.getMessageNumber());
+//			Date date = message.getSentDate();
+//			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
+//			vo.setSenddate(df.format(date).toString());
+//			vo.setSubject(message.getSubject().toString());
+//			vo.setContent(message.getContent().toString());
+//			vo.setFrom_email(message.getFrom()[0].toString());
+//			emaillist.add(vo);
+//			
+//		}
+		
+		for (int i = end; i > start; i--) {
 			EmailVO vo = new EmailVO();
-			Message message = messages[i];
+			Message message = messages[i-1];
 			vo.setNum(message.getMessageNumber());
 			Date date = message.getSentDate();
 			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
@@ -238,11 +257,13 @@ public class EmailController {
 	@RequestMapping(value = "/detail-receive", method = RequestMethod.GET)
 	public void detail(int num, int page, Model model, EmailVO vo) {
 		logger.info("detail jsp 실행 ");
-			EmailVO volist=emaillist.get(num-2);
+		logger.info("num" + num);
+		logger.info("어려운 공식: " + (messages.length - (page-1)*10 + num));
+		
+		EmailVO volist=emaillist.get(messages.length - num);
 			model.addAttribute("emaildetail", volist);
 			
 /*		// model.addAttribute("email", vo);
-		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
 		EmailVO vo = emaillist.get(num - 1);
 		logger.info("detail에 있는 vo 값 : " + vo.getContent());
 		logger.info("num:" + vo.getNum());
@@ -259,6 +280,19 @@ public class EmailController {
 		logger.info("detail subject : " + vo.getSubject());
 		//model.addAttribute("emaildetail", vo);
 	*/}
+
+
+	
+	@RequestMapping(value = "/detail-other", method = RequestMethod.GET)
+	public void detailother(int num, int page, Model model, EmailVO vo) {
+		logger.info("detail jsp 실행 ");
+		logger.info("num" + num);
+		EmailVO volist=emailServiceDAO.detailEmail(num);
+		
+		model.addAttribute("emaildetail", volist);
+			
+	
+	}
 
 	
 	
@@ -278,6 +312,13 @@ public class EmailController {
 		model.addAttribute("memberList", memberList);
 		
 		//int result=emailServiceDAO.insert(vo);
+		
+	}
+	
+	@RequestMapping(value="write", method=RequestMethod.POST)
+	public void emailforward(Model model,HttpServletRequest request,EmailVO vo){
+		
+	
 		
 	}
 	
@@ -503,8 +544,8 @@ public class EmailController {
 
 		   // Send message
 		   Transport.send(message);
-		   
-			EmailVO emailvo=new EmailVO(1, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), address[z], null, 1);
+		   num+=num;
+			EmailVO emailvo=new EmailVO(num, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), address[z], null, 1);
 			emailServiceDAO.insert(emailvo);
 			logger.info("vo 값 : "+vo.getSubject() );
 			logger.info("vo값 : "+vo.getFrom_email());
