@@ -15,13 +15,22 @@ public class MemberVO {
 	String mailno;
 	String addaddress;
 	String groupemail;
+	String profileimage;
 	//TODO 사내메일도 입력받아요?
 	
 	public MemberVO(){}
 
+	public String getProfileimage() {
+		return profileimage;
+	}
+
+	public void setProfileimage(String profileimage) {
+		this.profileimage = profileimage;
+	}
+
 	public MemberVO(String id, String pwd, String name, String dept, String gender, String birth, String telephone,
 			String cellphone, String address, String email, String usertype, String mailno, String addaddress,
-			String groupemail) {
+			String groupemail, String profileimage) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -37,6 +46,7 @@ public class MemberVO {
 		this.mailno = mailno;
 		this.addaddress = addaddress;
 		this.groupemail = groupemail;
+		this.profileimage=profileimage;
 	}
 
 	public String getId() {

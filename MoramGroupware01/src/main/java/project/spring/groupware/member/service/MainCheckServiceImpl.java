@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.member.domain.MainCheckVO;
 import project.spring.groupware.member.persistence.MainCheckDAO;
 
@@ -53,6 +54,16 @@ public class MainCheckServiceImpl implements MainCheckService {
 	@Override
 	public List<MainCheckVO> selectlistpage() {
 		return mainDAO.selectlistpage();
+	}
+
+	@Override
+	public List<BoardVO> selectITnews() {
+		return mainDAO.selectITnews();
+	}
+
+	@Override
+	public List<BoardVO> selectnotice() {
+		return mainDAO.selectnotice();
 	}
 
 

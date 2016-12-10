@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC 	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+>
+
+<mapper namespace = "MyPageBoardMapper">
+<!-- mypage에서 지가 쓴글 보여주는 sql 문 -->
+<select id="mypageList" resultType="project.spring.groupware.mypage.domain.MyPageBoardVO">
+select title, userid, regdate, viewcnt, content, code from moram_lecture_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_after_interview_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_info_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_itnews_board
+where userid = #{userid}
+order by regdate desc
+</select>
+
+<!-- mypage에서 테이블 페이징 처리 -->
+<select id="mypageListPaging" resultType = "project.spring.groupware.mypage.domain.MyPageBoardVO">
+<!-- select a.title, a. userid, a.regdate, a.viewcnt, a.content, a.code  from
+(
+select title, userid, regdate, viewcnt, content, code from moram_lecture_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_after_interview_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_info_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_itnews_board
+where userid = #{userid}
+order by regdate desc
+)a
+where rownum between #{start} and #{end} -->
+
+select * from(
+select rownum rn, a.title, a. userid, a.regdate, a.viewcnt, a.content, a.code  from
+(
+select title, userid, regdate, viewcnt, content, code from moram_lecture_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_after_interview_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_info_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_itnews_board
+where userid = #{userid}
+order by regdate desc
+)a
+)where rn between #{start} and #{end}
+
+</select>
+
+<!-- mypage total Count 처리-->
+<select id="myPageListTotalCount" resultType= "Integer">
+select count (*) from
+(
+select title, userid, regdate, viewcnt, content, code from moram_lecture_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_after_interview_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_info_board
+where userid = #{userid}
+union
+select title, userid, regdate, viewcnt, content, code from moram_itnews_board
+where userid = #{userid}
+)
+</select>
+</mapper>

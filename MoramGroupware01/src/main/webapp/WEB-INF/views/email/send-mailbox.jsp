@@ -61,55 +61,84 @@ table {
 	color: #0B233f;
 }
 button {
-   background-color: #A5DBCE; /* Green */
-   border: none;
    color: white;
    padding: 8px 16px;
    text-align: center;
    text-decoration: none;
    display: inline-block;
-   font-size: 10px;
+  
    margin: 4px 2px;
    -webkit-transition-duration: 0.4s; /* Safari */
    transition-duration: 0.4s;
    cursor: pointer;
+     color: black;
+   border: 1px solid #d6d6d6;
+  
+   
+     background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+   
+   
 }
 
 .buttondelete {
   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+   color: #a8abad;
+   
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 
+#searchbtn{
+  background-color: white;
+   color: #a8abad;
+     font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+
+}
 
 .buttondelete:hover {
-  background-color: #8fb73a;
-   color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .buttonreturn {
-   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+  background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 .buttonreturn:hover {
-   background-color: #8fb73a;
-   color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .buttonforward {
-   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+  background-color: white;
+      color: #a8abad;
+     font-weight : 850;
+   border: 1px solid #d6d6d6;
+   font-size: 13px;
+	
 }
 
 
 
 .buttonforward:hover {
-   background-color: #8fb73a;
-   color: white;
+   background-color: #edf8ff;
+   color: #3a3939;
+   font-weight: 900;
 }
 
 label input {
@@ -281,31 +310,51 @@ div.center {text-align: center;}
 
 
 				<div class="row">
-					<hr />
+			
 					<!-- 	<div class="col-md-12">
 						<h2>손동민님,</h2>
 						<h5>♡반갑습니당. 오늘하루도 힘내십시오 ♡</h5>
 					</div> -->
 				</div>
 				<!-- /. ROW  -->
-				<hr />
+				
 
 				<div class="row">
 					<div class="col-md-12">
 
-						<div>
-
+						
 
 
 
 							<div>
-								<div style="padding-bottom: 10px">
-									<button class="buttondelete" onclick="fn_userDel(this);">삭제</button>
-									<button class="buttonreturn">답장</button>
-									<button class="buttonforward">전달</button>
+										<div>
+							<div style="padding-bottom: 10px;  ">
+								<input type="text" id="keyword" name="keyword" placeholder=" 이메일 검색"
+									style="height: 35px; width: 250px;" />
+								<!-- value 값을 설정해야함 -->
 
-
+								<button id="searchBtn" value="메일 검색" >검색</button>
+								<div style="display: inline-block; ">
+									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;">보낸메일함</span>
+									<span> | </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${sendCount }</span>
+									<span> ／ </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${sendCount }</span>
+									
 								</div>
+
+							</div>
+
+							<div style="padding-bottom: 10px;">
+								<button class="buttondelete">삭제</button>
+								<button class="buttonreturn">답장</button>
+								<button class="buttonforward">전달</button>
+
+
+							</div>
+							
+							
+				
 								<table style="height: 50px" id="myTable">
 									<tr style="height: 30px" id="tr_header">
 										<td style="width: 50px"><label
@@ -314,7 +363,7 @@ div.center {text-align: center;}
 												onclick="allChk(this);" /><span></span></label></td>
 										<th style="width: 150px">Date</th>
 										<th style="width: 300px">To</th>
-										<th style="width: 700px">Title</th>
+										<th style="width: 1000px">Title</th>
 									</tr>
 
 
@@ -328,7 +377,7 @@ div.center {text-align: center;}
 													class="mail-group-checkbox row-check-box" value="${email.num }" /><span></span></label></td>
 											<td style="width: 150px">${email.senddate }</td>
 											<td style="width: 300px">${email.to_email }</td>	
-											<td style="width: 700px">
+											<td style="width: 1000px">
 											<a	href="${email.num }">${email.subject }</a></td>
 										</tr>
 										
@@ -382,7 +431,7 @@ div.center {text-align: center;}
 						</div>
 					</div>
 					<form id="pageForm">
-						<input type="hidden" name="num" /> 
+						<input type="hidden" name="num" value="${pageMaker.criteria.page } "/> 
 						<input type="hidden" name="page" value="${pageMaker.criteria.page}" /> 
 						<input type="hidden" name="perPage" value="${pageMaker.criteria.perPage }" />
 
@@ -420,25 +469,25 @@ div.center {text-align: center;}
 			
 			tabSetting();
 			
-				$(document).ready(function() {
+			
 					var frm = $("#pageForm");
 
 					$('table tr td a').click(function() {
 						event.preventDefault();
 						//bno 의 값은 클릭한 this 의 값에 bno가 들어가 있음. 
-						var bno = $(this).attr('href');
+						var num = $(this).attr('href');
 						//페이지가 바뀌지 않기 때문에 아래랑 조금 다름/ 
-						frm.find('[name="num"]').val(bno);
+						frm.find('[name="num"]').val(num);
 						frm.attr('action', '/groupware/email/detail');
 						frm.attr('method', 'get');
 						frm.submit();
+						alert("??");
 
 					});
 
 					//클래스 pageLinks 태그 안의 li 태그 안의 a 태그를 찾아서 click 이벤트를 커스터마이징
 
 					$('.pagination li a').click(function() {
-						$(this).css('background-color','gray');
 						event.preventDefault(); //기본 이벤트 처리 방식을 방지 (막음)
 						//pageForm 안에 있는 name="page"인 요소를 찾아서 이동할 페이지 번호를 세팅
 						var targetPage = $(this).attr('href');
@@ -495,8 +544,13 @@ div.center {text-align: center;}
 									valueArrTest : checkArr
 								},
 								success : function() {
-									location.reload();
+									
+									if(data=='OK'){
 
+										alert("test");
+										location.reload();
+}
+								
 								}
 							});
 						}
@@ -512,53 +566,9 @@ div.center {text-align: center;}
 						  });
 						});
 
-				}) 
+				 
 
-				/* 	function getSendMailbox(){	
-							var url='/ex03/replies/all/';
-							$.getJSON(url, function(x){
-							console.log("보낸메일함 :"+x.length);
-								var list='';
-								
-								$(x).each(function(){
 
-							
-							list+=
-							'<tr style="height: 30px" id="tr_header">'
-							+'<td style="width: 50px">'+'<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">'
-							+'<input type="checkbox" id="mail-group-checkbox" onclick="allChk(this);"/>'+'<span>'+'</span>'+'</label>'+'</td>'
-							+'<th style="width: 150px">'+'Date'+'</th>'
-							+'<th style="width: 300px">'+'To'+'</th>'
-							+'<th style="width: 700px">'+'Title'+'</th>'
-							+'<tr/>'
-							+'<tr style="height: 30px" id="tr_inner">'
-							+'<td style="width: 50px">'
-							+'<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">'
-							
-							+'<input type="checkbox" name="RowCheck"  class="mail-group-checkbox row-check-box" value="'
-				+this.num+'/>'
-							+'<span>'
-							+'</span>'
-							+'</label>'
-							+'</td>'
-							+'<td style="width: 150px">'
-							+this.senddate
-							+'</td>'
-							+'<td style="width: 300px">'
-							+this.from_email
-							+'</td>'
-							+'<td style="width: 700px">'
-							+'<a href="detail?num='
-									+this.num+'>'
-									+this.subject
-									+'</a>'
-									+'</td>';
-								});
-								$('#myTable').html(list);
-					
-							});
-				
-					} */
 			</script>
 
 			<!-- BOOTSTRAP SCRIPTS -->

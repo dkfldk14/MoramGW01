@@ -65,6 +65,10 @@ border-right: 1px solid white;
 </head>
 <body>
 
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
+
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
       <div class="navbar navbar-inverse navbar-fixed-top">
@@ -132,9 +136,9 @@ border-right: 1px solid white;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
-                     <li><a href="/../groupware/team_one_board/list">그냥2조</a></li>
-                     <li><a href="/../groupware/team_one_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="/../groupware/team_one_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="/../groupware/team_one_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -245,16 +249,16 @@ border-right: 1px solid white;
 	
 	<br/>
 	
-	<div>
+	<%-- <div>
 		<input type = "text" name="rtext" id="rtext"
 			placeholder ="write it" required/>
 		<input type = "text" name="replier" id="replier"
 			placeholder="ID" value = "${name }" readonly/>
 		<button type = "button" id="btnCreate">Write Comments</button>	
 	</div>
-	<br/>
+	<br/> --%>
 	
-	<div>
+	<!-- <div>
 		<ul id="replies"></ul>
 	</div>
 	<br/>
@@ -265,9 +269,8 @@ border-right: 1px solid white;
 		<input type="text" name="rtext" id="rtext_mod">
 		<br>
 		<button id="btn_delete">Delete</button>
-		<button id="btn_update">Update</button>
 		<button id="btn_cancel">Cancel</button>
-	</div>
+	</div> -->
 	
 </div>
 </div>
@@ -295,6 +298,32 @@ border-right: 1px solid white;
 				$("#frm").submit();
 			});
 			
+///////////////팀 별 게시판 권한 부여 ////////////////////
+			var dept = <%=dept%>;
+			
+			//alert('profileimage : ' + profileimage);
+			if(dept != 1 && dept != 5){
+				$('#authorization1').click(function(){
+					alert('당신은 1조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != 2 && dept != 5){
+				$('#authorization2').click(function(){
+					alert('당신은 2조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != 3 && dept != 5){
+				$('#authorization3').click(function(){
+					alert('당신은 3조가 아닙니다');
+					return false;
+				});
+			}
+			///////////////////////////////////////////////////////
+			
 			
 			$('#btnList').click(function(){
 				location="list?page=${page}";
@@ -302,15 +331,14 @@ border-right: 1px solid white;
 			
 			var bno = ${boardVO.bno};
 			
-			getAllReplies();
+			/* getAllReplies();
 			
 			function getAllReplies(){
 				//$.getJSON(url, data, callback):HTTP GET 요청을 사용해서 JSON 데이터를 로드하는 Ajax 함수
 				//url(필수 파라미터):요청을 보내는 주소
-				//data(선택 파라미터) : 요청과 함께 서버로 보내는 데이터
 				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
 				
-				var url = '/spring/interview_replies/all/'+bno;
+				var url = '/groupware/interview_replies/all/'+bno;
 				$.getJSON(url, function(data){
 					console.log("댓글 개수 : " + data.length);
 					//이름 값들을 받아노느 변수를 선언
@@ -371,7 +399,7 @@ border-right: 1px solid white;
 				
 				$.ajax({
 					type: 'post',
-					url: '/spring/interview_replies',
+					url: '/groupware/interview_replies',
 					headers: {
 						'Content-Type': 'application/json',
 						'X-HTTP-Method-Override': 'POST'
@@ -416,7 +444,7 @@ border-right: 1px solid white;
 					var bno = $('#bno_mod').val();
 					$.ajax({
 						type : 'delete',
-						url : '/spring/interview_replies/'+rno,
+						url : '/groupware/interview_replies/'+rno,
 						headers : {
 							'Content-Type' : 'application/json',
 							'X-HTTP-Method-Override' : 'DELETE'
@@ -440,7 +468,7 @@ border-right: 1px solid white;
 				var text = $('#rtext_mod').val();
 				$.ajax({
 					type : 'put',
-					url : '/spring/interview_replies/'+rno,
+					url : '/groupware/interview_replies/'+rno,
 					headers:{
 						'Content-Type' : 'application/json',
 						'X-HTTP-Method-Override' : 'PUT'
@@ -458,7 +486,7 @@ border-right: 1px solid white;
 					}
 					
 				});
-			});
+			}); */
 			
 			
 		});	

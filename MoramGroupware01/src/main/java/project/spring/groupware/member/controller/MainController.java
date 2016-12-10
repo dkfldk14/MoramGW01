@@ -24,6 +24,8 @@ import project.spring.groupware.board.service.BoardService;
 import project.spring.groupware.member.domain.LoginVO;
 import project.spring.groupware.member.domain.MemberVO;
 import project.spring.groupware.member.service.MemberService;
+import project.spring.groupware.mypage.domain.MyPageBoardVO;
+import project.spring.groupware.mypage.service.MypageBoardService;
 
 @Controller
 public class MainController {
@@ -34,7 +36,11 @@ public class MainController {
 	MemberService service;
 	
 	@Autowired
+	private MypageBoardService mypageBoardService;
+	
+	@Autowired
 	BoardService boardservice;
+
 	
 	@RequestMapping(value="main", method=RequestMethod.POST)
 	public String mainConnect(String user, Model model){
@@ -47,10 +53,18 @@ public class MainController {
 		model.addAttribute("name", name);
 		logger.info(name);
 		
+		
+		//각 조별 게시판으로 들어가도록 dept을 받아옴
+		String dept = vo.getDept();
+		model.addAttribute("dept", dept);
+		
 		String usertype = vo.getUsertype();
+		logger.info("MainController usertype : " + usertype);
 		model.addAttribute("type", usertype);
 		
-		
+		//프로필 이미지 가지고 오기
+		String profileimage=vo.getProfileimage();
+		model.addAttribute("profileimage", profileimage);
 		return "home";
 	}
 	//로그인이 되어있는 상태에서는 로그인 페이지가 접속 불가능하도록 메인 화면으로 연결
@@ -72,11 +86,22 @@ public class MainController {
 		
 		model.addAttribute("name", name);
 		logger.info(name);
+				
+		//각 조별 게시판으로 들어가도록 dept을 받아옴
+		String dept = vo.getDept();
+		model.addAttribute("dept", dept);
+		logger.info("dept : " + dept);
 		
-		model.addAttribute("type", vo.getUsertype());
+		String usertype = vo.getUsertype();
+		logger.info("MainController 1 usertype : " + usertype);
+		model.addAttribute("type", usertype);
+		
+		//프로필 이미지 가지고 오기
+		String profileimage=vo.getProfileimage();
+		model.addAttribute("profileimage", profileimage);
 		
 		model.addAttribute("count", count);
-		
+	
 		return "home";
 	}
 	
@@ -152,12 +177,23 @@ public class MainController {
 	}
 	
 	
-	@RequestMapping(value="my_page", method =RequestMethod.GET)
-	public String mypage(/*Integer page, Model model*/) {
-		System.out.println("마잉");
+/*	@RequestMapping(value="my_page", method =RequestMethod.GET)
+	public void mypagelist(HttpServletRequest request, Model model){
 		
-		return "/mypage/my_page";
-	}
+		HttpSession session = request.getSession();
+		String userid = (String)session.getAttribute("login_id");
+		
+		logger.info("mypage userid : " +userid);
+		
+		List<MyPageBoardVO> list = mypageBoardService.mypagelist(userid);
+		for(MyPageBoardVO vo : list){		
+			logger.info("mypage vo userid : " + vo.getUserid());
+		}
+		
+		model.addAttribute("mypage", list);
+		
+		
+	}*/
 	
 
 }

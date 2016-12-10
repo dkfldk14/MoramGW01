@@ -3,6 +3,7 @@ package project.spring.groupware.member.service;
 
 import java.util.List;
 
+import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.member.domain.MainCheckVO;
 
 public interface MainCheckService {
@@ -24,4 +25,8 @@ public interface MainCheckService {
 	public abstract List<MainCheckVO> selectallweek();
 	
 	public abstract List<MainCheckVO> selectlistpage();
+	
+	public abstract List<BoardVO> selectITnews();
+	
+	public abstract List<BoardVO> selectnotice();
 }

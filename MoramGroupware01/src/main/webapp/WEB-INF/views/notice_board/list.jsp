@@ -30,17 +30,24 @@ display: inline-block;
 <title>Insert title here</title>
 <style>
 table{
-	width : 100%;
+	width : 50%;
+	/* margin : 0 auto; */
+	border-color:#AAAAAA;
+	border-width: 1px;
+	border-style:solid;
+	border-collapse:collapse;
 }
+
 table, th,td{
 	
 	border-bottom : 1px solid gray;
 	border-collapse: collapse;
-}
+} 
 
 th{
-	height : 50%;
-	background-color: lightpink;
+	/* height : 50%; */
+	background-color: #6E6E6E;
+	border-width:1px;
 	border-left: 1px solid gray;
 }
 
@@ -51,6 +58,10 @@ li {
 </style>
 </head>
 <body>
+
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
 
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
@@ -119,9 +130,9 @@ li {
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="../team_one_board/list">시나브로</a></li>
-                     <li><a href="../team_two_board/list">그냥2조</a></li>
-                     <li><a href="../team_three_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="../team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="../team_two_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="../team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -173,7 +184,7 @@ li {
 <!-- 내가 한 코드 -->
 <div id="page-wrapper">
 	<div id="page-inner">
-	<h1>Test for Board</h1>
+	<h1>공지사항</h1>
 	
 	<nav>
 		<ul>
@@ -276,6 +287,32 @@ li {
 			alert("fail, try again");
 		}
 		
+///////////////팀 별 게시판 권한 부여 ////////////////////
+		var dept = <%=dept%>;
+		
+		//alert('profileimage : ' + profileimage);
+		if(dept != 1 && dept != 5){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 2 && dept != 5){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 3 && dept != 5){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
+		
 		
 		var frm = $('#pageForm');
 		$('.pageLinks li a').click(function(){
@@ -324,7 +361,10 @@ li {
 	});
 
 	
-	
+	var profileimage= '${profileimage}';
+	if(profileimage !=null && profileimage!=''){
+		$("#profileimage").attr('src', profileimage);
+	}
 	</script>
 	
 	

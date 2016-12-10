@@ -30,6 +30,7 @@ import project.spring.groupware.board.searchutil.SearchCriteria;
 import project.spring.groupware.board.service.BoardService;
 import project.spring.groupware.board.service.ReplyService;
 import project.spring.groupware.member.domain.MemberVO;
+import project.spring.groupware.member.service.MemberService;
 
 
 
@@ -54,6 +55,9 @@ public class BoardController {
 		HttpSession session = request.getSession();
 		String name = (String)session.getAttribute("name");
 		
+		String profileimage=(String)session.getAttribute("profileimage");
+		System.out.println("profile image : " +profileimage);
+		
 		//userid 를 이름으로 변경
 		List<BoardAddNameVO> listname = null;
 		
@@ -62,6 +66,8 @@ public class BoardController {
 
 		//페이징을 위한 구문
 		PaginationCriteria c = new PaginationCriteria();
+		
+		logger.info("Board parameter page : " + page);
 		
 		if(page != null){
 			c.setPage(page);
@@ -172,23 +178,18 @@ public class BoardController {
 		String id = (String)session.getAttribute("login_id");
 		model.addAttribute("id", id);
 		//System.out.println("id : " + id);
-		
-		/*//reply id 값을 모델에 저장
-		List<ReplyAddNameVO> replyNameList = replyService.selectName(replyvo);
-		
-		//String reply id
-		String replierName = null;
-		for(ReplyAddNameVO vo2 : replyNameList){
-			replierName = vo2.getRname();
-		}
-		model.addAttribute("replyName", replierName );*/
-		
+				
 		//조회수 증가
 		boardService.viewcnt(bno);
 		
 		BoardVO vo = boardService.read(bno);
 		
 		model.addAttribute("boardVO", vo);
+		
+		//각 조별 게시판으로 들어가도록 dept을 받아옴
+		/*MemberVO membervo = memberService.selectName(id);
+		String dept = membervo.getDept();
+		model.addAttribute("dept", dept);*/
 				
 	}
 	

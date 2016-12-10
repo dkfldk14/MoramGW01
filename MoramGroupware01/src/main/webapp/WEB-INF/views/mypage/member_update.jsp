@@ -378,7 +378,7 @@ li{
 					}
 				});
 			});
-			
-			
-		</script></body>
+</script>
+
+</body>
 </html>

@@ -202,7 +202,17 @@
 					<label for="birth">휴대폰 번호</label><br> <input type="tel"
 						class="form-control" id="sell" value="${MemberVO.cellphone }">
 				</div>
-
+				
+				
+				<!-- 내 사진 수정  -->
+				<div class="form-group">
+					<label for="birth">내 사진</label><br>
+					<img src="http://dy.gnch.or.kr/img/no-image.jpg" id="image" width="150px" height="150px"/>
+					<input id="input_file" type="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png"/>
+				</div>
+				<!-- ---------- -->
+				
+				
 				<div class="form-group">
 					<label for="birth">주소</label><br>
 					<div class="input-group">
@@ -401,6 +411,41 @@
 				return false;
 			}else if(true){
 				
+				
+				
+				
+				var file = document.getElementById('input_file');
+				var target = event.currentTarget;
+				var xmlHttpRequest = new XMLHttpRequest();
+				xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+				xmlHttpRequest.setRequestHeader("Authorization", "Client-ID db2d50e6a593a18");
+				xmlHttpRequest.onreadystatechange = function () {
+				if (xmlHttpRequest.readyState == 4) {
+				    if (xmlHttpRequest.status == 200) {
+				       var result = JSON.parse(xmlHttpRequest.responseText);
+				       image.src = result.data.link;
+				       console.log(result);
+				        alert(result.data.link + ' || ' + result.data.type);
+				      }
+				      else {
+				      	alert("업로드 실패");
+				        /* image.src = "http://dy.gnch.or.kr/img/no-image.jpg"; */
+				      }
+				    }
+				  };
+				  if(target.files !=null){
+				  	xmlHttpRequest.send(target.files[0]);
+				  }
+				  var no_image='http://dy.gnch.or.kr/img/no-image.jpg';
+				  var imgur_link = $('#image').attr('src');
+				  
+				  if(no_image===imgur_link){
+					  imgur_link="http://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/128/Places-user-identity-icon.png";
+				  }
+
+				  
+				  
+				
 				$('input[name=sexinfo]:checked').each(function(){ 
 					checked = $(this).val();
 				})
@@ -423,6 +468,7 @@
 						email: $('#email').val(),
 						mailno: $('#post_num').val(),
 						addaddress: $('#another_ad2').val(),
+						profileimage: imgur_link
 					}),
 					success:function(result){
 						if(result == 'OK'){
@@ -437,6 +483,124 @@
 		tabSetting();
 	</script>
 
+
+
+			<!-- /* 내 사진 */ -->
+			<script type="text/javascript">
+			var file = document.getElementById('input_file');
+			var image = document.getElementById('image'); 
+			file.onchange = function (event) {
+			 var target = event.currentTarget;
+			 var xmlHttpRequest = new XMLHttpRequest();
+			 xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
+			 xmlHttpRequest.setRequestHeader("Authorization", "Client-ID db2d50e6a593a18");
+			 xmlHttpRequest.onreadystatechange = function () {
+			   if (xmlHttpRequest.readyState == 4) {
+			     if (xmlHttpRequest.status == 200) {
+			       var result = JSON.parse(xmlHttpRequest.responseText);
+			       image.src = result.data.link;
+			       console.log(result);
+			       alert(result.data.link + ' || ' + result.data.type);
+			     }
+			     else {
+			     	alert("업로드 실패");
+			       image.src = "http://dy.gnch.or.kr/img/no-image.jpg"; 
+			     }
+			   }
+			 };
+			 if(target.files !=null){
+			 	xmlHttpRequest.send(target.files[0]);
+			 }
+			 image.src = "https://nrm.dfg.ca.gov/images/image-loader.gif"; 
+			};
+
+
+			$.fn.setPreview = function(opt){
+			    "use strict"
+			    var defaultOpt = {
+			        inputFile: $(this),
+			        img: null,
+			        w: 200,
+			        h: 200
+			    };
+			    $.extend(defaultOpt, opt);
+			 
+			    var previewImage = function(){
+			        if (!defaultOpt.inputFile || !defaultOpt.img) return;
+			 
+			        var inputFile = defaultOpt.inputFile.get(0);
+			        var img       = defaultOpt.img.get(0);
+			 
+			        // FileReader
+			        if (window.FileReader) {
+			            // image 파일만
+			            if (!inputFile.files[0].type.match(/image\//)) return;
+			 
+			            // preview
+			            try {
+			                var reader = new FileReader();
+			                reader.onload = function(e){
+			                    img.src = e.target.result;
+			                    img.style.width  = defaultOpt.w+'px';
+			                    img.style.height = defaultOpt.h+'px';
+			                    img.style.display = '';
+			                }
+			                reader.readAsDataURL(inputFile.files[0]);
+			            } catch (e) {
+			                // exception...
+			            }
+			        // img.filters (MSIE)
+			        } else if (img.filters) {
+			            inputFile.select();
+			            inputFile.blur();
+			            var imgSrc = document.selection.createRange().text;
+			 
+			            img.style.width  = defaultOpt.w+'px';
+			            img.style.height = defaultOpt.h+'px';
+			            img.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";            
+			            img.style.display = '';
+			        // no support
+			        } else {
+			            // Safari5, ...
+			        }
+			    };
+			 
+			    // onchange
+			    $(this).change(function(){
+			        previewImage();
+			    });
+			};
+			 
+			 
+			$(document).ready(function(){
+			    var opt = {
+			        img: $('#image'),
+			        w: 200,
+			        h: 200
+			    };
+			 
+			    $('#input_file').setPreview(opt);
+			});
+
+
+			function fileCheck(obj) {
+			    pathpoint = obj.value.lastIndexOf('.');
+			    filepoint = obj.value.substring(pathpoint+1,obj.length);
+			    filetype = filepoint.toLowerCase();
+			    if(filetype=='jpg' || filetype=='gif' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
+			        // 정상적인 이미지 확장자 파일일 경우 ...
+			    } else {
+			        alert('이미지 파일만 선택할 수 있습니다.');
+			        parentObj  = obj.parentNode
+			        node = parentObj.replaceChild(obj.cloneNode(true),obj);
+			        return false;
+			    }
+			    if(filetype=='bmp') {
+			        upload = confirm('BMP 파일은 웹상에서 사용하기엔 적절한 이미지 포맷이 아닙니다.\n그래도 계속 하시겠습니까?');
+			        if(!upload) return false;
+			    }
+			}
+			</script>
 
 </body>
 </html>

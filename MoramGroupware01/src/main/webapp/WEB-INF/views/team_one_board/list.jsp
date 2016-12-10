@@ -9,9 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="resources/assets/css/bootstrap.css" />
-<link rel="stylesheet" href="resources/assets/css/font-awesome.css" />
-<link rel="stylesheet" href="resources/assets/css/custom.css" />
+<!-- BOOTSTRAP STYLES-->
+<link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
+   rel="stylesheet" />
+<!-- FONTAWESOME STYLES-->
+<link href="<c:url value="/resources/assets/css/font-awesome.css"/>"
+   rel="stylesheet" />
+<!-- CUSTOM STYLES-->
+<link href="<c:url value="/resources/assets/css/custom.css"/>"
+   rel="stylesheet" />
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
@@ -45,6 +51,11 @@ li {
 </style>
 </head>
 <body>
+
+
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
 
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
@@ -113,9 +124,9 @@ li {
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="../team_one_board/list">시나브로</a></li>
-                     <li><a href="../team_two_board/list">그냥2조</a></li>
-                     <li><a href="../team_three_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="../team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="../team_two_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="../team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -267,6 +278,32 @@ li {
 			alert("fail, try again");
 		}
 		
+///////////////팀 별 게시판 권한 부여 ////////////////////
+		var dept = <%=dept%>;
+		
+		//alert('profileimage : ' + profileimage);
+		if(dept != 1 && dept != 5){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 2 && dept != 5){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != 3 && dept != 5){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
+		
 		
 		var frm = $('#pageForm');
 		$('.pageLinks li a').click(function(){
@@ -315,7 +352,10 @@ li {
 	});
 
 	
-	
+	var profileimage= '${profileimage}';
+	if(profileimage !=null && profileimage!=''){
+		$("#profileimage").attr('src', profileimage);
+	}
 	</script>
 	
 	

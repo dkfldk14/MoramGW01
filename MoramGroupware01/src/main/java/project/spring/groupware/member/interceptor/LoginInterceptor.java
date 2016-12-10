@@ -29,6 +29,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 			session.removeAttribute(SESSION_ATTR_ID);
 			session.removeAttribute("usertype");
 			session.removeAttribute("name");
+			session.removeAttribute("dept");
+			session.removeAttribute("profileimage");
+			
 			logger.info("기존 로그인 정보 삭제됨");
 		} else { // 세션에 로그인 정보가 없는 경우
 			logger.info("기존 로그인 정보 없음");
@@ -52,12 +55,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		String id = (String) mav.getModel().get("id");
 		String type = (String) mav.getModel().get("type");
 		String name = (String) mav.getModel().get("name");
+		String dept = (String) mav.getModel().get("dept");
+		String profileimage = (String) mav.getModel().get("profileimage");
+		
 		logger.info("아이디:"+id);
 		if(id != null){ //DB에 일치하는 id/pw 정보와 일치
 			logger.info("새로운 로그인 성공");
 			session.setAttribute(SESSION_ATTR_ID, id);
 			session.setAttribute("usertype", type);
 			session.setAttribute("name", name);
+			session.setAttribute("dept", dept);
+			session.setAttribute("profileimage", profileimage);
 		}
 	} // end postHandle()
 }

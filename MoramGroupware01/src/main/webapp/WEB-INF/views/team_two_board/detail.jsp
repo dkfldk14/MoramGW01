@@ -37,7 +37,6 @@
 	width:300px; height:100px;
 	backgroud-color:lightgray;
 	position:absolute;
-	top:30%; left:30%;
 	display:none;
 }
 .div1{
@@ -61,11 +60,36 @@ border-right: 1px solid white;
 }
 
 
+ul{
+	list-style:none;
+}
+ul.mylist li {
+	margin-left:-40px;
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    font-size: 12px;
+}
+.regdate{
+	text-align: right;
+}
+
+#updateReply{
+	
+}
+#modify input {
+	margin: 2px;
+}
 
 </style>
 <title>Insert title here</title>
 </head>
 <body>
+
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
+
 
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
@@ -134,9 +158,9 @@ border-right: 1px solid white;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
-                     <li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
-                     <li><a href="/../groupware/team_three_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="/../groupware/team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -210,15 +234,7 @@ border-right: 1px solid white;
 				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
 			</th>	
 		</tr>
-		
-<<<<<<< HEAD
-		<button type="button" id="btnList">Go to List</button>
-			<c:if test="${boardVO.userid eq id }">
-		<button type="submit" id="updatebutton">Update</button>
-		</c:if> 
-		<input type="hidden" name="page" value="${page }" />
-			
-=======
+	
 		<tr>
 			<td>
 				<!-- Writer -->
@@ -236,9 +252,11 @@ border-right: 1px solid white;
 
 		<tr>
 			<td style="height: 50px;">
-				<button type="button" id="btnList">Go to List</button>
-				<button type="submit" id="updatebutton">Update</button>
-				<input type="hidden" name="page" value="${page }" />
+		<button type="button" id="btnList">Go to List</button>
+			<c:if test="${boardVO.userid eq id }">
+		<button type="submit" id="updatebutton">Update</button>
+		</c:if> 
+		<input type="hidden" name="page" value="${page }" />
 			</td>
 		</tr>
 		
@@ -248,7 +266,6 @@ border-right: 1px solid white;
 	</tbody>
 	</table>
 	
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 	</form>
 	<!-- ---------------------------- -->
 	
@@ -264,7 +281,7 @@ border-right: 1px solid white;
 	<br/>
 	
 	<div>
-		<ul id="replies"></ul>
+		<ul class="mylist" id="replies"></ul>
 	</div>
 	<br/>
 	
@@ -299,6 +316,34 @@ border-right: 1px solid white;
 	<script>
 		$(document).ready(function(){
 			
+///////////////팀 별 게시판 권한 부여 ////////////////////
+			var dept = <%=dept%>;
+			
+			//alert('profileimage : ' + profileimage);
+			if(dept != 1 && dept != 5){
+				$('#authorization1').click(function(){
+					alert('당신은 1조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != 2 && dept != 5){
+				$('#authorization2').click(function(){
+					alert('당신은 2조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != 3 && dept != 5){
+				$('#authorization3').click(function(){
+					alert('당신은 3조가 아닙니다');
+					return false;
+				});
+			}
+			///////////////////////////////////////////////////////
+			
+			
+			
 			$("#updatebutton").click(function(){
 				obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 				
@@ -313,6 +358,13 @@ border-right: 1px solid white;
 			var bno = ${boardVO.bno};
 			
 			getAllReplies();
+			
+			
+			/* var update = $("#updateReply");
+            
+			var divX = update.offset().right;
+			var divY = update.offset().top; */
+
 			
 			function getAllReplies(){
 				//$.getJSON(url, data, callback):HTTP GET 요청을 사용해서 JSON 데이터를 로드하는 Ajax 함수
@@ -349,7 +401,7 @@ border-right: 1px solid white;
 							+'<span class="regdate">'
 							+dateString+' '
 							+'</span>'						
-							+ '<button>수정</button>'						
+							+ '<button id="updateReply">수정</button>'						
 							+'</li>';
 							
 							}else{
@@ -405,7 +457,20 @@ border-right: 1px solid white;
 			});//end btnCreate		
 			
 			$('#replies').on('click', '.reply_list button', function(){
+				var update = $("#updateReply");
+				
+				
+				var divY = update.offset().top;
+				var divX = update.offset().left;
+/* 				$('#modify').offset({top:divY});
+				$('#modify').offset({right:divX}); */
+				var modify = $("#modify");
+				modify.offset({top:divY});
+				modify.offset({left:divX});
 				$('#modify').show();
+				
+	            
+				
 				
 				var reply=$(this).parent();
 				var rno = $(reply).attr('data-rno');

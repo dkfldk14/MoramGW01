@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix ="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,28 +24,7 @@
 	<!-- 날씨 css -->
 <link href="<c:url value="/resources/assets/css/weather.css"/>"
 	rel="stylesheet" />
-	
-<<<<<<< HEAD
-	<style>
-#logoutButton{
-background-color: #ffd777;
-border: 1px solid #3fc3c4;
-color: #3f3f3f;
-font-size: 110%;
-padding: 7px;
-margin: 10px;
-}
 
-#logoutButton:hover {
-	background-color: #3fc3c4;
-	border: 1px solid #ffd777;
-	color: #ffffff;
-}
-	</style>
-	
-	
-=======
-	
 <style>
 #logoutButton{
 background-color: #ffd777;
@@ -60,14 +40,20 @@ margin: 10px;
 	border: 1px solid #ffd777;
 	color: #ffffff;
 }
+#profileimage{
+border-radius: 70px;
+-moz-border-radius: 7px;
+-khtml-border-radius: 7px;
+-webkit-border-radius: 7px;
+}
+</style>
+	
 
-
-
-</style>	
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
-</head>
+</head>  
 <body>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
+<% String dept = String.valueOf(session.getAttribute("dept"));%>
+
 	<%-- <% String id = String.valueOf(session.getAttribute("login_id")); %> --%>
 	<div id="login_id" data-id=${id } style="display: hidden;"></div>
 
@@ -107,22 +93,23 @@ margin: 10px;
 							<br/>
 						</div>
 					</li>
-				
+					
 					<li class="text-center user-image-back"><img
 						src="<c:url value="resources/assets/img/find_user.png"/>"
-						align="center" /> <class ="img-responsive" /></li>
+						align="center" id="profileimage" width="128px" height="128px"/> 
+						<span>Moram 소속 1팀 </span><class ="img-responsive" /></li>
 
 
-					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
-					<li><a href=""><i class="fa fa-edit "></i>결재<span class="fa arrow"></span></a>
+					<li id="test" class="current"><a href="/groupware/main1"><img alt="" src="resources/assets/img/main.png"/> MAIN PAGE</a></li>
+					<li><a href=""><img alt="" src="resources/assets/img/approval.png"/> 결재<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함page</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
 							<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
 							<li id="test" class="childTab"><a href="/groupware/draft/approval-return">반려함</a></li>
 							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 						</ul></li>
 
-					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
+					<li><a href="#"><img alt="" src="resources/assets/img/email.png"/> 전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
@@ -145,13 +132,14 @@ margin: 10px;
 						</ul></li>
 
 
-					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
+					<li><a href="#"><img alt="" src="resources/assets/img/teamproject.png"/> Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-
-							<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
-							<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
-							<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
+							
+							<!-- authorization은 각 조별 게시판에 들어가도록 권한을 부여 -->
+							<li class="childTab" id = "authorization1"><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 
 							<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
@@ -170,14 +158,14 @@ margin: 10px;
 
                             </li> -->
 						</ul></li>
-					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
+					<li><a href="#"><img alt="" src="resources/assets/img/mypage.png"/> 마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
-							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
-					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
+					<li id="admin"><a href="#"><img alt="" src="resources/assets/img/manager.png"/> 관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
@@ -204,7 +192,7 @@ margin: 10px;
 				<div class="row">
 					<div class="col-md-12">
 						      <h2>${name}님,<%-- <%=type %> --%></h2>   
-                        <h5> ♡★시공의 폭풍★시공의 폭풍으로 당신을 초대합니다!♠하스스톤 뒷면♠&☞레전더리 高級레스토랑☜의 음식 지급! 지금 이 기회를 놓지지 마세요!☞ ☎ h t t p://k r. b a t t l e . n e t /h e r e s/☎ ♡ </h5>
+                        <h5> ＜바꿔달라는 요청이 있어서 바꿉니다 ㅠ＞ </h5>
 					</div>
 				</div>
 				<!-- /. ROW  -->
@@ -345,83 +333,32 @@ margin: 10px;
 				<!-- 게시판 -->
 				<div class="row">
 					<div class="col-md-6">
-						<h5>Table Sample One</h5>
+						<h5>IT NEWS</h5>
 						<table class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Username</th>
+									<th>TITLE</th>
+									<th>DATE</th>
+	
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>@fat</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Larry</td>
-									<td>the Bird</td>
-									<td>@twitter</td>
-								</tr>
-							</tbody>
+							<tbody id = "ittablebody"></tbody>
 						</table>
 
 					</div>
 					<div class="col-md-6">
-						<h5>Table Sample Two</h5>
-						<div class="table-responsive">
-							<table class="table">
+						<h5>NOTICE</h5>
+						<div>
+							<table class="table table-striped table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>First Name</th>
-										<th>Last Name</th>
-										<th>Username</th>
+										<th>TITLE</th>
+										<th>DATE</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr class="success">
-										<td>1</td>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
-									</tr>
-									<tr class="info">
-										<td>2</td>
-										<td>Jacob</td>
-										<td>Thornton</td>
-										<td>@fat</td>
-									</tr>
-									<tr class="warning">
-										<td>3</td>
-										<td>Larry</td>
-										<td>the Bird</td>
-										<td>@twitter</td>
-									</tr>
-									<tr class="danger">
-										<td>4</td>
-										<td>John</td>
-										<td>Smith</td>
-										<td>@jsmith</td>
-									</tr>
-								</tbody>
+								<tbody id = "noticebody"></tbody>	
 							</table>
 						</div>
 					</div>
@@ -481,6 +418,7 @@ margin: 10px;
 	<script type="text/javascript">
 	
 	var admin = <%=type%>
+	var dept = <%=dept%>
 	function tabSetting() {
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 		/* $('.test').hide();
@@ -488,7 +426,7 @@ margin: 10px;
  		
 		console.log("값:"+admin);
 		if(admin != 1){
-			$('#admin').hide();	
+			$('#admin').hide();			
 		}
 				
 		if(admin==0){
@@ -498,6 +436,29 @@ margin: 10px;
 			})
 		}
 		
+		//팀별 게시판에 각 팀원 들이 들어가게끔 수정해야한다.
+		//오쌤은 dept 값이 5번이므로 모든 팀프로젝트 게시판에 들어가야한다.
+		
+		if(dept != 1 && dept != 5){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다.');
+				return false;
+			})
+		}
+		
+		if(dept != 2 && dept != 5){
+			$('#authorization2').click(function() {
+				alert('당신은 2조가 아닙니다.');
+				return false;
+			})
+		}
+		
+		if(dept != 3 && dept != 5){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다.');
+				return false;
+			})
+		}
 	
 	}
 		 function logout(){
@@ -552,6 +513,11 @@ margin: 10px;
 		tabSetting();
 	/* }); */
 	
+	
+	var profileimage= '${profileimage}';
+	if(profileimage !=null && profileimage!=''){
+		$("#profileimage").attr('src', profileimage);
+	}
 	</script>
 
 
