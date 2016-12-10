@@ -56,4 +56,7 @@ where from_email = #{groupemail} and state = 2 order by senddate desc
  update moram_group_email set state=0 where num = #{num}
 	 </update>
  
+ <select id="select_mail_num" resultType="Integer">
+ 	select max(num) from moram_group_email
+ </select>
  </mapper>

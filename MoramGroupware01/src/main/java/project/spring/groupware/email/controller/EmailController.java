@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -69,7 +70,7 @@ public class EmailController {
 	private final String Pwd="6557";
 	private String gwEmail=null;
 	private Message[] messages;	
-	private int num=1;
+	private int sendmailct=200;
 	
 	@RequestMapping(value="/list")
 	public void EmailList(Integer page,Model model,HttpServletRequest request){
@@ -544,8 +545,9 @@ public class EmailController {
 
 		   // Send message
 		   Transport.send(message);
-		   num+=num;
-			EmailVO emailvo=new EmailVO(num, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), address[z], null, 1);
+		   sendmailct = emailServiceDAO.select_mail_num();
+		   sendmailct+=1;
+			EmailVO emailvo=new EmailVO(sendmailct, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), address[z], null, 1);
 			emailServiceDAO.insert(emailvo);
 			logger.info("vo 값 : "+vo.getSubject() );
 			logger.info("vo값 : "+vo.getFrom_email());
@@ -588,9 +590,11 @@ public class EmailController {
 			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌. 
 		   }
 		
+		   logger.info("메일가져온거 맞냐.. : "+mvo.getGroupemail());
 		List<EmailVO> vo=emailServiceDAO.send_emailList(mvo.getGroupemail());
 		String from_email=mvo.getGroupemail();
 		//넣어주는거 ㅇ-
+		
 		List<EmailVO> vo1=emailServiceDAO.adressList(1, c, mvo.getGroupemail());
 		model.addAttribute("sendCount", vo.size());
 		model.addAttribute("email", vo1);

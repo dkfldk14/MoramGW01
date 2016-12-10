@@ -22,5 +22,6 @@ public interface emailDAO {
 	public abstract EmailVO detailEmail(int num);
 	
 	public abstract int delete_change(int num);
+	public abstract int select_mail_num();
 	
 }

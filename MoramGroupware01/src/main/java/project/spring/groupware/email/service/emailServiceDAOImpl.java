@@ -75,4 +75,9 @@ public int totalEmailct(String state, String groupemail) {
 		return dao.delete_change(num);
 	}
 	
+	@Override
+	public int select_mail_num() {
+		// TODO Auto-generated method stub
+		return dao.select_mail_num();
+	}
 }

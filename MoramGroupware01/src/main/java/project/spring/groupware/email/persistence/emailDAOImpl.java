@@ -67,7 +67,7 @@ public class emailDAOImpl implements emailDAO {
 			*/
 			Map<String,Object> adresslist=new HashMap<>();
 			adresslist.put("Element", element);
-			adresslist.put("from_email", "dkfldk14@moram.com");
+			adresslist.put("from_email", from_email);
 			
 			List<EmailVO> VO=SqlSession.selectList(NAMESPACE+".adressList",adresslist);
 			for(int i=0; i<VO.size();i++){
@@ -105,5 +105,11 @@ public class emailDAOImpl implements emailDAO {
 	public int delete_change(int num) {
 	  
 		return  SqlSession.update(NAMESPACE+".delete_change", num);
+	}
+	
+	@Override
+	public int select_mail_num() {
+		// TODO Auto-generated method stub
+		return SqlSession.selectOne(NAMESPACE+".select_mail_num");
 	}
 }
