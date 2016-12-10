@@ -6,7 +6,7 @@ public class PaginationCriteria {
 	
 	public PaginationCriteria(){
 		page = 1;
-		perPage = 3;
+		perPage = 5;
 		
 	}
 	

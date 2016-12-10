@@ -30,17 +30,24 @@ display: inline-block;
 <title>Insert title here</title>
 <style>
 table{
-	width : 100%;
+	width : 50%;
+	/* margin : 0 auto; */
+	border-color:#AAAAAA;
+	border-width: 1px;
+	border-style:solid;
+	border-collapse:collapse;
 }
+
 table, th,td{
 	
 	border-bottom : 1px solid gray;
 	border-collapse: collapse;
-}
+} 
 
 th{
-	height : 50%;
-	background-color: lightpink;
+	/* height : 50%; */
+	background-color: #6E6E6E;
+	border-width:1px;
 	border-left: 1px solid gray;
 }
 
@@ -177,7 +184,7 @@ li {
 <!-- 내가 한 코드 -->
 <div id="page-wrapper">
 	<div id="page-inner">
-	<h1>Test for Board</h1>
+	<h1>공지사항</h1>
 	
 	<nav>
 		<ul>
