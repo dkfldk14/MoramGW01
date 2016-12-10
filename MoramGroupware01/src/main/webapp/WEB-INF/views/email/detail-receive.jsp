@@ -187,9 +187,7 @@ ul {
 			<div id="page-inner">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>손동민님,</h2>
-						<h5>♡반갑습니당. 오늘하루도 힘내십시오 ♡</h5>
-
+						
 					</div>
 				</div>
 
@@ -270,7 +268,7 @@ ul {
 
 $(document).ready(function(){
     $("#listclick").click(function(){
-        location="list";
+        location="list?page=1";
     });
     
     $("#listup").click(function(){

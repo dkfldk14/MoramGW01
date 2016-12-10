@@ -387,7 +387,7 @@ div.center {text-align: center;}
 
 
 							</table>
-
+							<input type="hidden" name=email_from/>
 	
 							<p>
 							<div id="labelcenter">

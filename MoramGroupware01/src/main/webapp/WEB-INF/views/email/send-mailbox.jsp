@@ -376,7 +376,7 @@ div.center {text-align: center;}
 													type="checkbox" name="RowCheck"
 													class="mail-group-checkbox row-check-box" value="${email.num }" /><span></span></label></td>
 											<td style="width: 150px">${email.senddate }</td>
-											<td style="width: 300px">${email.to_email }</td>	
+											<td style="width: 300px"><a href="" onclick="location();">${email.to_email }</a></td>	
 											<td style="width: 1000px">
 											<a	href="${email.num }">${email.subject }</a></td>
 										</tr>
@@ -431,7 +431,7 @@ div.center {text-align: center;}
 						</div>
 					</div>
 					<form id="pageForm">
-						<input type="hidden" name="num" value="${pageMaker.criteria.page } "/> 
+						<input type="hidden" name="num"/> 
 						<input type="hidden" name="page" value="${pageMaker.criteria.page}" /> 
 						<input type="hidden" name="perPage" value="${pageMaker.criteria.perPage }" />
 
@@ -476,9 +476,10 @@ div.center {text-align: center;}
 						event.preventDefault();
 						//bno 의 값은 클릭한 this 의 값에 bno가 들어가 있음. 
 						var num = $(this).attr('href');
+						alert(num);
 						//페이지가 바뀌지 않기 때문에 아래랑 조금 다름/ 
 						frm.find('[name="num"]').val(num);
-						frm.attr('action', '/groupware/email/detail');
+						frm.attr('action', 'detail-other');
 						frm.attr('method', 'get');
 						frm.submit();
 						alert("??");
