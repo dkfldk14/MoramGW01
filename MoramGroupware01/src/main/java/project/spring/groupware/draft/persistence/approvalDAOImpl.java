@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 
 import project.spring.groupware.draft.domain.ApprovalVO;
 import project.spring.groupware.draft.domain.DrafterDTO;
+import project.spring.groupware.draft.domain.FinishDTO;
 import project.spring.groupware.draft.domain.ReturnDTO;
 import project.spring.groupware.draft.pageutil.PaginationCriteria;
+import project.spring.groupware.member.domain.MemberVO;
 
 
 @Repository
@@ -43,17 +45,22 @@ public class approvalDAOImpl implements approvalDAO {
 	@Override
 	public int createDraft(ApprovalVO vo) {
 		logger.info("id: " + vo.getId());
-		logger.info("id: " + vo.getName());
-		logger.info("id: " + vo.getDept());
-		logger.info("id: " + vo.getApprovalno());
-		logger.info("id: " + vo.getTitle());
-		logger.info("id: " + vo.getApprovalname());
-		logger.info("id: " + vo.getContent());
-		logger.info("id: " + vo.getFinal_id1());
+		logger.info("name: " + vo.getName());
+		logger.info("dept: " + vo.getDept());
+		logger.info("approvalno: " + vo.getApprovalno());
+		logger.info("title: " + vo.getTitle());
+		logger.info("approvalname: " + vo.getApprovalname());
+		logger.info("content: " + vo.getContent());
+		logger.info("final_id1: " + vo.getFinal_id1());
 		logger.info("id: " + vo.getFinalize());
 		logger.info("id: " + vo.getDraft_index());
 		int result = sqlSession.insert(NAMESPACE + ".insertTest", vo);
 		return result;
+	}
+	
+	@Override
+	public List<MemberVO> selectForPopup() {
+		return sqlSession.selectList(NAMESPACE + ".selectAll");
 	}
 
 	@Override
@@ -142,6 +149,11 @@ public class approvalDAOImpl implements approvalDAO {
 	public int createFinish(ApprovalVO vo) {
 		int result = sqlSession.insert(NAMESPACE + ".insertFinish", vo);
 		return result;
+	}
+	
+	@Override
+	public String selectFinalid(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectForFinalid", draft_index);
 	}
 	
 	@Override
@@ -239,7 +251,7 @@ public class approvalDAOImpl implements approvalDAO {
 	public List<DrafterDTO> selectForFinalizerId(String id) {
 		if(id != null) {
 			System.out.println(id);
-			return sqlSession.selectList(NAMESPACE + ".selectForFinalid", id);
+			return sqlSession.selectList(NAMESPACE + ".selectForFinalize", id);
 		} else {
 			return null;
 		}
@@ -248,10 +260,58 @@ public class approvalDAOImpl implements approvalDAO {
 	@Override
 	public List<ReturnDTO> selectForReturnId(String id) {
 		if(id != null) {
-			return sqlSession.selectList(NAMESPACE + ".selectForReturnid", id);
+			Map<String, String> args = new HashMap<>();
+			args.put("id", id);
+			args.put("final_id1", id);
+			args.put("final_id2", id);
+			args.put("final_id3", id);
+			args.put("final_id4", id);
+			args.put("final_id5", id);
+			return sqlSession.selectList(NAMESPACE + ".selectForReturn", args);
 		} else {
 			return null;
 		}
+	}
+	
+	@Override
+	public List<FinishDTO> selectForFinishId(String id) {
+		if(id != null) {
+			Map<String, String> args = new HashMap<>();
+			args.put("id", id);
+			args.put("final_id1", id);
+			args.put("final_id2", id);
+			args.put("final_id3", id);
+			args.put("final_id4", id);
+			args.put("final_id5", id);
+			return sqlSession.selectList(NAMESPACE + ".selectForFinish", args);
+		} else {
+			return null;
+		}
+	}
+	
+	@Override
+	public String selectFinal_id1(String name) {
+		return sqlSession.selectOne(NAMESPACE + ".selectID_final_id1", name);
+	}
+	
+	@Override
+	public String selectFinal_id2(String name) {
+		return sqlSession.selectOne(NAMESPACE + ".selectID_final_id2", name);
+	}
+	
+	@Override
+	public String selectFinal_id3(String name) {
+		return sqlSession.selectOne(NAMESPACE + ".selectID_final_id3", name);
+	}
+	
+	@Override
+	public String selectFinal_id4(String name) {
+		return sqlSession.selectOne(NAMESPACE + ".selectID_final_id4", name);
+	}
+	
+	@Override
+	public String selectFinal_id5(String name) {
+		return sqlSession.selectOne(NAMESPACE + ".selectID_final_id5", name);
 	}
 	
 }
