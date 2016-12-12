@@ -454,7 +454,7 @@ $(document).ready(function(){
 		      data.addColumn('number', 'Slices');
 		      data.addRows([
 		        ['출석', size],//출석인원
-		        ['결석', 29-size]//결석인원
+		        ['결석', 30-size]//결석인원
 		      ]);
 		      
 		      // 타이틀, 높이, 길이 정보

@@ -72,6 +72,9 @@
 		order by bno desc 
 	</select>
 	
+	<select id="memberimage" resultType="project.spring.groupware.member.domain.MemberVO">
+	select id, name, profileimage from moram_member where name = #{name} 
+	</select>
 	
 	
 </mapper>

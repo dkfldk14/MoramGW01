@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.member.domain.MainCheckVO;
+import project.spring.groupware.member.domain.MemberVO;
 import project.spring.groupware.member.persistence.MainCheckDAO;
 
 @Service
@@ -65,6 +66,13 @@ public class MainCheckServiceImpl implements MainCheckService {
 	public List<BoardVO> selectnotice() {
 		return mainDAO.selectnotice();
 	}
+
+	@Override
+	public List<MemberVO> memberimage(String name) {
+		return mainDAO.memberimage(name);
+	}
+	
+	
 
 
 }
