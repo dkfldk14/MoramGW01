@@ -524,8 +524,8 @@ border-radius: 70px;
 	
 	<script type="text/javascript">
 	
-	var admin = <%=type%>
-	var dept = <%=dept%>
+	var admin = '<%=type%>';
+	var dept = '<%=dept%>';
 	function tabSetting() {
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 		/* $('.test').hide();

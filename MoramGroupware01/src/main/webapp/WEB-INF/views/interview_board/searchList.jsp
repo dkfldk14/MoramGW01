@@ -19,6 +19,10 @@
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
+   
+   <!-- board-list -->
+<link href="<c:url value="/resources/assets/css/board-list.css"/>"
+   rel="stylesheet" />
 <style>
 table {
 	width: 100%;
@@ -179,12 +183,52 @@ li {
 
 				<ul>
 					<li><a href="list">전체 리스트로...</a>
+						<button type="button" class="btn btn-default" onclick="location.href='list">전체 리스트</button>
 				</ul>
 
 				</nav>
+				
 
 
-				<table>
+
+				
+				<table class="table_list">
+	<colgroup>
+	<col width = "8%"/>
+	<col width = "*"/>
+	<col width = "10%"/>
+	<col width = "20%"/>
+	<col width = "8%"/>
+	</colgroup>
+	<thead>
+		<th scope="col" class="col">번호</th>
+		<th scope="col" class="col">제목</th>
+		<th scope="col" class="col">작성자</th>
+		<th scope="col" class="col">작성일</th>
+		<th scope="col" class="col">조회수</th>
+	</thead>
+	<tbody>
+		
+		<c:forEach var = "vo" items="${searchList }">
+			<tr>
+				<td class="num">${vo.bno }</td>
+				<td class="title">
+					<a href="${vo.bno}">${vo.title }(${vo.replycnt})</a>
+				</td>
+				<td>${vo.name }</td>
+				<td class="date"><fmt:formatDate value="${vo.regdate }"
+					pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td class="num">${vo.viewcnt }</td>
+			</tr>
+		</c:forEach>
+		
+	</tbody>
+	</table>
+	
+	<button type="button" class="btn btn-default"
+								id="" onclick="location.href='ㄹㄹㄹㄹ"></button>
+				
+				<%-- <table>
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
@@ -204,23 +248,25 @@ li {
 						</tr>
 					</c:forEach>
 
-				</table>
+				</table> --%>
+
+					<hr/>
 
 				<ul class="pageLinks">
 					<c:if test="${pageMaker.hasPrev }">
-						<li><a href="${pageMaker.startPageNum - 1 }">Prev</a></li>
+						<li><a href="${pageMaker.startPageNum -1 }">Prev</a></li>
 					</c:if>
 
 					<c:forEach begin="${pageMaker.startPageNum }"
 						end="${pageMaker.endPageNum }" var="num">
-						<li><a href="${num }">${num }</a></li>
 
+						<li><button type="button" class="btn btn-default"
+								id="pagebtn${num}" onclick="location.href='?page=${num}'">${num}</button></li>
 					</c:forEach>
 
 					<c:if test="${pageMaker.hasNext }">
-						<li><a href="${pageMaker.endPageNum + 1 }">Next</a>
+						<li><a href="${pageMaker.endPageNum + 1 }">Next</a></li>
 					</c:if>
-
 				</ul>
 
 				<form id="pageForm">
@@ -250,7 +296,7 @@ li {
 	$(document).ready(function(){
 		
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-		var dept = <%=dept%>;
+		var dept = '<%=dept%>';
 		
 		//alert('profileimage : ' + profileimage);
 		if(dept != 1 && dept != 5){
