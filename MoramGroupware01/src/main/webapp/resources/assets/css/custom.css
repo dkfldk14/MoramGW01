@@ -14,18 +14,20 @@
     =============================================*/
 body {
     font-family: 'Open Sans', sans-serif;
+     background-color: #b3e5d8;
 }
 
  #wrapper {
     width: 100%;
     margin-top:50px;
-    background-color: #424a5d;
+    background-color: #fff;
 }
 
 #page-wrapper {
     padding: 15px 15px;
     min-height: 600px;
-    background:#F3F3F3;
+    background-color: #ffffff;
+
    
 }
 #page-inner {
@@ -39,9 +41,11 @@ body {
 
 .text-center {
     text-align:center;
+   
 }
 .user-image-back {
-	 background-color : #424a5d;
+	 background-color : #b3e5d8;
+	 
 }
 h5,.h5 {
     font-size: 14px;
@@ -87,18 +91,20 @@ color: #06F;
 }
 .sidebar-collapse , .sidebar-collapse .nav{
 	 /* background:none; */
-	 background-color: gray;
+	 background-color: #b3e5d8;
+	 
 	
 }
 .sidebar-collapse .nav {
 	padding:0;
-	background-color: #424a5d;
+	background-color: #b3e5d8;
 }
 .sidebar-collapse .nav > li > a {
- background-color: #424a5d;
- border: 7px solid #424a5d;
+ background-color: #b3e5d8;
+ border: 7px solid #b3e5d8;
 text-shadow: none;
-color:#808080;
+color:#000000;
+
 }
 .sidebar-collapse > .nav > li > a {
 	padding:15px 10px;
@@ -109,15 +115,16 @@ color:#808080;
 .sidebar-collapse .nav > li > a:hover,
 .sidebar-collapse .nav > li > a:focus {
 	
-	background:#68dff0;
+	background:#95e5d0;
 	outline:0;
-	color:#ffffff;
-	font: #CFCFCF;
+	color:#7a7a7a;
+	font-weight : 800;
+	font: #000000;
 }
 .nav-second-level  > li:last-child > a:after,
 .nav-third-level  > li:last-child > a:after {
 	height:50%;
-	background-color: #424a5d;
+	background-color: #f2f2f2;
 }
 .nav-third-level > li > a:after,
 .nav-third-level > li > a:before  {
@@ -136,18 +143,18 @@ border-color: #D3D3D3;
 
 .navbar-default {
 border:0px solid #DDDDDD;
-background-color: #424a5d;
+background-color: #f2f2f2;
      
 }
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
 background-color: #B40101;
 }
 .navbar-default .navbar-toggle {
-border-color: #424a5d;
+border-color: #f4f2f2;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
-background-color: #424a5d;
+background-color: #f2f2f2;
 }
 .nav > li > a > i {
     margin-right:10px;
@@ -171,7 +178,7 @@ background-color: #8B7BFF;
 }
 .adjust-nav {
     padding-left:20px;padding-right:20px;
-	 background-color : #59dfdf;
+	 background-color : #40efbe;
 }
 .navbar-toggle {
     background-color: #8B7BFF;
@@ -187,7 +194,7 @@ color: #fff;
 }
 
 .no-boder {
-border: 1px solid #f3f3f3;
+border: 1px solid #ffffff;
 }
 .back-footer-blue {
 background-color: #7479E6;
@@ -236,19 +243,27 @@ border-radius: 0px;
                margin: 0 0 0 260px;
         padding: 15px 30px;
         min-height: 1200px;
-         background-color : #FFFFFF;
+        
+      
+       
 		
     }
 	
 	
     .navbar-side {
         z-index: 1;
+       
         position: absolute;
         width: 260px;
     }
 
    .navbar {
  border-radius: 0px; 
+}
+
+#navPM{
+	
+	background-color: black;
 }
    
 }
