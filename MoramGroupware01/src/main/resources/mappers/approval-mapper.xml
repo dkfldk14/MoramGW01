@@ -244,5 +244,9 @@
 	select id from moram_member
 	where name = #{name}
 	</select>
+	
+	<select id="count_approval" resultType="Integer">
+		select count(*) from MORAM_APPROVAL_ORDER where final_id = #{id}
+	</select>
 
 </mapper>

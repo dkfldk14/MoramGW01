@@ -93,5 +93,18 @@ public class MemberDAOImple implements MemberDAO {
 		int result = sqlsession.update(NAMESPACE+".member_info_update", vo);
 		return result;
 	}
+	@Override
+	public int adminAllmem() {
+		// TODO Auto-generated method stub
+		int result = sqlsession.selectOne(NAMESPACE+".admin_all_member");
+		return result;
+	}
+	@Override
+	public int adminUsertypeMem() {
+		// TODO Auto-generated method stub
+		String usertype = "미승인";
+		int result = sqlsession.selectOne(NAMESPACE+".admin_usertype_member", usertype);
+		return result;
+	}
 
 }

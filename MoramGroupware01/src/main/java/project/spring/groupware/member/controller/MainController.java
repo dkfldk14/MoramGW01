@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import project.spring.groupware.board.service.BoardService;
+import project.spring.groupware.draft.persistence.approvalDAO;
 import project.spring.groupware.member.domain.LoginVO;
 import project.spring.groupware.member.domain.MemberVO;
 import project.spring.groupware.member.service.MemberService;
@@ -41,6 +42,8 @@ public class MainController {
 	@Autowired
 	BoardService boardservice;
 
+	@Autowired
+	approvalDAO dao;
 	
 	@RequestMapping(value="main", method=RequestMethod.POST)
 	public String mainConnect(String user, Model model){
@@ -53,15 +56,21 @@ public class MainController {
 		model.addAttribute("name", name);
 		logger.info(name);
 		
-		
+		int count = boardservice.infoCount();
 		//각 조별 게시판으로 들어가도록 dept을 받아옴
 		String dept = vo.getDept();
 		model.addAttribute("dept", dept);
 		
+		int noUser = service.adminUsertypeMem();
+		model.addAttribute("noUser", noUser);
+		
+		int count_ap = dao.count_approval(user);
+		model.addAttribute("count_ap", count_ap);
+		
 		String usertype = vo.getUsertype();
 		logger.info("MainController usertype : " + usertype);
 		model.addAttribute("type", usertype);
-		
+		model.addAttribute("count", count);
 		//프로필 이미지 가지고 오기
 		String profileimage=vo.getProfileimage();
 		model.addAttribute("profileimage", profileimage);
@@ -87,6 +96,13 @@ public class MainController {
 		model.addAttribute("name", name);
 		logger.info(name);
 				
+		int noUser = service.adminUsertypeMem();
+		model.addAttribute("noUser", noUser);
+		
+		int count_ap = dao.count_approval(obj.toString());
+		model.addAttribute("count_ap", count_ap);
+		logger.info("감자는 묵어봤나"+count_ap);
+		
 		//각 조별 게시판으로 들어가도록 dept을 받아옴
 		String dept = vo.getDept();
 		model.addAttribute("dept", dept);
@@ -110,8 +126,12 @@ public class MainController {
 		logger.info("member_manage 가 불려야해");
 		
 		List<MemberVO> list = service.manageMember();
+		int all = service.adminAllmem();
+		int noUser = service.adminUsertypeMem();
 		
 		model.addAttribute("member_list", list);
+		model.addAttribute("all", all);
+		model.addAttribute("noUser", noUser);
 		
 		return "/admin/member_manage";
 	}

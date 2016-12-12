@@ -326,7 +326,7 @@
 			$("#postcodify_search_button").postcodifyPopUp();
 		});
 
-		var admin =<%=type%>
+		var admin ="<%=type%>"
 		function tabSetting() {
 
 			console.log("값:" + admin);

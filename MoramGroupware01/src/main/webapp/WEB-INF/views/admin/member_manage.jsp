@@ -72,8 +72,6 @@ background-color: white;
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">See Website</a></li>
-						<li><a href="#">Open Ticket</a></li>
 						<li><a href="/groupware/member_login/logOut">Log outs</a></li>
 					</ul>
 				</div>
@@ -178,9 +176,9 @@ background-color: white;
 				<div style="display: inline-block; ">
 									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;">총 사용자</span>
 									<span> | </span> 
-									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: red;">1</span>
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: red;">${noUser }</span>
 									<span> ／ </span> 
-									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">25</span>
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${all }</span>
 									</div>
 			<hr/>
  		
@@ -202,20 +200,18 @@ background-color: white;
 							<td style="width: 200px;">${vo.birth }</td>
 							<td id="dept_${no.index }" style="width: 150px;">
 								<select id="dept_select_${no.index }">
-									<option>0</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
+									<option>없음</option>
+									<option>1팀</option>
+									<option>2팀</option>
+									<option>3팀</option>
 								</select>
 							</td>
 							<td id="usertype_${no.index }" style="width: 150px;">
 								<select id="usertype_select_${no.index }">
-									<option>0</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
+									<option>미승인</option>
+									<option>승인</option>
+									<option>관리자</option>
+									
 								</select>
 							</td>
 							<td><input type="button" id="${no.index }" class="btn" value="저장"></td>
@@ -245,14 +241,14 @@ background-color: white;
 
 
 		<script type="text/javascript">
-			var admin =<%=type%>
+			var admin = "<%=type%>";
 			function tabSetting() {
 				console.log("값:" + admin);
-				if (admin != 1) {
+				if (admin != '관리자') {
 					$('#admin').hide();
 				}
 
-				if (admin == 0) {
+				if (admin == '미승인') {
 					$('.childTab').click(function() {
 						alert('승인 후 이용해주세요');
 						return false;
@@ -302,6 +298,7 @@ background-color: white;
 					success: function(res, status, xhr){
 						if(res=='OK'){
 							alert('저장됨');
+							location.reload();
 						}else{
 							alert('다시 시도하세요');
 						}

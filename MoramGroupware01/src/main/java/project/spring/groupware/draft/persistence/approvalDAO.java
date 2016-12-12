@@ -56,4 +56,6 @@ public interface approvalDAO {
 	public abstract int getNumOfRecords();
 	public abstract List<ApprovalVO> select(String id, PaginationCriteria c);
 	
+	//갯수 카운트
+	public abstract int count_approval(String userid);
 }

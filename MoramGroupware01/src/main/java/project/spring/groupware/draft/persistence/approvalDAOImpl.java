@@ -314,4 +314,10 @@ public class approvalDAOImpl implements approvalDAO {
 		return sqlSession.selectOne(NAMESPACE + ".selectID_final_id5", name);
 	}
 	
+	@Override
+	public int count_approval(String userid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(NAMESPACE+".count_approval", userid);
+	}
+	
 }

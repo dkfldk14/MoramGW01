@@ -125,7 +125,7 @@ border-radius: 70px;
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><button id="logoutButton" onclick="logout();">로그아웃</button></li>
+						<li><button id="logoutButton" onclick="logout()">로그아웃</button></li>
 
 					</ul>
 				</div>
@@ -281,9 +281,9 @@ border-radius: 70px;
 							</span> -->
 							<div style="margin-left: 40px; margin-top: 3px;">
 								
-							<a class="quick-btn" href="draft/approval-drafter"> <i
+							<a class="quick-btn" href="draft/approval-finalizer"> <i
 											class="icon-check icon-2x"></i> <span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
-											class="label label-danger">2</span>
+											class="label label-danger">${count_ap}</span>
 										</a> <a class="quick-btn" href="email/list"> <i
 											class="icon-envelope icon-2x"></i> <span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-success">456</span>
@@ -297,9 +297,9 @@ border-radius: 70px;
 											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-default">${count }</span>
 										</a>
-										<a class="quick-btn" href="#"> <i
+										<a id="admin1" class="quick-btn" href="/groupware/member_manage"> <i
 											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
-											class="label label-default">${count }</span>
+											class="label label-default">${noUser }</span>
 										</a>
 							</div>
 						</div>
@@ -476,19 +476,23 @@ border-radius: 70px;
 	
 	<script type="text/javascript">
 	
-	var admin = <%=type%>
-	var dept = <%=dept%>
+	var admin = "<%=type%>"
+	var dept = "<%=dept%>"
 	function tabSetting() {
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 		/* $('.test').hide();
 		$($('.current').find('a').attr('href')).show(); */
  		
 		console.log("값:"+admin);
-		if(admin != 1){
-			$('#admin').hide();			
+		if(admin != '관리자'){
+			$('#admin').hide();	
+			$('#admin1').click(function(){
+				alert('접근 권한이 없습니다.');
+				return false;
+			})
 		}
 				
-		if(admin==0){
+		if(admin=='미승인'){
 			$('.childTab').click(function () {
 				alert('승인 후 이용해주세요');
 				return false;

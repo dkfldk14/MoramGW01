@@ -285,7 +285,7 @@ li{
 
 
 		<script type="text/javascript">
-			var admin =<%=type%>
+			var admin ="<%=type%>"
 			function tabSetting() {
 				console.log("값:" + admin);
 				if (admin != 1) {

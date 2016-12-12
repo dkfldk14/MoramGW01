@@ -24,7 +24,7 @@
   </select>
   
    <select id="admin_manage_member" resultType="project.spring.groupware.member.domain.MemberVO">
-  	select id, name, dept, usertype from moram_member
+  	select id, name, birth, dept, usertype from moram_member
   </select>
   
   <update id="admin_update_member">
@@ -38,4 +38,12 @@
   <update id="member_info_update">
   	update moram_member set pwd=#{pwd}, name=#{name}, gender=#{gender}, birth=#{birth}, telephone=#{telephone}, cellphone=#{cellphone}, address=#{address}, mailno=#{mailno}, addaddress=#{addaddress}, email=#{email}, profileimage=#{profileimage} where id = #{id}
   </update>
+  
+  <select id="admin_all_member" resultType="Integer">
+  	select count(*) from moram_member
+  </select>
+  
+  <select id="admin_usertype_member" resultType="Integer">
+   	select count(*) from moram_member where usertype=#{usertype}
+  </select>
   </mapper>
