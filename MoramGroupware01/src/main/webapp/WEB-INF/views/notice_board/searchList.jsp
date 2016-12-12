@@ -19,6 +19,10 @@
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
+   
+      <!-- board-list -->
+<link href="<c:url value="/resources/assets/css/board-list.css"/>"
+   rel="stylesheet" />
 <style>
 table{
 	width : 100%;
@@ -167,61 +171,72 @@ li {
 
 
 <!-- 내가한 코드 -->
-<h1>searchList 페이지 입니다.</h1>
 	<div id="page-wrapper">
 	<div id="page-inner">
-<nav>
-		<ul>
-			<li><a href="register">New Content</a>
-		</ul>
-		
-		<ul>
-			<li><a href="list">전체 리스트로...</a>
-		</ul>
-		
-</nav>
-	
-	
-	<table>
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성 시간</th>
-			<th>조회수</th>
-		</tr>
+	<h1>공지 게시판</h1>
+				<nav>
+					<ul style="float: right;">
+						<li style="display: inline-block;"><a class="btn btn-default"  href="register" style="margin-right: 10px">새 글 쓰기</a>
+						<li><a class="btn btn-default" href="list">전체 리스트</a>
+					</ul>
+
+				</nav>
 				
-		<c:forEach var = "vo" items="${searchList }">
-			<tr>
-				<td>${vo.bno }</td>
-				<td><a href="${vo.bno}">${vo.title }</a></td>
-				<td>${vo.name }</td>
-				<td><fmt:formatDate value="${vo.regdate }"
-					pattern="yyyy-MM-dd HH:mm:ss"/>
-				</td>
-				<td>${vo.viewcnt }</td>
-			</tr>
-		</c:forEach>
-			
-	</table>
-	
-	<ul class ="pageLinks">
-		<c:if test="${pageMaker.hasPrev }">
-		<li><a href="${pageMaker.startPageNum - 1 }">Prev</a></li>
-		</c:if>
+
+
+
+				
+				<table class="table_list">
+					<colgroup>
+					<col width = "8%"/>
+					<col width = "*"/>
+					<col width = "10%"/>
+					<col width = "20%"/>
+					<col width = "8%"/>
+					</colgroup>
+				<thead>
+					<th scope="col" class="col">번호</th>
+					<th scope="col" class="col">제목</th>
+					<th scope="col" class="col">작성자</th>
+					<th scope="col" class="col">작성일</th>
+					<th scope="col" class="col">조회수</th>
+			</thead>
+			<tbody>
 		
-		<c:forEach begin = "${pageMaker.startPageNum }"
-			end="${pageMaker.endPageNum }"
-			var = "num">
-			<li><a href="${num }">${num }</a></li>
-			
-		</c:forEach>
+			<c:forEach var = "vo" items="${searchList }">
+				<tr>
+					<td class="num">${vo.bno }</td>
+					<td class="title">
+					<a href="${vo.bno}">${vo.title }(${vo.replycnt})</a>
+					</td>
+					<td>${vo.name }</td>
+					<td class="date"><fmt:formatDate value="${vo.regdate }"
+					pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					<td class="num">${vo.viewcnt }</td>
+				</tr>
+			</c:forEach>
 		
-		<c:if test="${pageMaker.hasNext }">
-		<li><a href="${pageMaker.endPageNum + 1 }">Next</a>
-		</c:if>
-		
-	</ul>
+			</tbody>
+			</table>
+
+					<hr/>
+
+				<ul class="pageLinks">
+					<c:if test="${pageMaker.hasPrev }">
+						<li><a href="${pageMaker.startPageNum -1 }">Prev</a></li>
+					</c:if>
+
+					<c:forEach begin="${pageMaker.startPageNum }"
+						end="${pageMaker.endPageNum }" var="num">
+
+						<li><button type="button" class="btn btn-default"
+								id="pagebtn${num}" onclick="location.href='?page=${num}'">${num}</button></li>
+					</c:forEach>
+
+					<c:if test="${pageMaker.hasNext }">
+						<li><a href="${pageMaker.endPageNum + 1 }">Next</a></li>
+					</c:if>
+				</ul>
 	
 	<form id = "pageForm">
 	<input type="hidden" name = "page"
@@ -251,7 +266,7 @@ li {
 	$(document).ready(function(){
 		
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-		var dept = <%=dept%>;
+		var dept = '<%=dept%>';
 		
 		//alert('profileimage : ' + profileimage);
 		if(dept != 1 && dept != 5){
@@ -300,6 +315,41 @@ li {
 			frm.attr('method', 'get');
 			frm.submit();
 		});
+		
+		
+		$(function () {
+			var getpage = getQuerystring('page');
+			if(getpage != null && getpage !=''){
+				$("#pagebtn"+getpage).css("color", "white");
+				$("#pagebtn"+getpage).css("background-color", "#59DFDF");
+			} else {
+				$("#pagebtn1").css("color", "white");
+				$("#pagebtn1").css("background-color", "#59DFDF");
+			}
+		});
+		
+		
+		function getQuerystring(paramName){
+
+			var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+			var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+			
+			if(_tempArray!=null && _tempArray!=''){
+				for(var i = 0; _tempArray.length; i++) {
+					var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+				
+					if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
+						// _keyValuePair[1] : 파라미터 값
+						return _keyValuePair[1];
+					}
+				}
+			}
+		};
+	
+		var profileimage= '${profileimage}';
+		if(profileimage !=null && profileimage!=''){
+			$("#profileimage").attr('src', profileimage);
+		};
 		
 	});
 	</script>

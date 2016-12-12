@@ -177,14 +177,10 @@ li {
 
 				<h1>면접 후기 게시판</h1>
 				<nav>
-				<ul>
-					<li><a href="register">New Content</a>
-				</ul>
-
-				<ul>
-					<li><a href="list">전체 리스트로...</a>
-						<button type="button" class="btn btn-default" onclick="location.href='list">전체 리스트</button>
-				</ul>
+					<ul style="float: right;">
+						<li style="display: inline-block;"><a class="btn btn-default"  href="register" style="margin-right: 10px">새 글 쓰기</a>
+						<li><a class="btn btn-default" href="list">전체 리스트</a>
+					</ul>
 
 				</nav>
 				
@@ -224,31 +220,6 @@ li {
 		
 	</tbody>
 	</table>
-	
-	<button type="button" class="btn btn-default"
-								id="" onclick="location.href='ㄹㄹㄹㄹ"></button>
-				
-				<%-- <table>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성 시간</th>
-						<th>조회수</th>
-					</tr>
-
-					<c:forEach var="vo" items="${searchList }">
-						<tr>
-							<td>${vo.bno }</td>
-							<td><a href="${vo.bno}">${vo.title }(${vo.replycnt})</a></td>
-							<td>${vo.name }</td>
-							<td><fmt:formatDate value="${vo.regdate }"
-									pattern="yyyy-MM-dd HH:mm:ss" /></td>
-							<td>${vo.viewcnt }</td>
-						</tr>
-					</c:forEach>
-
-				</table> --%>
 
 					<hr/>
 
@@ -345,6 +316,39 @@ li {
 			frm.attr('method', 'get');
 			frm.submit();
 		});
+		
+		$(function () {
+			var getpage = getQuerystring('page');
+			if(getpage != null && getpage !=''){
+				$("#pagebtn"+getpage).css("color", "white");
+				$("#pagebtn"+getpage).css("background-color", "#59DFDF");
+			} else {
+				$("#pagebtn1").css("color", "white");
+				$("#pagebtn1").css("background-color", "#59DFDF");
+			}
+		});
+		
+		function getQuerystring(paramName){
+
+			var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+			var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+			
+			if(_tempArray!=null && _tempArray!=''){
+				for(var i = 0; _tempArray.length; i++) {
+					var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+				
+					if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
+						// _keyValuePair[1] : 파라미터 값
+						return _keyValuePair[1];
+					}
+				}
+			}
+		};
+	
+		var profileimage= '${profileimage}';
+		if(profileimage !=null && profileimage!=''){
+			$("#profileimage").attr('src', profileimage);
+		};
 		
 	});
 	</script>
