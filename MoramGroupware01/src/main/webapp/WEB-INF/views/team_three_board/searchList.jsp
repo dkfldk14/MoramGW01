@@ -88,21 +88,21 @@ li {
 				<li><a href="#"><i class="fa fa-edit "></i>전자결재<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">나의 결재함</a></li>
-						<li><a href="#">미결함</a></li>
-						<li><a href="#">반려함</a></li>
-						<li><a href="#">기결함</a></li>
+						  <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
 					</ul></li>
 
 				<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">받은 메일함</a></li>
-
-						<li><a href="#">편지쓰기</a></li>
-						<li><a href="#">보낸 메일함</a></li>
-						<li><a href="#">휴지통</a></li>
-						<li><a href="#">주소록</a></li>
+						<<li><a href="/groupware/email/list">받은 메일함</a></li>
+                  
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
+                     <li><a href="#">주소록</a></li>
 					</ul></li>
 				<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 						class="fa arrow"></span></a>
