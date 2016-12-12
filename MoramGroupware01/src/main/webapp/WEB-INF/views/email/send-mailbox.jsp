@@ -367,7 +367,7 @@ div.center {text-align: center;}
 									</tr>
 
 
-									<c:forEach var="email" items="${email}">
+									<c:forEach var="email" items="${emailList}">
 										
 										
 										<tr style="height: 30px" id="tr_inner">
@@ -432,8 +432,8 @@ div.center {text-align: center;}
 					</div>
 					<form id="pageForm">
 						<input type="hidden" name="num"/> 
-						<input type="hidden" name="page" value="${pageMaker.criteria.page}" /> 
-						<input type="hidden" name="perPage" value="${pageMaker.criteria.perPage }" />
+						<input type="hidden" name="page" value="${pageMaker.criteria2.page}" /> 
+						<input type="hidden" name="perPage" value="${pageMaker.criteria2.perPage }" />
 
 					</form>
 				</div>

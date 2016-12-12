@@ -28,8 +28,8 @@ where (from_email = #{groupemail} or to_email=#{groupemail}) and state = 2 order
  </select>
  
  <select id="adressList" resultType="project.spring.groupware.email.domain.EmailVO">
-	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=#{Element.state} and from_email = #{from_email} order by senddate desc) a 
-	)b where rn between #{Element.start} and #{Element.end}
+	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=#{state} and from_email = #{from_email} order by senddate desc) a 
+	)b where rn between #{start} and #{end}
 	</select>
 
 <select id="EmailTotalct" resultType="Integer">
@@ -59,4 +59,21 @@ where (from_email = #{groupemail} or to_email=#{groupemail}) and state = 2 order
  <select id="select_mail_num" resultType="Integer">
  	select max(num) from moram_group_email
  </select>
+
+
+ 
+<select id="addressList" resultType="project.spring.groupware.email.domain.EmailVO">
+	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=1 and from_email = #{from_email} order by senddate desc) a 
+	)b where rn between #{start} and #{end}
+</select>
+ 
+<select id="totalAddressList" resultType="Integer">
+select count (*) from 
+(select b.* from(select rownum rn, a.* from(select * from moram_group_email where state = 1 and from_email = #{from_email}
+order by senddate desc) a 
+	)b)
+</select>	
+ 
+ 
+ 
  </mapper>
