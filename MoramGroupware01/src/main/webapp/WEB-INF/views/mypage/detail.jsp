@@ -68,7 +68,7 @@
 				<ul class="nav" id="main-menu">
 					<li class="text-center user-image-back"><img
 						src="<c:url value="resources/assets/img/find_user.png"/>"
-						align="center" /> <class ="img-responsive" /></li>
+						align="center"  id="profileimage" width="128px" height="128px" /> <class ="img-responsive" /></li>
 
 
 					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
