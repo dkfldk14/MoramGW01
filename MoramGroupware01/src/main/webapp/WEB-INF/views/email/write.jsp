@@ -373,7 +373,7 @@ th, td {
 						<div class="col-md-12">
 							<button type="submit" id="send" onclick="ajaxCall">보내기</button>
 							<button type="submit" id="preview">미리보기</button>
-							<button type="submit" id="saveas">임시보관함</button>
+							<input type="button" id="saveas" value="취소" class="saveas"/>
 						</div>
 					</div>
 					<hr />
@@ -553,6 +553,9 @@ th, td {
 				});
 
 			
+				$('#saveas').click(function(){
+					location="list?page=1";
+				});
 
 			function javascript1() {
 				var adress = "";

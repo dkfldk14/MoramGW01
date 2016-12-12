@@ -432,8 +432,8 @@ div.center {text-align: center;}
 					</div>
 					<form id="pageForm">
 						<input type="hidden" name="num" /> 
-						<input type="hidden" name="page" value="${pageMaker.criteria.page}" /> 
-						<input type="hidden" name="perPage" value="${pageMaker.criteria.perPage }" />
+						<input type="hidden" name="page" value="${pageMaker.criteria2.page}" /> 
+						<input type="hidden" name="perPage" value="${pageMaker.criteria2.perPage }" />
 
 					</form>
 				</div>
@@ -478,7 +478,7 @@ div.center {text-align: center;}
 						var bno = $(this).attr('href');
 						//페이지가 바뀌지 않기 때문에 아래랑 조금 다름/ 
 						frm.find('[name="num"]').val(bno);
-						frm.attr('action', '/groupware/email/detail-other');
+						frm.attr('action', 'detail-other');
 						frm.attr('method', 'get');
 						frm.submit();
 

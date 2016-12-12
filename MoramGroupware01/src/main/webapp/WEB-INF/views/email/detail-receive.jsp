@@ -185,8 +185,17 @@ ul {
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<div id="page-inner">
+			
+			<form action="/groupware/email/write" id="fowardemail" method="post">
+			
 				<div class="row">
 					<div class="col-md-12">
+						
+						<div style="padding-bottom: 10px;">
+								<input type="button" class="buttonreturn" id="buttonreturn" value="답장"/>
+								<input type="submit" value="전달" class="buttonforward" id="buttonforward"/>
+								
+							</div>
 						
 					</div>
 				</div>
@@ -238,6 +247,15 @@ ul {
 						</div>
 					</div>
 
+
+	<input type="hidden" name="to_email" value=${emaildetail.to_email }>
+									<input type="hidden" name="from_email" value=${emaildetail.from_email }>
+									<input type="hidden" name="subject" value=${emaildetail.subject }>
+										<input type="hidden" name="content" value=${emaildetail.content }>
+									
+									<input type="hidden" name="senddate" value=${emaildetail.senddate }>
+									
+						
 					<%-- 	<a href="">☆</a>
 						<h2 class="div1">title ${emaildetail.subject }</h2>
 						<h1>${emaildetail.senddate }</h1>
@@ -253,7 +271,7 @@ ul {
 					 --%>
 				</div>
 
-
+</form>
 			</div>
 
 
@@ -282,6 +300,11 @@ $(document).ready(function(){
     	
     	
     });
+    $("#buttonreturn").click(function(){
+    	location="write?to_email=${emaildetail.from_email}";
+    })
+    
+    
     
 });
 

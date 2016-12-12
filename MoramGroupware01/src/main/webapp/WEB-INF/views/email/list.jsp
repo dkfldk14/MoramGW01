@@ -340,8 +340,8 @@ div.center {text-align: center;}
 
 							<div style="padding-bottom: 10px;">
 								<button class="buttondelete" onclick="fn_userDel(this);">삭제</button>
-								<button class="buttonreturn">답장</button>
-								<button class="buttonforward">전달</button>
+								<button class="buttonreturn" onclick="fn_return(this);">답장</button>
+								<button class="buttonforward" onclick="fn_forward(this);">전달</button>
 
 
 							</div>
@@ -448,9 +448,9 @@ div.center {text-align: center;}
 				}
 			}
 		}
+		});
 		
-		
-		var admin = "<%=type%>"
+		var admin ="<%=type%>"
 		function tabSetting() {
 			// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 			/* $('.test').hide();
@@ -490,6 +490,9 @@ div.center {text-align: center;}
 		      }
 		  } 
 		﻿ ﻿ 
+ 
+		
+		
 
 			function fn_userDel() {
 				
@@ -521,7 +524,9 @@ div.center {text-align: center;}
 				}
 					
 	
-		}});
+		}
+		
+
 	
 		
 		</script>

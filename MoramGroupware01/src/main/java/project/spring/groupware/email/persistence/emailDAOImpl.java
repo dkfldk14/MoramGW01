@@ -70,7 +70,8 @@ public class emailDAOImpl implements emailDAO {
 			
 			Map<String,Object> adresslist=new HashMap<>();
 			adresslist.put("state", state1);
-			adresslist.put("Pagination", c);
+			adresslist.put("start", start);
+			adresslist.put("end", end);
 			adresslist.put("from_email", from_email);
 			
 			List<EmailVO> VO=SqlSession.selectList(NAMESPACE+".adressList",adresslist);
@@ -130,4 +131,13 @@ public class emailDAOImpl implements emailDAO {
 		return SqlSession.selectOne(NAMESPACE + ".totalAddressList", c);
 	}
 	
+	
+	@Override
+	public List<EmailVO> addressListdelete(NewPaginationCriteria c) {
+		// TODO Auto-generated method stub
+		return SqlSession.selectList(NAMESPACE+".addressListdelete", c);
+	}@Override
+	public int totalCountdelete(NewPaginationCriteria c) {
+		return SqlSession.selectOne(NAMESPACE + ".totalAddressListdelete", c);
+	}
 }

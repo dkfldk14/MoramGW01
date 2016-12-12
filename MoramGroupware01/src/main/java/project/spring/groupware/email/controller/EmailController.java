@@ -133,20 +133,21 @@ public class EmailController {
 			end = messages.length;
 		}
 		
-//		for (int i = start; i < end; i++) {
-//			EmailVO vo = new EmailVO();
-//			Message message = messages[i];
-//			vo.setNum(message.getMessageNumber());
-//			Date date = message.getSentDate();
-//			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
-//			vo.setSenddate(df.format(date).toString());
-//			vo.setSubject(message.getSubject().toString());
-//			vo.setContent(message.getContent().toString());
-//			vo.setFrom_email(message.getFrom()[0].toString());
-//			emaillist.add(vo);
-//			
-//		}
-		
+		for (int i = start; i < end; i++) {
+			EmailVO vo = new EmailVO();
+			Message message = messages[i];
+			vo.setNum(message.getMessageNumber());
+			Date date = message.getSentDate();
+			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
+			vo.setSenddate(df.format(date).toString());
+			vo.setSubject(message.getSubject().toString());
+			vo.setContent(message.getContent().toString());
+			vo.setFrom_email(message.getFrom()[0].toString());
+			vo.setTo_email(gwEmail);
+			emaillist.add(vo);
+			
+		}
+		/*
 		for (int i = end; i > start; i--) {
 			EmailVO vo = new EmailVO();
 			Message message = messages[i-1];
@@ -159,7 +160,7 @@ public class EmailController {
 			vo.setFrom_email(message.getFrom()[0].toString());
 			emaillist.add(vo);
 			
-		}
+		} */
 		
 		/*
 		for (int i = end, n = start; i >= n; i--) {
@@ -260,9 +261,10 @@ public class EmailController {
 	public void detail(int num, int page, Model model, EmailVO vo) {
 		logger.info("detail jsp 실행 ");
 		logger.info("num" + num);
+		logger.info("page" + page);
 		logger.info("어려운 공식: " + (messages.length - (page-1)*10 + num));
 		
-		EmailVO volist=emaillist.get(messages.length - num);
+		EmailVO volist=emaillist.get(num - 1 - (page-1) * 10);
 			model.addAttribute("emaildetail", volist);
 			
 /*		// model.addAttribute("email", vo);
@@ -342,6 +344,11 @@ public class EmailController {
 		bt.append("------------------------------------------------------------------------------------------\n");
 		
 		model.addAttribute("emailforward", bt);
+		List<MemberVO> memberList=emailServiceDAO.member_adress();
+		logger.info("size MemberList:" +memberList.size());
+		model.addAttribute("memberList", memberList);
+		
+		
 		return "/email/write";
 		
 		
@@ -440,7 +447,9 @@ public class EmailController {
 					System.out.println("Email Number " + (i));
 					System.out.println("Subject: " + message1.getSubject());
 					EmailVO vo=new EmailVO();
-					vo.setNum(message1.getMessageNumber());
+					int mailNum = emailServiceDAO.select_mail_num();
+					mailNum += 1;
+					vo.setNum(mailNum);
 					vo.setFrom_email(message1.getFrom()[i].toString());
 					
 					vo.setSubject(message1.getSubject());
@@ -610,22 +619,15 @@ public class EmailController {
 		
 		NewPaginationCriteria c2 = new NewPaginationCriteria();
 		
-		/*String gwMail="dkfldk14@moram.com";*/
-		//   PaginationCriteria c = new PaginationCriteria();
+		
 		   if(page!=null){
-			  // c.setPage(page);
+			 
 			   //1페이지면 1부터 5까지
 			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌.
 			   c2.setPage(page);
 		   }
 		   logger.info("send-mail listpage (): page="+page);
-		
-		  // logger.info("메일가져온거 맞냐.. : "+mvo.getGroupemail());
-		//List<EmailVO> vo=emailServiceDAO.send_emailList(mvo.getGroupemail());
-		//String from_email=mvo.getGroupemail();
-		//넣어주는거 ㅇ-
-
-		
+			
 		//내가 만든 것
 	   c2.setFrom_email(from_email);
 	   logger.info("from_email : " + c2.getFrom_email());
@@ -636,25 +638,23 @@ public class EmailController {
 		model.addAttribute("emailList", emailList);
 		
 		//여기서 잠시 지움 복구
-		/*List<EmailVO> vo1=emailServiceDAO.adressList(1, c, mvo.getGroupemail());
+		/*
 		model.addAttribute("sendCount", vo.size());
-		model.addAttribute("email", vo1);*/
-		
+		model.addAttribute("email", vo1);*/		
 	 	
 	   	//페이지메이커 
 	   	PageMaker maker=new PageMaker();
 	   	//▼ 몇번째 페이지를 보여줄것인지 조건
-	   //	maker.setCriteria(c);
+	  
 	   	c2.setFrom_email(mvo.getGroupemail());
 	   	maker.setCriteria2(c2);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
-	   	//maker.setTotalCount(emailServiceDAO.totalEmailct("1", mvo.getGroupemail()));
+	  
 	   logger.info("send-mail totalCount : " + emailServiceDAO.totalCount(c2));
 	   	maker.setTotalCount(emailServiceDAO.totalCount(c2));
 	   	//▼ pageMaker 의 함수를 호출
-	   //	maker.setPageDate();
-	   	maker.setNewPageDate();
-	   	
+	  
+	   	maker.setNewPageDate();	   	
 	   	
 	   	
 	   	//모델객체에 pageMaker 넘겨줌. 
@@ -673,36 +673,64 @@ public class EmailController {
 		
 		HttpSession session=request.getSession();
 		String userid=(String) session.getAttribute("login_id");
+		
 		MemberVO mvo=emailServiceDAO.member_one(userid);
+		//String from_email = mvo.getGroupemail();
 		logger.info("이메일:"+mvo.getGroupemail());
 		
-		/*String gwMail="dkfldk14@moram.com";*/
-		logger.info("listpage (): page="+page);
-		   PaginationCriteria c=new PaginationCriteria();
-		   if(page!=null){
-			   c.setPage(page);
-			   //1페이지면 1부터 5까지
-			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌. 
-		   }
+		String from_email = mvo.getGroupemail();
+		logger.info("delete from_email : " + from_email);
 		
-		List<EmailVO> vo=emailServiceDAO.delete_emailList(mvo.getGroupemail());
-		String from_email=mvo.getGroupemail();
+		NewPaginationCriteria c2 = new NewPaginationCriteria();
+		/*String gwMail="dkfldk14@moram.com";*/
+		logger.info("listpage delete : page="+page);
+		  if(page!=null){
+			  // c.setPage(page);
+			   //1페이지면 1부터 5까지
+			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌.
+			   c2.setPage(page);
+		   }
+		  
+		  c2.setFrom_email(from_email);
+		  List<EmailVO> emailList = emailServiceDAO.addressListdelete(c2);
+		  logger.info("delete list : " + emailList);
+		  
+		  for(EmailVO vo : emailList){
+			  logger.info("EmailAddress delete : " + vo.getFrom_email());
+		  }
+		  //////////
+		  model.addAttribute("email", emailList);
+		  ///////
+		  
+		  
+		  //c2.setFrom_email(from_email);
+		 // logger.info("from_email : " + c2.getFrom_email());
+			
+		  
+		  
+		//List<EmailVO> vo=emailServiceDAO.delete_emailList(mvo.getGroupemail());
+		//String from_email=mvo.getGroupemail();
 		//넣어주는거 ㅇ-
-		List<EmailVO> vo1=emailServiceDAO.adressList(2, c, mvo.getGroupemail());
-		model.addAttribute("sendCount", vo.size());
-		model.addAttribute("email", vo1);
+		//List<EmailVO> vo1=emailServiceDAO.adressList(2, c, mvo.getGroupemail());
+		//model.addAttribute("sendCount", vo.size());
+		//model.addAttribute("email", vo1);
 		
 	 	
 	   	//페이지메이커 
 	   	PageMaker maker=new PageMaker();
 	   	//▼ 몇번째 페이지를 보여줄것인지 조건
-	   	maker.setCriteria(c);
+	   	//maker.setCriteria(c);
+	   	c2.setFrom_email(mvo.getGroupemail());
+	   	
+	   	maker.setCriteria2(c2);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
-	   	maker.setTotalCount(emailServiceDAO.totalEmailct("2", mvo.getGroupemail()));
+	   	//maker.setTotalCount(emailServiceDAO.totalEmailct("2", mvo.getGroupemail()));
+	   	maker.setTotalCount(emailServiceDAO.totalCountdelete(c2));
 	   	//▼ pageMaker 의 함수를 호출
-	   	maker.setPageDate();
+	   	maker.setNewPageDate();
 	   	//모델객체에 pageMaker 넘겨줌. 
 	   	model.addAttribute("pageMaker", maker);
+	   	model.addAttribute("sendCount", emailServiceDAO.totalCountdelete(c2));
 	   	model.addAttribute("Gemail", mvo.getGroupemail());
 	}
 	

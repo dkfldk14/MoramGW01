@@ -415,6 +415,7 @@ border-right: 1px solid white;
 						if(result==1){
 							alert("success");
 						}
+						$('#rtext').val("");
 						getAllReplies();
 					}
 				});

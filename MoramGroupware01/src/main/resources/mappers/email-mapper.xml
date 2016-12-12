@@ -75,5 +75,18 @@ order by senddate desc) a
 </select>	
  
  
+  
+<select id="addressListdelete" resultType="project.spring.groupware.email.domain.EmailVO">
+	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=2 and from_email = #{from_email} order by senddate desc) a 
+	)b where rn between #{start} and #{end}
+</select>
+ 
+<select id="totalAddressListdelete" resultType="Integer">
+select count (*) from 
+(select b.* from(select rownum rn, a.* from(select * from moram_group_email where state = 2 and from_email = #{from_email}
+order by senddate desc) a 
+	)b)
+</select>
+ 
  
  </mapper>
