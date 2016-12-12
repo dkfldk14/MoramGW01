@@ -72,6 +72,7 @@ public class EmailController {
 	private String gwEmail=null;
 	private Message[] messages;	
 	private int sendmailct=200;
+	private int countNewMail;
 	
 	@RequestMapping(value="/list")
 	public void EmailList(Integer page,Model model,HttpServletRequest request){
@@ -139,6 +140,15 @@ public class EmailController {
 			vo.setNum(message.getMessageNumber());
 			Date date = message.getSentDate();
 			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
+			SimpleDateFormat df1= new SimpleDateFormat("yy/MM/dd");
+				Date currentTime=new Date();
+				String date1=df1.format(currentTime);
+				String mailDate=df1.format(date).toString();
+				
+				if(date1.equals(mailDate)){
+					countNewMail++;
+				}
+				
 			vo.setSenddate(df.format(date).toString());
 			vo.setSubject(message.getSubject().toString());
 			vo.setContent(message.getContent().toString());
@@ -147,6 +157,7 @@ public class EmailController {
 			emaillist.add(vo);
 			
 		}
+		logger.info("///// 나와랏! countNewMail"+countNewMail);
 		/*
 		for (int i = end; i > start; i--) {
 			EmailVO vo = new EmailVO();
@@ -267,24 +278,8 @@ public class EmailController {
 		EmailVO volist=emaillist.get(num - 1 - (page-1) * 10);
 			model.addAttribute("emaildetail", volist);
 			
-/*		// model.addAttribute("email", vo);
-		EmailVO vo = emaillist.get(num - 1);
-		logger.info("detail에 있는 vo 값 : " + vo.getContent());
-		logger.info("num:" + vo.getNum());
-		logger.info("num : "+num);
-		logger.info("page : "+page);
-		int emailNum=num-(page-1) * 10;
-		EmailVO vo1=emaillist.get(emailNum-1);
-		
-		EmailVO vo1=emaillist.get(num);
-	//	int emailNum=num-(page-1) * 10;
-		//EmailVO vo1=emaillist.get(emailNum-1);
-		model.addAttribute("emaildetail", vo1);
-		vo = emailServiceDAO.detailEmail(vo1.getNum());	
-		logger.info("detail subject : " + vo.getSubject());
-		//model.addAttribute("emaildetail", vo);
-	*/}
 
+	}
 
 	
 	@RequestMapping(value = "/detail-other", method = RequestMethod.GET)
@@ -334,14 +329,14 @@ public class EmailController {
 		model.addAttribute("gwemail", gwemail);
 		
 		StringBuffer bt=new StringBuffer();
-		bt.append("\n\n\n\n\n\n\n\n\n\n\n");
-		bt.append("-----------------------------------origin message--------------------------------------\n");
-		bt.append("   Title : "+vo.getSubject()+"\n");
-		bt.append("   Senddate : "+vo.getSenddate()+"\n");
-		bt.append("   From : "+vo.getFrom_email()+"\n");
-		bt.append("   To : "+vo.getTo_email()+"\n");
-		bt.append("   Content : "+vo.getContent()+"\n");
-		bt.append("------------------------------------------------------------------------------------------\n");
+		bt.append("\n\n\n\n\n\n\n\n\n\n\n"+"<br/>");
+		bt.append("-----------------------------------origin message---------------------------------------\n<br/>");
+		bt.append("   Title : "+vo.getSubject()+"\n"+"<br/>");
+		bt.append("   Senddate : "+vo.getSenddate()+"\n"+"<br/>");
+		bt.append("   From : "+vo.getFrom_email()+"\n"+"<br/>");
+		bt.append("   To : "+vo.getTo_email()+"\n"+"<br/>");
+		bt.append("   Content : "+vo.getContent()+"\n"+"<br/>");
+		bt.append("------------------------------------------------------------------------------------------\n<br/>");
 		
 		model.addAttribute("emailforward", bt);
 		List<MemberVO> memberList=emailServiceDAO.member_adress();

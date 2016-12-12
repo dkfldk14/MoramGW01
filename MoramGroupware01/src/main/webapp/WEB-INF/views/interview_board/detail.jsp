@@ -280,25 +280,7 @@ border-right: 1px solid white;
 
 
 	
-<<<<<<< HEAD
 
-=======
-	<div>
-		<ul class="mylist" id="replies"></ul>
-	</div>
-	<br/>
-	
-	<div id = "modify">
-		<input type = "text" name="rno" id="rno_mod" readonly/>
-		<br/>
-		<input type="text" name="rtext" id="rtext_mod">
-		<br>
-		<button id="btn_delete">Delete</button>
-		<button id="btn_update">Update</button>
-		<button id="btn_cancel">Cancel</button>
-	</div>
-	
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 </div>
 </div>
 	

@@ -360,7 +360,7 @@ display: inline-block;
 			frm.submit();
 		});
 		
-		$('#bnoNum').click(function(){
+		$('table tr td a').click(function(){
 			event.preventDefault();
 			var bno = $(this).attr('href');
 			frm.find('[name="bno"]').val(bno);

@@ -91,6 +91,37 @@ ul {
 	
 }
 
+.buttonforward:hover {
+   background-color: #edf8ff;
+   color: #3a3939;
+   font-weight: 900;
+}
+
+.buttonforward {
+  background-color: white;
+      color: #a8abad;
+     font-weight : 850;
+   border: 1px solid #d6d6d6;
+   font-size: 13px;
+	
+}
+
+.buttonreturn:hover {
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
+}
+
+.buttonforward {
+  background-color: white;
+      color: #a8abad;
+     font-weight : 850;
+   border: 1px solid #d6d6d6;
+   font-size: 13px;
+	
+}
+
 
 
 .buttonforward:hover {
@@ -98,6 +129,7 @@ ul {
    color: #3a3939;
    font-weight: 900;
 }
+
 
 </style>
 </head>
@@ -150,10 +182,10 @@ ul {
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li class="childTab"><a href="../email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="../email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="../email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="../email/delete-mailbox">휴지통</a></li>
 							
 
 						</ul></li>

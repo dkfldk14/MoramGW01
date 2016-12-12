@@ -255,6 +255,38 @@ th, td {
 }
 
 
+.saveas {
+  background-color: white;
+      color: #a8abad;
+     font-weight : 850;
+   border: 1px solid #d6d6d6;
+   font-size: 13px;
+	
+}
+
+.saveas {
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
+}
+
+
+#saveas {
+ background-color: white;
+   color: black;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+	
+}
+
+#saveas {
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
+}
+
 </style>
 </head>
 <body>
@@ -310,10 +342,10 @@ th, td {
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li class="childTab"><a href="../email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="../email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="../email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="../email/delete-mailbox">휴지통</a></li>
 							
 
 						</ul></li>
@@ -383,8 +415,7 @@ th, td {
 
 						<div class="col-md-12">
 							<button type="submit" id="send" onclick="ajaxCall">보내기</button>
-							<button type="submit" id="preview">미리보기</button>
-							<input type="button" id="saveas" value="취소" class="saveas"/>
+							<button type="submit" id="preview">취소</button>
 						</div>
 					</div>
 					<hr />
@@ -519,34 +550,7 @@ th, td {
 		<script>
 
 		
-		$(document).ready(function(){
-			
-          var admin = "<%=type%>";
-///////////////팀 별 게시판 권한 부여 ////////////////////
-			var dept = "<%=dept%>";
-			
-			//alert('profileimage : ' + profileimage);
-			if(dept != "1팀" && dept != "5팀"){
-				$('#authorization1').click(function(){
-					alert('당신은 1조가 아닙니다');
-					return false;
-				});
-			}
-			
-			if(dept != "2팀" && dept != "5팀"){
-				$('#authorization2').click(function(){
-					alert('당신은 2조가 아닙니다');
-					return false;
-				});
-			}
-			
-			if(dept != "3팀" && dept != "5팀"){
-				$('#authorization3').click(function(){
-					alert('당신은 3조가 아닙니다');
-					return false;
-				});
-			}
-			///////////////////////////////////////////////////////
+	
 		
 
 		var admin = "<%=type%>";
@@ -623,7 +627,8 @@ th, td {
 				$("#disableDiv").hide();
 			}
 			
-		});	
+		
+		
 		</script>
            <!-- jQuery CDN -->
             <script

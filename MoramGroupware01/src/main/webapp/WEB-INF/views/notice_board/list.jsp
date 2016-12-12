@@ -220,7 +220,7 @@ display: inline-block;
 			<tr>
 				<td class="num">${vo2.bno }</td>
 				<td class="title">
-					<a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
+					<a href="${vo2.bno}">${vo2.title }</a>
 				</td>
 				<td>${vo2.name }</td>
 				<td class="date"><fmt:formatDate value="${vo2.regdate }"

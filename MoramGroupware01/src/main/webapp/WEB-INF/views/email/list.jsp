@@ -237,10 +237,10 @@ div.center {text-align: center;}
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li class="childTab"><a href="../email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="../email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="../email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="../email/delete-mailbox">휴지통</a></li>
 							
 
 						</ul></li>
