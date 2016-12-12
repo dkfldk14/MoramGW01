@@ -167,7 +167,7 @@ ul {
 				<ul class="nav" id="main-menu">
 					<li class="text-center user-image-back"><img
 						src="<c:url value="../resources/assets/img/find_user.png"/>"
-						align="center" /> <class ="img-responsive" /></li>
+						align="center"   id="profileimage" width="128px" height="128px" /> <class ="img-responsive" /></li>
 
 
 					<li><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN1</a></li>
@@ -182,10 +182,13 @@ ul {
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
+
 							<li class="childTab"><a href="../email/list?page=1">받은 메일함</a></li>
 							<li class="childTab"><a href="../email/write">편지쓰기</a></li>
 							<li class="childTab"><a href="../email/send-mailbox">보낸 메일함</a></li>
 							<li class="childTab"><a href="../email/delete-mailbox">휴지통</a></li>
+
+				
 							
 
 						</ul></li>
@@ -216,16 +219,14 @@ ul {
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
-							<li class="childTab"><a href="#">나의 이력서</a></li>
+							
 							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
-							<li class="childTab"><a href="#">권한관리</a></li>
-							<li class="childTab"><a href="#">문서함관리</a></li>
-							<li class="childTab"><a href="#">결재함관리</a></li>
+						
 						</ul></li>
 
 					<!--  <li>
@@ -386,6 +387,20 @@ $(document).ready(function(){
     	alert("호출");
     		
     }) */
+    
+	var name = "${name}";
+	var url = '/groupware/checktime/myimage/'+name;
+	$.getJSON(url, function(data){
+		var profileimage='';
+
+		$(data).each(function(){
+			profileimage=this.profileimage;
+		});
+
+		if(profileimage!=null && profileimage!=''){
+			$('#profileimage').attr("src", profileimage);
+		};
+	});
     
     
 });

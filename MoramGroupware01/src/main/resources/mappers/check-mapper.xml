@@ -76,5 +76,8 @@
 	select id, name, profileimage from moram_member where name = #{name} 
 	</select>
 	
+	<select id="myimage" resultType="project.spring.groupware.member.domain.MemberVO">
+	select name, profileimage from moram_member where name = #{name} 
+	</select>
 	
 </mapper>

@@ -152,16 +152,14 @@ li{
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
-							<li class="childTab"><a href="#">나의 이력서</a></li>
+							
 							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
-							<li class="childTab"><a href="#">권한관리</a></li>
-							<li class="childTab"><a href="#">문서함관리</a></li>
-							<li class="childTab"><a href="#">결재함관리</a></li>
+							
 						</ul></li>
 
 					<!--  <li>

@@ -655,7 +655,8 @@ public class EmailController {
 	   	//모델객체에 pageMaker 넘겨줌. 
 	   	model.addAttribute("pageMaker", maker);
 	   	model.addAttribute("Gemail", mvo.getGroupemail());
-	
+	   	model.addAttribute("sendCount", emailServiceDAO.totalCount(c2));
+		
 	
 	}
 	

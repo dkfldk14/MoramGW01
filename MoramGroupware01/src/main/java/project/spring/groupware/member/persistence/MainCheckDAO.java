@@ -31,6 +31,8 @@ public interface MainCheckDAO {
 	public abstract List<BoardVO> selectnotice();
 	
 	public abstract List<MemberVO> memberimage(String name);
+	
+	public abstract List<MemberVO> myimage(String name);
 } // end interface ReplyDAO
 
 

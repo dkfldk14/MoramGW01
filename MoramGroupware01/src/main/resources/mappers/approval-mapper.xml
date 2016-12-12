@@ -370,5 +370,7 @@
 		where draft_index = #{draft_index}
 
 	</select>
+	
+
 
 </mapper>

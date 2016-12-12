@@ -39,9 +39,9 @@ margin: 10px;
 }
 
 #logoutButton:hover {
-	background-color: #3fc3c4;
-	border: 1px solid #ffd777;
-	color: #ffffff;
+   background-color: #3fc3c4;
+   border: 1px solid #ffd777;
+   color: #ffffff;
 }
 #profileimage{
 border-radius: 70px;
@@ -90,6 +90,40 @@ border-radius: 70px;
   background-color: #gray;
   text-shadow: 0 1px 1px #000;
 }
+
+
+#빼애앵{
+   position: relative;
+}
+
+#빼애앵 a{
+   position: absolute;
+}
+
+#빼애앵 a#col1_btn2{
+   margin-left: 153px;
+}
+#빼애앵 a#col1_btn3{
+   margin-left: 306px;
+}
+#빼애앵 a#col1_btn4{
+   margin-left: 459px;
+}
+#빼애앵 a#col1_btn5{
+   margin-left: 612px;
+}
+#빼애앵 a#col1_btn6{
+   margin-left: 765px;
+}
+
+#weather {
+   margin-left: 73px;
+}
+
+#weather tbody tr td {
+   width: 150px;
+}
+
 </style>
 	
 
@@ -217,16 +251,14 @@ border-radius: 70px;
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
-							<li class="childTab"><a href="#">나의 이력서</a></li>
+							
 							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><img alt="" src="resources/assets/img/manager.png"/> 관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
-							<li class="childTab"><a href="#">권한관리</a></li>
-							<li class="childTab"><a href="#">문서함관리</a></li>
-							<li class="childTab"><a href="#">결재함관리</a></li>
+							
 						</ul></li>
 
 					<!--  <li>
@@ -274,36 +306,50 @@ border-radius: 70px;
 					</div>
 					
 				
-					<div id="margin-box2">
-						<div class="panel panel-back noti-box">
-<!-- 							<span class="icon-box bg-color-red set-icon"> <i
-								class="fa fa-envelope-o"></i>
-							</span> -->
-							<div style="margin-left: 40px; margin-top: 3px;">
-								
-							<a class="quick-btn" href="draft/approval-finalizer"> <i
-											class="icon-check icon-2x"></i> <span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
-											class="label label-danger">${count_ap}</span>
-										</a> <a class="quick-btn" href="email/list"> <i
-											class="icon-envelope icon-2x"></i> <span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
-											class="label label-success">456</span>
-										</a> <a class="quick-btn" href="#"> <i
-											class="icon-signal icon-2x"></i> <span><img src="resources/assets/img/home_img/folder (1).png" style="width: 80px"; height="60px;"/></span> <span
-											class="label label-warning">+25</span>
-										</a> <a class="quick-btn" href="notice_board/list"> <i
-											class="icon-external-link icon-2x"></i> <span><img src="resources/assets/img/home_img/speaker.png" style="width: 80px"; height="60px;"/></span> <span
-											class="label label-success">3</span>
-										</a> <a class="quick-btn" href="notice_board/list"> <i
-											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
-											class="label label-default">${count }</span>
-										</a>
-										<a id="admin1" class="quick-btn" href="/groupware/member_manage"> <i
-											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
-											class="label label-default">${noUser }</span>
-										</a>
-							</div>
-						</div>
-					</div>
+					<div id="margin-box2" style="width: 980px;">
+                  <div class="panel panel-back noti-box">
+<!--                      <span class="icon-box bg-color-red set-icon"> <i
+                        class="fa fa-envelope-o"></i>
+                     </span> -->
+                     <div style="margin-left: 40px; margin-top: 3px;"  id="빼애앵">
+                        
+                     <a class="quick-btn" href="draft/approval-finalizer" id="col1_btn1"> 
+                              <i class="icon-check icon-2x"></i> 
+                                 <span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
+                                 class="label label-danger">${count_ap }</span>
+                              </a> 
+                              
+                              <a class="quick-btn" href="email/list" id="col1_btn2"> 
+                              <i class="icon-envelope icon-2x"></i> 
+                                 <span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
+                                 class="label label-success">456</span>
+                              </a> 
+                              
+                              <a class="quick-btn" href="#" id="col1_btn3"> 
+                              <i class="icon-signal icon-2x"></i> 
+                              <span><img src="resources/assets/img/home_img/folder (1).png" style="width: 80px"; height="60px;"/></span> <span
+                                 class="label label-warning">+25</span>
+                              </a> 
+                              
+                              <a class="quick-btn" href="notice_board/list" id="col1_btn4"> 
+                              <i class="icon-external-link icon-2x"></i> 
+                              <span><img src="resources/assets/img/home_img/speaker.png" style="width: 80px"; height="60px;"/></span> <span
+                                 class="label label-success">3</span>
+                              </a> 
+                              
+                              <a class="quick-btn" href="notice_board/list" id="col1_btn5"> 
+                              <i class="icon-bolt icon-2x"></i> 
+                              <span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
+                                 class="label label-default">${count }</span>
+                              </a>
+                              <a class="quick-btn" href="/groupware/member_manage" id="col1_btn6"> 
+                              <i class="icon-bolt icon-2x"></i> 
+                              <span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
+                                 class="label label-default">${noUser }</span>
+                              </a>
+                     </div>
+                  </div>
+               </div>
 				
 					<!-- div 추가해줘야 함.  -->
 					<!--  <div class="col-md-3 col-sm-3 col-xs-6">
@@ -362,9 +408,9 @@ border-radius: 70px;
 							<p class="help-block">Help text here.</p>
 						</div> -->
 						<div class="panel panel-back noti-box">
-							<div href="#" class="weather" style="width: 450px; height: 95px;">
-								<table id="weather" style="width: 150px"></table>
-							</div>
+                     <div href="#" class="weather" style="width: 450px; height: 100px;">
+                        <table id="weather" style="width: 250px"></table>
+                     </div>
 							
 							
 						<!-- 원형그래프 -->
@@ -454,9 +500,10 @@ border-radius: 70px;
 
 
 
-	<script src="<c:url value='resources/assets/js/jquery-1.10.2.js'/>" /></script>
-	<!-- BOOTSTRAP SCRIPTS -->
-	<script src="<c:url value='resources/assets/js/bootstrap.min.js'/>" /></script>
+
+   <script src="<c:url value='resources/assets/js/jquery-1.10.2.js'/>" /></script>
+   <!-- BOOTSTRAP SCRIPTS -->
+   <script src="<c:url value='resources/assets/js/bootstrap.min.js'/>" /></script>
 
 	<!-- METISMENU SCRIPTS -->
 	<script src="<c:url value='resources/assets/js/jquery.metisMenu.js'/>" /></script>
@@ -486,7 +533,7 @@ border-radius: 70px;
 		console.log("값:"+admin);
 		if(admin != '관리자'){
 			$('#admin').hide();	
-			$('#admin1').click(function(){
+			$('#col1_btn6').click(function(){
 				alert('접근 권한이 없습니다.');
 				return false;
 			})
@@ -524,6 +571,7 @@ border-radius: 70px;
 			 location="/groupware/member_login/logOut";
 		 }
 
+
 		</script>
 		<script>
 
@@ -558,6 +606,10 @@ border-radius: 70px;
 				} */
 				
 
+      </script>
+      <script>
+
+
 			/* } *//* else{
 				$($(currentLiTag).find('a').attr('href')).show();
 	/* 		} */
@@ -565,19 +617,29 @@ border-radius: 70px;
 	/* 		return false;
 		}); */ 
 		
-	
- 
-	/* $(function () { */
-		// 탭 초기화 및 설정
-		tabSetting();
-	/* }); */
-	
-	
-	var profileimage= '${profileimage}';
-	if(profileimage !=null && profileimage!=''){
-		$("#profileimage").attr('src', profileimage);
-	}
-	</script>
+   /* $(function () { */
+      // 탭 초기화 및 설정
+      tabSetting();
+   /* }); */
+   
+   
+
+   			var name = "${name}";
+			var url = '/groupware/checktime/myimage/'+name;
+			$.getJSON(url, function(data){
+				var profileimage='';
+		
+				$(data).each(function(){
+					profileimage=this.profileimage;
+				});
+				
+				if(profileimage!=null && profileimage!=''){
+					$('#profileimage').attr("src", profileimage);
+				};
+			});
+
+   </script>
+
 
 
 

@@ -79,5 +79,10 @@ public class MainCheckDAOImpl implements MainCheckDAO {
 		return sqlSession.selectList(NAMESPACE+".memberimage", name);
 	}
 
+	@Override
+	public List<MemberVO> myimage(String name) {
+		return sqlSession.selectList(NAMESPACE+".myimage", name);
+	}
+
 
 }
