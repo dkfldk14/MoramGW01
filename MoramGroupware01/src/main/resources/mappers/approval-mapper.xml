@@ -11,7 +11,7 @@
 </select>  
 <select id="selectAll" resultType = "project.spring.groupware.member.domain.MemberVO">
 	select * from moram_member
-	where usertype = 2 or usertype = 3
+	where usertype = '승인'
 </select>
 
 <select id="selectID" resultType="project.spring.groupware.draft.domain.ApprovalVO">
@@ -142,6 +142,56 @@
 	where draft_index = #{draft_index}
 </select>
 
+<select id = "selectIdReturn1" resultType = "String">
+	select final_id1 from moram_approval_return
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdReturn2" resultType = "String">
+	select final_id2 from moram_approval_return
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdReturn3" resultType = "String">
+	select final_id3 from moram_approval_return
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdReturn4" resultType = "String">
+	select final_id4 from moram_approval_return
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdReturn5" resultType = "String">
+	select final_id5 from moram_approval_return
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdFinlsh1" resultType = "String">
+	select final_id1 from moram_approval_finish
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdFinlsh2" resultType = "String">
+	select final_id2 from moram_approval_finish
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdFinlsh3" resultType = "String">
+	select final_id3 from moram_approval_finish
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdFinlsh4" resultType = "String">
+	select final_id4 from moram_approval_finish
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectIdFinlsh5" resultType = "String">
+	select final_id5 from moram_approval_finish
+	where draft_index = #{draft_index}
+</select>
+
 <update id = "updateOrder">
 	update moram_approval_order
 	set final_id = #{final_id}
@@ -174,6 +224,66 @@
 
 <select id = "selectNameFinalizer5" resultType = "String">
 	select c.name from moram_approval_finalizer join moram_member c
+	on final_id5 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameReturn1" resultType = "String">
+	select c.name from moram_approval_return join moram_member c
+	on final_id1 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameReturn2" resultType = "String">
+	select c.name from moram_approval_return join moram_member c
+	on final_id2 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameReturn3" resultType = "String">
+	select c.name from moram_approval_return join moram_member c
+	on final_id3 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameReturn4" resultType = "String">
+	select c.name from moram_approval_return join moram_member c
+	on final_id4 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameReturn5" resultType = "String">
+	select c.name from moram_approval_return join moram_member c
+	on final_id5 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameFinish1" resultType = "String">
+	select c.name from moram_approval_finish join moram_member c
+	on final_id1 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameFinish2" resultType = "String">
+	select c.name from moram_approval_finish join moram_member c
+	on final_id2 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameFinish3" resultType = "String">
+	select c.name from moram_approval_finish join moram_member c
+	on final_id3 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameFinish4" resultType = "String">
+	select c.name from moram_approval_finish join moram_member c
+	on final_id4 = c.id
+	where draft_index = #{draft_index}
+</select>
+
+<select id = "selectNameFinish5" resultType = "String">
+	select c.name from moram_approval_finish join moram_member c
 	on final_id5 = c.id
 	where draft_index = #{draft_index}
 </select>
@@ -243,6 +353,16 @@
 		<select id="selectID_final_id5" resultType="String">
 	select id from moram_member
 	where name = #{name}
+	</select>
+	
+	<select id="selectFinish" resultType = "project.spring.groupware.draft.domain.ApprovalVO">
+		select * from moram_approval_finish
+		where draft_index = #{draft_index}
+	</select>
+	
+	<select id="selectReturn" resultType = "project.spring.groupware.draft.domain.ApprovalVO">
+		select * from moram_approval_return
+		where draft_index = #{draft_index}
 	</select>
 
 </mapper>

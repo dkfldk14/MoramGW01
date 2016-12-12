@@ -45,6 +45,19 @@ public interface approvalDAO {
 	public abstract String selectFinal_id3(String name);
 	public abstract String selectFinal_id4(String name);
 	public abstract String selectFinal_id5(String name);
+	public abstract String selectName1Return(String draft_index);
+	public abstract String selectName2Return(String draft_index);
+	public abstract String selectName3Return(String draft_index);
+	public abstract String selectName4Return(String draft_index);
+	public abstract String selectName5Return(String draft_index);
+	public abstract String selectName1Finish(String draft_index);
+	public abstract String selectName2Finish(String draft_index);
+	public abstract String selectName3Finish(String draft_index);
+	public abstract String selectName4Finish(String draft_index);
+	public abstract String selectName5Finish(String draft_index);
+	
+	public abstract ApprovalVO selectFinish(String draft_index);
+	public abstract ApprovalVO selectReturn(String draft_index);
 		
 	public abstract List<DrafterDTO> selectForDrafterId(String id);
 	public abstract List<DrafterDTO> selectForFinalizerId(String id);

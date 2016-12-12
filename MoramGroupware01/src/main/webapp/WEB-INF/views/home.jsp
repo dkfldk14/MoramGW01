@@ -125,7 +125,7 @@ border-radius: 70px;
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><button id="logoutButton" onclick="logout();">로그아웃</button></li>
+						<li><button id="logoutButton" onclick="logout()">로그아웃</button></li>
 
 					</ul>
 				</div>
@@ -476,29 +476,21 @@ border-radius: 70px;
 	
 	<script type="text/javascript">
 	
-	var admin = <%=type%>
-	var dept = <%=dept%>
+	var admin = "<%=type%>"
+	var dept = "<%=dept%>"
 	function tabSetting() {
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 		/* $('.test').hide();
 		$($('.current').find('a').attr('href')).show(); */
  		
-		console.log("값:"+admin);
 
-		/* if(admin != 1){
-			$('#admin').hide();	
-			$('#authorization1').click(function(){
-				alert('당신은 1조가 아닙니다.');
-				return false;
-			})
-=======
-		if(admin != 1){
-			$('#admin').hide();			
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
+		console.log("값:" + admin);
+		if (admin != '어드민') {
+			$('#admin').hide();
 		}
-				
-		if(admin==0){
-			$('.childTab').click(function () {
+
+		if (admin == '미승인') {
+			$('.childTab').click(function() {
 				alert('승인 후 이용해주세요');
 				return false;
 			})
@@ -507,26 +499,26 @@ border-radius: 70px;
 		//팀별 게시판에 각 팀원 들이 들어가게끔 수정해야한다.
 		//오쌤은 dept 값이 5번이므로 모든 팀프로젝트 게시판에 들어가야한다.
 		
-		if(dept != 1 && dept != 5){
-			$('#authorization1').click(function(){
+		if(dept != '1팀' ) {
+			$('#authorization1').click(function() {
 				alert('당신은 1조가 아닙니다.');
 				return false;
 			})
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != '2팀') {
 			$('#authorization2').click(function() {
 				alert('당신은 2조가 아닙니다.');
 				return false;
 			})
 		}
 		
-		if(dept != 3 && dept != 5){
-			$('#authorization3').click(function(){
+		if(dept != '3팀') {
+			$('#authorization3').click(function() {
 				alert('당신은 3조가 아닙니다.');
 				return false;
 			})
-		} */
+		} 
 	
 	}
 		 function logout(){
