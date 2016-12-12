@@ -8,11 +8,11 @@ public class ReturnDTO {
 	private String title;
 	private Date draftdate;
 	private String aname;
-	private String progress;
+	private String cname;
 	private String returndate;
 	
 	public ReturnDTO() {}
-	public ReturnDTO(String draft_index, String approvalname, String title, Date draftdate, String aname, String progress,
+	public ReturnDTO(String draft_index, String approvalname, String title, Date draftdate, String aname, String cname,
 			String returndate) {
 		super();
 		this.draft_index = draft_index;
@@ -20,7 +20,7 @@ public class ReturnDTO {
 		this.title = title;
 		this.draftdate = draftdate;
 		this.aname = aname;
-		this.progress = progress;
+		this.cname = cname;
 		this.returndate = returndate;
 	}
 	public String getDraft_index() {
@@ -53,11 +53,11 @@ public class ReturnDTO {
 	public void setAname(String aname) {
 		this.aname = aname;
 	}
-	public String getProgress() {
-		return progress;
+	public String getCname() {
+		return cname;
 	}
-	public void setProgress(String progress) {
-		this.progress = progress;
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
 	public String getReturndate() {
 		return returndate;

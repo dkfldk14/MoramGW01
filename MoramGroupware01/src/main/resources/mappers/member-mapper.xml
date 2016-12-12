@@ -20,7 +20,7 @@
   </select>
   
   <select id="name_select" resultType="project.spring.groupware.member.domain.MemberVO">
-  	select name, usertype, profileimage from moram_member where id = #{userid}
+  	select name, usertype, dept, profileimage from moram_member where id = #{userid}
   </select>
   
    <select id="admin_manage_member" resultType="project.spring.groupware.member.domain.MemberVO">

@@ -20,9 +20,9 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
    
-<link rel="stylesheet" href="resources/css/kalendae.css" type="text/css" charset="utf-8">
-<link rel="stylesheet" href="resources/css/metal.css" type="text/css">
-<script src="resources/js/kalendae.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="../resources/css/kalendae.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="../resources/css/metal.css" type="text/css">
+<script src="../resources/js/kalendae.js" type="text/javascript" charset="utf-8"></script>
    
    
 <style type="text/css">
@@ -62,7 +62,7 @@
 		border: 0px solid #000000;
 	}
 	
-	#text-center{
+	.text-center{
 		text-align: center;
 	}
 	#cell_sign{
@@ -86,6 +86,10 @@
 	.kalendae .k-days span.closed {
 			background:red;
 	}
+	.k-calendar .k-days span{
+      width: 30px;
+
+   }
 	/*============================== */
 		
 	
@@ -93,7 +97,7 @@
 
 </head>
 <body>
-	<form action="draft-doing" method="POST">
+	<form method="POST">
 		<div id="wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="adjust-nav">
@@ -128,30 +132,28 @@
 				<li><a href="#"><i class="fa fa-edit "></i>전자결재<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">나의 결재함</a></li>
-						<li><a href="#">미결함</a></li>
-						<li><a href="#">반려함</a></li>
-						<li><a href="#">기결함</a></li>
+						<li class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+						<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+						<li class="childTab"><a href="/groupware/draft/approval-return">반려함</a></li>
+						<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 					</ul></li>
 
 				<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="list">받은 메일함</a></li>
-
-						<li><a href="#">편지쓰기</a></li>
-						<li><a href="#">보낸 메일함</a></li>
-						<li><a href="#">휴지통</a></li>
-						<li><a href="#">주소록</a></li>
+							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
 					</ul></li>
 				<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 						class="fa arrow"></span></a>
 
 					<ul class="nav nav-second-level">
-						<li><a href="#">공지게시</a></li>
-						<li><a href="#">수업자료</a></li>
-						<li><a href="#">IT news</a></li>
-						<li><a href="#">면접후기</a></li>
+							<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
+							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
+							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
+							<li class="childTab"><a href="/groupware/interview_board/list">면접후기</a></li>
 
 					</ul></li>
 
@@ -159,9 +161,9 @@
 				<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">시나브로</a></li>
-						<li><a href="#">그냥2조</a></li>
-						<li><a href="#">성준이네</a></li>
+							<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
 						<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -182,18 +184,18 @@
 				<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">개인정보수정</a></li>
-						<li><a href="#">나의 이력서</a></li>
-						<li><a href="#">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
+							<li class="childTab"><a href="#">나의 이력서</a></li>
+							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
 					</ul></li>
 				<li><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="#">사용자관리</a></li>
-						<li><a href="#">권한관리</a></li>
-						<li><a href="#">문서함관리</a></li>
+						<li class="childTab"><a href="#">사용자관리</a></li>
+						<li class="childTab"><a href="#">권한관리</a></li>
+						<li class="childTab"><a href="#">문서함관리</a></li>
 
-						<li><a href="#">결재함관리</a></li>
+						<li class="childTab"><a href="#">결재함관리</a></li>
 					</ul></li>
 
 			</ul>
@@ -223,18 +225,18 @@
  			<td colspan="1" class="gapRL" style="border-top: 1px solid white; border-bottom: 1px solid white;"></td>
  			<td colspan="1" class="gapRL" style="border-top: 1px solid white; border-bottom: 1px solid white;"></td>
  			<td colspan="1" style="border-top: 1px solid white; border-bottom: 1px solid white; border-left: 1px solid white;"></td>
-			<td id="text-center" style="background-color: #cccccc; font-weight: bold">
-				<button style="width:115px; height: 30px; font-weight: bold "type="submit" name="save">
+			<td class="text-center" style="background-color: #cccccc; font-weight: bold">
+				<button style="width:115px; height: 30px; font-weight: bold "type="submit" name="draft">
 				상신
 				</button>
 			</td>
- 			<td id="text-center" style="background-color: #efefef; font-weight: bold">
+ 			<td class="text-center" style="background-color: #efefef; font-weight: bold">
  				<button style="width:115px; height: 30px; font-weight: bold "type="submit" name="cancel" >
 				취소
 				</button>
  			</td>
- 			<td id="text-center" style="background-color: #efefef; font-weight: bold">
- 				<button style="width:115px; height: 30px; font-weight: bold "type="submit" name="" >
+ 			<td class="text-center" style="background-color: #efefef; font-weight: bold">
+ 				<button style="width:115px; height: 30px; font-weight: bold "type="submit" name="save" >
 				저장
 				</button>
  			</td>
@@ -244,65 +246,70 @@
 		</tr>
 		<tr>
  			<td class="cell1_x" rowspan="1">문서번호</td>
- 			<td id="text-center" colspan="4" rowspan="2" style=" font-weight: bold; height: 50px;">근 태 신 청 서</td>
+ 			<td class="text-center" colspan="4" rowspan="2" style=" font-weight: bold; height: 50px;">근 태 신 청 서</td>
  			<td colspan="2" rowspan="2" style="border-top: 1px solid white; border-right: 1px solid white;"><!--2*6 셀--></td>
  			<!-- <td id="text-center" style="background-color: #cccccc; font-weight: bold">저장</td>
  			<td id="text-center" style="background-color: #efefef; font-weight: bold">취소</td>
  			<td id="text-center" style="background-color: #efefef; font-weight: bold">상신</td> -->
 		</tr>
 		<tr>
- 			<td id="text-center "class="cell1_x" style = "border-right: 0px; border-top: 0px; border-bottom: 0px;">
-			<input type="text" readonly="readonly" id = "code"/>
+ 			<td class="text-center" class="cell1_x" style = "border-right: 0px; border-top: 0px; border-bottom: 0px;">
+			<input type="text" readonly="readonly" name = "approvalno" id = "code"/>
 			</td>
 		</tr>
 		<tr>
- 			<td id="text-center" colspan="3">구분</td>
- 			<td id="text-center">직급</td>
- 			<td id="text-center">직급</td>
- 			<td id="text-center">직급</td>
- 			<td id="text-center">직급</td>
- 			<td id="text-center">직급</td>
+ 			<td class="text-center" colspan="3">구분</td>
+ 			<td class="text-center">직급</td>
+ 			<td class="text-center">직급</td>
+ 			<td class="text-center">직급</td>
+ 			<td class="text-center">직급</td>
+ 			<td class="text-center">직급</td>
 		</tr>
 		<tr>
  			<td class="cell1_x" style="border: 0px solid white; border-left: 1px solid black;">이름</td>
  			<td colspan="2">
- 				<input type = "text"  value="${ApprovalVO.name }" style = "width: 228px; background-color: #ffffff;" readonly="readonly"/>
+ 				<input type = "text" name="name" value="${ApprovalVO.name }" style = "width: 228px; background-color: #ffffff;" readonly="readonly"/>
  			</td>
- 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" class="final_id1">1</td>
- 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" id="final_id2">2</td>
- 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" id="final_id3">3</td>
- 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" id="final_id4">4</td>
- 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" id="final_id5">5</td>
+ 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id1"></td>
+ 			<input type="hidden" style="width:30px" name = "final_id1" id ="text1"/>
+ 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id2"></td>
+ 			<input type="hidden" style="width:30px" name = "final_id2" id ="text2"/>
+ 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id3"></td>
+			<input type="hidden" style="width:30px" name = "final_id3" id ="text3"/>
+ 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id4"></td>
+ 			<input type="hidden" style="width:30px" name = "final_id4" id ="text4"/>
+ 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id5"></td>
+			<input type="hidden" style="width:30px" name = "final_id5" id ="text5"/>
 		</tr>
 		<tr>
  			<td class="cell1_x">소속</td>
  			<td colspan="2" id="dept" >
-	 			<input type = "text"  value="${ApprovalVO.dept }" style = "width: 228px; background-color: #ffffff;" readonly="readonly"/>
+	 			<input type = "text"  name="dept" value="${ApprovalVO.dept }" style = "width: 228px; background-color: #ffffff;" readonly="readonly"/>
  			</td>
 		</tr>
 		<tr>
  			<td class="cell1_x">구분</td>
- 			<td colspan="2"><input style="width: 227.5px;"type="text" id = "code2" name = "name" /></td>
+ 			<td colspan="2"><input style="width: 227.5px;"type="text" id = "code2" name = "approvalname" readonly="readonly" /></td>
 		</tr>
 		<tr>
  			<td class="cell1_x">사용일자</td>
- 			<td colspan="2" ><input type="text" class="auto-kal" data-kal="dayOutOfMonthClickable: true" style="width: 102px;">&nbsp;~&nbsp;&nbsp;&nbsp;<input type="text" class="auto-kal" data-kal="dayOutOfMonthClickable: true" style="width: 92px; "></td>
+ 			<td colspan="2" ><input type="text" name="usedatestart" class="auto-kal"  data-kal="dayOutOfMonthClickable: true" style="width: 102px;">&nbsp;~&nbsp;&nbsp;&nbsp;<input type="text" name="usedateend" class="auto-kal" data-kal="dayOutOfMonthClickable: true" style="width: 92px; "></td>
 		</tr>
 		<tr>
  			<td>제출일자</td>
  			<td colspan="2"></td>
- 			<td id="text-center">사원이름</td>
- 			<td id="text-center">사원이름</td>
- 			<td id="text-center">사원이름</td>
- 			<td id="text-center">사원이름</td>
- 			<td id="text-center">사원이름</td>
+ 			<td class="text-center">사원이름</td>
+ 			<td class="text-center">사원이름</td>
+ 			<td class="text-center">사원이름</td>
+ 			<td class="text-center">사원이름</td>
+ 			<td class="text-center">사원이름</td>
 		</tr>
 		<tr>
  			<td colspan="2" style="height: 40px;">TITLE</td>
  			<td colspan="6"><input type = "text" name = "title" style = " width: 705px; height: 35px; border-color: #000000; border-width: 0px;" /></td>
 		</tr>
 		<tr>
- 			<td style="height: 345px; " colspan="8"><textarea rows="" cols="100" style = "height: 345px; width: 1000px; resize:none; "></textarea></td>
+ 			<td style="height: 345px; " colspan="8"><textarea rows="" cols="100" style = "height: 345px; width: 1000px; resize:none; " name="content"></textarea></td>
 		</tr>
 		
 	</table>
@@ -335,7 +342,7 @@
              
         });
     	
-   		$('.final_id1').click(function() {
+   		$('#getfinal_id1').click(function() {
        		window.open('popup-list', '', 'left=200, top=200, width=640, height=480, scrollbars=no, status=no, resizable=no, fullscreen=no, channelmode=no');
        	});
     	

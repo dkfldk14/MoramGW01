@@ -1,5 +1,7 @@
 package project.spring.groupware.email.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,19 +24,24 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.sun.mail.handlers.message_rfc822;
 
 import project.spring.groupware.email.domain.EmailVO;
 import project.spring.groupware.email.pageutil.PageMaker;
@@ -62,6 +69,8 @@ public class EmailController {
 	private final String mailStoreType="pop3";
 	private final String Pwd="6557";
 	private String gwEmail=null;
+	private Message[] messages;	
+	private int sendmailct=200;
 	
 	@RequestMapping(value="/list")
 	public void EmailList(Integer page,Model model,HttpServletRequest request){
@@ -89,26 +98,73 @@ public class EmailController {
 		// create the folder object and open it
 		Folder emailFolder = store.getFolder("INBOX");
 		emailFolder.open(Folder.READ_ONLY);
-
+		
 		logger.info("count : "+emailFolder.getMessageCount());
 		
-		Message[] messages=emailFolder.getMessages();
-
+		messages=emailFolder.getMessages();
+		/*
 		PaginationCriteria c = new PaginationCriteria();
+		
 		int paging = page;
+		
+		logger.info("paging : "+paging);
 		int start = c.getStart() + 10 * paging -1;
 		System.out.println("엔드엔드"+c.getEnd());
 		int end = c.getEnd() + 10 * paging -1;
+		
 		System.out.println("페이징 넘버 " + paging);
+		//전체카운트 start/end 정하고
+		int perPage=10;
+		
+	
+		//emailFolder.getMessages(start, end);
+		
+		
 		
 		if (messages.length<=end){
 			end = messages.length;
 		}
+		*/
 		
+		int start = 10 * (page - 1);
+		int end = start + 10;
+		if (end > messages.length) {
+			end = messages.length;
+		}
+		
+//		for (int i = start; i < end; i++) {
+//			EmailVO vo = new EmailVO();
+//			Message message = messages[i];
+//			vo.setNum(message.getMessageNumber());
+//			Date date = message.getSentDate();
+//			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
+//			vo.setSenddate(df.format(date).toString());
+//			vo.setSubject(message.getSubject().toString());
+//			vo.setContent(message.getContent().toString());
+//			vo.setFrom_email(message.getFrom()[0].toString());
+//			emaillist.add(vo);
+//			
+//		}
+		
+		for (int i = end; i > start; i--) {
+			EmailVO vo = new EmailVO();
+			Message message = messages[i-1];
+			vo.setNum(message.getMessageNumber());
+			Date date = message.getSentDate();
+			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
+			vo.setSenddate(df.format(date).toString());
+			vo.setSubject(message.getSubject().toString());
+			vo.setContent(message.getContent().toString());
+			vo.setFrom_email(message.getFrom()[0].toString());
+			emaillist.add(vo);
+			
+		}
+		
+		/*
 		for (int i = end, n = start; i >= n; i--) {
 			EmailVO vo = new EmailVO();
 			
-			Message message = messages[i-1];
+			Message message = messages[i];
 			
 			System.out.println("---------------------------------");
 			System.out.println("message number:" + message.getMessageNumber());
@@ -125,19 +181,29 @@ public class EmailController {
 			vo.setContent(message.getContent().toString());
 			vo.setFrom_email(message.getFrom()[0].toString());
 
+		
 			if (i <= start) {
 				i = n;
 			}
-			
 			emaillist.add(vo);
+			
+			
 		
 		}
+		*/
 		System.out.println("/////////////////////////////");
 		model.addAttribute("email", emaillist);
+		if(messages.length==0){
+			model.addAttribute("messages",0);
+//			
+		}
+		
+		
 		model.addAttribute("messages",messages.length);
-		c.setPage(page);
+//		c.setPage(page);
 		
 		
+		PaginationCriteria c = new PaginationCriteria(page, 10);
 		PageMaker maker = new PageMaker();
 		maker.setCriteria(c);
 		maker.setTotalCount(messages.length);
@@ -151,10 +217,7 @@ public class EmailController {
 		System.out.println("start = " +maker.getStartPageNum());
 		System.out.println("end = "+maker.getEndPageNum());
 		
-	
-		
-		
-		
+
 		emailFolder.close(false);
 		store.close();
 
@@ -166,9 +229,10 @@ public class EmailController {
 		e.printStackTrace();
 	}
 }
-
+	
+	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public void emailview(int num, int page, Model model, EmailVO vo) {
+	public void emailview(int num, @ModelAttribute("page") int page, Model model, EmailVO vo) {
 		logger.info("detail jsp 실행 ");
 		// model.addAttribute("email", vo);
 		// 아마 디테일을 누를때 전체 리스트를 받아오면 되지 않을까 싶어요! >ㅇ<
@@ -177,14 +241,59 @@ public class EmailController {
 		logger.info("num:" + vo.getNum());*/
 		logger.info("num : "+num);
 		logger.info("page : "+page);
-		int emailNum=num-(page-1) * 10;
+		/*int emailNum=num-(page-1) * 10;
 		EmailVO vo1=emaillist.get(emailNum-1);
-		model.addAttribute("emaildetail", vo1);
-		vo = emailServiceDAO.detailEmail(emailNum);	
-		logger.info("detail subject : " + vo.getSubject());
+		*/
+		//int emailNum=num-(page-1) * 10;
+		//EmailVO vo1=emaillist.get(emailNum-1);
+		EmailVO detail=emailServiceDAO.detailEmail(num);
+		
+		//EmailVO vo1=emaillist.get(num);
+		model.addAttribute("emaildetail", detail);
+		//vo = emailServiceDAO.detailEmail(vo1.getNum());	
+		//logger.info("detail subject : " + vo.getSubject());
 		//model.addAttribute("emaildetail", vo);
 	}
 	
+	@RequestMapping(value = "/detail-receive", method = RequestMethod.GET)
+	public void detail(int num, int page, Model model, EmailVO vo) {
+		logger.info("detail jsp 실행 ");
+		logger.info("num" + num);
+		logger.info("어려운 공식: " + (messages.length - (page-1)*10 + num));
+		
+		EmailVO volist=emaillist.get(messages.length - num);
+			model.addAttribute("emaildetail", volist);
+			
+/*		// model.addAttribute("email", vo);
+		EmailVO vo = emaillist.get(num - 1);
+		logger.info("detail에 있는 vo 값 : " + vo.getContent());
+		logger.info("num:" + vo.getNum());
+		logger.info("num : "+num);
+		logger.info("page : "+page);
+		int emailNum=num-(page-1) * 10;
+		EmailVO vo1=emaillist.get(emailNum-1);
+		
+		EmailVO vo1=emaillist.get(num);
+	//	int emailNum=num-(page-1) * 10;
+		//EmailVO vo1=emaillist.get(emailNum-1);
+		model.addAttribute("emaildetail", vo1);
+		vo = emailServiceDAO.detailEmail(vo1.getNum());	
+		logger.info("detail subject : " + vo.getSubject());
+		//model.addAttribute("emaildetail", vo);
+	*/}
+
+
+	
+	@RequestMapping(value = "/detail-other", method = RequestMethod.GET)
+	public void detailother(int num, int page, Model model, EmailVO vo) {
+		logger.info("detail jsp 실행 ");
+		logger.info("num" + num);
+		EmailVO volist=emailServiceDAO.detailEmail(num);
+		
+		model.addAttribute("emaildetail", volist);
+			
+	
+	}
 
 	
 	
@@ -207,6 +316,13 @@ public class EmailController {
 		
 	}
 	
+	@RequestMapping(value="write", method=RequestMethod.POST)
+	public void emailforward(Model model,HttpServletRequest request,EmailVO vo){
+		
+	
+		
+	}
+	
 	
 	@RequestMapping(value="/listup", method=RequestMethod.GET)
 	public String emailwrite(int num, RedirectAttributes attr){
@@ -220,26 +336,31 @@ public class EmailController {
 	
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
-	@ResponseBody
-	public void testCheck(@RequestParam(value = "valueArrTest[]") List<Integer> valueArrTest,Model model) {
+	
+	public void testCheck(@RequestParam(value = "valueArrTest[]") List<Integer> valueArrTest, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session=request.getSession();
+		String id = (String)session.getAttribute("login_id");
+		MemberVO vo = emailServiceDAO.member_one(id);
+		gwEmail = vo.getGroupemail().toString();
 		logger.info("testCheck() ...");
 		logger.info("arr size: " + valueArrTest.size());
-		for (int i = 0; i <= valueArrTest.size(); i++) {
+//		for (int i = 0; i < valueArrTest.size(); i++) {
 		/*	int num=Integer.parseInt(valueArrTest.get(i).toString());
 			System.out.println("num : "+num);
 		*/
 			
 			
 			delete(valueArrTest,model,gwEmail);
-		
-		}
+			
+//		}
 	
 	/*	response.setHeader("Refresh", "0; URL=list.jsp");
 
 		return;
-*/
-		
-		
+*/			
+			
+		PrintWriter out=response.getWriter();
+		out.print("OK");
 	}
 	
 	private void delete(List<Integer> valueArrTest,Model model,String gwEmail) {
@@ -287,8 +408,8 @@ public class EmailController {
 				*/
 				
 				for (int i = 0; i < valueArrTest.size(); i++) {
-				Message message1=emailFolder.getMessage(Integer.parseInt(valueArrTest.get(i).toString()));
-				
+			     Message message1=emailFolder.getMessage(Integer.parseInt(valueArrTest.get(i).toString()));
+					
 	
 					System.out.println("---------------------------------");
 					System.out.println("Email Number " + (i));
@@ -296,17 +417,19 @@ public class EmailController {
 					EmailVO vo=new EmailVO();
 					vo.setNum(message1.getMessageNumber());
 					vo.setFrom_email(message1.getFrom()[i].toString());
+					
 					vo.setSubject(message1.getSubject());
 					Date date=message1.getSentDate();
 					SimpleDateFormat df=new SimpleDateFormat("yy/MM/dd hh:mm");
 					vo.setSenddate(df.format(date).toString());
 					vo.setContent(message1.getContent().toString());
 					vo.setState(2);
-					vo.setTo_email("sera@joycool.com");
+					vo.setTo_email(gwEmail);
 					emailServiceDAO.insert(vo);
+				/*	emailServiceDAO.delete_emailList(gwMail);*/
 						// set the DELETE flag to true
 					message1.setFlag(Flags.Flag.DELETED, true);
-					
+					logger.info("끝!");
 				}
 				
 				
@@ -422,8 +545,9 @@ public class EmailController {
 
 		   // Send message
 		   Transport.send(message);
-		   
-			EmailVO emailvo=new EmailVO(1, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), address[z], null, 1);
+		   sendmailct = emailServiceDAO.select_mail_num();
+		   sendmailct+=1;
+			EmailVO emailvo=new EmailVO(sendmailct, vo.getSubject(), null, vo.getFrom_email(), vo.getContent(), address[z], null, 1);
 			emailServiceDAO.insert(emailvo);
 			logger.info("vo 값 : "+vo.getSubject() );
 			logger.info("vo값 : "+vo.getFrom_email());
@@ -466,8 +590,15 @@ public class EmailController {
 			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌. 
 		   }
 		
+		   logger.info("메일가져온거 맞냐.. : "+mvo.getGroupemail());
 		List<EmailVO> vo=emailServiceDAO.send_emailList(mvo.getGroupemail());
-		model.addAttribute("email", vo);
+		String from_email=mvo.getGroupemail();
+		//넣어주는거 ㅇ-
+		
+		List<EmailVO> vo1=emailServiceDAO.adressList(1, c, mvo.getGroupemail());
+		model.addAttribute("sendCount", vo.size());
+		model.addAttribute("email", vo1);
+		
 	 	
 	   	//페이지메이커 
 	   	PageMaker maker=new PageMaker();
@@ -490,11 +621,13 @@ public class EmailController {
 	public void delete_mailbox(Integer page,Model model, HttpServletRequest request){
 		//todo- session 아이디 가져와서 하기 
 		
+		
 		HttpSession session=request.getSession();
 		String userid=(String) session.getAttribute("login_id");
 		MemberVO mvo=emailServiceDAO.member_one(userid);
+		logger.info("이메일:"+mvo.getGroupemail());
 		
-		//String gwMail="dkfldk14@moram.com";
+		/*String gwMail="dkfldk14@moram.com";*/
 		logger.info("listpage (): page="+page);
 		   PaginationCriteria c=new PaginationCriteria();
 		   if(page!=null){
@@ -504,34 +637,44 @@ public class EmailController {
 		   }
 		
 		List<EmailVO> vo=emailServiceDAO.delete_emailList(mvo.getGroupemail());
-		model.addAttribute("email", vo);
+		String from_email=mvo.getGroupemail();
+		//넣어주는거 ㅇ-
+		List<EmailVO> vo1=emailServiceDAO.adressList(2, c, mvo.getGroupemail());
+		model.addAttribute("sendCount", vo.size());
+		model.addAttribute("email", vo1);
+		
 	 	
 	   	//페이지메이커 
 	   	PageMaker maker=new PageMaker();
 	   	//▼ 몇번째 페이지를 보여줄것인지 조건
 	   	maker.setCriteria(c);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
-	   	maker.setTotalCount(emailServiceDAO.totalEmailct("2", gwEmail));
-	   	// 역시 범인은 당신이야!											↑ null 들어가고 있사옵니다!
-	   	
+	   	maker.setTotalCount(emailServiceDAO.totalEmailct("2", mvo.getGroupemail()));
 	   	//▼ pageMaker 의 함수를 호출
 	   	maker.setPageDate();
 	   	//모델객체에 pageMaker 넘겨줌. 
 	   	model.addAttribute("pageMaker", maker);
-  
-	
-	
+	   	model.addAttribute("Gemail", mvo.getGroupemail());
 	}
 	
 	
+	@RequestMapping(value="/delete-mailbox", method=RequestMethod.POST)
 	
-	@RequestMapping(value="/test1")
-	public void test1(){
+	public void deleteMail(@RequestParam(value = "valueArrTest[]") List<Integer> valueArrTest, Model model, HttpServletResponse response) throws IOException{
+				
+		logger.info("=== length: " + valueArrTest.size());
 		
-	}
+		/*int result=emailServiceDAO.delete_change(num);
+			*/
+			for(int i=0; i<valueArrTest.size(); i++){
+				logger.info("=== value: " + valueArrTest.get(i));
+				int result=emailServiceDAO.delete_change(Integer.valueOf(valueArrTest.get(i)));
+				logger.info("i 값 : "+result);
+				
+			}
+			PrintWriter out = response.getWriter();
+			out.print("OK");
 	
-
-
 	
-	
+}
 }

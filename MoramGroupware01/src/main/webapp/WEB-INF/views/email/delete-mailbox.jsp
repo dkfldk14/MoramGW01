@@ -61,55 +61,84 @@ table {
 	color: #0B233f;
 }
 button {
-   background-color: #A5DBCE; /* Green */
-   border: none;
    color: white;
    padding: 8px 16px;
    text-align: center;
    text-decoration: none;
    display: inline-block;
-   font-size: 10px;
+  
    margin: 4px 2px;
    -webkit-transition-duration: 0.4s; /* Safari */
    transition-duration: 0.4s;
    cursor: pointer;
+     color: black;
+   border: 1px solid #d6d6d6;
+  
+   
+     background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+   
+   
 }
 
 .buttondelete {
   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+   color: #a8abad;
+   
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 
+#searchbtn{
+  background-color: white;
+   color: #a8abad;
+     font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+
+}
 
 .buttondelete:hover {
-  background-color: #8fb73a;
-   color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .buttonreturn {
-   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+  background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
 }
 
 .buttonreturn:hover {
-   background-color: #8fb73a;
-   color: white;
+  background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;
 }
 
 .buttonforward {
-   background-color: white;
-   color: black;
-   border: 2px solid #8fb73a;
+  background-color: white;
+      color: #a8abad;
+     font-weight : 850;
+   border: 1px solid #d6d6d6;
+   font-size: 13px;
+	
 }
 
 
 
 .buttonforward:hover {
-   background-color: #8fb73a;
-   color: white;
+   background-color: #edf8ff;
+   color: #3a3939;
+   font-weight: 900;
 }
 
 label input {
@@ -201,30 +230,30 @@ div.center {text-align: center;}
 					<li><a href="#"><i class="fa fa-edit "></i>전자결재<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="#">나의 결재함</a></li>
-						<li class="childTab"><a href="#">미결함</a></li>
-						<li class="childTab"><a href="#">반려함</a></li>
-						<li class="childTab"><a href="#">기결함</a></li>
+							<li class="childTab"><a href="">나의 결재함page</a></li>
+							<li class="childTab"><a href="">미결함</a></li>
+							<li class="childTab"><a href="">반려함</a></li>
+							<li class="childTab"><a href="#">기결함</a></li>
 						</ul></li>
 
 
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="list?page=1">받은 메일함</a></li>
-						<li class="childTab"><a href="write">편지쓰기</a></li>
-						<li class="childTab"><a href="send-mailbox">보낸 메일함</a></li>
-						<li class="childTab"><a href="delete-mailbox">휴지통</a></li>
-					</ul></li>
+							<li class="childTab"><a href="/groupware/email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/delete-mailbox">휴지통</a></li>
+				</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
 
 						<ul class="nav nav-second-level">
-		<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
+				<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
 							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
 							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
 							<li class="childTab"><a href="groupware/interview_board/list">면접후기</a></li>
-						
+				
 						</ul></li>
 
 
@@ -232,24 +261,23 @@ div.center {text-align: center;}
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
-						<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
-						<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
+							<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
 							</ul></li>
 					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
-						<li class="childTab"><a href="#">나의 이력서</a></li>
-						<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
+							<li class="childTab"><a href="#">나의 이력서</a></li>
+							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
-						<li class="childTab"><a href="#">권한관리</a></li>
-						<li class="childTab"><a href="#">문서함관리</a></li>
-
-						<li class="childTab"><a href="#">결재함관리</a></li>
+							<li class="childTab"><a href="#">권한관리</a></li>
+							<li class="childTab"><a href="#">문서함관리</a></li>
+							<li class="childTab"><a href="#">결재함관리</a></li>
 						</ul></li>
 
 					<!--  <li>
@@ -263,7 +291,9 @@ div.center {text-align: center;}
 			</div>
 
 		</nav>
+		
 		</div>
+
 
 
 
@@ -280,31 +310,51 @@ div.center {text-align: center;}
 
 
 				<div class="row">
-					<hr />
+				
 					<!-- 	<div class="col-md-12">
 						<h2>손동민님,</h2>
 						<h5>♡반갑습니당. 오늘하루도 힘내십시오 ♡</h5>
 					</div> -->
 				</div>
 				<!-- /. ROW  -->
-				<hr />
+				
 
 				<div class="row">
 					<div class="col-md-12">
 
-						<div>
-
+						
 
 
 
 							<div>
-								<div style="padding-bottom: 10px">
-									<button class="buttondelete" onclick="fn_userDel(this);">삭제</button>
-									<button class="buttonreturn">답장</button>
-									<button class="buttonforward">전달</button>
+										<div>
+							<div style="padding-bottom: 10px;  ">
+								<input type="text" id="keyword" name="keyword" placeholder=" 이메일 검색"
+									style="height: 35px; width: 250px;" />
+								<!-- value 값을 설정해야함 -->
 
-
+								<button id="searchBtn" value="메일 검색" >검색</button>
+								<div style="display: inline-block; ">
+									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;">휴지통</span>
+									<span> | </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${sendCount }</span>
+									<span> ／ </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${sendCount }</span>
+									
 								</div>
+
+							</div>
+
+							<div style="padding-bottom: 10px;">
+								<button class="buttondelete" onclick="fn_userDel(this);">영구삭제</button>
+								<button class="buttonreturn">이동</button>
+								<button class="buttonforward">전달</button>
+
+
+							</div>
+							
+							
+				
 								<table style="height: 50px" id="myTable">
 									<tr style="height: 30px" id="tr_header">
 										<td style="width: 50px"><label
@@ -313,23 +363,24 @@ div.center {text-align: center;}
 												onclick="allChk(this);" /><span></span></label></td>
 										<th style="width: 150px">Date</th>
 										<th style="width: 300px">To</th>
-										<th style="width: 700px">Title</th>
+										<th style="width: 1000px">Title</th>
 									</tr>
 
 
 									<c:forEach var="email" items="${email}">
-
+										
+										
 										<tr style="height: 30px" id="tr_inner">
 											<td style="width: 50px"><label
 												class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input
 													type="checkbox" name="RowCheck"
-													class="mail-group-checkbox row-check-box"
-													value="${email.num }" /><span></span></label></td>
+													class="mail-group-checkbox row-check-box" value="${email.num }" /><span></span></label></td>
 											<td style="width: 150px">${email.senddate }</td>
-											<td style="width: 300px">${email.to_email }</td>
-											<td style="width: 700px"><a
-												href="detail?num=${email.num }">${email.subject }</a></td>
+											<td style="width: 300px">${email.to_email }</td>	
+											<td style="width: 1000px">
+											<a	href="${email.num }">${email.subject }</a></td>
 										</tr>
+										
 									</c:forEach>
 
 
@@ -362,7 +413,7 @@ div.center {text-align: center;}
 								<div class="center">
 								<ul class="pagination">
 									<c:if test="${pageMaker.hasPrev }">
-										<li><a href="${pageMaker.startPageNum -1}" >&laquo;이전</a></li>
+										<li><a href="${pageMaker.startPageNum -1}" >이전</a></li>
 									</c:if>
 
 									<c:forEach begin="${pageMaker.startPageNum }"
@@ -371,7 +422,7 @@ div.center {text-align: center;}
 									</c:forEach>
 										
 									<c:if test="${pageMaker.hasNext }">
-										<li><a href="${pageMaker.endPageNum +1 }" >다음&raquo;</a></li>
+										<li><a href="${pageMaker.endPageNum +1 }" >다음</a></li>
 									</c:if>
 								</ul>
 								</div>
@@ -380,10 +431,9 @@ div.center {text-align: center;}
 						</div>
 					</div>
 					<form id="pageForm">
-						<input type="hidden" name="num" /> <input type="hidden"
-							name="page" value="${pageMaker.criteria.page}" /> <input
-							type="hidden" name="perPage"
-							value="${pageMaker.criteria.perPage }" />
+						<input type="hidden" name="num" /> 
+						<input type="hidden" name="page" value="${pageMaker.criteria.page}" /> 
+						<input type="hidden" name="perPage" value="${pageMaker.criteria.perPage }" />
 
 					</form>
 				</div>
@@ -397,6 +447,7 @@ div.center {text-align: center;}
 				src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 			<script>
 			
+			console.log("${Gemail}")
 			var admin = <%=type%>
 			function tabSetting() {
 				// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
@@ -418,7 +469,7 @@ div.center {text-align: center;}
 			
 			tabSetting();
 			
-				$(document).ready(function() {
+			
 					var frm = $("#pageForm");
 
 					$('table tr td a').click(function() {
@@ -427,9 +478,9 @@ div.center {text-align: center;}
 						var bno = $(this).attr('href');
 						//페이지가 바뀌지 않기 때문에 아래랑 조금 다름/ 
 						frm.find('[name="num"]').val(bno);
-						frm.attr('action', 'detail');
+						frm.attr('action', '/groupware/email/detail-other');
 						frm.attr('method', 'get');
-						frm.submit();
+						frm.submit(?);
 
 					});
 
@@ -474,26 +525,31 @@ div.center {text-align: center;}
 					function fn_userDel() {
 
 						var checkArr = [];
-
+							
+						alert("1");
 						$("input[name='RowCheck']:checked").each(function(i) {
 							console.log($(this).val());
 							checkArr.push($(this).val());
-							/* alert("check/"+$(this).val()); */
+							console.log(checkArr[1]);
 						});
-
+						
 						if (checkArr.length == 0) {
 							alert('선택된 메일이 없어요~');
 						} else {
-
+							alert("1");
 							$.ajax({
-								url : 'list',
+								url : 'delete-mailbox',
 								type : 'post',
 								dataType : 'text',
 								data : {
 									valueArrTest : checkArr
 								},
-								success : function() {
-									location.reload();
+								
+								success : function(data) {
+									/* location.reload(); */
+									if(data=='OK'){
+										location="delete-mailbox";
+									}
 
 								}
 							});
@@ -510,53 +566,9 @@ div.center {text-align: center;}
 						  });
 						});
 
-				}) 
+			
 
-				/* 	function getSendMailbox(){	
-							var url='/ex03/replies/all/';
-							$.getJSON(url, function(x){
-							console.log("보낸메일함 :"+x.length);
-								var list='';
-								
-								$(x).each(function(){
-
-							
-							list+=
-							'<tr style="height: 30px" id="tr_header">'
-							+'<td style="width: 50px">'+'<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">'
-							+'<input type="checkbox" id="mail-group-checkbox" onclick="allChk(this);"/>'+'<span>'+'</span>'+'</label>'+'</td>'
-							+'<th style="width: 150px">'+'Date'+'</th>'
-							+'<th style="width: 300px">'+'To'+'</th>'
-							+'<th style="width: 700px">'+'Title'+'</th>'
-							+'<tr/>'
-							+'<tr style="height: 30px" id="tr_inner">'
-							+'<td style="width: 50px">'
-							+'<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">'
-							
-							+'<input type="checkbox" name="RowCheck"  class="mail-group-checkbox row-check-box" value="'
-				+this.num+'/>'
-							+'<span>'
-							+'</span>'
-							+'</label>'
-							+'</td>'
-							+'<td style="width: 150px">'
-							+this.senddate
-							+'</td>'
-							+'<td style="width: 300px">'
-							+this.from_email
-							+'</td>'
-							+'<td style="width: 700px">'
-							+'<a href="detail?num='
-									+this.num+'>'
-									+this.subject
-									+'</a>'
-									+'</td>';
-								});
-								$('#myTable').html(list);
-					
-							});
-				
-					} */
+			
 			</script>
 
 			<!-- BOOTSTRAP SCRIPTS -->

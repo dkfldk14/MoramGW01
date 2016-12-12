@@ -30,11 +30,13 @@
 table, th, td{
 	border-bottom:1px solid gray;
 	border-collapse: collapse;
+	font-size : 110%;
 }
 
 th{
-	background-color: lightpink;
-	border-left: 1px solid white;
+border: solid 0px #EAEAEA;
+	color: gray;
+	border-bottom : 2px solid gray;
 	text-align: center;
 }
 td{
@@ -46,6 +48,10 @@ ul{
 
 li{
 	display: inline-block;
+}
+.btn{
+background-color: white;
+
 }
 </style>
 </head>
@@ -88,28 +94,28 @@ li{
 					<li><a href=""><i class="fa fa-edit "></i>결제<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li id="test" class="childTab"><a href="#test_input">나의 결재함page</a></li>
-							<li class="childTab"><a href="#test_input1">미결함</a></li>
-							<li id="test" class="childTab"><a href="/groupware/test2">반려함</a></li>
-							<li><a href="#">기결함</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함page</a></li>
+							<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-return">반려함</a></li>
+							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 						</ul></li>
 
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">받은 메일함1</a></li>
-							<li><a href="#">보낸 메일함</a></li>
-							<li><a href="#">휴지통</a></li>
-							<li><a href="#">주소록</a></li>
+							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
 						</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
 
 						<ul class="nav nav-second-level">
-							<li><a href="#">공지게시</a></li>
-							<li><a href="#">수업자료</a></li>
-							<li><a href="#">IT news</a></li>
-							<li><a href="#">면접후기</a></li>
+							<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
+							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
+							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
+							<li class="childTab"><a href="/groupware/interview_board/list">면접후기</a></li>
 
 						</ul></li>
 
@@ -117,9 +123,9 @@ li{
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">시나브로</a></li>
-							<li><a href="#">그냥2조</a></li>
-							<li><a href="#">성준이네</a></li>
+							<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
 							<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -140,18 +146,17 @@ li{
 					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="/groupware/member_update">개인정보수정</a></li>
-							<li><a href="#">나의 이력서</a></li>
-							<li><a href="#">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
+							<li class="childTab"><a href="#">나의 이력서</a></li>
+							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
-							<li><a href="#">권한관리</a></li>
-							<li><a href="#">문서함관리</a></li>
-
-							<li><a href="#">결재함관리</a></li>
+							<li class="childTab"><a href="#">권한관리</a></li>
+							<li class="childTab"><a href="#">문서함관리</a></li>
+							<li class="childTab"><a href="#">결재함관리</a></li>
 						</ul></li>
 
 					<!--  <li>
@@ -169,22 +174,33 @@ li{
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<div id="page-inner" class="test">
-
+			<h3><img src="resources/assets/img/home_img/share.png" />  사용자 관리</h3>
+				<div style="display: inline-block; ">
+									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;">총 사용자</span>
+									<span> | </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: red;">1</span>
+									<span> ／ </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">25</span>
+									</div>
+			<hr/>
+ 		
 				<table>
 					<tr>
-						<th>아이디</th>
-						<th>이름</th>
-						<th>부서</th>
-						<th>승인여부</th>
-						<th></th>
+						<th style="width: 200px;">아이디</th>
+						<th style="width: 150px;">이름</th>
+						<th style="width: 150px;">생년월일</th>
+						<th style="width: 150px;">부서</th>
+						<th style="width: 150px;">승인여부</th>
+						<th style="width: 150px;"></th>
 						
 					</tr>
 
 					<c:forEach var="vo" items="${member_list }" varStatus="no">
 						<tr>
-							<td id="id_${no.index }">${vo.id }</td>
-							<td id="name_${no.index }"><a href="/groupware/admin_member_detail?userid=${vo.id }">${vo.name }</a></td>
-							<td id="dept_${no.index }">
+							<td id="id_${no.index }" style="width: 200px;">${vo.id }</td>
+							<td id="name_${no.index }" style="width: 150px;"><a href="/groupware/admin_member_detail?userid=${vo.id }">${vo.name }</a></td>
+							<td style="width: 200px;">${vo.birth }</td>
+							<td id="dept_${no.index }" style="width: 150px;">
 								<select id="dept_select_${no.index }">
 									<option>0</option>
 									<option>1</option>
@@ -193,7 +209,7 @@ li{
 									<option>4</option>
 								</select>
 							</td>
-							<td id="usertype_${no.index }">
+							<td id="usertype_${no.index }" style="width: 150px;">
 								<select id="usertype_select_${no.index }">
 									<option>0</option>
 									<option>1</option>

@@ -24,6 +24,11 @@ public class LogoutInterceptor extends HandlerInterceptorAdapter{
 		Object id = session.getAttribute("login_id");
 		if (id != null) { // 세션에 기존 정보가 남아 있는 경우
 			session.removeAttribute("login_id");
+			session.removeAttribute("usertype");
+			session.removeAttribute("name");
+			session.removeAttribute("dept");
+			session.removeAttribute("profileimage");
+			
 			logger.info("기존 로그인 정보 삭제됨");
 		} 
 		return true;
