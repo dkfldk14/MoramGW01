@@ -524,63 +524,62 @@ border-radius: 70px;
 	
 	<script type="text/javascript">
 	
+
+	
+	$(document).ready(function(){
+		
+
 	var admin = '<%=type%>';
 	var dept = '<%=dept%>';
-	function tabSetting() {
+
+
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
-		/* $('.test').hide();
-		$($('.current').find('a').attr('href')).show(); */
+	 $('.test').hide();
+	 $($('.current').find('a').attr('href')).show();
  		
 		console.log("값:"+admin);
 
-		/* if(admin != 1){
+		 if(admin != "승인"){
 			$('#admin').hide();	
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다.');
 				return false;
-			})
-=======
-		if(admin != 1){
-			$('#admin').hide();			
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
-		}
-				
-		if(admin==0){
+			});
+		 }	
+		if(admin=="미승인"){
 			$('.childTab').click(function () {
 				alert('승인 후 이용해주세요');
 				return false;
-			})
+			});
 		}
+	
 		
 		//팀별 게시판에 각 팀원 들이 들어가게끔 수정해야한다.
 		//오쌤은 dept 값이 5번이므로 모든 팀프로젝트 게시판에 들어가야한다.
 		
-		if(dept != 1 && dept != 5){
+		if(dept != "1팀" && dept != "5팀"){
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다.');
 				return false;
-			})
+			});
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function() {
 				alert('당신은 2조가 아닙니다.');
 				return false;
-			})
+			});
 		}
 		
-		if(dept != 3 && dept != 5){
+		if(dept != "3팀" && dept != "5팀"){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다.');
 				return false;
-			})
-		} */
+			});
+		}
 	
-	}
-		 function logout(){
-			 location="/groupware/member_login/logOut";
-		 }
-
+		location="/groupware/member_login/logOut";
+	
 		</script>
 		<script>
 
@@ -624,16 +623,18 @@ border-radius: 70px;
 		
 	
  
-	/* $(function () { */
+	 /* function tabsetting () {
 		// 탭 초기화 및 설정
 		tabSetting();
-	/* }); */
+	 }  */
 	
 	
-	var profileimage= '${profileimage}';
-	if(profileimage !=null && profileimage!=''){
-		$("#profileimage").attr('src', profileimage);
-	}
+		var profileimage= '${profileimage}';
+		if(profileimage !=null && profileimage!=''){
+			$("#profileimage").attr('src', profileimage);
+		}
+	
+	});
 	</script>
 
 

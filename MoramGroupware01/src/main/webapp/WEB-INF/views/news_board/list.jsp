@@ -312,7 +312,33 @@ display: inline-block;
 			alert("fail, try again");
 		}
 		
+///////////////팀 별 게시판 권한 부여 ////////////////////
+		var dept = "<%=dept%>";
 		
+		//alert('profileimage : ' + profileimage);
+		if(dept != "1팀" && dept != "5팀"){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != "2팀" && dept != "5팀"){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != "3팀" && dept != "5팀"){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
+		
+
 		var frm = $('#pageForm');
 		$('.pageLinks li a').click(function(){
 			event.preventDefault(); //기본 이벤트 처리 방식을 방지
@@ -357,7 +383,7 @@ display: inline-block;
 		});
 		
 		
-	});
+	
 	
 	
 	$(function () {
@@ -389,14 +415,15 @@ display: inline-block;
 		}
 	};
 
-	
 	var profileimage= '${profileimage}';
 	if(profileimage !=null && profileimage!=''){
 		$("#profileimage").attr('src', profileimage);
-	}
 		
-		
+ 	}
+				
 	});
+	
+
 	</script>
 	
 	

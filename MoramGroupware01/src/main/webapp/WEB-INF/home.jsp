@@ -56,6 +56,8 @@ margin: 10px;
 </head>
 <body>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
 	<%-- <% String id = String.valueOf(session.getAttribute("login_id")); %> --%>
 	<div id="login_id" data-id=${id } style="display: hidden;"></div>
 
@@ -418,41 +420,52 @@ margin: 10px;
 	
 	<script type="text/javascript">
 	
-	var admin = <%=type%>
+	var admin = <%=type%>;
+	var dept = "<%=dept%>";
 	function tabSetting() {
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 		/* $('.test').hide();
 		$($('.current').find('a').attr('href')).show(); */
  		
 		console.log("값:"+admin);
-		/* if(admin != 1){
+		 if(admin != "승인"){
 			$('#admin').hide();	
-			$('#authorization1').click(function(){
+			/* $('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다.');
 				return false;
-			})
+			})*/
 		}
 				
-		if(admin==0){
+		if(admin=="미승인"){
 			$('.childTab').click(function () {
 				alert('승인 후 이용해주세요');
 				return false;
 			})
 		}
 		
-		if(admin != 2){
-			$('#authorization2').click(function() {
-				alert('당신은 2조가 아닙니다.');
+		
+		//alert('profileimage : ' + profileimage);
+		if(dept != "1팀" && dept != "5팀"){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
 				return false;
-			})
+			});
 		}
 		
-		if(admin != 3){
-			$('#authorization3').click(function(){
-				alert('당신은 3조가 아닙니다.');
+		if(dept != "2팀" && dept != "5팀"){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
 				return false;
-			})
-		} */
+			});
+		}
+		
+		if(dept != "3팀" && dept != "5팀"){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
 	
 	}
 		 function logout(){

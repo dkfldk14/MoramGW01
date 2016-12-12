@@ -262,9 +262,10 @@ th, td {
 
 
 
-
-
+<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
+
 	<!-- 위의 탭 버튼들을 나타냄 -->
 	<div id="wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
@@ -330,9 +331,9 @@ th, td {
 				<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
-						<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
-						<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
+						<li class="childTab" id = "authorization1"><a href="/groupware/team_one_board/list">시나브로</a></li>
+						<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+						<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 					
 					</ul></li>
 				<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
@@ -507,18 +508,50 @@ th, td {
 
 		<script>
 
-		var admin = "<%=type%>"
+		
+		$(document).ready(function(){
+			
+          var admin = "<%=type%>";
+///////////////팀 별 게시판 권한 부여 ////////////////////
+			var dept = "<%=dept%>";
+			
+			//alert('profileimage : ' + profileimage);
+			if(dept != "1팀" && dept != "5팀"){
+				$('#authorization1').click(function(){
+					alert('당신은 1조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != "2팀" && dept != "5팀"){
+				$('#authorization2').click(function(){
+					alert('당신은 2조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != "3팀" && dept != "5팀"){
+				$('#authorization3').click(function(){
+					alert('당신은 3조가 아닙니다');
+					return false;
+				});
+			}
+			///////////////////////////////////////////////////////
+		
+
+		var admin = "<%=type%>";
+
 		function tabSetting() {
 			// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 			/* $('.test').hide();
 			$($('.current').find('a').attr('href')).show(); */
 	 		
 			console.log("값:"+admin);
-			if(admin != 1){
+			if(admin != "승인"){
 				$('#admin').hide();	
 			}
 					
-			if(admin==0){
+			if(admin=="미승인"){
 				$('.childTab').click(function () {
 					alert('승인 후 이용해주세요');
 					return false;
@@ -531,7 +564,7 @@ th, td {
 		
 
 				$('#send').click(function() {
-					// add loading image to div
+				// add loading image to div
 					$('#loadingDiv').show();
 					var disableDivObj = document.getElementById("disableDiv");
 					disableDivObj.style.display = "";
@@ -577,11 +610,11 @@ th, td {
 				$("#disableDiv").hide();
 			}
 			
-			
+		});	
 		</script>
            <!-- jQuery CDN -->
             <script
-               src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 </body>
 </html>

@@ -196,6 +196,9 @@ div.center {text-align: center;}
 </head>
 <body>
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
+<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
+
 	<div id="wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="adjust-nav">
@@ -252,7 +255,7 @@ div.center {text-align: center;}
 				<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
 							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
 							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
-							<li class="childTab"><a href="groupware/interview_board/list">면접후기</a></li>
+							<li class="childTab"><a href="/groupware/interview_board/list">면접후기</a></li>
 				
 						</ul></li>
 
@@ -260,9 +263,9 @@ div.center {text-align: center;}
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
-							<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
-							<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
+							<li class="childTab" id = "authorization1"><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 							</ul></li>
 					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 							class="fa arrow"></span></a>
@@ -448,18 +451,51 @@ div.center {text-align: center;}
 			<script>
 			
 			console.log("${Gemail}")
+
+			var admin = "<%=type%>";
+			
+			$(document).ready(function(){
+				
+	///////////////팀 별 게시판 권한 부여 ////////////////////
+				var dept = "<%=dept%>";
+				
+				//alert('profileimage : ' + profileimage);
+				if(dept != "1팀" && dept != "5팀"){
+					$('#authorization1').click(function(){
+						alert('당신은 1조가 아닙니다');
+						return false;
+					});
+				}
+				
+				if(dept != "2팀" && dept != "5팀"){
+					$('#authorization2').click(function(){
+						alert('당신은 2조가 아닙니다');
+						return false;
+					});
+				}
+				
+				if(dept != "3팀" && dept != "5팀"){
+					$('#authorization3').click(function(){
+						alert('당신은 3조가 아닙니다');
+						return false;
+					});
+				}
+				///////////////////////////////////////////////////////
+			
+	
 			var admin = "<%=type%>"
+
 			function tabSetting() {
 				// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 				/* $('.test').hide();
 				$($('.current').find('a').attr('href')).show(); */
 		 		
 				console.log("값:"+admin);
-				if(admin != 1){
+				if(admin != "승인"){
 					$('#admin').hide();	
 				}
 						
-				if(admin==0){
+				if(admin=="미승인"){
 					$('.childTab').click(function () {
 						alert('승인 후 이용해주세요');
 						return false;
@@ -567,7 +603,7 @@ div.center {text-align: center;}
 						  });
 						});
 
-				 
+				 });
 
 
 			</script>
