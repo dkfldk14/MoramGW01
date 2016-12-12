@@ -414,14 +414,14 @@ th, td {
 
 						<div class="col-md-12">
 
-
+								<br />
+								<input type="hidden" name="from_email" value="${gwemail }">
+								
 
 							<form>
 								<textarea id="editor" rows="10" cols="100"
-									style="width: 1030px; height: 412px;" name="content">
-										</textarea>
-								<br />
-								<input type="hidden" name="from_email" value="${gwemail }">
+									style="width: 1030px; height: 412px; font-size: 130%;" name="content"  >
+										${emailforward }</textarea>
 								
 							</form>
 						</div>
@@ -508,10 +508,10 @@ th, td {
 
 		<script>
 
-		var admin = "<%=type%>";
 		
 		$(document).ready(function(){
 			
+          var admin = "<%=type%>";
 ///////////////팀 별 게시판 권한 부여 ////////////////////
 			var dept = "<%=dept%>";
 			
@@ -538,6 +538,9 @@ th, td {
 			}
 			///////////////////////////////////////////////////////
 		
+
+		var admin = "<%=type%>";
+
 		function tabSetting() {
 			// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 			/* $('.test').hide();
@@ -561,7 +564,7 @@ th, td {
 		
 
 				$('#send').click(function() {
-					// add loading image to div
+				// add loading image to div
 					$('#loadingDiv').show();
 					var disableDivObj = document.getElementById("disableDiv");
 					disableDivObj.style.display = "";
@@ -611,7 +614,7 @@ th, td {
 		</script>
            <!-- jQuery CDN -->
             <script
-               src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 </body>
 </html>

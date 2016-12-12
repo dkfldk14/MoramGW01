@@ -451,6 +451,7 @@ div.center {text-align: center;}
 			<script>
 			
 			console.log("${Gemail}")
+
 			var admin = "<%=type%>";
 			
 			$(document).ready(function(){
@@ -481,8 +482,9 @@ div.center {text-align: center;}
 				}
 				///////////////////////////////////////////////////////
 			
-			
-			
+	
+			var admin = "<%=type%>"
+
 			function tabSetting() {
 				// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 				/* $('.test').hide();

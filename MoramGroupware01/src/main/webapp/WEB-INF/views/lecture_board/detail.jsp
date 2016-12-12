@@ -407,7 +407,6 @@ border-right: 1px solid white;
 						username=this.replier;
 						if(this.profileimage===null||this.profileimage==="null"||this.profileimage===''){
 							profileimage='http://findicons.com/files/icons/1786/oxygen_refit/128/stock_people.png';
-							alert("뺴애앵");
 						}
 
 						if(username == name){

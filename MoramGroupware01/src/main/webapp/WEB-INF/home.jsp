@@ -40,6 +40,16 @@ margin: 10px;
 	border: 1px solid #ffd777;
 	color: #ffffff;
 }
+
+#weather{
+	width: 350px;
+	margin-left: 50px;
+}
+
+#weather tbody tr td {
+	height: 14px;
+}
+
 </style>
 	
 
@@ -296,8 +306,8 @@ margin: 10px;
 							<p class="help-block">Help text here.</p>
 						</div> -->
 						<div class="panel panel-back noti-box">
-							<div href="#" class="weather" style="width: 300px; height: 75px;">
-								<table id="weather" style="width: 150px"></table>
+							<div href="#" class="weather" style="width: 500px; height: 75px;">
+								<table id="weather" style="width: 500px;"></table>
 							</div>
 							
 							

@@ -435,7 +435,8 @@ div.center {text-align: center;}
 		
 		$(document).ready(function(){
 			
-///////////////팀 별 게시판 권한 부여 ////////////////////
+
+////////팀 별 게시판 권한 부여 ////////////////////
 			var dept = "<%=dept%>";
 			
 			//alert('profileimage : ' + profileimage);
@@ -459,7 +460,8 @@ div.center {text-align: center;}
 					return false;
 				});
 			}
-			///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
 	
 		
 		function getQuerystring(paramName){
@@ -477,7 +479,9 @@ div.center {text-align: center;}
 			}
 		}
 		
-		var admin = "<%=type%>";
+		
+		var admin = "<%=type%>"
+
 		function tabSetting() {
 			// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 			/* $('.test').hide();
@@ -547,9 +551,11 @@ div.center {text-align: center;}
 					}});
 				}
 					
+
 		}	
 		});
 		
+	
 		
 		
 		</script>

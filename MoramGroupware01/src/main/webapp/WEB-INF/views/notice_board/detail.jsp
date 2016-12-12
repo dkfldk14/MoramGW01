@@ -287,7 +287,11 @@ border-right: 1px solid white;
 			});
 			
 ///////////////팀 별 게시판 권한 부여 ////////////////////
+<<<<<<< HEAD
 			var dept = "<%=dept%>";
+=======
+
+>>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 			
 			//alert('profileimage : ' + profileimage);
 			if(dept != "1팀" && dept != "5팀"){
