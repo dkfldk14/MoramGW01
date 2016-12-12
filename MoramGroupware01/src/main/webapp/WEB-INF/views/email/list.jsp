@@ -429,6 +429,26 @@ div.center {text-align: center;}
 		<script src="<c:url value='../resources/assets/js/jquery-1.10.2.js'/>" /></script>
 		<script type="text/javascript">
 		
+		$(function () {
+			
+		)
+	
+		
+		function getQuerystring(paramName){
+
+			var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+			var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+			
+			for(var i = 0; _tempArray.length; i++) {
+				var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+				
+				if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
+					// _keyValuePair[1] : 파라미터 값
+					return _keyValuePair[1];
+				}
+			}
+		}
+		
 		var admin = <%=type%>
 		function tabSetting() {
 			// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show

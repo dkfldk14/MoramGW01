@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.member.domain.MainCheckVO;
+import project.spring.groupware.member.domain.MemberVO;
 
 @Repository
 public class MainCheckDAOImpl implements MainCheckDAO {
@@ -71,6 +72,11 @@ public class MainCheckDAOImpl implements MainCheckDAO {
 	@Override
 	public List<BoardVO> selectnotice() {
 		return sqlSession.selectList(NAMESPACE+".selectInfo");
+	}
+
+	@Override
+	public List<MemberVO> memberimage(String name) {
+		return sqlSession.selectList(NAMESPACE+".memberimage", name);
 	}
 
 

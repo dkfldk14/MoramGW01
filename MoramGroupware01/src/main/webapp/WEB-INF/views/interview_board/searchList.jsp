@@ -171,7 +171,7 @@ li {
 		<div id="page-wrapper">
 			<div id="page-inner">
 
-				<h1>searchList 페이지 입니다.</h1>
+				<h1>면접 후기 게시판</h1>
 				<nav>
 				<ul>
 					<li><a href="register">New Content</a>

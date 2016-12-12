@@ -30,11 +30,13 @@
 table, th, td{
 	border-bottom:1px solid gray;
 	border-collapse: collapse;
+	font-size : 110%;
 }
 
 th{
-	background-color: lightpink;
-	border-left: 1px solid white;
+border: solid 0px #EAEAEA;
+	color: gray;
+	border-bottom : 2px solid gray;
 	text-align: center;
 }
 td{
@@ -46,6 +48,10 @@ ul{
 
 li{
 	display: inline-block;
+}
+.btn{
+background-color: white;
+
 }
 </style>
 </head>
@@ -168,22 +174,33 @@ li{
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<div id="page-inner" class="test">
-
+			<h3><img src="resources/assets/img/home_img/share.png" />  사용자 관리</h3>
+				<div style="display: inline-block; ">
+									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;">총 사용자</span>
+									<span> | </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: red;">1</span>
+									<span> ／ </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">25</span>
+									</div>
+			<hr/>
+ 		
 				<table>
 					<tr>
-						<th>아이디</th>
-						<th>이름</th>
-						<th>부서</th>
-						<th>승인여부</th>
-						<th></th>
+						<th style="width: 200px;">아이디</th>
+						<th style="width: 150px;">이름</th>
+						<th style="width: 150px;">생년월일</th>
+						<th style="width: 150px;">부서</th>
+						<th style="width: 150px;">승인여부</th>
+						<th style="width: 150px;"></th>
 						
 					</tr>
 
 					<c:forEach var="vo" items="${member_list }" varStatus="no">
 						<tr>
-							<td id="id_${no.index }">${vo.id }</td>
-							<td id="name_${no.index }"><a href="/groupware/admin_member_detail?userid=${vo.id }">${vo.name }</a></td>
-							<td id="dept_${no.index }">
+							<td id="id_${no.index }" style="width: 200px;">${vo.id }</td>
+							<td id="name_${no.index }" style="width: 150px;"><a href="/groupware/admin_member_detail?userid=${vo.id }">${vo.name }</a></td>
+							<td style="width: 200px;">${vo.birth }</td>
+							<td id="dept_${no.index }" style="width: 150px;">
 								<select id="dept_select_${no.index }">
 									<option>0</option>
 									<option>1</option>
@@ -192,7 +209,7 @@ li{
 									<option>4</option>
 								</select>
 							</td>
-							<td id="usertype_${no.index }">
+							<td id="usertype_${no.index }" style="width: 150px;">
 								<select id="usertype_select_${no.index }">
 									<option>0</option>
 									<option>1</option>

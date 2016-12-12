@@ -19,33 +19,28 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
+
+<link href="<c:url value="/resources/assets/css/reply.css"/>"   
+  rel="stylesheet" />
+
+
 <style>
-.replier{
-	font-style: italic;
+
+.reply{
+border-bottom:1px dotted;
+list-style-type: none;
+border-collapse: collapse;
+margin-left: -30px;
+
 }
 
-.rtext{
-	font-weight: bold;
-}
 
-.regdate{
-	font-style: italic;
-	color:gray;
-}
 
-#modify{
-	width:300px; height:100px;
-	backgroud-color:lightgray;
-	position:absolute;
-	top:30%; left:30%;
-	display:none;
-}
 .div1{
 display: inline-block;
 
 }
 tbody tr td input, tbody tr th input{
-	width: 400px;
 	border:none;
 	border-right:0px; 
 	border-top:0px; 
@@ -58,6 +53,8 @@ border:1px solid #ddd;
 border-left: 1px solid white;
 border-right: 1px solid white;
 }
+</style>
+
 
 
 </style>
@@ -190,7 +187,7 @@ border-right: 1px solid white;
 <!-- 내가한 코드 -->
 <div id="page-wrapper">
 	<div id="page-inner">
-	<h1>detail</h1>
+	<h1>공지 게시판</h1>
 	
 	
 	<!-- 수정 -->
@@ -205,10 +202,10 @@ border-right: 1px solid white;
 	<input style="font-style: gray;" type="hidden" value="${dateString }" readonly /> 
 	<br/>
 	
-	<table>
+	<table class="table table-condensed">
 	<tbody>
 		<tr>
-			<th>
+			<th style="border-bottom: 2px solid #ddd; border-top: 2px solid #ddd; ">
 				<!-- title -->
 				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
 			</th>	
@@ -216,7 +213,8 @@ border-right: 1px solid white;
 		<tr>
 			<td>
 				<!-- Writer -->
-				<input type = "text" value="글쓴이 : ${boardVO.userid}" name="userid" readonly/>작성일 : ${dateString }
+				<input type = "text" value="글쓴이 : ${boardVO.userid}" name="userid" style="font-size:13;" readonly/> 
+				<input type="text" value="작성일 : ${dateString }" style="font-size:13; float: right; width: 190px;" readonly="readonly"/>
 			</td>
 		</tr>
 		
@@ -224,57 +222,95 @@ border-right: 1px solid white;
 		<tr>
 			<td>
 				<!-- content -->
-				<div style="width:800px; margin-bottom: 50px; margin-top: 50px;">${boardVO.content}</div>
+				<div style="margin-bottom: 50px; margin-top: 50px;">${boardVO.content}</div>
 			</td>
 		</tr>
 
-		<tr>
-			<td style="height: 50px;">
-				<button type="button" id="btnList">Go to List</button>
-				<c:if test="${boardVO.userid eq id }">
-				<button type="submit" id="updatebutton">Update</button>
-				</c:if> 
-				<input type="hidden" name="page" value="${page }" />
-			</td>
-		</tr>
-		
-		<tr>
-			<td style="border: 1px solid #a5a5a5;"></td>
-		</tr>
+
 	</tbody>
 	</table>
+		
+	<br/>
+	<h4>댓글 목록</h4>
 	
-	</form>
 	<!-- ---------------------------- -->
 	
-	<br/>
+	<table id="commentTable" class="table table-condensed"></table>
+                    <table class="table table-condensed">
+                        <tr>
+                            <td>
+                                <span class="form-inline" role="form">
+                                    <p>
+                                        <div class="form-group" id ="form-group">
+                                            <input type="text" value="${name }" readonly id="replier" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10">
+                                        </div>
+                                        <div class="form-group">
+                                        <!-- 댓글 번호 넣고 히든 -->
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="button" id="btnCreate" name="commentParentSubmit" class="btn btn-default">확인</button>
+                                        </div>
+                                    </p>
+                                        <textarea id="rtext" class="form-control col-lg-12" style="width:100%" rows="4"></textarea>
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <span style='float:right'>
+                                        <button type="button" id="btnList" class="btn btn-default">목록</button>
+                                        <c:if test="${boardVO.userid eq id }">
+                                        <button type="submit" id="updatebutton" class="btn btn-default">수정</button>
+                                     	</c:if> 
+                                        <!-- <button type="button" id="delete" class="btn btn-default">삭제</button> -->
+                                        <!-- <button type="button" id="write" class="btn btn-default">글쓰기</button> -->
+                                    	<input type="hidden" name="page" value="${page }" />
+                                    </span>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
 	
-	<%-- <div>
-		<input type = "text" name="rtext" id="rtext"
-			placeholder ="write it" required/>
-		<input type = "text" name="replier" id="replier"
-			placeholder="ID" value = "${name }" readonly/>
-		<button type = "button" id="btnCreate">Write Comments</button>	
-	</div>
-	<br/> --%>
+				
+	<hr/>
+
+	</form>
+
+
 	
-	<!-- <div>
-		<ul id="replies"></ul>
-	</div>
-	<br/>
-	
-	<div id = "modify">
-		<input type = "text" name="rno" id="rno_mod" readonly/>
-		<br/>
-		<input type="text" name="rtext" id="rtext_mod">
-		<br>
-		<button id="btn_delete">Delete</button>
-		<button id="btn_cancel">Cancel</button>
-	</div> -->
-	
+
 </div>
 </div>
 	
+	
+	
+	
+	
+		<!-- 팝업 -->
+	<div id="login-box" class="login-popup" style="display: none; width: 238px;">
+        <a class="close" ><img src="../resources/assets/img/index.png" id="btn_cancel" class="btn_close" title="Close Window" alt="Close"></a>
+          <form method="post" class="signin" action="#">
+                <fieldset class="textbox">
+            	<label class="username">
+                <span>댓글 번호</span>
+                <input id="rno_mod" name="username" value="" type="text" autocomplete="on" placeholder="rno_mod" readonly="readonly">
+                </label>
+                
+                <label class="password">
+                <span>댓글 내용</span>
+                <input id="rtext_mod" name="password" value="" type="text" placeholder="rtext_mod">
+                </label>
+                
+                <button id="btn_update" class="submit button" type="button">수정</button>
+                <button id="btn_delete" class="submit button" type="button">삭제</button>
+                
+                </fieldset>
+          </form>
+		</div>
 	
 	
 	
@@ -289,7 +325,6 @@ border-right: 1px solid white;
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			$("#updatebutton").click(function(){

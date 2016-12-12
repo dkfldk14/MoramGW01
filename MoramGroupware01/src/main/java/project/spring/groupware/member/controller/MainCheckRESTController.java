@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import project.spring.groupware.board.domain.BoardVO;
 import project.spring.groupware.member.domain.MainCheckVO;
+import project.spring.groupware.member.domain.MemberVO;
 import project.spring.groupware.member.service.MainCheckService;
 
 
@@ -201,5 +202,23 @@ public class MainCheckRESTController {
 		
 		return entity;
 	}
+	
+	
+	@RequestMapping (value= "/allimage/{name}", method=RequestMethod.GET)
+	public ResponseEntity<List<MemberVO>> memberimage(
+			@PathVariable("name") String name){
+		List<MemberVO> list = service.memberimage(name);
+		
+		ResponseEntity<List<MemberVO>> entity = null;
+		
+		if(list != null){
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} else{
+			entity = new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+
 	
 }

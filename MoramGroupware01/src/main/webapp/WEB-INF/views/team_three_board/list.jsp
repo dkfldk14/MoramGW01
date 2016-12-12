@@ -21,34 +21,20 @@
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
+
+   
+<!-- board-list -->
+<link href="<c:url value="/resources/assets/css/board-list.css"/>"
+   rel="stylesheet" />
+
+
 <style>
 .div1{
 display: inline-block;
-
 }
 </style>
 <title>Insert title here</title>
-<style>
-table{
-	width : 100%;
-}
-table, th,td{
-	
-	border-bottom : 1px solid gray;
-	border-collapse: collapse;
-}
 
-th{
-	height : 50%;
-	background-color: lightpink;
-	border-left: 1px solid gray;
-}
-
-li {
-	display: inline-block;
-}
-
-</style>
 </head>
 <body>
 
@@ -177,16 +163,77 @@ li {
 <!-- 내가 한 코드 -->
 <div id="page-wrapper">
 	<div id="page-inner">
-	<h1>Test for Board</h1>
-	
-	<nav>
-		<ul>
-			<li><a href="register">New Content</a>
-		</ul>
-	</nav>
+	<h1>성준이네 게시판</h1>
 	
 	
-	<table>
+
+	<table class="table table-condensed">
+    	<thead>
+    		<tr class="toptable">
+    			<td class="left">
+    				<button type="button" class="btn btn-default" onclick="location.href='register'">새 글 쓰기</button>
+    			</td>
+    		
+    			
+				<td class="right">
+					<button type = "button" class="btn btn-default" id="searchBtn">검색</button> 
+				</td>
+					
+				<td class="right">
+					<input type="text" id="keyword" class="form-control" name="keyword" value="${pageMaker.searchCriteria.keyword }"/> <!-- value 값을 설정해야함 -->
+				</td>
+				
+				<td class="right">
+					<select style="height: 35px;" id ="searchType" name="searchType">
+						<option id="t" value="t" <c:out value="${pageMaker.searchCriteria.searchType == 't'? 'selected' : '' }"/>>
+						제목</option>
+						<option id="u" value="u"<c:out value="${pageMaker.searchCriteria.searchType =='u'? 'selected' : '' }"/>>
+						작성자</option>
+					</select>
+				</td>
+			</tr>
+		</thead>
+	</table>
+	
+	
+	
+	<table class="table_list">
+	<colgroup>
+	<col width = "8%"/>
+	<col width = "*"/>
+	<col width = "10%"/>
+	<col width = "20%"/>
+	<col width = "8%"/>
+	</colgroup>
+	<thead>
+		<th scope="col" class="col">번호</th>
+		<th scope="col" class="col">제목</th>
+		<th scope="col" class="col">작성자</th>
+		<th scope="col" class="col">작성일</th>
+		<th scope="col" class="col">조회수</th>
+	</thead>
+	<tbody>
+		
+		<c:forEach var = "vo2" items="${listName }">
+			<tr>
+				<td class="num">${vo2.bno }</td>
+				<td class="title">
+					<a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
+				</td>
+				<td>${vo2.name }</td>
+				<td class="date"><fmt:formatDate value="${vo2.regdate }"
+					pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td class="num">${vo2.viewcnt }</td>
+			</tr>
+		</c:forEach>
+		
+	</tbody>
+	</table>
+	
+	
+	
+	
+<%-- 	<table>
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
@@ -195,19 +242,20 @@ li {
 			<th>조회수</th>
 		</tr>
 				
-		<c:forEach var = "vo" items="${listName }">
+		<c:forEach var = "vo2" items="${listName }">
 			<tr>
-				<td>${vo.bno }</td>
-				<td><a href="${vo.bno}">${vo.title }(${vo.replycnt})</a></td>
-				<td>${vo.name }</td>
-				<td><fmt:formatDate value="${vo.regdate }"
-					pattern="yyyy-MM-dd HH:mm:ss"/>
+				<td class="num">${vo2.bno }</td>
+				<td class="title">
+					<a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
 				</td>
-				<td>${vo.viewcnt }</td>
+				<td>${vo2.name }</td>
+				<td class="date"><fmt:formatDate value="${vo2.regdate }"
+					pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td class="num">${vo2.viewcnt }</td>
 			</tr>
 		</c:forEach>
 			
-	</table>
+	</table> --%>
 	<hr/>
 	
 	<ul class = "pageLinks">
@@ -219,8 +267,7 @@ li {
 			end ="${pageMaker.endPageNum }"
 			var = "num">
 			
-			<li><a href = "${num }">${num }</a></li>
-			
+			<li><button type="button" class="btn btn-default" id="pagebtn${num}" onclick="location.href='?page=${num}'">${num}</button></li>
 		</c:forEach>
 		
 		<c:if test="${pageMaker.hasNext }">
@@ -229,19 +276,10 @@ li {
 	</ul>
 		
 		
-	<select id ="searchType" name="searchType">
-		
-		<option id="t" value="t" <c:out value="${pageMaker.searchCriteria.searchType == 't'? 'selected' : '' }"/>>
-		제목</option>
-		<option id="u" value="u"<c:out value="${pageMaker.searchCriteria.searchType =='u'? 'selected' : '' }"/>>
-		작성자</option>
-	</select>	
-	<input type="text" id="keyword" name="keyword" value="${pageMaker.searchCriteria.keyword }"/> <!-- value 값을 설정해야함 -->
-		
-	<button type = "button" id="searchBtn">검색</button> 
 	
 	
-			
+	
+	
 	<%--서버로 현재 페이지, 페이지 당 보여줄 게시글 개수를 서버로 보내주기 위해서 --%>
 	<%-- 사용자에게는 보이지 않지만, 서버로 보낼 정보를 양식 데이터로 저장하는 form --%>
 	<form id = "pageForm">

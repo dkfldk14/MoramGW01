@@ -40,11 +40,11 @@
 	</delete>
 	
 	<select id="selectName" resultType="project.spring.groupware.board.domain.ReplyAddNameVO">
-		select a.rno, a.bno, a.rtext, b.name, a.replier, a.regdate
+		select a.rno, a.bno, a.rtext, b.name, a.replier, b.profileimage, a.regdate
   		from moram_ITNews_comment a left outer join moram_member b
-		on replier = id and id = #{replier}
+		on replier = b.name 
 		where bno = #{bno}
-		order by rno desc
+		order by regdate ASC
 	</select>
 	
 </mapper>

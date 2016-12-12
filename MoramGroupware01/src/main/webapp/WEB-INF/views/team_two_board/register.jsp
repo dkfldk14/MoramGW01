@@ -22,11 +22,15 @@
    rel='stylesheet' type='text/css' />
 <style>
 .div1{
-display: inline-block;
-
+	display: inline-block;
 }
-td{
-	height: 50px;
+iframe{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 750px;
+}
+th{
+	width: 70px;
 }
 </style>
 </head>
@@ -160,38 +164,32 @@ td{
 	
 	<div id="page-wrapper">
 	<div id="page-inner">
-	<h1>Test Register Page</h1>
+	<h1>2조 게시판</h1>
 
 	<!--  수정  -->
 	<form method="post" id="frm">	
-	<table>
+	<table width="850px">
 	<tbody>
 	
 	
 		<tr>
 			<th>Title</th>
-			<td><input type="text" name="title" required/></td>
+			<td><input type="text" name="title" class="form-control col-lg-2" style="width: 600px;" required/></td>
 		</tr>
 		
 		<tr>
 			<th>Content</th>
 			<td>
-			<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea>
+				<textarea name="content" id="editor" style="width:775px; height:450px; margin-bottom: 50px; margin-top: 50px;" required></textarea>
 			</td>	
 		</tr>
 		<tr>
 			<th>UserID</th>
 			<td>
-				<input type="text" name="userid" value="${login_id }" readonly/>
+				<input type="text" name="userid" value="${login_id }" class="form-control col-lg-2" style="width: 250px; display: inline-block;" readonly="readonly"/>
+				<input type="submit" id="savebutton" class="btn btn-default" value="complete" style="float: right;" required/>
 			</td>
 		</tr>
-		<tr>
-			<td>
-			<input type="submit" id = "savebutton" value="complete" required/>
-			</td>
-		</tr>
-	
-	
 	</tbody>
 	</table>
 	</form>
@@ -210,9 +208,9 @@ td{
 	
 	
 	
-	<!-- jQuery CDN -->
+	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="/groupware/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="/groupware/resources/js/HuskyEZCreator2.js" charset="utf-8"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -231,7 +229,6 @@ td{
 				//using mode tab ( Editor/HTML/ TEXT)
 				bUserModeChanger : true,
 			}
-		
 		});
 		
 ///////////////팀 별 게시판 권한 부여 ////////////////////

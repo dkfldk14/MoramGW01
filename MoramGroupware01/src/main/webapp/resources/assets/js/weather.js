@@ -46,10 +46,10 @@ $(document).ready(function(){
 				
 				// table 안쪽에 rowspan을 줘서  1(날씨 아이콘) : 5(날씨정보)를 넣어줌 
 				list += 
-					'<tr><td rowspan="5">'
+					'<tr><td rowspan="4">'
 					+'<img src="resources/assets/img/ic_weather/ic_'
 					+ this.weather[0].icon 
-					+'.png"/>'
+					+'.png" style="padding-left:20px;"/>'
 					+'</td></tr>'
 					+ '<tr><td>'
 					+ '온도 : ' + (this.main.temp - 273.15).toFixed(1)+'℃'
@@ -57,9 +57,9 @@ $(document).ready(function(){
 					+ '<tr><td>'
 					+ '습도 : ' + this.main.humidity +' %'
 					+ '</td></tr>'
-					+ '<tr><td>'
+					/*+ '<tr><td>'
 					+ '기압 : ' + this.main.pressure +' hPa'
-					+ '</td></tr>'
+					+ '</td></tr>'*/
 					+ '<tr><td>'
 					+ '바람 : ' + this.wind.speed + ' mps'
 					+ '</td></tr>';
@@ -139,6 +139,7 @@ $(document).ready(function(){
 					+ '</td>'
 					+ '</tr>';
 			val+=1;
+			
 			$('#noticebody').html(list);
 				if(val===5){
 					return false;
@@ -454,17 +455,17 @@ $(document).ready(function(){
 		      data.addColumn('number', 'Slices');
 		      data.addRows([
 		        ['출석', size],//출석인원
-		        ['결석', 29-size]//결석인원
+		        ['결석', 30-size]//결석인원
 		      ]);
 		      
 		      // 타이틀, 높이, 길이 정보
 		      // Set chart options
-		      var options = {'title':'파이챠트',
-		                     'width':285,
-		                     'height':260,
+		      var options = {'title':'Today Modram in ',
+		                     'width':440,
+		                     'height':420,
 		                     slices: {
-		                         0: { color: 'yellow' },
-		                         1: { color: 'green' }
+		                         0: { color: '#f23e92' },
+		                         1: { color: '#eaeaea' }
 		                       }};
 
 		      // Instantiate and draw our chart, passing in some options.
@@ -651,11 +652,16 @@ $(document).ready(function(){
 	$("#hide").click(function() {
 		$('#navPM').css('margin-left', '-260px');
 		$('#page-wrapper').css('margin-left', '0px');
+		$('#hide').hide();
+		$('#show').show();
+		
 	});
 	
 	$("#show").click(function() {
 		$('#navPM').css('margin-left', '0px');
 		$('#page-wrapper').css('margin-left', '260px');
+		$('#show').hide();
+		$('#hide').show();
 	});
 	
    

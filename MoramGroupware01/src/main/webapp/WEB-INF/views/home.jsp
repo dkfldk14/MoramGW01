@@ -27,10 +27,13 @@
 
 <style>
 #logoutButton{
-background-color: #ffd777;
-border: 1px solid #3fc3c4;
-color: #3f3f3f;
-font-size: 110%;
+background-color: 
+#399695;
+border: 1px solid 
+#1db88e;
+color: #ffffff;
+font-weight : 200;
+font-size: 100%;
 padding: 7px;
 margin: 10px;
 }
@@ -46,6 +49,47 @@ border-radius: 70px;
 -khtml-border-radius: 7px;
 -webkit-border-radius: 7px;
 }
+*:focus { outline:none; }
+
+
+
+.quick-btn {
+  background: #ffffff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 0 0 1px #F8F8F8 inset, 0 0 0 1px #CCCCCC;
+  -moz-box-shadow: 0 0 0 1px #F8F8F8 inset, 0 0 0 1px #CCCCCC;
+  box-shadow: 0 0 0 1px #F8F8F8 inset, 0 0 0 1px #CCCCCC;
+  color: #444444;
+  display: inline-block;
+  height: 100px;
+  margin: 10px;
+  padding-top: 16px;
+  padding-left : 20px;
+  padding-right : 30px;
+  margin-right : 20px;
+  margin-left : 10px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+  width: 110px;
+  position: relative;
+}
+.quick-btn span {
+  display: block;
+}
+.quick-btn .label {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+}
+.quick-btn:hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: #gray;
+  text-shadow: 0 1px 1px #000;
+}
 </style>
 	
 
@@ -60,27 +104,33 @@ border-radius: 70px;
 		<div id="wrapper">
 			<div class="navbar navbar-inverse navbar-fixed-top">
 				<div class="adjust-nav">
-					<div class="navbar-header">
-						<span id="moramHeader">Moram</span>
-							<button id="hide"><img width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
-							<button id="show"><img style="margin-left: 0px;" width="20px" height="20px" alt="리스트" src="resources/assets/img/list.png"/></button>
-							
+				<div class="navbar-header">
+					<span id="moramHeader">
+
+						<div style="padding-top: 0px;">
+						<div style="display: inline;  margin-bottom: 30px; ">
+							<button id="hide" style="background-color: #40efbe; border: #40efbe">
+								<img width="25px" height="25px" alt="리스트"
+									src="resources/assets/img/home_img/menutoggle.png" />
+							</button>
+							<button id="show"
+								style="display: none; background-color: #40efbe; border: #40efbe; ">
+								<img style="margin-left: 0px;" width="25px" height="25px"
+									alt="리스트" src="resources/assets/img/home_img/menutoggle.png" />
+							</button></div>
+							<div style="font-size: 30px; font-weight: 800; color: white; margin-top: 30px; display: inline; line-height:200%">MORAM</div>
+						</div>
 					
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target=".sidebar-collapse">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<!--     <a class="navbar-brand" href="#"><i class="fa fa-square-o "></i></a> -->
+					</span>
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><button id="logoutButton" onclick="logout();">Logout</button></li>
-					
+						<li><button id="logoutButton" onclick="logout();">로그아웃</button></li>
+
 					</ul>
 				</div>
-
-				</div>
+	
+			</div>
 			</div>
 		</div>
 		<!-- /. NAV TOP  -->
@@ -97,10 +147,15 @@ border-radius: 70px;
 					<li class="text-center user-image-back"><img
 						src="<c:url value="resources/assets/img/find_user.png"/>"
 						align="center" id="profileimage" width="128px" height="128px"/> 
-						<span>Moram 소속 1팀 </span><class ="img-responsive" /></li>
+						<br/><br/>
+						<span style="font-weight: 700; color: gray;"><img src="resources/assets/img/home_img/user (2).png" style="width: 18px"; height="18px; "/> Moram 1팀 사원</span><class ="img-responsive" /></li>
+						
+						
+						<li>
+					
+					</li>
 
-
-					<li id="test" class="current"><a href="/groupware/main1"><img alt="" src="resources/assets/img/main.png"/> MAIN PAGE</a></li>
+					<li id="test" class="current"><br/><a href="/groupware/main1"><img alt="" src="resources/assets/img/main.png"/> MAIN PAGE</a></li>
 					<li><a href=""><img alt="" src="resources/assets/img/approval.png"/> 결재<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
@@ -191,9 +246,9 @@ border-radius: 70px;
 			<div id="page-inner" class="test">
 				<div class="row">
 					<div class="col-md-12">
-						      <h2>${name}님,<%-- <%=type %> --%></h2>   
-                        <h5> ＜바꿔달라는 요청이 있어서 바꿉니다 ㅠ＞ </h5>
-					</div>
+						     <h3>${name}님,<%-- <%=type %> --%></h2>
+                 			<h4>Moram 에 접속하셨습니다. </h4>
+                 	  </div>
 				</div>
 				<!-- /. ROW  -->
 				<hr />
@@ -205,9 +260,9 @@ border-radius: 70px;
 						<div class="panel panel-back noti-box">
 							<div id = "check-inout">
 							<div id = "margin-box-weather">
-								<button class="check-in" id="check-in">입실</button>
+								<button class="check-in" id="check-in" style="margin-left: 12px;">입실</button>
 								<button class="check-out" id="check-out">퇴실</button>
-								<div>
+								<div style="margin-left: 7px;">
 									<p id="font-garo" style="margin-top: 20px;">입실 시간 : <a id="check-in-text"></a></p>
 									
 									<p id="font-garo" style="margin-top: -10px;">퇴실 시간 : <a id="check-out-text"></a></p>
@@ -224,24 +279,28 @@ border-radius: 70px;
 <!-- 							<span class="icon-box bg-color-red set-icon"> <i
 								class="fa fa-envelope-o"></i>
 							</span> -->
-							<div style="margin-left: 10px;">
+							<div style="margin-left: 40px; margin-top: 3px;">
 								
-								<div class="text-box1">
-									<img id="main_img" alt="이메일" src="resources/assets/img/home_img/email.png"/>
-									<!-- <img id="main_img" alt="이메일" src="resources/assets/img/home_img/heos.png"/> -->
-									<a class="text-line1">New</a>
-								</div>
-								
-								
-								<div class="text-box2">
-									<img id="main_img" alt="리스트" src="resources/assets/img/home_img/list.png"/>
-									<a class="text-line1">뉴</a>
-								</div>
-							
-								<div class="text-box3">
-									<img id="main_img" alt="벨" src="resources/assets/img/home_img/bell.png"/>
-									<a class="text-line1">${count }</a>
-								</div>
+							<a class="quick-btn" href="draft/approval-drafter"> <i
+											class="icon-check icon-2x"></i> <span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
+											class="label label-danger">2</span>
+										</a> <a class="quick-btn" href="email/list"> <i
+											class="icon-envelope icon-2x"></i> <span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
+											class="label label-success">456</span>
+										</a> <a class="quick-btn" href="#"> <i
+											class="icon-signal icon-2x"></i> <span><img src="resources/assets/img/home_img/folder (1).png" style="width: 80px"; height="60px;"/></span> <span
+											class="label label-warning">+25</span>
+										</a> <a class="quick-btn" href="notice_board/list"> <i
+											class="icon-external-link icon-2x"></i> <span><img src="resources/assets/img/home_img/speaker.png" style="width: 80px"; height="60px;"/></span> <span
+											class="label label-success">3</span>
+										</a> <a class="quick-btn" href="notice_board/list"> <i
+											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
+											class="label label-default">${count }</span>
+										</a>
+										<a class="quick-btn" href="#"> <i
+											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
+											class="label label-default">${count }</span>
+										</a>
 							</div>
 						</div>
 					</div>
@@ -303,7 +362,7 @@ border-radius: 70px;
 							<p class="help-block">Help text here.</p>
 						</div> -->
 						<div class="panel panel-back noti-box">
-							<div href="#" class="weather" style="width: 300px; height: 75px;">
+							<div href="#" class="weather" style="width: 450px; height: 95px;">
 								<table id="weather" style="width: 150px"></table>
 							</div>
 							
@@ -322,7 +381,7 @@ border-radius: 70px;
 					<div>
 						<div class="box-layout" id="graph-layout">
 							<div id="box-inner-items">
-								<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+								<div id="container" style="min-width: 500px; height: 500px; margin: 0 auto"></div>
 							</div>
 						</div>
 					</div>
@@ -425,8 +484,17 @@ border-radius: 70px;
 		$($('.current').find('a').attr('href')).show(); */
  		
 		console.log("값:"+admin);
+
+		/* if(admin != 1){
+			$('#admin').hide();	
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다.');
+				return false;
+			})
+=======
 		if(admin != 1){
 			$('#admin').hide();			
+>>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 		}
 				
 		if(admin==0){
@@ -458,7 +526,7 @@ border-radius: 70px;
 				alert('당신은 3조가 아닙니다.');
 				return false;
 			})
-		}
+		} */
 	
 	}
 		 function logout(){

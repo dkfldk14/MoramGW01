@@ -21,41 +21,20 @@
    rel='stylesheet' type='text/css' />
 <style>
 .div1{
-display: inline-block;
-
+	display: inline-block;
+}
+iframe{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 750px;
 }
 th{
-	width: 200px;
+	width: 70px;
 }
 
-tbody tr td input, tbody tr th input{
-	width: 400px;
-	border:none;
-	border-right:0px; 
-	border-top:0px; 
-	boder-left:0px; 
-	boder-bottom:0px;
+tbody tr td .btn-default {
+	float: right;
 }
-
-td{
-text-align: left;
-}
-textarea{
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-tr{
-border:1px solid #ddd; 
-border-left: 1px solid white;
-border-right: 1px solid white;
-}
-
-iframe{
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-
 </style>
 </head>
 <body>
@@ -189,7 +168,7 @@ iframe{
 	<h1>게시글/수정 삭제 페이지</h1>
 	<!--  수정  -->
 	<form id="frm">	
-	<table style="position: relative;" width="875px">
+	<table style="position: relative;" width="850px">
 	<tbody>
 	
 	
@@ -197,7 +176,7 @@ iframe{
 			
 			<th>Title</th>
 			<td>
-				<input type="text" name="title" value="${boardVO.title }"/>
+				<input type="text" class="form-control col-lg-2" name="title" style="width: 600px;" value="${boardVO.title }"/>
 				<input type = "hidden" name ="bno" value="${boardVO.bno }" />
 			</td>
 		</tr>
@@ -205,27 +184,25 @@ iframe{
 		<tr>
 			<th>Content</th>
 			<td>
-				<textarea name="content" id="editor" style="width:750px; height:450px; margin-bottom: 50px; margin-top: 50px;" required>${boardVO.content }</textarea>
+				<textarea name="content" id="editor" style="width:775px; height:450px; margin-bottom: 50px; margin-top: 50px;" required>${boardVO.content }</textarea>
 			</td>	
 		</tr>
 		<tr>
 			<th>Writer ID</th>
 			<td>
-				<input type = "text" name="userid" value="${boardVO.userid }" readonly/>
+				<input type="text" style="width: 250px; display: inline-block;" class="form-control col-lg-2" name="userid" value="${boardVO.userid }" readonly/>
+				<button type = "button" class="btn btn-default" id="btnList">Main Page</button>
+				<button type = "button" class="btn btn-default" id="btnCancel">Cancel</button>
+				<button type = "submit" class="btn btn-default" id="btnDelete">Delete</button>
+				<button type = "submit" class="btn btn-default" id="btnUpdate">Update</button>
 			</td>
 		</tr>
 	</tbody>
 	</table>
-		<input type="submit" id = "savebutton" value="complete" required/>
+		
 		<input type = "hidden" name="page" value="${page }"/>
 	</form>
 	<!--  -------------------  -->
-	
-	
-	<button type = "submit" id = "btnUpdate">Update</button>
-	<button type = "submit" id = "btnDelete">Delete</button>
-	<button type = "button" id = "btnCancel">Cancel</button>
-	<button type = "button" id = "btnList">Main Page</button>
 	
 	<!-- page 정보를 update 요청에 포함시키기 위해서 -->
 	<input type="hidden" name="page" value="$[page]"/>

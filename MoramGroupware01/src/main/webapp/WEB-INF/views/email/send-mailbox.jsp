@@ -346,7 +346,7 @@ div.center {text-align: center;}
 							</div>
 
 							<div style="padding-bottom: 10px;">
-								<button class="buttondelete">삭제</button>
+								<!-- <button class="buttondelete">삭제</button> -->
 								<button class="buttonreturn">답장</button>
 								<button class="buttonforward">전달</button>
 
