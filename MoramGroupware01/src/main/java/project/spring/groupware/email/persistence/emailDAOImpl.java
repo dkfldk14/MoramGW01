@@ -1,6 +1,5 @@
 package project.spring.groupware.email.persistence;
 
-import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,10 +69,11 @@ public class emailDAOImpl implements emailDAO {
 			
 			Map<String,Object> adresslist=new HashMap<>();
 			adresslist.put("state", state1);
+
+			adresslist.put("from_email", from_email);
 			adresslist.put("start", start);
 			adresslist.put("end", end);
-			adresslist.put("from_email", from_email);
-			
+					
 			List<EmailVO> VO=SqlSession.selectList(NAMESPACE+".adressList",adresslist);
 			for(int i=0; i<VO.size();i++){
 				logger.info("vo : "+VO.get(i).getSubject());

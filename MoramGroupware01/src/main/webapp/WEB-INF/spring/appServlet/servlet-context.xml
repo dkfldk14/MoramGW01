@@ -25,6 +25,7 @@
 	
 	<context:component-scan base-package="project.spring.groupware" />
 	<context:component-scan base-package="project.spring.groupware.controller"></context:component-scan>
+	<context:component-scan base-package="project.spring.groupware.draft.controller"></context:component-scan>
 	
 	<!-- aop 프록시 객체 자동생성 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>

@@ -72,8 +72,6 @@ background-color: white;
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">See Website</a></li>
-						<li><a href="#">Open Ticket</a></li>
 						<li><a href="/groupware/member_login/logOut">Log outs</a></li>
 					</ul>
 				</div>
@@ -91,8 +89,7 @@ background-color: white;
 
 
 					<li id="test" class="current"><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN PAGE</a></li>
-					<li><a href=""><i class="fa fa-edit "></i>결제<span
-							class="fa arrow"></span></a>
+					<li><a href="#"><i class="fa fa-edit "></i>전자결재<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함page</a></li>
 							<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
@@ -107,15 +104,18 @@ background-color: white;
 							<li class="childTab"><a href="email/write">편지쓰기</a></li>
 							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
 							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							
+
 						</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
-
 						<ul class="nav nav-second-level">
+
 							<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
 							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
 							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
 							<li class="childTab"><a href="/groupware/interview_board/list">면접후기</a></li>
+
 
 						</ul></li>
 
@@ -123,32 +123,19 @@ background-color: white;
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="/groupware/team_one_board/list">시나브로</a></li>
-							<li class="childTab"><a href="/groupware/team_two_board/list">그냥2조</a></li>
-							<li class="childTab"><a href="/groupware/team_three_board/list">성준이네</a></li>
-							<!--  <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
+							
+							<!-- authorization은 각 조별 게시판에 들어가도록 권한을 부여 -->
+							<li class="childTab" id = "authorization1"><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 
-                                </ul>
-
-                            </li> -->
 						</ul></li>
 					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
-							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
@@ -178,9 +165,9 @@ background-color: white;
 				<div style="display: inline-block; ">
 									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;">총 사용자</span>
 									<span> | </span> 
-									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: red;">1</span>
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: red;">${noUser }</span>
 									<span> ／ </span> 
-									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">25</span>
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${all }</span>
 									</div>
 			<hr/>
  		
@@ -202,20 +189,18 @@ background-color: white;
 							<td style="width: 200px;">${vo.birth }</td>
 							<td id="dept_${no.index }" style="width: 150px;">
 								<select id="dept_select_${no.index }">
-									<option>0</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
+									<option>없음</option>
+									<option>1팀</option>
+									<option>2팀</option>
+									<option>3팀</option>
 								</select>
 							</td>
 							<td id="usertype_${no.index }" style="width: 150px;">
 								<select id="usertype_select_${no.index }">
-									<option>0</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
+									<option>미승인</option>
+									<option>승인</option>
+									<option>관리자</option>
+									
 								</select>
 							</td>
 							<td><input type="button" id="${no.index }" class="btn" value="저장"></td>
@@ -245,14 +230,15 @@ background-color: white;
 
 
 		<script type="text/javascript">
-			var admin =<%=type%>
+
+			var admin ="<%=type%>"
 			function tabSetting() {
 				console.log("값:" + admin);
-				if (admin != 1) {
+				if (admin != '관리자') {
 					$('#admin').hide();
 				}
 
-				if (admin == 0) {
+				if (admin == '미승인') {
 					$('.childTab').click(function() {
 						alert('승인 후 이용해주세요');
 						return false;
@@ -302,6 +288,7 @@ background-color: white;
 					success: function(res, status, xhr){
 						if(res=='OK'){
 							alert('저장됨');
+							location.reload();
 						}else{
 							alert('다시 시도하세요');
 						}

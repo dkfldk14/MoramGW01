@@ -102,20 +102,20 @@ border-right: 1px solid white;
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                     <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">받은 메일함</a></li>
+                     <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -231,32 +231,7 @@ border-right: 1px solid white;
 	</table>
 		
 	<br/>
-	<h4>댓글 목록</h4>
 	
-	<!-- ---------------------------- -->
-	
-	<table id="commentTable" class="table table-condensed"></table>
-                    <table class="table table-condensed">
-                        <tr>
-                            <td>
-                                <span class="form-inline" role="form">
-                                    <p>
-                                        <div class="form-group" id ="form-group">
-                                            <input type="text" value="${name }" readonly id="replier" name="commentParentName" class="form-control col-lg-2" data-rule-required="true" placeholder="이름" maxlength="10">
-                                        </div>
-                                        <div class="form-group">
-                                        <!-- 댓글 번호 넣고 히든 -->
-                                            
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="button" id="btnCreate" name="commentParentSubmit" class="btn btn-default">확인</button>
-                                        </div>
-                                    </p>
-                                        <textarea id="rtext" class="form-control col-lg-12" style="width:100%" rows="4"></textarea>
-                                </span>
-                            </td>
-                        </tr>
-                    </table>
                     <table class="table table-condensed">
                         <thead>
                             <tr>
@@ -290,29 +265,7 @@ border-right: 1px solid white;
 	
 	
 	
-		<!-- 팝업 -->
-	<div id="login-box" class="login-popup" style="display: none; width: 238px;">
-        <a class="close" ><img src="../resources/assets/img/index.png" id="btn_cancel" class="btn_close" title="Close Window" alt="Close"></a>
-          <form method="post" class="signin" action="#">
-                <fieldset class="textbox">
-            	<label class="username">
-                <span>댓글 번호</span>
-                <input id="rno_mod" name="username" value="" type="text" autocomplete="on" placeholder="rno_mod" readonly="readonly">
-                </label>
-                
-                <label class="password">
-                <span>댓글 내용</span>
-                <input id="rtext_mod" name="password" value="" type="text" placeholder="rtext_mod">
-                </label>
-                
-                <button id="btn_update" class="submit button" type="button">수정</button>
-                <button id="btn_delete" class="submit button" type="button">삭제</button>
-                
-                </fieldset>
-          </form>
-		</div>
-	
-	
+		
 	
 	<script src="<c:url value='../resources/assets/js/jquery-1.10.2.js'/>" /></script>
    <!-- BOOTSTRAP SCRIPTS -->
@@ -335,23 +288,24 @@ border-right: 1px solid white;
 			
 ///////////////팀 별 게시판 권한 부여 ////////////////////
 
+			var dept = "<%=dept%>";
 			
-			//alert('profileimage : ' + profileimage);
-			if(dept != 1 && dept != 5){
+			
+			if(dept != "1팀" && dept != "5팀"){
 				$('#authorization1').click(function(){
 					alert('당신은 1조가 아닙니다');
 					return false;
 				});
 			}
 			
-			if(dept != 2 && dept != 5){
+			if(dept != "2팀" && dept != "5팀"){
 				$('#authorization2').click(function(){
 					alert('당신은 2조가 아닙니다');
 					return false;
 				});
 			}
 			
-			if(dept != 3 && dept != 5){
+			if(dept != "3팀" && dept != "5팀"){
 				$('#authorization3').click(function(){
 					alert('당신은 3조가 아닙니다');
 					return false;

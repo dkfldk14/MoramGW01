@@ -79,20 +79,20 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                      <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">받은 메일함</a></li>
+                    <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -314,11 +314,36 @@ display: inline-block;
 			alert("fail, try again");
 		}
 		
+////////////팀 별 게시판 권한 부여 ////////////////////
+		var dept = '<%=dept%>';
+		
+		//alert('profileimage : ' + profileimage);
+		if(dept != "1팀" && dept != "5팀"){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != "2팀" && dept != "5팀"){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != "3팀" && dept != "5팀"){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
 		
 		var frm = $('#pageForm');
 		$('.pageLinks li a').click(function(){
 			event.preventDefault(); //기본 이벤트 처리 방식을 방지
-			//pageForm 안에 있는 name="page"인 요소를 찾아서
+		//pageForm 안에 있는 name="page"인 요소를 찾아서
 			//이동할 페이지 번호를 세팅
 			var targetPage = $(this).attr('href');
 			frm.find('[name="page"]').val(targetPage);

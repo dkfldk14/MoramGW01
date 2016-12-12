@@ -78,20 +78,20 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                       <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">받은 메일함</a></li>
+                    <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -219,7 +219,7 @@ display: inline-block;
 			<tr>
 				<td class="num">${vo2.bno }</td>
 				<td class="title">
-					<a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
+					<a id = "bnoNum" href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
 				</td>
 				<td>${vo2.name }</td>
 				<td class="date"><fmt:formatDate value="${vo2.regdate }"
@@ -323,21 +323,21 @@ display: inline-block;
 		var dept = '<%=dept%>';
 		
 		//alert('profileimage : ' + profileimage);
-		if(dept != 1 && dept != 5){
+		if(dept != "1팀" && dept != "5팀"){
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function(){
 				alert('당신은 2조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 3 && dept != 5){
+		if(dept != "3팀" && dept != "5팀"){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다');
 				return false;
@@ -360,7 +360,7 @@ display: inline-block;
 			frm.submit();
 		});
 		
-		$('table tr td a').click(function(){
+		$('#bnoNum').click(function(){
 			event.preventDefault();
 			var bno = $(this).attr('href');
 			frm.find('[name="bno"]').val(bno);

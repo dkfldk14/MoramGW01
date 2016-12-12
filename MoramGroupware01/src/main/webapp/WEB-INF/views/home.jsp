@@ -90,40 +90,6 @@ border-radius: 70px;
   background-color: #gray;
   text-shadow: 0 1px 1px #000;
 }
-
-
-#빼애앵{
-	position: relative;
-}
-
-#빼애앵 a{
-	position: absolute;
-}
-
-#빼애앵 a#col1_btn2{
-	margin-left: 153px;
-}
-#빼애앵 a#col1_btn3{
-	margin-left: 306px;
-}
-#빼애앵 a#col1_btn4{
-	margin-left: 459px;
-}
-#빼애앵 a#col1_btn5{
-	margin-left: 612px;
-}
-#빼애앵 a#col1_btn6{
-	margin-left: 765px;
-}
-
-#weather {
-	margin-left: 73px;
-}
-
-#weather tbody tr td {
-	width: 150px;
-}
-
 </style>
 	
 
@@ -143,23 +109,23 @@ border-radius: 70px;
 
 						<div style="padding-top: 0px;">
 						<div style="display: inline;  margin-bottom: 30px; ">
-							<button id="hide" style="background-color: #40efbe; border: #40efbe; position: absolute; left:25px; top:16px;">
+							<button id="hide" style="background-color: #40efbe; border: #40efbe">
 								<img width="25px" height="25px" alt="리스트"
 									src="resources/assets/img/home_img/menutoggle.png" />
 							</button>
 							<button id="show"
-								style="display: none; background-color: #40efbe; border: #40efbe; position: absolute; left:25px; top:16px;">
+								style="display: none; background-color: #40efbe; border: #40efbe; ">
 								<img style="margin-left: 0px;" width="25px" height="25px"
 									alt="리스트" src="resources/assets/img/home_img/menutoggle.png" />
 							</button></div>
-							<div style="font-size: 30px; margin-left: 55px; font-weight: 800; color: white; margin-top: 30px; display: inline; line-height:200%">MORAM</div>
+							<div style="font-size: 30px; font-weight: 800; color: white; margin-top: 30px; display: inline; line-height:200%">MORAM</div>
 						</div>
 					
 					</span>
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><button id="logoutButton" onclick="logout();">로그아웃</button></li>
+						<li><button id="logoutButton" onclick="logout()">로그아웃</button></li>
 
 					</ul>
 				</div>
@@ -308,46 +274,32 @@ border-radius: 70px;
 					</div>
 					
 				
-					<div id="margin-box2" style="width: 980px;">
+					<div id="margin-box2">
 						<div class="panel panel-back noti-box">
 <!-- 							<span class="icon-box bg-color-red set-icon"> <i
 								class="fa fa-envelope-o"></i>
 							</span> -->
-							<div style="margin-left: 40px; margin-top: 3px;"  id="빼애앵">
+							<div style="margin-left: 40px; margin-top: 3px;">
 								
-							<a class="quick-btn" href="draft/approval-drafter" id="col1_btn1"> 
-										<i class="icon-check icon-2x"></i> 
-											<span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
-											class="label label-danger">2</span>
-										</a> 
-										
-										<a class="quick-btn" href="email/list" id="col1_btn2"> 
-										<i class="icon-envelope icon-2x"></i> 
-											<span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
+							<a class="quick-btn" href="draft/approval-finalizer"> <i
+											class="icon-check icon-2x"></i> <span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
+											class="label label-danger">${count_ap}</span>
+										</a> <a class="quick-btn" href="email/list"> <i
+											class="icon-envelope icon-2x"></i> <span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-success">456</span>
-										</a> 
-										
-										<a class="quick-btn" href="#" id="col1_btn3"> 
-										<i class="icon-signal icon-2x"></i> 
-										<span><img src="resources/assets/img/home_img/folder (1).png" style="width: 80px"; height="60px;"/></span> <span
+										</a> <a class="quick-btn" href="#"> <i
+											class="icon-signal icon-2x"></i> <span><img src="resources/assets/img/home_img/folder (1).png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-warning">+25</span>
-										</a> 
-										
-										<a class="quick-btn" href="notice_board/list" id="col1_btn4"> 
-										<i class="icon-external-link icon-2x"></i> 
-										<span><img src="resources/assets/img/home_img/speaker.png" style="width: 80px"; height="60px;"/></span> <span
+										</a> <a class="quick-btn" href="notice_board/list"> <i
+											class="icon-external-link icon-2x"></i> <span><img src="resources/assets/img/home_img/speaker.png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-success">3</span>
-										</a> 
-										
-										<a class="quick-btn" href="notice_board/list" id="col1_btn5"> 
-										<i class="icon-bolt icon-2x"></i> 
-										<span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
+										</a> <a class="quick-btn" href="notice_board/list"> <i
+											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-default">${count }</span>
 										</a>
-										<a class="quick-btn" href="#" id="col1_btn6"> 
-										<i class="icon-bolt icon-2x"></i> 
-										<span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
-											class="label label-default">${count }</span>
+										<a id="admin1" class="quick-btn" href="/groupware/member_manage"> <i
+											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
+											class="label label-default">${noUser }</span>
 										</a>
 							</div>
 						</div>
@@ -410,8 +362,8 @@ border-radius: 70px;
 							<p class="help-block">Help text here.</p>
 						</div> -->
 						<div class="panel panel-back noti-box">
-							<div href="#" class="weather" style="width: 450px; height: 100px;">
-								<table id="weather" style="width: 250px"></table>
+							<div href="#" class="weather" style="width: 450px; height: 95px;">
+								<table id="weather" style="width: 150px"></table>
 							</div>
 							
 							
@@ -438,7 +390,7 @@ border-radius: 70px;
 				<hr />
 				
 				<!-- 게시판 -->
-				<div class="row" style="width: 1216px;">
+				<div class="row">
 					<div class="col-md-6">
 						<h5>IT NEWS</h5>
 						<table class="table table-striped table-bordered table-hover">
@@ -524,57 +476,48 @@ border-radius: 70px;
 	
 	<script type="text/javascript">
 	
-	var admin = '<%=type%>';
-	var dept = '<%=dept%>';
+	var admin = "<%=type%>"
+	var dept = "<%=dept%>"
 	function tabSetting() {
 		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 		/* $('.test').hide();
 		$($('.current').find('a').attr('href')).show(); */
  		
 		console.log("값:"+admin);
-
-		/* if(admin != 1){
+		if(admin != '관리자'){
 			$('#admin').hide();	
-			$('#authorization1').click(function(){
-				alert('당신은 1조가 아닙니다.');
+			$('#admin1').click(function(){
+				alert('접근 권한이 없습니다.');
 				return false;
 			})
-=======
-		if(admin != 1){
-			$('#admin').hide();			
->>>>>>> branch 'master' of https://github.com/dkfldk14/MoramGW01
 		}
-				
-		if(admin==0){
+		if(admin=='미승인'){
 			$('.childTab').click(function () {
 				alert('승인 후 이용해주세요');
 				return false;
 			})
 		}
 		
-		//팀별 게시판에 각 팀원 들이 들어가게끔 수정해야한다.
-		//오쌤은 dept 값이 5번이므로 모든 팀프로젝트 게시판에 들어가야한다.
-		
-		if(dept != 1 && dept != 5){
+		if(dept != "1팀" && dept != "5팀"){
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다.');
 				return false;
 			})
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function() {
 				alert('당신은 2조가 아닙니다.');
 				return false;
 			})
 		}
 		
-		if(dept != 3 && dept != 5){
+		if(dept != "3팀" && dept != "5팀"){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다.');
 				return false;
 			})
-		} */
+		}
 	
 	}
 		 function logout(){
