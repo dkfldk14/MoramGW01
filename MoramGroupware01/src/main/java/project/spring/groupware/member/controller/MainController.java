@@ -67,7 +67,8 @@ public class MainController {
 		int count_ap = dao.count_approval(user);
 		model.addAttribute("count_ap", count_ap);
 		
-		
+		 int count_fin = dao.count_finish(user);
+	      model.addAttribute("count_fin", count_fin);
 		
 		String usertype = vo.getUsertype();
 		logger.info("MainController usertype : " + usertype);
@@ -106,7 +107,8 @@ public class MainController {
 		model.addAttribute("count_ap", count_ap);
 		logger.info("감자는 묵어봤나"+count_ap);
 		
-		
+		 int count_fin = dao.count_finish(obj.toString());
+	      model.addAttribute("count_fin", count_fin);
 		
 		//각 조별 게시판으로 들어가도록 dept을 받아옴
 		String dept = vo.getDept();
