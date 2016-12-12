@@ -16,4 +16,6 @@ public interface MemberService {
 	public abstract int adminUudateMem(String id, String dept, String usertype);
 	public abstract MemberVO selectAdminMem(String userid);
 	public abstract int updateMemberInfo(MemberVO vo);
+	public abstract int adminAllmem();
+	public abstract int adminUsertypeMem();
 }

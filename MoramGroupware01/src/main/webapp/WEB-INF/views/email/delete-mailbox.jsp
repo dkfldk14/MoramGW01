@@ -231,49 +231,53 @@ div.center {text-align: center;}
 
 
 					<li><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN1</a></li>
-					<li><a href="#"><i class="fa fa-edit "></i>전자결재<span
-							class="fa arrow"></span></a>
+					<li><a href="#"><i class="fa fa-edit "></i>전자결재<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="">나의 결재함page</a></li>
-							<li class="childTab"><a href="">미결함</a></li>
-							<li class="childTab"><a href="">반려함</a></li>
-							<li class="childTab"><a href="#">기결함</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함page</a></li>
+							<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-return">반려함</a></li>
+							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 						</ul></li>
-
 
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="/groupware/email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="/groupware/email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="/groupware/email/delete-mailbox">휴지통</a></li>
-				</ul></li>
+							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							
+
+						</ul></li>
 					<li><a href="#"><i class="fa fa-edit "></i>게시판<span
 							class="fa arrow"></span></a>
-
 						<ul class="nav nav-second-level">
-				<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
+
+							<li class="childTab"><a href="/groupware/notice_board/list">공지게시</a></li>
 							<li class="childTab"><a href="/groupware/lecture_board/list">수업자료</a></li>
 							<li class="childTab"><a href="/groupware/news_board/list">IT news</a></li>
-							<li class="childTab"><a href="groupware/interview_board/list">면접후기</a></li>
-				
+							<li class="childTab"><a href="/groupware/interview_board/list">면접후기</a></li>
+
+
 						</ul></li>
 
 
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
+							
+							<!-- authorization은 각 조별 게시판에 들어가도록 권한을 부여 -->
 							<li class="childTab" id = "authorization1"><a href="/groupware/team_one_board/list">시나브로</a></li>
 							<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
 							<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
-							</ul></li>
+
+						</ul></li>
 					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
-							<li class="childTab"><a href="/groupware/my_page">나의 이력관리</a></li>
+							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
 					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
 							class="fa arrow"></span></a>
@@ -436,8 +440,8 @@ div.center {text-align: center;}
 					</div>
 					<form id="pageForm">
 						<input type="hidden" name="num" /> 
-						<input type="hidden" name="page" value="${pageMaker.criteria.page}" /> 
-						<input type="hidden" name="perPage" value="${pageMaker.criteria.perPage }" />
+						<input type="hidden" name="page" value="${pageMaker.criteria2.page}" /> 
+						<input type="hidden" name="perPage" value="${pageMaker.criteria2.perPage }" />
 
 					</form>
 				</div>
@@ -516,7 +520,7 @@ div.center {text-align: center;}
 						var bno = $(this).attr('href');
 						//페이지가 바뀌지 않기 때문에 아래랑 조금 다름
 						frm.find('[name="num"]').val(bno);
-						frm.attr('action', '/groupware/email/detail-other');
+						frm.attr('action', 'detail-other');
 						frm.attr('method', 'get');
 						frm.submit();
 

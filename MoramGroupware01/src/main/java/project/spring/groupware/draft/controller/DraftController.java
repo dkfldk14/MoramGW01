@@ -21,6 +21,7 @@ import project.spring.groupware.draft.domain.FinishDTO;
 import project.spring.groupware.draft.domain.ReturnDTO;
 import project.spring.groupware.draft.persistence.approvalDAO;
 import project.spring.groupware.member.domain.MemberVO;
+import project.spring.groupware.member.service.MemberService;
 
 /**
  * Handles requests for the application home page.
@@ -59,10 +60,18 @@ public class DraftController {
 	@Autowired
 	private approvalDAO dao;
 
+	@Autowired
+	MemberService service;
+	
 	@RequestMapping(value = "draft/register-sample", method = RequestMethod.GET)
 	public void sampleGET(String id, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		id = (String) session.getAttribute("login_id");
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		System.out.println("유저 타입:" + usertype);
+		model.addAttribute("type", usertype);
 		ApprovalVO vo = dao.selectMe(id);
 		logger.info(vo.getId());
 
@@ -70,9 +79,13 @@ public class DraftController {
 	}
 
 	@RequestMapping(value = "draft/register-sample", method = RequestMethod.POST)
-	public String samplePOST(ApprovalVO vo, RedirectAttributes attr, HttpServletRequest request) {
+	public String samplePOST(ApprovalVO vo, RedirectAttributes attr, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		id = (String) session.getAttribute("login_id");
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
 		setting(vo);
 		selectCount();
 		String zero = "00";
@@ -150,6 +163,12 @@ public class DraftController {
 	public void approvalDrafterGET(String id, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		id = (String) session.getAttribute("login_id");
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		String profileimage=mvo.getProfileimage();
+		model.addAttribute("profileimage", profileimage);;
+		model.addAttribute("type", usertype);
 		List<DrafterDTO> list = dao.selectForDrafterId(id);
 		if (list != null) {
 			model.addAttribute("DrafterDTO", list);
@@ -157,14 +176,22 @@ public class DraftController {
 	}
 	
 	@RequestMapping(value = "draft/approval-drafter", method = RequestMethod.POST) // 결재함
-	public String approvalDrafterPOST(ApprovalVO vo, RedirectAttributes attr) {
-
+	public String approvalDrafterPOST(ApprovalVO vo, RedirectAttributes attr, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
 		return "redirect:approval-drafter";
 	}
 
 	@RequestMapping(value = "draft/approval-return", method = RequestMethod.GET) // 반려함
 	public void approvalReturnGET(String id, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
 		id = (String) session.getAttribute("login_id");
 		List<ReturnDTO> list = dao.selectForReturnId(id);
 		if (list != null) {
@@ -181,6 +208,10 @@ public class DraftController {
 	@RequestMapping(value = "draft/approval-finish", method = RequestMethod.GET) // 기결함
 	public void approvalFinishGET(String id, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
 		id = (String) session.getAttribute("login_id");
 		List<FinishDTO> list = dao.selectForFinishId(id);
 		if (list != null) {
@@ -197,6 +228,10 @@ public class DraftController {
 	@RequestMapping(value = "draft/approval-finalizer", method = RequestMethod.GET) // 미결함
 	public void approvalFinalizerGET(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
 		id = (String) session.getAttribute("login_id");
 		List<DrafterDTO> list = dao.selectForFinalizerId(id);
 		if (list != null) {
@@ -223,8 +258,12 @@ public class DraftController {
 	}
 
 	@RequestMapping(value = "draft/register-finalizer", method = RequestMethod.GET)
-	public void finalizerGET(String draft_index, Model model) {
-
+	public void finalizerGET(String draft_index, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
 		ApprovalVO vo = dao.selectAllForReturn(draft_index);
 		String final_name1 = dao.selectName1Finalize(draft_index);
 		String final_name2 = dao.selectName2Finalize(draft_index);
@@ -241,6 +280,58 @@ public class DraftController {
 		model.addAttribute("List", list);
 	}
 
+	@RequestMapping(value = "draft/register-finish", method = RequestMethod.GET)
+	public void finishGET(String draft_index, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
+		ApprovalVO vo = dao.selectFinish(draft_index);
+		String final_name1 = dao.selectName1Finish(draft_index);
+		String final_name2 = dao.selectName2Finish(draft_index);
+		String final_name3 = dao.selectName3Finish(draft_index);
+		String final_name4 = dao.selectName4Finish(draft_index);
+		String final_name5 = dao.selectName5Finish(draft_index);
+		System.out.println(final_name1);
+		System.out.println(final_name2);
+		System.out.println(final_name3);
+		System.out.println(final_name4);
+		System.out.println(final_name5);
+		List<String> list = new ArrayList<>();
+		list.add(final_name1);
+		list.add(final_name2);
+		list.add(final_name3);
+		list.add(final_name4);
+		list.add(final_name5);
+		model.addAttribute("ApprovalVO", vo);
+		model.addAttribute("List", list);
+	}
+	
+	@RequestMapping(value = "draft/register-return", method = RequestMethod.GET)
+	public void returnGET(String draft_index, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
+		ApprovalVO vo = dao.selectReturn(draft_index);
+		String final_name1 = dao.selectName1Return(draft_index);
+		String final_name2 = dao.selectName2Return(draft_index);
+		String final_name3 = dao.selectName3Return(draft_index);
+		String final_name4 = dao.selectName4Return(draft_index);
+		String final_name5 = dao.selectName5Return(draft_index);
+		List<String> list = new ArrayList<>();
+		System.out.println();
+		list.add(final_name1);
+		list.add(final_name2);
+		list.add(final_name3);
+		list.add(final_name4);
+		list.add(final_name5);
+		model.addAttribute("ApprovalVO", vo);
+		model.addAttribute("List", list);
+	}
+		
 	@RequestMapping(value = "draft/register-finalizer", method = RequestMethod.POST)
 	public String finalizerPOST() {
 
@@ -281,7 +372,12 @@ public class DraftController {
 	}
 
 	@RequestMapping(value = "draft/draft-return", method = RequestMethod.POST) // 반려시 POST
-	public String draftreturnPOST(String draft_index, RedirectAttributes attr) {
+	public String draftreturnPOST(String draft_index, RedirectAttributes attr, HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		Object obj = session.getAttribute("login_id");
+		MemberVO mvo = service.selectName(obj.toString());
+		String usertype = mvo.getUsertype();
+		model.addAttribute("type", usertype);
 		index = draft_index;
 		updateApprovalDraft(); // 기안서에 반려됐다고 업데이트
 		createFinishToReturn(); // 기결함에 반려된거 보내주기

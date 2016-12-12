@@ -1,6 +1,5 @@
 package project.spring.groupware.email.persistence;
 
-import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,9 +69,11 @@ public class emailDAOImpl implements emailDAO {
 			
 			Map<String,Object> adresslist=new HashMap<>();
 			adresslist.put("state", state1);
-			adresslist.put("Pagination", c);
+
 			adresslist.put("from_email", from_email);
-			
+			adresslist.put("start", start);
+			adresslist.put("end", end);
+					
 			List<EmailVO> VO=SqlSession.selectList(NAMESPACE+".adressList",adresslist);
 			for(int i=0; i<VO.size();i++){
 				logger.info("vo : "+VO.get(i).getSubject());
@@ -130,4 +131,13 @@ public class emailDAOImpl implements emailDAO {
 		return SqlSession.selectOne(NAMESPACE + ".totalAddressList", c);
 	}
 	
+	
+	@Override
+	public List<EmailVO> addressListdelete(NewPaginationCriteria c) {
+		// TODO Auto-generated method stub
+		return SqlSession.selectList(NAMESPACE+".addressListdelete", c);
+	}@Override
+	public int totalCountdelete(NewPaginationCriteria c) {
+		return SqlSession.selectOne(NAMESPACE + ".totalAddressListdelete", c);
+	}
 }

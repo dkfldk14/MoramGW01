@@ -29,5 +29,11 @@ public interface emailServiceDAO {
 	///
 	public abstract List<EmailVO>addressList(NewPaginationCriteria c);
 	public abstract int totalCount(NewPaginationCriteria c);
+
+
+	public abstract List<EmailVO>addressListdelete(NewPaginationCriteria c);
+	public abstract int totalCountdelete(NewPaginationCriteria c);
+
+
 }
 

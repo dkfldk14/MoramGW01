@@ -506,95 +506,73 @@ border-radius: 70px;
    <!-- BOOTSTRAP SCRIPTS -->
    <script src="<c:url value='resources/assets/js/bootstrap.min.js'/>" /></script>
 
-   <!-- METISMENU SCRIPTS -->
-   <script src="<c:url value='resources/assets/js/jquery.metisMenu.js'/>" /></script>
-   <!-- CUSTOM SCRIPTS -->
-   <script src="<c:url value='resources/assets/js/custom.js'/>" /></script>
-   
-   
-   <!-- 날씨 정보 css,js -->
-   <script src="<c:url value='resources/assets/js/weather.js'/>" /></script>
-   
-   <!-- 파이 -->
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   
-   <!-- 막대 -->
-   <script src="https://code.highcharts.com/highcharts.js"></script>
-   <script src="https://code.highcharts.com/modules/exporting.js"></script>
-   
-   <script src="<c:url value='resources/assets/js/jquery-1.10.2.js'/>" /></script>
-   <!-- BOOTSTRAP SCRIPTS -->
-   <script src="<c:url value='resources/assets/js/bootstrap.min.js'/>" /></script>
 
-   <!-- METISMENU SCRIPTS -->
-   <script src="<c:url value='resources/assets/js/jquery.metisMenu.js'/>" /></script>
-   <!-- CUSTOM SCRIPTS -->
-   <script src="<c:url value='resources/assets/js/custom.js'/>" /></script>
-   
-   
-   <!-- 날씨 정보 css,js -->
-   <script src="<c:url value='resources/assets/js/weather.js'/>" /></script>
-   
-   <!-- 파이 -->
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   
-   <!-- 막대 -->
-   <script src="https://code.highcharts.com/highcharts.js"></script>
-   <script src="https://code.highcharts.com/modules/exporting.js"></script>
-   
-   <script type="text/javascript">
-   
-   var admin = "<%=type%>"
-   var dept = "<%=dept%>"
-   function tabSetting() {
-      // 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
-      /* $('.test').hide();
-      $($('.current').find('a').attr('href')).show(); */
-       
-      console.log("값:"+admin);
-      if(admin != '관리자'){
-         $('#admin').hide();   
-         $('#admin1').click(function(){
-            alert('접근 권한이 없습니다.');
-            return false;
-         })
-      }
-            
-      if(admin=='미승인'){
-         $('.childTab').click(function () {
-            alert('승인 후 이용해주세요');
-            return false;
-         })
-      }
-      
-      //팀별 게시판에 각 팀원 들이 들어가게끔 수정해야한다.
-      //오쌤은 dept 값이 5번이므로 모든 팀프로젝트 게시판에 들어가야한다.
-      
-      if(dept != "1팀" && dept != "5팀"){
-         $('#authorization1').click(function(){
-            alert('당신은 1조가 아닙니다.');
-            return false;
-         })
-      }
-      
-      if(dept != "2팀" && dept != "5팀"){
-         $('#authorization2').click(function() {
-            alert('당신은 2조가 아닙니다.');
-            return false;
-         })
-      }
-      
-      if(dept != "3팀" && dept != "5팀"){
-         $('#authorization3').click(function(){
-            alert('당신은 3조가 아닙니다.');
-            return false;
-         })
-      }
-   
-   }
-       function logout(){
-          location="/groupware/member_login/logOut";
-       }
+	<!-- METISMENU SCRIPTS -->
+	<script src="<c:url value='resources/assets/js/jquery.metisMenu.js'/>" /></script>
+	<!-- CUSTOM SCRIPTS -->
+	<script src="<c:url value='resources/assets/js/custom.js'/>" /></script>
+	
+	
+	<!-- 날씨 정보 css,js -->
+	<script src="<c:url value='resources/assets/js/weather.js'/>" /></script>
+	
+	<!-- 파이 -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	<!-- 막대 -->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	
+	<script type="text/javascript">
+	
+	var admin = "<%=type%>"
+	var dept = "<%=dept%>"
+	function tabSetting() {
+		// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
+		/* $('.test').hide();
+		$($('.current').find('a').attr('href')).show(); */
+ 		
+		console.log("값:"+admin);
+		if(admin != '관리자'){
+			$('#admin').hide();	
+			$('#admin1').click(function(){
+				alert('접근 권한이 없습니다.');
+				return false;
+			})
+		}
+		if(admin=='미승인'){
+			$('.childTab').click(function () {
+				alert('승인 후 이용해주세요');
+				return false;
+			})
+		}
+		
+		if(dept != "1팀" && dept != "5팀"){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다.');
+				return false;
+			})
+		}
+		
+		if(dept != "2팀" && dept != "5팀"){
+			$('#authorization2').click(function() {
+				alert('당신은 2조가 아닙니다.');
+				return false;
+			})
+		}
+		
+		if(dept != "3팀" && dept != "5팀"){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다.');
+				return false;
+			})
+		}
+	
+	}
+		 function logout(){
+			 location="/groupware/member_login/logOut";
+		 }
+
 
       </script>
       <script>
