@@ -413,14 +413,14 @@ th, td {
 
 						<div class="col-md-12">
 
-
+								<br />
+								<input type="hidden" name="from_email" value="${gwemail }">
+								
 
 							<form>
 								<textarea id="editor" rows="10" cols="100"
-									style="width: 1030px; height: 412px;" name="content">
-										</textarea>
-								<br />
-								<input type="hidden" name="from_email" value="${gwemail }">
+									style="width: 1030px; height: 412px; font-size: 130%;" name="content"  >
+										${emailforward }</textarea>
 								
 							</form>
 						</div>
@@ -507,7 +507,7 @@ th, td {
 
 		<script>
 
-		var admin = <%=type%>
+		var admin = "<%=type%>"
 		function tabSetting() {
 			// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
 			/* $('.test').hide();
