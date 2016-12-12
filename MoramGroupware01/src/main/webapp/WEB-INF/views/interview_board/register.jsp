@@ -22,11 +22,15 @@
    rel='stylesheet' type='text/css' />
 <style>
 .div1{
-display: inline-block;
-
+	display: inline-block;
 }
-td{
-	height: 50px;
+iframe{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 750px;
+}
+th{
+	width: 70px;
 }
 </style>
 </head>
@@ -76,20 +80,20 @@ td{
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                      <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="list">받은 메일함</a></li>
+                   <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -162,39 +166,33 @@ td{
 	
 	<div id="page-wrapper">
 	<div id="page-inner">
-	<h1>Test Register Page</h1>
+	<h1>면접 후기 게시판</h1>
 
 		
 	<!--  수정  -->
 	<form method="post" id="frm">	
-	<table>
+	<table width="850px">
 	<tbody>
 	
 	
 		<tr>
 			<th>Title</th>
-			<td><input type="text" name="title" required/></td>
+			<td><input type="text" name="title" class="form-control col-lg-2" style="width: 600px;" required/></td>
 		</tr>
 		
 		<tr>
 			<th>Content</th>
 			<td>
-			<textarea name="content" id="editor" rows="10" cols="100" style="width:766px; height:412px;" required></textarea>
+				<textarea name="content" id="editor" style="width:775px; height:450px; margin-bottom: 50px; margin-top: 50px;" required></textarea>
 			</td>	
 		</tr>
 		<tr>
 			<th>UserID</th>
 			<td>
-				<input type="text" name="userid" value="${login_id }"  readonly="readonly"/>
+				<input type="text" name="userid" value="${login_id }" class="form-control col-lg-2" style="width: 250px; display: inline-block;" readonly="readonly"/>
+				<input type="submit" id="savebutton" class="btn btn-default" value="complete" style="float: right;" required/>
 			</td>
 		</tr>
-		<tr>
-			<td>
-			<input type="submit" id = "savebutton" value="complete" required/>
-			</td>
-		</tr>
-	
-	
 	</tbody>
 	</table>
 	</form>
@@ -217,9 +215,9 @@ td{
 	
 	
 	
-	<!-- jQuery CDN -->
+	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<script src="/groupware/resources/js/HuskyEZCreator.js" charset="utf-8"></script>
+	<script src="/groupware/resources/js/HuskyEZCreator2.js" charset="utf-8"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -238,28 +236,27 @@ td{
 				//using mode tab ( Editor/HTML/ TEXT)
 				bUserModeChanger : true,
 			}
-		
 		});
 		
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-		var dept = <%=dept%>;
+		var dept = "<%=dept%>"
 		
 		//alert('profileimage : ' + profileimage);
-		if(dept != 1 && dept != 5){
+		if(dept != "1팀" && dept != "5팀"){
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function(){
 				alert('당신은 2조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 3 && dept != 5){
+		if(dept != "3팀" && dept != "5팀"){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다');
 				return false;

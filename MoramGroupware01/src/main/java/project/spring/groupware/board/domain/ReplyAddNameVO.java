@@ -9,17 +9,19 @@ public class ReplyAddNameVO {
 	private String rtext;
 	private String rname;
 	private String replier;
+	private String profileimage;
 	private Date regdate;
 	
 	public ReplyAddNameVO(){}
 
-	public ReplyAddNameVO(int rno, int bno, String rtext, String rname, String replier, Date regdate) {
+	public ReplyAddNameVO(int rno, int bno, String rtext, String rname, String replier,String profileimage, Date regdate) {
 		super();
 		this.rno = rno;
 		this.bno = bno;
 		this.rtext = rtext;
 		this.rname = rname;
 		this.replier = replier;
+		this.profileimage=profileimage;
 		this.regdate = regdate;
 	}
 
@@ -61,6 +63,14 @@ public class ReplyAddNameVO {
 
 	public void setReplier(String replier) {
 		this.replier = replier;
+	}
+	
+	public String getProfileimage(){
+		return profileimage;
+	}
+	
+	public void setProfileimage(String profileimage){
+		this.profileimage=profileimage;
 	}
 
 	public Date getRegdate() {

@@ -238,6 +238,56 @@ public class approvalDAOImpl implements approvalDAO {
 	}
 	
 	@Override
+	public String selectName1Return(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameReturn1", draft_index);
+	}
+	
+	@Override
+	public String selectName2Return(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameReturn2", draft_index);
+	}
+	
+	@Override
+	public String selectName3Return(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameReturn3", draft_index);
+	}
+	
+	@Override
+	public String selectName4Return(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameReturn4", draft_index);
+	}
+	
+	@Override
+	public String selectName5Return(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameReturn5", draft_index);
+	}
+	
+	@Override
+	public String selectName1Finish(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameFinish1", draft_index);
+	}
+	
+	@Override
+	public String selectName2Finish(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameFinish2", draft_index);
+	}
+
+	@Override
+	public String selectName3Finish(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameFinish3", draft_index);
+	}
+	
+	@Override
+	public String selectName4Finish(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameFinish4", draft_index);
+	}
+	
+	@Override
+	public String selectName5Finish(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectNameFinish5", draft_index);
+	}
+	
+	@Override
 	public List<DrafterDTO> selectForDrafterId(String id) {
 		if(id != null) {
 			System.out.println(id);
@@ -315,9 +365,19 @@ public class approvalDAOImpl implements approvalDAO {
 	}
 	
 	@Override
+
 	public int count_approval(String userid) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NAMESPACE+".count_approval", userid);
+	}
+	public ApprovalVO selectFinish(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectFinish", draft_index);
+	}
+	
+	@Override
+	public ApprovalVO selectReturn(String draft_index) {
+		return sqlSession.selectOne(NAMESPACE + ".selectReturn", draft_index);
+
 	}
 	
 }

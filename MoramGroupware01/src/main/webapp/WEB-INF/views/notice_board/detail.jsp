@@ -19,33 +19,28 @@ f<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
+
+<link href="<c:url value="/resources/assets/css/reply.css"/>"   
+  rel="stylesheet" />
+
+
 <style>
-.replier{
-	font-style: italic;
+
+.reply{
+border-bottom:1px dotted;
+list-style-type: none;
+border-collapse: collapse;
+margin-left: -30px;
+
 }
 
-.rtext{
-	font-weight: bold;
-}
 
-.regdate{
-	font-style: italic;
-	color:gray;
-}
 
-#modify{
-	width:300px; height:100px;
-	backgroud-color:lightgray;
-	position:absolute;
-	top:30%; left:30%;
-	display:none;
-}
 .div1{
 display: inline-block;
 
 }
 tbody tr td input, tbody tr th input{
-	width: 400px;
 	border:none;
 	border-right:0px; 
 	border-top:0px; 
@@ -58,6 +53,8 @@ border:1px solid #ddd;
 border-left: 1px solid white;
 border-right: 1px solid white;
 }
+</style>
+
 
 
 </style>
@@ -105,20 +102,20 @@ border-right: 1px solid white;
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                     <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">받은 메일함</a></li>
+                     <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -190,7 +187,7 @@ border-right: 1px solid white;
 <!-- 내가한 코드 -->
 <div id="page-wrapper">
 	<div id="page-inner">
-	<h1>detail</h1>
+	<h1>공지 게시판</h1>
 	
 	
 	<!-- 수정 -->
@@ -205,10 +202,10 @@ border-right: 1px solid white;
 	<input style="font-style: gray;" type="hidden" value="${dateString }" readonly /> 
 	<br/>
 	
-	<table>
+	<table class="table table-condensed">
 	<tbody>
 		<tr>
-			<th>
+			<th style="border-bottom: 2px solid #ddd; border-top: 2px solid #ddd; ">
 				<!-- title -->
 				<input style="height: 25px;" type="text" value="[공지] ${boardVO.title }" name="title" readonly/>
 			</th>	
@@ -216,7 +213,8 @@ border-right: 1px solid white;
 		<tr>
 			<td>
 				<!-- Writer -->
-				<input type = "text" value="글쓴이 : ${boardVO.userid}" name="userid" readonly/>작성일 : ${dateString }
+				<input type = "text" value="글쓴이 : ${boardVO.userid}" name="userid" style="font-size:13;" readonly/> 
+				<input type="text" value="작성일 : ${dateString }" style="font-size:13; float: right; width: 190px;" readonly="readonly"/>
 			</td>
 		</tr>
 		
@@ -224,59 +222,50 @@ border-right: 1px solid white;
 		<tr>
 			<td>
 				<!-- content -->
-				<div style="width:800px; margin-bottom: 50px; margin-top: 50px;">${boardVO.content}</div>
+				<div style="margin-bottom: 50px; margin-top: 50px;">${boardVO.content}</div>
 			</td>
 		</tr>
 
-		<tr>
-			<td style="height: 50px;">
-				<button type="button" id="btnList">Go to List</button>
-				<c:if test="${boardVO.userid eq id }">
-				<button type="submit" id="updatebutton">Update</button>
-				</c:if> 
-				<input type="hidden" name="page" value="${page }" />
-			</td>
-		</tr>
-		
-		<tr>
-			<td style="border: 1px solid #a5a5a5;"></td>
-		</tr>
+
 	</tbody>
 	</table>
+		
+	<br/>
 	
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <span style='float:right'>
+                                        <button type="button" id="btnList" class="btn btn-default">목록</button>
+                                        <c:if test="${boardVO.userid eq id }">
+                                        <button type="submit" id="updatebutton" class="btn btn-default">수정</button>
+                                     	</c:if> 
+                                        <!-- <button type="button" id="delete" class="btn btn-default">삭제</button> -->
+                                        <!-- <button type="button" id="write" class="btn btn-default">글쓰기</button> -->
+                                    	<input type="hidden" name="page" value="${page }" />
+                                    </span>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+	
+				
+	<hr/>
+
 	</form>
-	<!-- ---------------------------- -->
+
+
 	
-	<br/>
-	
-	<%-- <div>
-		<input type = "text" name="rtext" id="rtext"
-			placeholder ="write it" required/>
-		<input type = "text" name="replier" id="replier"
-			placeholder="ID" value = "${name }" readonly/>
-		<button type = "button" id="btnCreate">Write Comments</button>	
-	</div>
-	<br/> --%>
-	
-	<!-- <div>
-		<ul id="replies"></ul>
-	</div>
-	<br/>
-	
-	<div id = "modify">
-		<input type = "text" name="rno" id="rno_mod" readonly/>
-		<br/>
-		<input type="text" name="rtext" id="rtext_mod">
-		<br>
-		<button id="btn_delete">Delete</button>
-		<button id="btn_cancel">Cancel</button>
-	</div> -->
-	
+
 </div>
 </div>
 	
 	
 	
+	
+	
+		
 	
 	<script src="<c:url value='../resources/assets/js/jquery-1.10.2.js'/>" /></script>
    <!-- BOOTSTRAP SCRIPTS -->
@@ -289,7 +278,6 @@ border-right: 1px solid white;
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
 	<script>
 		$(document).ready(function(){
 			$("#updatebutton").click(function(){
@@ -299,24 +287,25 @@ border-right: 1px solid white;
 			});
 			
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-			var dept = <%=dept%>;
+
+			var dept = "<%=dept%>";
 			
-			//alert('profileimage : ' + profileimage);
-			if(dept != 1 && dept != 5){
+			
+			if(dept != "1팀" && dept != "5팀"){
 				$('#authorization1').click(function(){
 					alert('당신은 1조가 아닙니다');
 					return false;
 				});
 			}
 			
-			if(dept != 2 && dept != 5){
+			if(dept != "2팀" && dept != "5팀"){
 				$('#authorization2').click(function(){
 					alert('당신은 2조가 아닙니다');
 					return false;
 				});
 			}
 			
-			if(dept != 3 && dept != 5){
+			if(dept != "3팀" && dept != "5팀"){
 				$('#authorization3').click(function(){
 					alert('당신은 3조가 아닙니다');
 					return false;

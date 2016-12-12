@@ -21,6 +21,12 @@
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
+   
+<!-- board-list -->
+<link href="<c:url value="/resources/assets/css/board-list.css"/>"
+   rel="stylesheet" />
+   
+
 <style>
 .div1{
 display: inline-block;
@@ -28,27 +34,7 @@ display: inline-block;
 }
 </style>
 <title>Insert title here</title>
-<style>
-table{
-	width : 100%;
-}
-table, th,td{
-	
-	border-bottom : 1px solid gray;
-	border-collapse: collapse;
-}
 
-th{
-	height : 50%;
-	background-color: lightpink;
-	border-left: 1px solid gray;
-}
-
-li {
-	display: inline-block;
-}
-
-</style>
 </head>
 <body>
 
@@ -92,20 +78,20 @@ li {
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                       <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">받은 메일함</a></li>
+                    <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -174,19 +160,81 @@ li {
 
 
 
+
 <!-- 내가 한 코드 -->
 <div id="page-wrapper">
 	<div id="page-inner">
-	<h1>Test for Board</h1>
-	
-	<nav>
-		<ul>
-			<li><a href="register">New Content</a>
-		</ul>
-	</nav>
+	<h1>면접 후기 게시판</h1>
 	
 	
-	<table>
+
+	<table class="table table-condensed">
+    	<thead>
+    		<tr class="toptable">
+    			<td class="left">
+    				<button type="button" class="btn btn-default" onclick="location.href='register'">새 글 쓰기</button>
+    			</td>
+    		
+    			
+				<td class="right">
+					<button type = "button" class="btn btn-default" id="searchBtn">검색</button> 
+				</td>
+					
+				<td class="right">
+					<input type="text" id="keyword" class="form-control" name="keyword" value="${pageMaker.searchCriteria.keyword }"/> <!-- value 값을 설정해야함 -->
+				</td>
+				
+				<td class="right">
+					<select style="height: 35px;" id ="searchType" name="searchType">
+						<option id="t" value="t" <c:out value="${pageMaker.searchCriteria.searchType == 't'? 'selected' : '' }"/>>
+						제목</option>
+						<option id="u" value="u"<c:out value="${pageMaker.searchCriteria.searchType =='u'? 'selected' : '' }"/>>
+						작성자</option>
+					</select>
+				</td>
+			</tr>
+		</thead>
+	</table>
+	
+	
+	
+	<table class="table_list">
+	<colgroup>
+	<col width = "8%"/>
+	<col width = "*"/>
+	<col width = "10%"/>
+	<col width = "20%"/>
+	<col width = "8%"/>
+	</colgroup>
+	<thead>
+		<th scope="col" class="col">번호</th>
+		<th scope="col" class="col">제목</th>
+		<th scope="col" class="col">작성자</th>
+		<th scope="col" class="col">작성일</th>
+		<th scope="col" class="col">조회수</th>
+	</thead>
+	<tbody>
+		
+		<c:forEach var = "vo2" items="${listName }">
+			<tr>
+				<td class="num">${vo2.bno }</td>
+				<td class="title">
+					<a id = "bnoNum" href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
+				</td>
+				<td>${vo2.name }</td>
+				<td class="date"><fmt:formatDate value="${vo2.regdate }"
+					pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td class="num">${vo2.viewcnt }</td>
+			</tr>
+		</c:forEach>
+		
+	</tbody>
+	</table>
+	
+	
+	
+	
+<%-- 	<table>
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
@@ -197,17 +245,18 @@ li {
 				
 		<c:forEach var = "vo2" items="${listName }">
 			<tr>
-				<td>${vo2.bno }</td>
-				<td><a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a></td>
-				<td>${vo2.name }</td>
-				<td><fmt:formatDate value="${vo2.regdate }"
-					pattern="yyyy-MM-dd HH:mm:ss"/>
+				<td class="num">${vo2.bno }</td>
+				<td class="title">
+					<a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
 				</td>
-				<td>${vo2.viewcnt }</td>
+				<td>${vo2.name }</td>
+				<td class="date"><fmt:formatDate value="${vo2.regdate }"
+					pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				<td class="num">${vo2.viewcnt }</td>
 			</tr>
 		</c:forEach>
 			
-	</table>
+	</table> --%>
 	<hr/>
 	
 	<ul class = "pageLinks">
@@ -219,8 +268,7 @@ li {
 			end ="${pageMaker.endPageNum }"
 			var = "num">
 			
-			<li><a href = "${num }">${num }</a></li>
-			
+			<li><button type="button" class="btn btn-default" id="pagebtn${num}" onclick="location.href='?page=${num}'">${num}</button></li>
 		</c:forEach>
 		
 		<c:if test="${pageMaker.hasNext }">
@@ -229,16 +277,9 @@ li {
 	</ul>
 		
 		
-	<select id ="searchType" name="searchType">
-		
-		<option id="t" value="t" <c:out value="${pageMaker.searchCriteria.searchType == 't'? 'selected' : '' }"/>>
-		제목</option>
-		<option id="u" value="u"<c:out value="${pageMaker.searchCriteria.searchType =='u'? 'selected' : '' }"/>>
-		작성자</option>
-	</select>	
-	<input type="text" id="keyword" name="keyword" value="${pageMaker.searchCriteria.keyword }"/> <!-- value 값을 설정해야함 -->
-		
-	<button type = "button" id="searchBtn">검색</button> 
+	
+	
+	
 	
 	
 			
@@ -279,24 +320,24 @@ li {
 		
 		
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-		var dept = <%=dept%>;
+		var dept = '<%=dept%>';
 		
 		//alert('profileimage : ' + profileimage);
-		if(dept != 1 && dept != 5){
+		if(dept != "1팀" && dept != "5팀"){
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function(){
 				alert('당신은 2조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 3 && dept != 5){
+		if(dept != "3팀" && dept != "5팀"){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다');
 				return false;
@@ -319,7 +360,7 @@ li {
 			frm.submit();
 		});
 		
-		$('table tr td a').click(function(){
+		$('#bnoNum').click(function(){
 			event.preventDefault();
 			var bno = $(this).attr('href');
 			frm.find('[name="bno"]').val(bno);
@@ -352,6 +393,35 @@ li {
 		
 	});
 
+	
+	$(function () {
+		var getpage = getQuerystring('page');
+		if(getpage != null && getpage !=''){
+			$("#pagebtn"+getpage).css("color", "white");
+			$("#pagebtn"+getpage).css("background-color", "#59DFDF");
+		} else {
+			$("#pagebtn1").css("color", "white");
+			$("#pagebtn1").css("background-color", "#59DFDF");
+		}
+	});
+
+	
+	function getQuerystring(paramName){
+
+		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+		
+		if(_tempArray!=null && _tempArray!=''){
+			for(var i = 0; _tempArray.length; i++) {
+				var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+			
+				if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
+					// _keyValuePair[1] : 파라미터 값
+					return _keyValuePair[1];
+				}
+			}
+		}
+	};
 	
 	var profileimage= '${profileimage}';
 	if(profileimage !=null && profileimage!=''){

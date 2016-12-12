@@ -44,6 +44,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sun.mail.handlers.message_rfc822;
 
 import project.spring.groupware.email.domain.EmailVO;
+import project.spring.groupware.email.pageutil.NewPaginationCriteria;
 import project.spring.groupware.email.pageutil.PageMaker;
 import project.spring.groupware.email.pageutil.PaginationCriteria;
 import project.spring.groupware.email.service.emailServiceDAO;
@@ -316,10 +317,34 @@ public class EmailController {
 		
 	}
 	
-	@RequestMapping(value="write", method=RequestMethod.POST)
-	public void emailforward(Model model,HttpServletRequest request,EmailVO vo){
-		
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String emailforward(Model model,HttpServletRequest request, EmailVO vo){
+		logger.info("write post 호출되야함.??");
+		HttpSession session = request.getSession();
+		String userid = (String) session.getAttribute("login_id");
+		MemberVO vo1 = emailServiceDAO.member_one(userid);
 	
+		String name=vo1.getName();
+		String gwemail=vo1.getGroupemail();
+		
+		logger.info("vo:"+vo.getSubject());
+		model.addAttribute("name", name);
+		model.addAttribute("gwemail", gwemail);
+		
+		StringBuffer bt=new StringBuffer();
+		bt.append("\n\n\n\n\n\n\n\n\n\n\n");
+		bt.append("-----------------------------------origin message--------------------------------------\n");
+		bt.append("   Title : "+vo.getSubject()+"\n");
+		bt.append("   Senddate : "+vo.getSenddate()+"\n");
+		bt.append("   From : "+vo.getFrom_email()+"\n");
+		bt.append("   To : "+vo.getTo_email()+"\n");
+		bt.append("   Content : "+vo.getContent()+"\n");
+		bt.append("------------------------------------------------------------------------------------------\n");
+		
+		model.addAttribute("emailforward", bt);
+		return "/email/write";
+		
+		
 		
 	}
 	
@@ -573,41 +598,65 @@ public class EmailController {
 	}
 
 	@RequestMapping(value="/send-mailbox", method=RequestMethod.GET)
-	public void send_mailbox(Integer page,Model model, HttpServletRequest request){
+	public void send_mailbox(Integer page, Model model, HttpServletRequest request){
 		//todo- session 아이디 가져와서 하기 
 		
 		HttpSession session=request.getSession();
 		String userid=(String) session.getAttribute("login_id");
 		MemberVO mvo=emailServiceDAO.member_one(userid);
 		logger.info("이메일:"+mvo.getGroupemail());
+		String from_email = mvo.getGroupemail();
+		
+		
+		NewPaginationCriteria c2 = new NewPaginationCriteria();
 		
 		/*String gwMail="dkfldk14@moram.com";*/
-		logger.info("listpage (): page="+page);
-		   PaginationCriteria c=new PaginationCriteria();
+		//   PaginationCriteria c = new PaginationCriteria();
 		   if(page!=null){
-			   c.setPage(page);
+			  // c.setPage(page);
 			   //1페이지면 1부터 5까지
-			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌. 
+			   //2페이지면 6부터 10까지..  해당 호출된 페이지를 설정해줌.
+			   c2.setPage(page);
 		   }
+		   logger.info("send-mail listpage (): page="+page);
 		
-		   logger.info("메일가져온거 맞냐.. : "+mvo.getGroupemail());
-		List<EmailVO> vo=emailServiceDAO.send_emailList(mvo.getGroupemail());
-		String from_email=mvo.getGroupemail();
+		  // logger.info("메일가져온거 맞냐.. : "+mvo.getGroupemail());
+		//List<EmailVO> vo=emailServiceDAO.send_emailList(mvo.getGroupemail());
+		//String from_email=mvo.getGroupemail();
 		//넣어주는거 ㅇ-
+
 		
-		List<EmailVO> vo1=emailServiceDAO.adressList(1, c, mvo.getGroupemail());
+		//내가 만든 것
+	   c2.setFrom_email(from_email);
+	   logger.info("from_email : " + c2.getFrom_email());
+		List<EmailVO> emailList = emailServiceDAO.addressList(c2);
+		for(EmailVO vo : emailList){
+			logger.info("EmailAddress : " + vo.getFrom_email());
+		}
+		model.addAttribute("emailList", emailList);
+		
+		//여기서 잠시 지움 복구
+		/*List<EmailVO> vo1=emailServiceDAO.adressList(1, c, mvo.getGroupemail());
 		model.addAttribute("sendCount", vo.size());
-		model.addAttribute("email", vo1);
+		model.addAttribute("email", vo1);*/
 		
 	 	
 	   	//페이지메이커 
 	   	PageMaker maker=new PageMaker();
 	   	//▼ 몇번째 페이지를 보여줄것인지 조건
-	   	maker.setCriteria(c);
+	   //	maker.setCriteria(c);
+	   	c2.setFrom_email(mvo.getGroupemail());
+	   	maker.setCriteria2(c2);
 	   	//▼ 전체 총 페이지를 검색해준다. result 타입은 int로 했었..다는
-	   	maker.setTotalCount(emailServiceDAO.totalEmailct("1", mvo.getGroupemail()));
+	   	//maker.setTotalCount(emailServiceDAO.totalEmailct("1", mvo.getGroupemail()));
+	   logger.info("send-mail totalCount : " + emailServiceDAO.totalCount(c2));
+	   	maker.setTotalCount(emailServiceDAO.totalCount(c2));
 	   	//▼ pageMaker 의 함수를 호출
-	   	maker.setPageDate();
+	   //	maker.setPageDate();
+	   	maker.setNewPageDate();
+	   	
+	   	
+	   	
 	   	//모델객체에 pageMaker 넘겨줌. 
 	   	model.addAttribute("pageMaker", maker);
 	   	model.addAttribute("Gemail", mvo.getGroupemail());

@@ -442,7 +442,6 @@ file.onchange = function (event) {
      if (xmlHttpRequest.status == 200) {
        var result = JSON.parse(xmlHttpRequest.responseText);
        image.src = result.data.link;
-       console.log(result);
        alert(result.data.link + ' || ' + result.data.type);
      }
      else {

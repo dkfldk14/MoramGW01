@@ -83,12 +83,13 @@ public class MainController {
 	public String mainConnect(Model model, HttpServletRequest request){
 		
 		HttpSession session = request.getSession();
-		
+
 		Object obj = session.getAttribute("login_id");
 		model.addAttribute("id", obj.toString());
 		logger.info("이름 불러오기");
 		
 		MemberVO vo = service.selectName(obj.toString());
+		
 		int count = boardservice.infoCount();
 		
 		String name = vo.getName();

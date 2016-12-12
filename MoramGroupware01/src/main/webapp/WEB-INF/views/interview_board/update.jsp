@@ -21,41 +21,20 @@
    rel='stylesheet' type='text/css' />
 <style>
 .div1{
-display: inline-block;
-
-}
-
-th{
-	width: 100px;
-}
-
-tbody tr td input, tbody tr th input{
-	width: 400px;
-	border:none;
-	border-right:0px; 
-	border-top:0px; 
-	boder-left:0px; 
-	boder-bottom:0px;
-}
-
-td{
-text-align: left;
-}
-textarea{
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-tr{
-border:1px solid #ddd; 
-border-left: 1px solid white;
-border-right: 1px solid white;
+	display: inline-block;
 }
 iframe{
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 750px;
+}
+th{
+	width: 70px;
 }
 
+tbody tr td .btn-default {
+	float: right;
+}
 </style>
 </head>
 <body>
@@ -100,20 +79,20 @@ iframe{
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                       <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">받은 메일함</a></li>
+                 <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -187,10 +166,9 @@ iframe{
 	<div id="page-wrapper">
 	<div id="page-inner">
 	<h1>게시글/수정 삭제 페이지</h1>
-
 	<!--  수정  -->
 	<form id="frm">	
-	<table style="position: relative;" width="875px">
+	<table style="position: relative;" width="850px">
 	<tbody>
 	
 	
@@ -198,7 +176,7 @@ iframe{
 			
 			<th>Title</th>
 			<td>
-				<input type="text" name="title" value="${boardVO.title }"/>
+				<input type="text" class="form-control col-lg-2" name="title" style="width: 600px;" value="${boardVO.title }"/>
 				<input type = "hidden" name ="bno" value="${boardVO.bno }" />
 			</td>
 		</tr>
@@ -206,30 +184,28 @@ iframe{
 		<tr>
 			<th>Content</th>
 			<td>
-				<textarea name="content" id="editor" style="width:750px; height:450px; margin-bottom: 50px; margin-top: 50px;" required>${boardVO.content }</textarea>
+				<textarea name="content" id="editor" style="width:775px; height:450px; margin-bottom: 50px; margin-top: 50px;" required>${boardVO.content }</textarea>
 			</td>	
 		</tr>
 		<tr>
 			<th>Writer ID</th>
 			<td>
-				<input type = "text" name="userid" value="${boardVO.userid }" readonly/>
+				<input type="text" style="width: 250px; display: inline-block;" class="form-control col-lg-2" name="userid" value="${boardVO.userid }" readonly/>
+				<button type = "button" class="btn btn-default" id="btnList">Main Page</button>
+				<button type = "button" class="btn btn-default" id="btnCancel">Cancel</button>
+				<button type = "submit" class="btn btn-default" id="btnDelete">Delete</button>
+				<button type = "submit" class="btn btn-default" id="btnUpdate">Update</button>
 			</td>
 		</tr>
 	</tbody>
 	</table>
-		<input type="submit" id = "savebutton" value="complete" required/>
+		
 		<input type = "hidden" name="page" value="${page }"/>
 	</form>
 	<!--  -------------------  -->
 	
-	<button type = "submit" id = "btnUpdate">Update</button>
-	<button type = "submit" id = "btnDelete">Delete</button>
-	<button type = "button" id = "btnCancel">Cancel</button>
-	<button type = "button" id = "btnList">Main Page</button>
-	
 	<!-- page 정보를 update 요청에 포함시키기 위해서 -->
 	<input type="hidden" name="page" value="$[page]"/>
-
 	</div>
 	</div>
 	
@@ -272,24 +248,24 @@ iframe{
 		
 		
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-		var dept = <%=dept%>;
+		var dept = '<%=dept%>';
 		
 		//alert('profileimage : ' + profileimage);
-		if(dept != 1 && dept != 5){
+		if(dept != "1팀" && dept != "5팀"){
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function(){
 				alert('당신은 2조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 3 && dept != 5){
+		if(dept != "3팀" && dept != "5팀"){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다');
 				return false;
