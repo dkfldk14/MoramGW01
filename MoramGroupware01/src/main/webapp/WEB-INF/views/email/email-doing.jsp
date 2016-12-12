@@ -60,7 +60,7 @@
 			<ul class="nav" id="main-menu">
 				<li class="text-center user-image-back"><img
 					src="<c:url value="../resources/assets/img/find_user.png"/>"
-					align="center" /> <class ="img-responsive" /></li>
+					align="center"  id="profileimage" width="128px" height="128px" /> <class ="img-responsive" /></li>
 
 
 				<li><a href="/groupware/main1"><i class="fa fa-desktop "></i>MAIN1</a></li>
@@ -75,10 +75,12 @@
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li><a href="/groupware/email/list">받은 메일함</a></li>
+                  
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
+                     <li><a href="#">주소록</a></li>
 							
 
 						</ul></li>
@@ -181,6 +183,21 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
+	<script type="text/javascript">
+	var name = "${name}";
+	var url = '/groupware/checktime/myimage/'+name;
+	$.getJSON(url, function(data){
+		var profileimage='';
+
+		$(data).each(function(){
+			profileimage=this.profileimage;
+		});
+
+		if(profileimage!=null && profileimage!=''){
+			$('#profileimage').attr("src", profileimage);
+		};
+	});	
+	</script>
 
 </body>
 </html>

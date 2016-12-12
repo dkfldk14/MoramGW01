@@ -96,7 +96,7 @@ border-right: 1px solid white;
             <ul class="nav" id="main-menu">
                <li class="text-center user-image-back"><img
                   src="<c:url value="../resources/assets/img/find_user.png"/>"
-                  align="center" /> <class ="img-responsive" /></li>
+                  align="center"  id="profileimage" width="128px" height="128px"  /> <class ="img-responsive" /></li>
 
 
                <li><a href="../"><i class="fa fa-desktop "></i>메인</a></li>
@@ -472,7 +472,7 @@ $('#commentTable').on('click', 'td a', function(){
 				var a = $('#'+id).offset().top;
 				var b = $('#'+id).offset().left;
 				
-				alert(id +" | "+ a + " | " +b);
+
 				
 				var c = '';
 				var d = '';
@@ -568,6 +568,20 @@ $('#commentTable').on('click', 'td a', function(){
 				});
 			});
 			
+			
+			var name = "${name}";
+			var url = '/groupware/checktime/myimage/'+name;
+			$.getJSON(url, function(data){
+				var profileimage='';
+		
+				$(data).each(function(){
+					profileimage=this.profileimage;
+				});
+	
+				if(profileimage!=null && profileimage!=''){
+					$('#profileimage').attr("src", profileimage);
+				};
+			});
 			
 		});	
 	

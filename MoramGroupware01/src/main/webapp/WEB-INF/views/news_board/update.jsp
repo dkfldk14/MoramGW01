@@ -72,7 +72,7 @@ tbody tr td .btn-default {
             <ul class="nav" id="main-menu">
                <li class="text-center user-image-back"><img
                   src="<c:url value="../resources/assets/img/find_user.png"/>"
-                  align="center" /> <class ="img-responsive" /></li>
+                  align="center"   id="profileimage" width="128px" height="128px" /> <class ="img-responsive" /></li>
 
 
                <li><a href="../"><i class="fa fa-desktop "></i>메인</a></li>
@@ -298,6 +298,20 @@ tbody tr td .btn-default {
 				frm.attr("method", "post");
 				frm.submit();
 			}
+		});
+		
+		var name = "${name}";
+		var url = '/groupware/checktime/myimage/'+name;
+		$.getJSON(url, function(data){
+			var profileimage='';
+	
+			$(data).each(function(){
+				profileimage=this.profileimage;
+			});
+
+			if(profileimage!=null && profileimage!=''){
+				$('#profileimage').attr("src", profileimage);
+			};
 		});
 	});
 	</script>

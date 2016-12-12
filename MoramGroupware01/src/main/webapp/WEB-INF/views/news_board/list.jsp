@@ -415,11 +415,19 @@ display: inline-block;
 		}
 	};
 
-	var profileimage= '${profileimage}';
-	if(profileimage !=null && profileimage!=''){
-		$("#profileimage").attr('src', profileimage);
-		
- 	}
+	var name = "${name}";
+	var url = '/groupware/checktime/myimage/'+name;
+	$.getJSON(url, function(data){
+		var profileimage='';
+
+		$(data).each(function(){
+			profileimage=this.profileimage;
+		});
+
+		if(profileimage!=null && profileimage!=''){
+			$('#profileimage').attr("src", profileimage);
+		};
+	});
 				
 	});
 	

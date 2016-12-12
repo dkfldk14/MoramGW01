@@ -221,4 +221,20 @@ public class MainCheckRESTController {
 	}
 
 	
+	@RequestMapping (value= "/myimage/{name}", method=RequestMethod.GET)
+	public ResponseEntity<List<MemberVO>> myimage(
+			@PathVariable("name") String name){
+		List<MemberVO> list = service.myimage(name);
+		
+		ResponseEntity<List<MemberVO>> entity = null;
+		
+		if(list != null){
+			entity = new ResponseEntity<>(list, HttpStatus.OK);
+		} else{
+			entity = new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
 }

@@ -213,10 +213,12 @@ li{
 					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li><a href="/groupware/email/list">받은 메일함</a></li>
+                  
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
+                     <li><a href="#">주소록</a></li>
 							
 
 						</ul></li>
@@ -365,6 +367,20 @@ li{
 							location = '/groupware/member_update_detail';
 						}
 					}
+				});
+				
+				var name = "${name}";
+				var url = '/groupware/checktime/myimage/'+name;
+				$.getJSON(url, function(data){
+					var profileimage='';
+			
+					$(data).each(function(){
+						profileimage=this.profileimage;
+					});
+		
+					if(profileimage!=null && profileimage!=''){
+						$('#profileimage').attr("src", profileimage);
+					};
 				});
 			});
 </script>
