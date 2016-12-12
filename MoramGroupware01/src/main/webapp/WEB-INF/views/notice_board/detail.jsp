@@ -95,7 +95,7 @@ border-right: 1px solid white;
             <ul class="nav" id="main-menu">
                <li class="text-center user-image-back"><img
                   src="<c:url value="../resources/assets/img/find_user.png"/>"
-                  align="center" /> <class ="img-responsive" /></li>
+                  align="center"   id="profileimage" width="128px" height="128px" /> <class ="img-responsive" /></li>
 
 
                <li><a href="../"><i class="fa fa-desktop "></i>메인</a></li>
@@ -116,7 +116,7 @@ border-right: 1px solid white;
                      <li><a href="/groupware/email/write">편지쓰기</a></li>
                      <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
                      <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
-                     <li><a href="#">주소록</a></li>
+                     
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
                      class="fa arrow"></span></a>
@@ -156,18 +156,13 @@ border-right: 1px solid white;
                <li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">개인정보수정</a></li>
-                     <li><a href="#">나의 이력서</a></li>
-                     <li><a href="#">나의 이력관리</a></li>
+                      <li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
+					 <li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
                   </ul></li>
-               <li><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
+               <li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">사용자관리</a></li>
-                     <li><a href="#">권한관리</a></li>
-                     <li><a href="#">문서함관리</a></li>
-
-                     <li><a href="#">결재함관리</a></li>
+                     <li><a href="/groupware/member_manage">사용자관리</a></li>
                   </ul></li>
 
                <!--  <li>
@@ -286,6 +281,21 @@ border-right: 1px solid white;
 				$("#frm").submit();
 			});
 			
+			var admin ='<%=type%>';
+			function tabSetting() {
+				console.log("값:" + admin);
+				if (admin != '관리자') {
+					$('#admin').hide();
+				}
+
+				if (admin == '미승인') {
+					$('.childTab').click(function() {
+						alert('승인 후 이용해주세요');
+						return false;
+					})
+				}
+			}
+			tabSetting();
 ///////////////팀 별 게시판 권한 부여 ////////////////////
 
 			var dept = "<%=dept%>";
@@ -320,163 +330,19 @@ border-right: 1px solid white;
 			
 			var bno = ${boardVO.bno};
 			
-			/* getAllReplies();
-			
-			function getAllReplies(){
-				//$.getJSON(url, data, callback):HTTP GET 요청을 사용해서 JSON 데이터를 로드하는 Ajax 함수
-				//url(필수 파라미터):요청을 보내는 주소
-				//callback(선택 파라미터) : 요청이 성공했을 때 호출되는 콜백 함수
-				
-				var url = '/groupware/interview_replies/all/'+bno;
-				$.getJSON(url, function(data){
-					console.log("댓글 개수 : " + data.length);
-					//이름 값들을 받아노느 변수를 선언
-					var list = '';
-					var username = '';
-					var name = "${name}";
-					//data의 개수 만큼 function의 내용을 반복해서 수행
-					$(data).each(function(){
-						var date = new Date(this.regdate);
-						var dateString = date.toLocaleDateString();
-						console.log(dateString);
-					
-					username=this.replier;
-					if(username == name){
-						list += '<li class ="reply_list" data-rno="'
-							+ this.rno
-							+'">'
-							+'#'+this.rno+' '
-							+'<span class="replier">'
-							+this.replier + ' '
-							+'</span>'
-							+ '<span class = "rtext">'
-							+this.rtext + ' '
-							+"</span>"
-							+'<span class="regdate">'
-							+dateString+' '
-							+'</span>'						
-							+ '<button>수정</button>'						
-							+'</li>';
-							
-							}else{
-								list += '<li class ="reply_list" data-rno="'
-									+ this.rno
-									+'">'
-									+'#'+this.rno+' '
-									+'<span class="replier">'
-									+this.replier + ' '
-									+'</span>'
-									+ '<span class = "rtext">'
-									+this.rtext + ' '
-									+"</span>"
-									+'<span class="regdate">'
-									+dateString+' '
-									+'</span>'
-									+'</li>';
-							
-							}
-					});
-				
-					$('#replies').html(list);
-				});			
-				
-			};
-			
-			$('#btnCreate').click(function(){
-				var rtextString = $('#rtext').val();
-				var replierString = $('#replier').val();
-				
-				$.ajax({
-					type: 'post',
-					url: '/groupware/interview_replies',
-					headers: {
-						'Content-Type': 'application/json',
-						'X-HTTP-Method-Override': 'POST'
-					},
-					
-					//JSON.stringify : JavaScript 객체를 JSON 문자열로 변환
-					data: JSON.stringify({
-						bno:bno,
-						rtext:rtextString,
-						replier:replierString
-					}),
-					success:function(result){
-						if(result==1){
-							alert("success");
-						}
-						getAllReplies();
-					}
+			var name = "${name}";
+			var url = '/groupware/checktime/myimage/'+name;
+			$.getJSON(url, function(data){
+				var profileimage='';
+		
+				$(data).each(function(){
+					profileimage=this.profileimage;
 				});
-				
-			});//end btnCreate		
-			
-			$('#replies').on('click', '.reply_list button', function(){
-				$('#modify').show();
-				
-				var reply=$(this).parent();
-				var rno = $(reply).attr('data-rno');
-				var text = $(reply).children('.rtext').text();
-				
-				$('#rno_mod').val(rno);
-				$('#rtext_mod').val(text);				
+	
+				if(profileimage!=null && profileimage!=''){
+					$('#profileimage').attr("src", profileimage);
+				};
 			});
-			
-			$('#btn_cancel').click(function(){
-				$('#modify').hide();
-			});
-			
-			$('#btn_delete').click(function(){
-				var check = confirm('delete?');
-				
-				if(check == true){
-					var rno = $('#rno_mod').val();
-					var bno = $('#bno_mod').val();
-					$.ajax({
-						type : 'delete',
-						url : '/groupware/interview_replies/'+rno,
-						headers : {
-							'Content-Type' : 'application/json',
-							'X-HTTP-Method-Override' : 'DELETE'
-						},
-						 data : JSON.stringify({
-							bno:bno
-						}),
-						success:function(result){
-							if(result == 'success'){
-								alert(rno + 'deleted');
-								$('#modify').hide();
-								getAllReplies();
-							}
-						}
-					});
-				}
-			});
-			
-			$('#btn_update').click(function(){
-				var rno = $('#rno_mod').val();
-				var text = $('#rtext_mod').val();
-				$.ajax({
-					type : 'put',
-					url : '/groupware/interview_replies/'+rno,
-					headers:{
-						'Content-Type' : 'application/json',
-						'X-HTTP-Method-Override' : 'PUT'
-					},
-					data : JSON.stringify({
-						rno:rno,
-						rtext:text
-					}),
-					success:function(result){
-						if(result == 'success'){
-							alert(rno + 'updated');
-							$('#modify').hide();
-							getAllReplies();
-						}
-					}
-					
-				});
-			}); */
-			
 			
 		});	
 	

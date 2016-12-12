@@ -71,4 +71,5 @@ public interface approvalDAO {
 	
 	//갯수 카운트
 	public abstract int count_approval(String userid);
+	public abstract int count_finish(String userid);
 }

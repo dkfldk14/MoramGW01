@@ -67,6 +67,8 @@ public class MainController {
 		int count_ap = dao.count_approval(user);
 		model.addAttribute("count_ap", count_ap);
 		
+		
+		
 		String usertype = vo.getUsertype();
 		logger.info("MainController usertype : " + usertype);
 		model.addAttribute("type", usertype);
@@ -103,6 +105,8 @@ public class MainController {
 		int count_ap = dao.count_approval(obj.toString());
 		model.addAttribute("count_ap", count_ap);
 		logger.info("감자는 묵어봤나"+count_ap);
+		
+		
 		
 		//각 조별 게시판으로 들어가도록 dept을 받아옴
 		String dept = vo.getDept();
@@ -182,6 +186,8 @@ public class MainController {
 		
 		if(password.equals(vo.getPwd())){
 			out.print("OK");
+		}else{
+			out.print("NOK");
 		}
 	}
 	

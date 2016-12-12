@@ -244,14 +244,24 @@ margin: 10px;
 			}
 			tabSetting();
 			
-			var profileimage= '${profileimage}';
-			if(profileimage !=null && profileimage!=''){
-				$("#profileimage").attr('src', profileimage);
-			}
-			
 			 function logout(){
 				 location="/groupware/member_login/logOut";
 			 }
+			 
+			 var name = "${name}";
+				var url = '/groupware/checktime/myimage/'+name;
+				$.getJSON(url, function(data){
+					var profileimage='';
+			
+					$(data).each(function(){
+						profileimage=this.profileimage;
+					});
+					
+					if(profileimage!=null && profileimage!=''){
+						$('#profileimage').attr("src", profileimage);
+					};
+				});
+			 
 			</script>
 
 </body>

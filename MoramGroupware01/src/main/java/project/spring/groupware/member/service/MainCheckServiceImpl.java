@@ -72,7 +72,10 @@ public class MainCheckServiceImpl implements MainCheckService {
 		return mainDAO.memberimage(name);
 	}
 	
-	
+	@Override
+	public List<MemberVO> myimage(String name) {
+		return mainDAO.myimage(name);
+	}
 
 
 }

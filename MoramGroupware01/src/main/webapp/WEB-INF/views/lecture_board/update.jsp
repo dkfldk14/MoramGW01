@@ -72,7 +72,7 @@ tbody tr td .btn-default {
             <ul class="nav" id="main-menu">
                <li class="text-center user-image-back"><img
                   src="<c:url value="../resources/assets/img/find_user.png"/>"
-                  align="center" /> <class ="img-responsive" /></li>
+                  align="center"   id="profileimage" width="128px" height="128px" /> <class ="img-responsive" /></li>
 
 
                <li><a href="../"><i class="fa fa-desktop "></i>메인</a></li>
@@ -88,12 +88,12 @@ tbody tr td .btn-default {
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="/groupware/email/list">받은 메일함</a></li>
+                    <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
                      <li><a href="/groupware/email/write">편지쓰기</a></li>
                      <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
                      <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
-                     <li><a href="#">주소록</a></li>
+                     
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
                      class="fa arrow"></span></a>
@@ -134,17 +134,14 @@ tbody tr td .btn-default {
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
                   <li><a href="/groupware/member_update">개인정보수정</a></li>
-                     <li><a href="#">나의 이력서</a></li>
+                    
                      <li><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
                   </ul></li>
-               <li><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
+               <li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
                      <li><a href="/groupware/member_manage">사용자관리</a></li>
-                     <li><a href="#">권한관리</a></li>
-                     <li><a href="#">문서함관리</a></li>
-
-                     <li><a href="#">결재함관리</a></li>
+                    
                   </ul></li>
 
                <!--  <li>
@@ -246,7 +243,21 @@ tbody tr td .btn-default {
 			}
 		});
 		
-		
+		var admin ='<%=type%>';
+		function tabSetting() {
+			console.log("값:" + admin);
+			if (admin != '관리자') {
+				$('#admin').hide();
+			}
+
+			if (admin == '미승인') {
+				$('.childTab').click(function() {
+					alert('승인 후 이용해주세요');
+					return false;
+				})
+			}
+		}
+		tabSetting();
 ///////////////팀 별 게시판 권한 부여 ////////////////////
 		var dept = "<%=dept%>";
 		
@@ -297,6 +308,21 @@ tbody tr td .btn-default {
 				frm.attr("method", "post");
 				frm.submit();
 			}
+		});
+		
+		
+		var name = "${name}";
+		var url = '/groupware/checktime/myimage/'+name;
+		$.getJSON(url, function(data){
+			var profileimage='';
+	
+			$(data).each(function(){
+				profileimage=this.profileimage;
+			});
+
+			if(profileimage!=null && profileimage!=''){
+				$('#profileimage').attr("src", profileimage);
+			};
 		});
 	});
 	</script>

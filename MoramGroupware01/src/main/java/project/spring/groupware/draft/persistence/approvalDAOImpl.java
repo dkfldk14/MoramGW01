@@ -211,6 +211,19 @@ public class approvalDAOImpl implements approvalDAO {
 		args.put("end", end);
 		return sqlSession.selectList(NAMESPACE + ".listpage-approvalpage", args);
 	}
+	
+	   @Override
+	   public int count_finish(String userid) {
+	      Map<String, String> args = new HashMap<>();
+	      System.out.println(userid);
+	      args.put("id", userid);
+	      args.put("final_id1", userid);
+	      args.put("final_id2", userid);
+	      args.put("final_id3", userid);
+	      args.put("final_id4", userid);
+	      args.put("final_id5", userid);
+	      return sqlSession.selectOne(NAMESPACE + ".count_finish", args);
+	   }
 
 	@Override
 	public String selectName1Finalize(String draft_index) {
