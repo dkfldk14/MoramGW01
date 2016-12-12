@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import project.spring.groupware.email.domain.EmailVO;
+import project.spring.groupware.email.pageutil.NewPaginationCriteria;
 import project.spring.groupware.email.pageutil.PaginationCriteria;
 import project.spring.groupware.member.domain.MemberVO;
 
@@ -23,5 +24,9 @@ public interface emailDAO {
 	
 	public abstract int delete_change(int num);
 	public abstract int select_mail_num();
+	
+	public abstract List<EmailVO>addressList(NewPaginationCriteria c);
+	public abstract int totalCount(NewPaginationCriteria c);
+	
 	
 }

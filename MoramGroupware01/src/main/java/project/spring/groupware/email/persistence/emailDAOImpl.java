@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 
 import project.spring.groupware.email.domain.EmailVO;
+import project.spring.groupware.email.pageutil.NewPaginationCriteria;
 import project.spring.groupware.email.pageutil.PaginationCriteria;
 import project.spring.groupware.member.domain.MemberVO;
 
@@ -56,6 +57,7 @@ public class emailDAOImpl implements emailDAO {
 	public List<EmailVO> adressList(int state, PaginationCriteria c, String from_email) {
 			Map<String, Integer> element=new HashMap<>();
 			EmailVO vo=new EmailVO();
+			Integer state1=Integer.valueOf(state);
 			vo.setState(state);
 			element.put("state", state);
 			int start = c.getStart();
@@ -65,8 +67,10 @@ public class emailDAOImpl implements emailDAO {
 			element.put("end", end);
 			/*element.put("from_email", groupmail);
 			*/
+			
 			Map<String,Object> adresslist=new HashMap<>();
-			adresslist.put("Element", element);
+			adresslist.put("state", state1);
+			adresslist.put("Pagination", c);
 			adresslist.put("from_email", from_email);
 			
 			List<EmailVO> VO=SqlSession.selectList(NAMESPACE+".adressList",adresslist);
@@ -112,4 +116,18 @@ public class emailDAOImpl implements emailDAO {
 		// TODO Auto-generated method stub
 		return SqlSession.selectOne(NAMESPACE+".select_mail_num");
 	}
+
+	
+	@Override
+	public List<EmailVO> addressList(NewPaginationCriteria c) {
+		// TODO Auto-generated method stub
+		return SqlSession.selectList(NAMESPACE + ".addressList", c);
+	}
+	
+	@Override
+	public int totalCount(NewPaginationCriteria c) {
+		// TODO Auto-generated method stub
+		return SqlSession.selectOne(NAMESPACE + ".totalAddressList", c);
+	}
+	
 }
