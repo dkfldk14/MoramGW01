@@ -511,7 +511,7 @@ th, td {
 		
 		$(document).ready(function(){
 			
-          var admin = "<%=type%>";
+         
 ///////////////팀 별 게시판 권한 부여 ////////////////////
 			var dept = "<%=dept%>";
 			
@@ -547,7 +547,7 @@ th, td {
 			$($('.current').find('a').attr('href')).show(); */
 	 		
 			console.log("값:"+admin);
-			if(admin != "승인"){
+			if(admin != "관리자"){
 				$('#admin').hide();	
 			}
 					

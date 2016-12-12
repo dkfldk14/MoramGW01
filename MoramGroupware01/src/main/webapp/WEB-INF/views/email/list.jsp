@@ -488,7 +488,7 @@ div.center {text-align: center;}
 			$($('.current').find('a').attr('href')).show(); */
 	 		
 			console.log("값:"+admin);
-			if(admin != "승인"){
+			if(admin != "관리자"){
 				$('#admin').hide();	
 			}
 					

@@ -345,14 +345,14 @@ li{
 
 
 		<script type="text/javascript">
-			var admin =<%=type%>
+			var admin ='<%=type%>';
 			function tabSetting() {
 				console.log("값:" + admin);
-				if (admin != 1) {
+				if (admin != "관리자") {
 					$('#admin').hide();
 				}
 
-				if (admin == 0) {
+				if (admin == "미승인") {
 					$('.childTab').click(function() {
 						alert('승인 후 이용해주세요');
 						return false;
