@@ -217,18 +217,26 @@ ul {
 		<!-- /. NAV SIDE  -->
 		<div id="page-wrapper">
 			<div id="page-inner">
+			
+				<form action="/groupware/email/write" id="fowardemail" method="post">
+			
 				<div class="row">
+				
+			
 					<div class="col-md-12">
 					
 							<div style="padding-bottom: 10px;">
 								<button class="buttonreturn" id="buttonreturn">답장</button>
-								<button class="buttonforward">전달</button>
+								<input type="submit" value="전달" class="buttonforward" id="buttonforward"/>
+								
 							</div>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-md-12">
+				
+			
 						<div id="btndiv">
 						
 							<button class="button" id="listclick">list</button>
@@ -241,9 +249,11 @@ ul {
 							<hr />
 							</div>
 						</div>
-
 						<div>
-					<div class="row">
+						
+							<div class="row">
+								
+
 									<div class="col-md-12">
 										<div id="timesone">
 											<h3>${emaildetail.subject }</h3>
@@ -265,31 +275,26 @@ ul {
 
 										<hr />
 									</div>
-										<input type="hidden" name="page" value="${page }" />
-			
-
-								</div>
-								<div>${emaildetail.content }</div>
+											
+									<input type="hidden" name="page" value="${page }" />
 							</div>
+							<div>${emaildetail.content }</div>
 						</div>
-					</div>
+									<input type="hidden" name="to_email" value=${emaildetail.to_email }>
+									<input type="hidden" name="from_email" value=${emaildetail.from_email }>
+									<input type="hidden" name="subject" value=${emaildetail.subject }>
+										<input type="hidden" name="content" value=${emaildetail.content }>
+									
+									<input type="hidden" name="senddate" value=${emaildetail.senddate }>
+									
+						
+						</div>
+			</div>
 
-					<%-- 	<a href="">☆</a>
-						<h2 class="div1">title ${emaildetail.subject }</h2>
-						<h1>${emaildetail.senddate }</h1>
-						<div class="div1">
-						<a href="list">목록</a>
-						<a href="detail?num=${emaildetail.num+1}">위</a>
-						<a href="detail?num=${emaildetail.num-1}">아래</a></div>
-						<div>보낸사람${emaildetail.from_email }</div>
-						<div>${emaildetail.content }</div>
-							<form>
-			<input type="hidden" name="num" value="${emaildetail.num }">
-			</form>
-					 --%>
+				
 				</div>
-
-
+			</form>
+	
 			</div>
 
 
@@ -322,6 +327,12 @@ $(document).ready(function(){
     $("#buttonreturn").click(function(){
     	location="write?to_email=${emaildetail.from_email}";
     })
+    
+  /*   $("#buttonforward").click(function(){
+    	alert("호출");
+    		
+    }) */
+    
     
 });
 
