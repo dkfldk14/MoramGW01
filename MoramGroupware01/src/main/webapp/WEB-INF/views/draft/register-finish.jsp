@@ -19,12 +19,7 @@
 <!-- GOOGLE FONTS-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans'
    rel='stylesheet' type='text/css' />
-   
-<link rel="stylesheet" href="../resources/css/kalendae.css" type="text/css" charset="utf-8">
-<link rel="stylesheet" href="../resources/css/metal.css" type="text/css">
-<script src="../resources/js/kalendae.js" type="text/javascript" charset="utf-8"></script>
-   
-   
+
 <style type="text/css">
 
 .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
@@ -62,7 +57,7 @@
 		border: 0px solid #000000;
 	}
 	
-	.text-center{
+	#text-center{
 		text-align: center;
 	}
 	#cell_sign{
@@ -86,12 +81,8 @@
 	.kalendae .k-days span.closed {
 			background:red;
 	}
-	.k-calendar .k-days span{
-      width: 30px;
-
-   }
 	/*============================== */
-	#logoutButton{
+		#logoutButton{
 background-color: 
 #399695;
 border: 1px solid 
@@ -107,13 +98,13 @@ margin: 10px;
 	background-color: #3fc3c4;
 	border: 1px solid #ffd777;
 	color: #ffffff;
-}	
+}
 	
 </style>
 
 </head>
 <body>
-	<form method="POST">
+
 <% String type = String.valueOf(session.getAttribute("usertype")); %>
 <% String dept = String.valueOf(session.getAttribute("dept"));%>
 
@@ -183,7 +174,8 @@ margin: 10px;
 							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 						</ul></li>
 
-					<li><a href="#"><img alt="" src="../resources/assets/img/email.png"/> 전자우편<span class="fa arrow"></span></a>
+					<li><a href="#"><img alt="" src="../resources/assets/img/email.png"/> 전자우편<span
+							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/email/list?page=1">받은 메일함</a></li>
 							<li class="childTab"><a href="/groupware/email/write">편지쓰기</a></li>
@@ -214,8 +206,6 @@ margin: 10px;
 							<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
 							<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 
-							
-
 
 						</ul></li>
 					<li><a href="#"><img alt="" src="../resources/assets/img/mypage.png"/> 마이페이지<span
@@ -225,20 +215,21 @@ margin: 10px;
 							<li class="childTab"><a href="#">나의 이력서</a></li>
 							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
-					<li id="admin"><a href="#"><img alt="" src="resources/assets/img/manager.png"/> 관리자<span
+					<li id="admin"><a href="#"><img alt="" src="../resources/assets/img/manager.png"/> 관리자<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="../groupware/member_manage">사용자관리</a></li>
+							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
 							<li class="childTab"><a href="#">권한관리</a></li>
 							<li class="childTab"><a href="#">문서함관리</a></li>
 							<li class="childTab"><a href="#">결재함관리</a></li>
 						</ul></li>
+
+
 				</ul>
 
 			</div>
 
 		</nav>
-		
 </div>
 		<div id="page-wrapper">
 			<div id="page-inner">
@@ -249,93 +240,79 @@ margin: 10px;
 	<table>
 		<tr>
 			<td class="cell1_1">문서폼</td>
- 			<td class="cell1_1" >		
- 			<select name="문서폼" class = "cell1_1" style = "width: 115px; height: 30px;" id = "ApprovalType" >
-				<option value="none" disabled selected>-</option>
-				<option value="C">일반기안서</option>
-				<option value="H">휴일신청서</option>
-				<option value="L">지각신청서</option>
-				</select>
-			</td>		<!--  목록 상자(drop-down list) -->
-	
+ 			<td class="cell1_1" >
+ 			<input type="text" style="background-color: #d9d9d9" value="${ApprovalVO.approvalname}" readonly="readonly">
+			</td>	
  			<td colspan="1" class="gapRL" style="border-top: 1px solid white; border-bottom: 1px solid white;"></td>
  			<td colspan="1" class="gapRL" style="border-top: 1px solid white; border-bottom: 1px solid white;"></td>
- 			<td colspan="1" style="border-top: 1px solid white; border-bottom: 1px solid white; border-left: 1px solid white;"></td>
-			<td class="text-center" style="background-color: #cccccc; font-weight: bold">
-				<button style="width:115px; height: 30px; font-weight: bold "type="submit" name="draft">
-				상신
-				</button>
-			</td>
+ 			<td colspan="1" style="border-top: 1px solid white; border-bottom: 1px solid white; border-left: 1px solid white; border-right: 0px"></td>
+
+ 			</form>
 		</tr>
 		<tr>
  			<td colspan="5" class="gapRL" style = "margin: 200px"></td>
 		</tr>
 		<tr>
  			<td class="cell1_x" rowspan="1">문서번호</td>
- 			<td class="text-center" colspan="4" rowspan="2" style=" font-weight: bold; height: 50px;">근 태 신 청 서</td>
+ 			<td id="text-center" colspan="4" rowspan="2" style=" font-weight: bold; height: 50px;">근 태 신 청 서</td>
  			<td colspan="2" rowspan="2" style="border-top: 1px solid white; border-right: 1px solid white;"><!--2*6 셀--></td>
- 			<!-- <td id="text-center" style="background-color: #cccccc; font-weight: bold">저장</td>
- 			<td id="text-center" style="background-color: #efefef; font-weight: bold">취소</td>
- 			<td id="text-center" style="background-color: #efefef; font-weight: bold">상신</td> -->
+
 		</tr>
 		<tr>
- 			<td class="text-center" class="cell1_x" style = "border-right: 0px; border-top: 0px; border-bottom: 0px;">
-			<input type="text" readonly="readonly" name = "approvalno" id = "code"/>
+ 			<td id="text-center "class="cell1_x" style = "border-right: 0px; border-top: 0px; border-bottom: 0px;">
+				<input type="text" readonly="readonly" id = "code" name="draft_index" value = "${ApprovalVO.draft_index }"/>
 			</td>
 		</tr>
 		<tr>
- 			<td class="text-center" colspan="3">구분</td>
- 			<td class="text-center">직급</td>
- 			<td class="text-center">직급</td>
- 			<td class="text-center">직급</td>
- 			<td class="text-center">직급</td>
- 			<td class="text-center">직급</td>
+ 			<td id="text-center" colspan="3">구분</td>
+ 			<td id="text-center">직급</td>
+ 			<td id="text-center">직급</td>
+ 			<td id="text-center">직급</td>
+ 			<td id="text-center">직급</td>
+ 			<td id="text-center">직급</td>
 		</tr>
 		<tr>
  			<td class="cell1_x" style="border: 0px solid white; border-left: 1px solid black;">이름</td>
  			<td colspan="2">
- 				<input type = "text" name="name" value="${ApprovalVO.name }" style = "width: 228px; background-color: #ffffff;" readonly="readonly"/>
+ 				<input type = "text"  value="${ApprovalVO.name }" style = "width: 228px; background-color: #ffffff;" readonly="readonly"/>
  			</td>
- 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id1"></td>
- 			<input type="hidden" style="width:30px" name = "final_id1" id ="text1"/>
- 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id2"></td>
- 			<input type="hidden" style="width:30px" name = "final_id2" id ="text2"/>
- 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id3"></td>
-			<input type="hidden" style="width:30px" name = "final_id3" id ="text3"/>
- 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id4"></td>
- 			<input type="hidden" style="width:30px" name = "final_id4" id ="text4"/>
- 			<td rowspan="4" class="text-center" style="font-size:27pt; color: #d9d9d9" id="getfinal_id5"></td>
-			<input type="hidden" style="width:30px" name = "final_id5" id ="text5"/>
+ 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" class="final_id1">${List.get(0)}</td>
+ 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" class="final_id2">${List.get(1)}</td>
+ 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" class="final_id3">${List.get(2)}</td>
+ 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" class="final_id4">${List.get(3)}</td>
+ 			<td rowspan="4" id="text-center" style="font-size:27pt; color: #d9d9d9" class="final_id5">${List.get(4)}</td>
 		</tr>
 		<tr>
  			<td class="cell1_x">소속</td>
  			<td colspan="2" id="dept" >
-	 			<input type = "text"  name="dept" value="${ApprovalVO.dept }" style = "width: 228px; background-color: #ffffff;" readonly="readonly"/>
+	 			<input type = "text"  value="${ApprovalVO.dept }" style = "width: 228px; background-color: #ffffff;" readonly="readonly"/>
  			</td>
 		</tr>
 		<tr>
  			<td class="cell1_x">구분</td>
- 			<td colspan="2"><input style="width: 227.5px;"type="text" id = "code2" name = "approvalname" readonly="readonly" /></td>
+ 			<td colspan="2"><input style="width: 227.5px;"type="text" id = "code2" name = "name" readonly="readonly" value ="${ApprovalVO.approvalname}"/></td>
 		</tr>
 		<tr>
  			<td class="cell1_x">사용일자</td>
- 			<td colspan="2" ><input type="text" name="usedatestart" class="auto-kal"  data-kal="dayOutOfMonthClickable: true" style="width: 102px;">&nbsp;~&nbsp;&nbsp;&nbsp;<input type="text" name="usedateend" class="auto-kal" data-kal="dayOutOfMonthClickable: true" style="width: 92px; "></td>
+ 			<td colspan="2" >	<input type="text"  style="width: 102px;" readonly="readonly" value="${ApprovalVO.usedatestart}">    &nbsp;~&nbsp;&nbsp;&nbsp;<input type="text" style="width: 92px; " readonly="readonly" value ="${ApprovalVO.usedateend}"></td>
 		</tr>
 		<tr>
  			<td>제출일자</td>
- 			<td colspan="2"></td>
- 			<td class="text-center">사원이름</td>
- 			<td class="text-center">사원이름</td>
- 			<td class="text-center">사원이름</td>
- 			<td class="text-center">사원이름</td>
- 			<td class="text-center">사원이름</td>
+ 			<td colspan="2">
+ 			<input type="text" value="${ApprovalVO.draftdate}" readonly="readonly"/>
+ 			</td>
+ 			<td id="text-center">사원이름</td>
+ 			<td id="text-center">사원이름</td>
+ 			<td id="text-center">사원이름</td>
+ 			<td id="text-center">사원이름</td>
+ 			<td id="text-center">사원이름</td>
 		</tr>
 		<tr>
  			<td colspan="2" style="height: 40px;">TITLE</td>
- 			<td colspan="6"><input type = "text" name = "title" style = " width: 705px; height: 35px; border-color: #000000; border-width: 0px;" /></td>
+ 			<td colspan="6"><input type = "text" name = "title" style = " width: 705px; height: 35px; border-color: #000000; border-width: 0px;" readonly="readonly" value="${ApprovalVO.title}"/></td>
 		</tr>
 		<tr>
- 			<td style="height: 345px; " colspan="8"><textarea rows="" cols="100" style = "height: 345px; width: 1000px; resize:none; " name="content"></textarea></td>
+ 			<td style="height: 345px; " colspan="8"><textarea rows="" cols="100" style = "height: 345px; width: 1000px; resize:none; " readonly="readonly" >${ApprovalVO.content}</textarea></td>
 		</tr>
 		
 	</table>
@@ -344,42 +321,28 @@ margin: 10px;
              </table>
             <hr/>
             
+            
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
-    	$('#ApprovalType').change(function() {
-            // 드롭다운리스트에서 선택된 값을 텍스트박스에 출력
-            var selectedText =
-                // $("#lstFavorites option:selected").text();
-                // $("option:selected").text();
-                $(":selected").text();
-            var text = selectedText;
-            var text2 = "";
-            if (text == "일반기안서") {
-            	text2 = "C"
-            } else if (text == "휴일신청서") {
-            	text2 = "H"
-            } else if (text == "지각신청서") {
-            	text2 = "L"
-            }
-              $("#code").val(text2);
-              $("#code2").val(text);
-             
-        });
-    	
-   		$('#getfinal_id1').click(function() {
-       		window.open('popup-list', '', 'left=200, top=200, width=640, height=480, scrollbars=no, status=no, resizable=no, fullscreen=no, channelmode=no');
-       	});
-    	
-    	
-    	
-   /*  	$('#ApprovalType').click(function() {
-    		var text = $('#ApprovalType').val();
-    		$('#code').html(text)
-    	}) */
-    </script>
+    $(document).ready(function(){
+    	$('#finalize').click(function(){
+    		<% System.out.println("결재");%>	
+    	});
+    });
     
+    function mySubmit(index) {
+    	if (index == 1 ) {
+    		document.admit.action = "draft-doing"
+    	}
+		if (index == 2 ) {
+			document.admit.action = "draft-return"
+		}   	    	
+    }
+    
+   	</script>
+   	
 
 	<script src="<c:url value='/resources/assets/js/jquery-1.10.2.js'/>" /></script>
 	<!-- BOOTSTRAP SCRIPTS -->
@@ -394,11 +357,11 @@ margin: 10px;
 			var admin ="<%=type%>"
 			function tabSetting() {
 				console.log("값:" + admin);
-				if (admin != '어드민') {
+				if (admin != '관리자') {
 					$('#admin').hide();
 				}
 
-				if (admin == '관리자') {
+				if (admin == '미승인') {
 					$('.childTab').click(function() {
 						alert('승인 후 이용해주세요');
 						return false;
@@ -406,7 +369,8 @@ margin: 10px;
 				}
 			}
 			tabSetting();
-
+			
+			
 			 function logout(){
 				 location="/groupware/member_login/logOut";
 			 }
@@ -425,6 +389,8 @@ margin: 10px;
 					};
 				});
 			</script>
+
+
     </form>
 	</body>
 </html>

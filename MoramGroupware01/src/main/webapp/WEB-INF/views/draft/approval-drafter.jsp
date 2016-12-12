@@ -30,56 +30,102 @@
 .tg .tg-9hbo{font-weight:bold;vertical-align:top}
 .tg .tg-yw4l{vertical-align:top}
 .tg .tg-b7b8{background-color:#f9f9f9;vertical-align:top}
+
+#logoutButton{
+background-color: 
+#399695;
+border: 1px solid 
+#1db88e;
+color: #ffffff;
+font-weight : 200;
+font-size: 100%;
+padding: 7px;
+margin: 10px;
+}
+
+#logoutButton:hover {
+	background-color: #3fc3c4;
+	border: 1px solid #ffd777;
+	color: #ffffff;
+}
 </style>
 </head>
 <body>
+<% String type = String.valueOf(session.getAttribute("usertype")); %>
+<% String dept = String.valueOf(session.getAttribute("dept"));%>
 
-	<div id="wrapper">
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="adjust-nav">
+	<%-- <% String id = String.valueOf(session.getAttribute("login_id")); %> --%>
+	<div id="login_id" data-id=${id } style="display: hidden;"></div>
+
+		<div id="wrapper">
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="adjust-nav">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<!--     <a class="navbar-brand" href="#"><i class="fa fa-square-o "></i></a> -->
+					<span id="moramHeader">
+
+						<div style="padding-top: 0px;">
+						<div style="display: inline;  margin-bottom: 30px; ">
+							<button id="hide" style="background-color: #40efbe; border: #40efbe">
+								<img width="25px" height="25px" alt="리스트"
+									src="../resources/assets/img/home_img/menutoggle.png" />
+							</button>
+							<button id="show"
+								style="display: none; background-color: #40efbe; border: #40efbe; ">
+								<img style="margin-left: 0px;" width="25px" height="25px"
+									alt="리스트" src="../resources/assets/img/home_img/menutoggle.png" />
+							</button></div>
+							<div style="font-size: 30px; font-weight: 800; color: white; margin-top: 30px; display: inline; line-height:200%">MORAM</div>
+						</div>
+					
+					</span>
 				</div>
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">See Website</a></li>
-						<li><a href="#">Open Ticket</a></li>
-						<li><a href="#">Report Bug</a></li>
+						<li><button id="logoutButton" onclick="logout()">로그아웃</button></li>
+
 					</ul>
 				</div>
-
+	
+			</div>
 			</div>
 		</div>
+		<!-- /. NAV TOP  -->
+		<nav id = "navPM" class="navbar-default navbar-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="main-menu">
+					
+					<li>
+						<div>
+							<br/>
+						</div>
+					</li>
+					
+					<li class="text-center user-image-back"><img
+						src="<c:url value="../resources/assets/img/find_user.png"/>"
+						align="center" id="profileimage" width="128px" height="128px"/> 
+						<br/><br/>
+						<span style="font-weight: 700; color: gray;"><img src="../resources/assets/img/home_img/user (2).png" style="width: 18px"; height="18px; "/> Moram 1팀 사원</span><class ="img-responsive" /></li>
+						
+						
+						<li>
+					
+					</li>
 
-		<!-- 옆쪽에 창을 나타내는 코드  -->
-		<nav class="navbar-default navbar-side" role="navigation">
-		<div class="sidebar-collapse">
-			<ul class="nav" id="main-menu">
-				<li class="text-center user-image-back"><img
-					src="<c:url value="/resources/assets/img/find_user.png"/>"
-					align="center" /> <class ="img-responsive" /></li>
-
-
-				<li><a href="/groupware/main1"><i class="fa fa-desktop "></i>메인</a></li>
-				<li><a href="#"><i class="fa fa-edit "></i>전자결재<span class="fa arrow"></span></a>
+					<li id="test" class="current"><br/><a href="/groupware/main1"><img alt="" src="../resources/assets/img/main.png"/> MAIN PAGE</a></li>
+					<li><a href=""><img alt="" src="../resources/assets/img/approval.png"/> 결재<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함page</a></li>
+							<li id="test" class="childTab"><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
 							<li class="childTab"><a href="/groupware/draft/approval-finalizer">미결함</a></li>
 							<li id="test" class="childTab"><a href="/groupware/draft/approval-return">반려함</a></li>
 							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 						</ul></li>
 
-					<li><a href="#"><i class="fa fa-table "></i>전자우편<span
-							class="fa arrow"></span></a>
+					<li><a href="#"><img alt="" src="../resources/assets/img/email.png"/> 전자우편<span	class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li class="childTab"><a href="/groupware/email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/delete-mailbox">휴지통</a></li>
 							
 
 						</ul></li>
@@ -96,7 +142,7 @@
 						</ul></li>
 
 
-					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
+					<li><a href="#"><img alt="" src="../resources/assets/img/teamproject.png"/> Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							
@@ -105,16 +151,15 @@
 							<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
 							<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 
+
 						</ul></li>
-					<li><a href="#"><i class="fa fa-qrcode "></i>마이페이지<span
-							class="fa arrow"></span></a>
+					<li><a href="#"><img alt="" src="../resources/assets/img/mypage.png"/> 마이페이지<span	class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
 							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
-					<li id="admin"><a href="#"><i class="fa fa-bar-chart-o"></i>관리자<span
-							class="fa arrow"></span></a>
+					<li id="admin"><a href="#"><img alt="" src="../resources/assets/img/manager.png"/> 관리자<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
 							<li class="childTab"><a href="#">권한관리</a></li>
@@ -197,7 +242,34 @@
 	<!-- jQuery CDN -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript">
+			var admin ="<%=type%>"
+			function tabSetting() {
+				console.log("값:" + admin);
+				if (admin != '관리자') {
+					$('#admin').hide();
+				}
 
-		
+				if (admin == '미승인') {
+					$('.childTab').click(function() {
+						alert('승인 후 이용해주세요');
+						return false;
+					})
+				}
+			}
+			
+			tabSetting();
+			var profileimage= '${profileimage}';
+			if(profileimage !=null && profileimage!=''){
+				$("#profileimage").attr('src', profileimage);
+			}
+			 function logout(){
+				 location="/groupware/member_login/logOut";
+			 }
+			 
+			 
+			 
+			</script>
+
 </body>
 </html>

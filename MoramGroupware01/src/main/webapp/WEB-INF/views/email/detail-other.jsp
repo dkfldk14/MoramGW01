@@ -222,7 +222,7 @@ ul {
 					<div class="col-md-12">
 					
 							<div style="padding-bottom: 10px;">
-								<button class="buttonreturn" id="buttonreturn">답장</button>
+								<input type="button" class="buttonreturn" id="buttonreturn" value="답장"/>
 								<input type="submit" value="전달" class="buttonforward" id="buttonforward"/>
 								
 							</div>

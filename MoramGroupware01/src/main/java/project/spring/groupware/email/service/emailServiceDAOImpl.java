@@ -101,4 +101,17 @@ public int totalEmailct(String state, String groupemail) {
 		// TODO Auto-generated method stub
 		return dao.totalCount(c);
 	}
+	
+	@Override
+	public List<EmailVO> addressListdelete(NewPaginationCriteria c) {
+		
+		return dao.addressListdelete(c);
+	}
+	
+	@Override
+	public int totalCountdelete(NewPaginationCriteria c) {
+		// TODO Auto-generated method stub
+		return dao.totalCountdelete(c);
+	}
+	
 }
