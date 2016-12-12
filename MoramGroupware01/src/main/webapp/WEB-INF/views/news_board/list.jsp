@@ -313,33 +313,6 @@ display: inline-block;
 		}
 		
 		
-///////////////팀 별 게시판 권한 부여 ////////////////////
-		var dept = <%=dept%>;
-		
-		//alert('profileimage : ' + profileimage);
-		if(dept != 1 && dept != 5){
-			$('#authorization1').click(function(){
-				alert('당신은 1조가 아닙니다');
-				return false;
-			});
-		}
-		
-		if(dept != 2 && dept != 5){
-			$('#authorization2').click(function(){
-				alert('당신은 2조가 아닙니다');
-				return false;
-			});
-		}
-		
-		if(dept != 3 && dept != 5){
-			$('#authorization3').click(function(){
-				alert('당신은 3조가 아닙니다');
-				return false;
-			});
-		}
-		///////////////////////////////////////////////////////
-		
-		
 		var frm = $('#pageForm');
 		$('.pageLinks li a').click(function(){
 			event.preventDefault(); //기본 이벤트 처리 방식을 방지
@@ -383,41 +356,44 @@ display: inline-block;
 			
 		});
 		
-		$(function () {
-			var getpage = getQuerystring('page');
-			if(getpage != null && getpage !=''){
-				$("#pagebtn"+getpage).css("color", "white");
-				$("#pagebtn"+getpage).css("background-color", "#59DFDF");
-			} else {
-				$("#pagebtn1").css("color", "white");
-				$("#pagebtn1").css("background-color", "#59DFDF");
-			}
-		});
-
 		
-		function getQuerystring(paramName){
+	});
+	
+	
+	$(function () {
+		var getpage = getQuerystring('page');
+		if(getpage != null && getpage !=''){
+			$("#pagebtn"+getpage).css("color", "white");
+			$("#pagebtn"+getpage).css("background-color", "#59DFDF");
+		} else {
+			$("#pagebtn1").css("color", "white");
+			$("#pagebtn1").css("background-color", "#59DFDF");
+		}
+	});
 
-			var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
-			var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+	
+	function getQuerystring(paramName){
+
+		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+		
+		if(_tempArray!=null && _tempArray!=''){
+			for(var i = 0; _tempArray.length; i++) {
+				var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
 			
-			if(_tempArray!=null && _tempArray!=''){
-				for(var i = 0; _tempArray.length; i++) {
-					var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
-				
-					if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
-						// _keyValuePair[1] : 파라미터 값
-						return _keyValuePair[1];
-					}
+				if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
+					// _keyValuePair[1] : 파라미터 값
+					return _keyValuePair[1];
 				}
 			}
-		};
-		
-		
-		
-		var profileimage= '${profileimage}';
-		if(profileimage !=null && profileimage!=''){
-			$("#profileimage").attr('src', profileimage);
 		}
+	};
+
+	
+	var profileimage= '${profileimage}';
+	if(profileimage !=null && profileimage!=''){
+		$("#profileimage").attr('src', profileimage);
+	}
 		
 		
 	});

@@ -90,6 +90,40 @@ border-radius: 70px;
   background-color: #gray;
   text-shadow: 0 1px 1px #000;
 }
+
+
+#빼애앵{
+	position: relative;
+}
+
+#빼애앵 a{
+	position: absolute;
+}
+
+#빼애앵 a#col1_btn2{
+	margin-left: 153px;
+}
+#빼애앵 a#col1_btn3{
+	margin-left: 306px;
+}
+#빼애앵 a#col1_btn4{
+	margin-left: 459px;
+}
+#빼애앵 a#col1_btn5{
+	margin-left: 612px;
+}
+#빼애앵 a#col1_btn6{
+	margin-left: 765px;
+}
+
+#weather {
+	margin-left: 73px;
+}
+
+#weather tbody tr td {
+	width: 150px;
+}
+
 </style>
 	
 
@@ -109,16 +143,16 @@ border-radius: 70px;
 
 						<div style="padding-top: 0px;">
 						<div style="display: inline;  margin-bottom: 30px; ">
-							<button id="hide" style="background-color: #40efbe; border: #40efbe">
+							<button id="hide" style="background-color: #40efbe; border: #40efbe; position: absolute; left:25px; top:16px;">
 								<img width="25px" height="25px" alt="리스트"
 									src="resources/assets/img/home_img/menutoggle.png" />
 							</button>
 							<button id="show"
-								style="display: none; background-color: #40efbe; border: #40efbe; ">
+								style="display: none; background-color: #40efbe; border: #40efbe; position: absolute; left:25px; top:16px;">
 								<img style="margin-left: 0px;" width="25px" height="25px"
 									alt="리스트" src="resources/assets/img/home_img/menutoggle.png" />
 							</button></div>
-							<div style="font-size: 30px; font-weight: 800; color: white; margin-top: 30px; display: inline; line-height:200%">MORAM</div>
+							<div style="font-size: 30px; margin-left: 55px; font-weight: 800; color: white; margin-top: 30px; display: inline; line-height:200%">MORAM</div>
 						</div>
 					
 					</span>
@@ -274,31 +308,45 @@ border-radius: 70px;
 					</div>
 					
 				
-					<div id="margin-box2">
+					<div id="margin-box2" style="width: 980px;">
 						<div class="panel panel-back noti-box">
 <!-- 							<span class="icon-box bg-color-red set-icon"> <i
 								class="fa fa-envelope-o"></i>
 							</span> -->
-							<div style="margin-left: 40px; margin-top: 3px;">
+							<div style="margin-left: 40px; margin-top: 3px;"  id="빼애앵">
 								
-							<a class="quick-btn" href="draft/approval-drafter"> <i
-											class="icon-check icon-2x"></i> <span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
+							<a class="quick-btn" href="draft/approval-drafter" id="col1_btn1"> 
+										<i class="icon-check icon-2x"></i> 
+											<span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
 											class="label label-danger">2</span>
-										</a> <a class="quick-btn" href="email/list"> <i
-											class="icon-envelope icon-2x"></i> <span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
+										</a> 
+										
+										<a class="quick-btn" href="email/list" id="col1_btn2"> 
+										<i class="icon-envelope icon-2x"></i> 
+											<span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-success">456</span>
-										</a> <a class="quick-btn" href="#"> <i
-											class="icon-signal icon-2x"></i> <span><img src="resources/assets/img/home_img/folder (1).png" style="width: 80px"; height="60px;"/></span> <span
+										</a> 
+										
+										<a class="quick-btn" href="#" id="col1_btn3"> 
+										<i class="icon-signal icon-2x"></i> 
+										<span><img src="resources/assets/img/home_img/folder (1).png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-warning">+25</span>
-										</a> <a class="quick-btn" href="notice_board/list"> <i
-											class="icon-external-link icon-2x"></i> <span><img src="resources/assets/img/home_img/speaker.png" style="width: 80px"; height="60px;"/></span> <span
+										</a> 
+										
+										<a class="quick-btn" href="notice_board/list" id="col1_btn4"> 
+										<i class="icon-external-link icon-2x"></i> 
+										<span><img src="resources/assets/img/home_img/speaker.png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-success">3</span>
-										</a> <a class="quick-btn" href="notice_board/list"> <i
-											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
+										</a> 
+										
+										<a class="quick-btn" href="notice_board/list" id="col1_btn5"> 
+										<i class="icon-bolt icon-2x"></i> 
+										<span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-default">${count }</span>
 										</a>
-										<a class="quick-btn" href="#"> <i
-											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
+										<a class="quick-btn" href="#" id="col1_btn6"> 
+										<i class="icon-bolt icon-2x"></i> 
+										<span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-default">${count }</span>
 										</a>
 							</div>
@@ -362,8 +410,8 @@ border-radius: 70px;
 							<p class="help-block">Help text here.</p>
 						</div> -->
 						<div class="panel panel-back noti-box">
-							<div href="#" class="weather" style="width: 450px; height: 95px;">
-								<table id="weather" style="width: 150px"></table>
+							<div href="#" class="weather" style="width: 450px; height: 100px;">
+								<table id="weather" style="width: 250px"></table>
 							</div>
 							
 							
@@ -390,7 +438,7 @@ border-radius: 70px;
 				<hr />
 				
 				<!-- 게시판 -->
-				<div class="row">
+				<div class="row" style="width: 1216px;">
 					<div class="col-md-6">
 						<h5>IT NEWS</h5>
 						<table class="table table-striped table-bordered table-hover">

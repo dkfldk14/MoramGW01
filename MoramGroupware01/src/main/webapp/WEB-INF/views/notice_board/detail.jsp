@@ -334,7 +334,7 @@ border-right: 1px solid white;
 			});
 			
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-			var dept = <%=dept%>;
+
 			
 			//alert('profileimage : ' + profileimage);
 			if(dept != 1 && dept != 5){

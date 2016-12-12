@@ -46,10 +46,10 @@ $(document).ready(function(){
 				
 				// table 안쪽에 rowspan을 줘서  1(날씨 아이콘) : 5(날씨정보)를 넣어줌 
 				list += 
-					'<tr><td rowspan="4">'
+					'<tr><td rowspan="5">'
 					+'<img src="resources/assets/img/ic_weather/ic_'
 					+ this.weather[0].icon 
-					+'.png" style="padding-left:20px;"/>'
+					+'.png" style="padding-left:20px; width:100px; height:90px;"/>'
 					+'</td></tr>'
 					+ '<tr><td>'
 					+ '온도 : ' + (this.main.temp - 273.15).toFixed(1)+'℃'
@@ -57,9 +57,9 @@ $(document).ready(function(){
 					+ '<tr><td>'
 					+ '습도 : ' + this.main.humidity +' %'
 					+ '</td></tr>'
-					/*+ '<tr><td>'
+					+ '<tr><td>'
 					+ '기압 : ' + this.main.pressure +' hPa'
-					+ '</td></tr>'*/
+					+ '</td></tr>'
 					+ '<tr><td>'
 					+ '바람 : ' + this.wind.speed + ' mps'
 					+ '</td></tr>';
@@ -582,18 +582,21 @@ $(document).ready(function(){
 				var zzzmm = zzz.getMonth();
 				var zzzdd = zzz.getDate();
 				
-				/*alert(zzzdd);*/
 				
-				if (zzzdd.toString().length ===1){
+				
+				if(zzzmm == 0){
+					zzzmm="12";
+				}
+				
+				if (zzzdd.toString().length ==1){
 					zzzdd = "0"+zzzdd.toString();
 				}
-				if (zzzmm.toString().length ===1){
+				if (zzzmm.toString().length ==1){
 					zzzmm = "0"+zzzmm.toString();
 				}
 				
 				var subtitle = zzz.getFullYear()+ "-" + zzzmm + "-" + zzzdd + ' (월)  ~  ' 
 								+ enter_fri.substring(mon_start, mon_end) + '(금)';
-				/*alert("으음? "+subtitle);*/
 			}
 			
 			 Highcharts.chart('container', {
