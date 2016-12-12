@@ -219,7 +219,7 @@ display: inline-block;
 			<tr>
 				<td class="num">${vo2.bno }</td>
 				<td class="title">
-					<a href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
+					<a id = "bnoNum" href="${vo2.bno}">${vo2.title }(${vo2.replycnt})</a>
 				</td>
 				<td>${vo2.name }</td>
 				<td class="date"><fmt:formatDate value="${vo2.regdate }"
@@ -320,24 +320,24 @@ display: inline-block;
 		
 		
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-		var dept = <%=dept%>;
+		var dept = '<%=dept%>';
 		
 		//alert('profileimage : ' + profileimage);
-		if(dept != 1 && dept != 5){
+		if(dept != "1팀" && dept != "5팀"){
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function(){
 				alert('당신은 2조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 3 && dept != 5){
+		if(dept != "3팀" && dept != "5팀"){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다');
 				return false;
@@ -360,7 +360,7 @@ display: inline-block;
 			frm.submit();
 		});
 		
-		$('table tr td a').click(function(){
+		$('#bnoNum').click(function(){
 			event.preventDefault();
 			var bno = $(this).attr('href');
 			frm.find('[name="bno"]').val(bno);

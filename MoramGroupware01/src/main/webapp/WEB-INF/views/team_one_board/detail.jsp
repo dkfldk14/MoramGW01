@@ -60,6 +60,11 @@ border-right: 1px solid white;
 </head>
 <body>
 
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
+
+
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
       <div class="navbar navbar-inverse navbar-fixed-top">
@@ -127,9 +132,9 @@ border-right: 1px solid white;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="/../groupware/team_one_board/list">시나브로</a></li>
-                     <li><a href="/../groupware/team_two_board/list">그냥2조</a></li>
-                     <li><a href="/../groupware/team_three_board/list">성준이네</a></li>
+                     <li "authorization1"><a href="/../groupware/team_one_board/list">시나브로</a></li>
+                     <li "authorization2"><a href="/../groupware/team_two_board/list">그냥2조</a></li>
+                     <li "authorization3"><a href="/../groupware/team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -318,6 +323,34 @@ border-right: 1px solid white;
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script>
 		$(document).ready(function(){
+			
+///////////////팀 별 게시판 권한 부여 ////////////////////
+			var dept = "<%=dept%>";
+			
+			//alert('profileimage : ' + profileimage);
+			if(dept != "1팀" && dept != "5팀"){
+				$('#authorization1').click(function(){
+					alert('당신은 1조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != "2팀" && dept != "5팀"){
+				$('#authorization2').click(function(){
+					alert('당신은 2조가 아닙니다');
+					return false;
+				});
+			}
+			
+			if(dept != "3팀" && dept != "5팀"){
+				$('#authorization3').click(function(){
+					alert('당신은 3조가 아닙니다');
+					return false;
+				});
+			}
+			///////////////////////////////////////////////////////
+			
+			
 						
 			$("#updatebutton").click(function(){
 				obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);

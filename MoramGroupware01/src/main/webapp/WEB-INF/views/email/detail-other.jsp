@@ -102,6 +102,12 @@ ul {
 </style>
 </head>
 <body>
+
+<% String type = String.valueOf(session.getAttribute("usertype")); %>
+<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
+
+
 	<div id="wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="adjust-nav">
@@ -166,9 +172,9 @@ ul {
 					<li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
 							class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">시나브로</a></li>
-							<li><a href="#">그냥2조</a></li>
-							<li><a href="#">성준이네</a></li>
+							<li id = "authorization1"><a href="/groupware/team_one_board/list">시나브로</a></li>
+							<li id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
+							<li id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 							<!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -303,6 +309,34 @@ ul {
 <script>
 
 $(document).ready(function(){
+	
+///////////////팀 별 게시판 권한 부여 ////////////////////
+	var dept = "<%=dept%>";
+	
+	//alert('profileimage : ' + profileimage);
+	if(dept != '1팀' && dept != '5팀'){
+		$('#authorization1').click(function(){
+			alert('당신은 1조가 아닙니다');
+			return false;
+		});
+	}
+	
+	if(dept != '2팀' && dept != '5팀'){
+		$('#authorization2').click(function(){
+			alert('당신은 2조가 아닙니다');
+			return false;
+		});
+	}
+	
+	if(dept != '3팀' && dept != '5팀'){
+		$('#authorization3').click(function(){
+			alert('당신은 3조가 아닙니다');
+			return false;
+		});
+	}
+	///////////////////////////////////////////////////////
+	
+	
     $("#listclick").click(function(){
         location="send-mailbox";
     });

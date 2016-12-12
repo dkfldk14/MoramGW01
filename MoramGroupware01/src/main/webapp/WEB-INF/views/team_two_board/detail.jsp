@@ -327,24 +327,24 @@ border-right: 1px solid white;
 		$(document).ready(function(){
 			
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-			var dept = <%=dept%>;
+			var dept = "<%=dept%>";
 			
 			//alert('profileimage : ' + profileimage);
-			if(dept != 1 && dept != 5){
+			if(dept != "1팀" && dept != "5팀"){
 				$('#authorization1').click(function(){
 					alert('당신은 1조가 아닙니다');
 					return false;
 				});
 			}
 			
-			if(dept != 2 && dept != 5){
+			if(dept != "2팀" && dept != "5팀"){
 				$('#authorization2').click(function(){
 					alert('당신은 2조가 아닙니다');
 					return false;
 				});
 			}
 			
-			if(dept != 3 && dept != 5){
+			if(dept != "3팀" && dept != "5팀"){
 				$('#authorization3').click(function(){
 					alert('당신은 3조가 아닙니다');
 					return false;
