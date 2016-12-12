@@ -317,10 +317,34 @@ public class EmailController {
 		
 	}
 	
-	@RequestMapping(value="write", method=RequestMethod.POST)
-	public void emailforward(Model model,HttpServletRequest request,EmailVO vo){
-		
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String emailforward(Model model,HttpServletRequest request, EmailVO vo){
+		logger.info("write post 호출되야함.??");
+		HttpSession session = request.getSession();
+		String userid = (String) session.getAttribute("login_id");
+		MemberVO vo1 = emailServiceDAO.member_one(userid);
 	
+		String name=vo1.getName();
+		String gwemail=vo1.getGroupemail();
+		
+		logger.info("vo:"+vo.getSubject());
+		model.addAttribute("name", name);
+		model.addAttribute("gwemail", gwemail);
+		
+		StringBuffer bt=new StringBuffer();
+		bt.append("\n\n\n\n\n\n\n\n\n\n\n");
+		bt.append("-----------------------------------origin message--------------------------------------\n");
+		bt.append("   Title : "+vo.getSubject()+"\n");
+		bt.append("   Senddate : "+vo.getSenddate()+"\n");
+		bt.append("   From : "+vo.getFrom_email()+"\n");
+		bt.append("   To : "+vo.getTo_email()+"\n");
+		bt.append("   Content : "+vo.getContent()+"\n");
+		bt.append("------------------------------------------------------------------------------------------\n");
+		
+		model.addAttribute("emailforward", bt);
+		return "/email/write";
+		
+		
 		
 	}
 	
@@ -635,7 +659,7 @@ public class EmailController {
 	   	
 	   	//모델객체에 pageMaker 넘겨줌. 
 	   	model.addAttribute("pageMaker", maker);
-	   //	model.addAttribute("Gemail", mvo.getGroupemail());
+	   	model.addAttribute("Gemail", mvo.getGroupemail());
 	
 	
 	}

@@ -281,9 +281,9 @@ border-radius: 70px;
 							</span> -->
 							<div style="margin-left: 40px; margin-top: 3px;">
 								
-							<a class="quick-btn" href="draft/approval-drafter"> <i
+							<a class="quick-btn" href="draft/approval-finalizer"> <i
 											class="icon-check icon-2x"></i> <span><img src="resources/assets/img/home_img/list (1).png" style="width: 80px"; height="60px; "/></span> <span
-											class="label label-danger">2</span>
+											class="label label-danger">${count_ap}</span>
 										</a> <a class="quick-btn" href="email/list"> <i
 											class="icon-envelope icon-2x"></i> <span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-success">456</span>
@@ -297,9 +297,9 @@ border-radius: 70px;
 											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/magic-wand.png" style="width: 80px"; height="60px;"/></span> <span
 											class="label label-default">${count }</span>
 										</a>
-										<a class="quick-btn" href="#"> <i
+										<a id="admin1" class="quick-btn" href="/groupware/member_manage"> <i
 											class="icon-bolt icon-2x"></i> <span><span><img src="resources/assets/img/home_img/user (1).png" style="width: 80px"; height="60px;"/></span> <span
-											class="label label-default">${count }</span>
+											class="label label-default">${noUser }</span>
 										</a>
 							</div>
 						</div>
@@ -483,42 +483,42 @@ border-radius: 70px;
 		/* $('.test').hide();
 		$($('.current').find('a').attr('href')).show(); */
  		
-
-		console.log("값:" + admin);
-		if (admin != '어드민') {
-			$('#admin').hide();
+		console.log("값:"+admin);
+		if(admin != '관리자'){
+			$('#admin').hide();	
+			$('#admin1').click(function(){
+				alert('접근 권한이 없습니다.');
+				return false;
+			})
 		}
 
-		if (admin == '미승인') {
-			$('.childTab').click(function() {
+		if(admin=='미승인'){
+			$('.childTab').click(function () {
 				alert('승인 후 이용해주세요');
 				return false;
 			})
 		}
 		
-		//팀별 게시판에 각 팀원 들이 들어가게끔 수정해야한다.
-		//오쌤은 dept 값이 5번이므로 모든 팀프로젝트 게시판에 들어가야한다.
-		
-		if(dept != '1팀' ) {
-			$('#authorization1').click(function() {
+		if(dept != "1팀" && dept != "5팀"){
+			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다.');
 				return false;
 			})
 		}
 		
-		if(dept != '2팀') {
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function() {
 				alert('당신은 2조가 아닙니다.');
 				return false;
 			})
 		}
 		
-		if(dept != '3팀') {
-			$('#authorization3').click(function() {
+		if(dept != "3팀" && dept != "5팀"){
+			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다.');
 				return false;
 			})
-		} 
+		}
 	
 	}
 		 function logout(){

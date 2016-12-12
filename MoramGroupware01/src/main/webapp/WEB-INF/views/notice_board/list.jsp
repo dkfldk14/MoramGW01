@@ -38,6 +38,11 @@ display: inline-block;
 </head>
 <body>
 
+	<% String type = String.valueOf(session.getAttribute("usertype")); %>
+	<% String dept = String.valueOf(session.getAttribute("dept")); %>	
+	<% String profileimage = String.valueOf(session.getAttribute("profileimage")); %>
+
+
 <!-- 위의 탭 버튼들을 나타냄 -->
    <div id="wrapper">
       <div class="navbar navbar-inverse navbar-fixed-top">
@@ -74,20 +79,20 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                      <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="list">받은 메일함</a></li>
+                     <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -105,9 +110,9 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-sitemap "></i>Project 게시판<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="../team_one_board/list">시나브로</a></li>
-                     <li><a href="../team_two_board/list">그냥2조</a></li>
-                     <li><a href="../team_three_board/list">성준이네</a></li>
+                     <li id = "authorization1"><a href="../team_one_board/list">시나브로</a></li>
+                     <li id = "authorization2"><a href="../team_two_board/list">그냥2조</a></li>
+                     <li id = "authorization3"><a href="../team_three_board/list">성준이네</a></li>
                      <!--  <li>
                                 <a href="#">Second Level Link<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
@@ -316,6 +321,33 @@ display: inline-block;
 		}
 		
 		
+///////////////팀 별 게시판 권한 부여 ////////////////////
+		var dept = "<%=dept%>";
+		
+		//alert('profileimage : ' + profileimage);
+		if(dept != "1팀" && dept != "5팀"){
+			$('#authorization1').click(function(){
+				alert('당신은 1조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != "2팀" && dept != "5팀"){
+			$('#authorization2').click(function(){
+				alert('당신은 2조가 아닙니다');
+				return false;
+			});
+		}
+		
+		if(dept != "3팀" && dept != "5팀"){
+			$('#authorization3').click(function(){
+				alert('당신은 3조가 아닙니다');
+				return false;
+			});
+		}
+		///////////////////////////////////////////////////////
+		
+		
 		var frm = $('#pageForm');
 		$('.pageLinks li a').click(function(){
 			event.preventDefault(); //기본 이벤트 처리 방식을 방지
@@ -359,43 +391,40 @@ display: inline-block;
 			
 		});
 		
+		$(function () {
+			var getpage = getQuerystring('page');
+			if(getpage != null && getpage !=''){
+				$("#pagebtn"+getpage).css("color", "white");
+				$("#pagebtn"+getpage).css("background-color", "#59DFDF");
+			} else {
+				$("#pagebtn1").css("color", "white");
+				$("#pagebtn1").css("background-color", "#59DFDF");
+			}
+		});
+
 		
-	});
+		function getQuerystring(paramName){
 
-	
-	$(function () {
-		var getpage = getQuerystring('page');
-		if(getpage != null && getpage !=''){
-			$("#pagebtn"+getpage).css("color", "white");
-			$("#pagebtn"+getpage).css("background-color", "#59DFDF");
-		} else {
-			$("#pagebtn1").css("color", "white");
-			$("#pagebtn1").css("background-color", "#59DFDF");
-		}
-	});
-
-	
-	function getQuerystring(paramName){
-
-		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
-		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
-		
-		if(_tempArray!=null && _tempArray!=''){
-			for(var i = 0; _tempArray.length; i++) {
-				var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+			var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+			var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
 			
-				if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
-					// _keyValuePair[1] : 파라미터 값
-					return _keyValuePair[1];
+			if(_tempArray!=null && _tempArray!=''){
+				for(var i = 0; _tempArray.length; i++) {
+					var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+				
+					if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
+						// _keyValuePair[1] : 파라미터 값
+						return _keyValuePair[1];
+					}
 				}
 			}
-		}
-	};
+		};
 	
-	var profileimage= '${profileimage}';
-	if(profileimage !=null && profileimage!=''){
-		$("#profileimage").attr('src', profileimage);
-	}
+		var profileimage= '${profileimage}';
+		if(profileimage !=null && profileimage!=''){
+			$("#profileimage").attr('src', profileimage);
+		};
+	});
 	</script>
 	
 	

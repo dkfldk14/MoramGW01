@@ -74,20 +74,20 @@ display: inline-block;
                <li><a href="#"><i class="fa fa-edit "></i>전자결재<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">나의 결재함</a></li>
-                     <li><a href="#">미결함</a></li>
-                     <li><a href="#">반려함</a></li>
-                     <li><a href="#">기결함</a></li>
+                   <li><a href="/groupware/draft/approval-drafter">나의 결재함</a></li>
+                     <li><a href="/groupware/draft/approval-finalizer">미결함</a></li>
+                     <li><a href="/groupware/draft/approval-return">반려함</a></li>
+                     <li><a href="/groupware/draft/approval-finish">기결함</a></li>
                   </ul></li>
 
                <li><a href="#"><i class="fa fa-table "></i>전자우편<span
                      class="fa arrow"></span></a>
                   <ul class="nav nav-second-level">
-                     <li><a href="#">받은 메일함</a></li>
+                     <li><a href="/groupware/email/list">받은 메일함</a></li>
                   
-                     <li><a href="#">편지쓰기</a></li>
-                     <li><a href="#">보낸 메일함</a></li>
-                     <li><a href="#">휴지통</a></li>
+                     <li><a href="/groupware/email/write">편지쓰기</a></li>
+                     <li><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+                     <li><a href="/groupware/email/delete-mailbox">휴지통</a></li>
                      <li><a href="#">주소록</a></li>
                   </ul></li>
                <li><a href="#"><i class="fa fa-edit "></i>게시판<span
@@ -312,26 +312,25 @@ display: inline-block;
 			alert("fail, try again");
 		}
 		
-		
 ///////////////팀 별 게시판 권한 부여 ////////////////////
-		var dept = <%=dept%>;
+		var dept = "<%=dept%>";
 		
 		//alert('profileimage : ' + profileimage);
-		if(dept != 1 && dept != 5){
+		if(dept != "1팀" && dept != "5팀"){
 			$('#authorization1').click(function(){
 				alert('당신은 1조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 2 && dept != 5){
+		if(dept != "2팀" && dept != "5팀"){
 			$('#authorization2').click(function(){
 				alert('당신은 2조가 아닙니다');
 				return false;
 			});
 		}
 		
-		if(dept != 3 && dept != 5){
+		if(dept != "3팀" && dept != "5팀"){
 			$('#authorization3').click(function(){
 				alert('당신은 3조가 아닙니다');
 				return false;
@@ -339,7 +338,7 @@ display: inline-block;
 		}
 		///////////////////////////////////////////////////////
 		
-		
+
 		var frm = $('#pageForm');
 		$('.pageLinks li a').click(function(){
 			event.preventDefault(); //기본 이벤트 처리 방식을 방지
@@ -383,44 +382,48 @@ display: inline-block;
 			
 		});
 		
-		$(function () {
-			var getpage = getQuerystring('page');
-			if(getpage != null && getpage !=''){
-				$("#pagebtn"+getpage).css("color", "white");
-				$("#pagebtn"+getpage).css("background-color", "#59DFDF");
-			} else {
-				$("#pagebtn1").css("color", "white");
-				$("#pagebtn1").css("background-color", "#59DFDF");
-			}
-		});
-
 		
-		function getQuerystring(paramName){
+	
+	
+	
+	$(function () {
+		var getpage = getQuerystring('page');
+		if(getpage != null && getpage !=''){
+			$("#pagebtn"+getpage).css("color", "white");
+			$("#pagebtn"+getpage).css("background-color", "#59DFDF");
+		} else {
+			$("#pagebtn1").css("color", "white");
+			$("#pagebtn1").css("background-color", "#59DFDF");
+		}
+	});
 
-			var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
-			var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+	
+	function getQuerystring(paramName){
+
+		var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제
+		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기
+		
+		if(_tempArray!=null && _tempArray!=''){
+			for(var i = 0; _tempArray.length; i++) {
+				var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
 			
-			if(_tempArray!=null && _tempArray!=''){
-				for(var i = 0; _tempArray.length; i++) {
-					var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
-				
-					if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
-						// _keyValuePair[1] : 파라미터 값
-						return _keyValuePair[1];
-					}
+				if(_keyValuePair[0] == paramName){ // _keyValuePair[0] : 파라미터 명
+					// _keyValuePair[1] : 파라미터 값
+					return _keyValuePair[1];
 				}
 			}
-		};
-		
-		
-		
-		var profileimage= '${profileimage}';
-		if(profileimage !=null && profileimage!=''){
-			$("#profileimage").attr('src', profileimage);
 		}
+	};
+
+	var profileimage= '${profileimage}';
+	if(profileimage !=null && profileimage!=''){
+		$("#profileimage").attr('src', profileimage);
 		
-		
+ 	}
+				
 	});
+	
+
 	</script>
 	
 	

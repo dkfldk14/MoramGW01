@@ -176,13 +176,12 @@ margin: 10px;
 							<li class="childTab"><a href="/groupware/draft/approval-finish">기결함</a></li>
 						</ul></li>
 
-					<li><a href="#"><img alt="" src="../resources/assets/img/email.png"/> 전자우편<span
-							class="fa arrow"></span></a>
+					<li><a href="#"><img alt="" src="../resources/assets/img/email.png"/> 전자우편<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li class="childTab"><a href="email/list?page=1">받은 메일함</a></li>
-							<li class="childTab"><a href="email/write">편지쓰기</a></li>
-							<li class="childTab"><a href="email/send-mailbox">보낸 메일함</a></li>
-							<li class="childTab"><a href="email/delete-mailbox">휴지통</a></li>
+							<li class="childTab"><a href="/groupware/email/list?page=1">받은 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/write">편지쓰기</a></li>
+							<li class="childTab"><a href="/groupware/email/send-mailbox">보낸 메일함</a></li>
+							<li class="childTab"><a href="/groupware/email/delete-mailbox">휴지통</a></li>
 							
 
 						</ul></li>
@@ -208,32 +207,16 @@ margin: 10px;
 							<li class="childTab" id = "authorization2"><a href="/groupware/team_two_board/list">그냥2조</a></li>
 							<li class="childTab" id = "authorization3"><a href="/groupware/team_three_board/list">성준이네</a></li>
 
-							<!--  <li>
-                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Link</a>
-                                    </li>
 
-                                </ul>
-
-                            </li> -->
 						</ul></li>
-					<li><a href="#"><img alt="" src="../resources/assets/img/mypage.png"/> 마이페이지<span
-							class="fa arrow"></span></a>
+					<li><a href="#"><img alt="" src="../resources/assets/img/mypage.png"/> 마이페이지<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_update">개인정보수정</a></li>
 							<li class="childTab"><a href="#">나의 이력서</a></li>
 							<li class="childTab"><a href="/groupware/mypage/my_page">나의 이력관리</a></li>
 						</ul></li>
-					<li id="admin"><a href="#"><img alt="" src="../resources/assets/img/manager.png"/> 관리자<span
-							class="fa arrow"></span></a>
+
+					<li id="admin"><a href="#"><img alt="" src="../resources/assets/img/manager.png"/> 관리자<span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li class="childTab"><a href="/groupware/member_manage">사용자관리</a></li>
 							<li class="childTab"><a href="#">권한관리</a></li>
@@ -242,17 +225,10 @@ margin: 10px;
 						</ul></li>
 
 
-					<!--  <li>
-                        <a href="#"><i class="fa fa-edit "></i>Last Link </a>
-                    </li>
-                    <li>
-                        <a href="blank.html"><i class="fa fa-table "></i>Blank Page</a>
-                    </li>  -->
-				</ul>
-
 			</div>
 
 		</nav>
+		
 </div>
 		<div id="page-wrapper">
 			<div id="page-inner">
@@ -389,7 +365,7 @@ margin: 10px;
 			var admin ="<%=type%>"
 			function tabSetting() {
 				console.log("값:" + admin);
-				if (admin != '어드민') {
+				if (admin != '관리자') {
 					$('#admin').hide();
 				}
 
@@ -400,6 +376,8 @@ margin: 10px;
 					})
 				}
 			}
+			tabSetting();
+			
 			var profileimage= '${profileimage}';
 			if(profileimage !=null && profileimage!=''){
 				$("#profileimage").attr('src', profileimage);
