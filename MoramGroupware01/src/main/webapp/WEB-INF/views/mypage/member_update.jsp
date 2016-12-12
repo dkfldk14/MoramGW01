@@ -338,8 +338,7 @@ li{
 			var admin ='<%=type%>';
 			function tabSetting() {
 
-			var admin ='<%=type%>';
-		function tabSetting() {
+	
 
 				console.log("값:" + admin);
 				if (admin != "관리자") {
@@ -372,7 +371,7 @@ li{
 					}
 				});
 			});
-			}
+			
 			
 </script>
 
