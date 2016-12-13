@@ -221,7 +221,7 @@ ul {
 			<form action="/groupware/email/write" id="fowardemail" method="post">
 			
 				<div class="row">
-								<div style="display: inline-block;">
+				<%-- 				<div style="display: inline-block;">
 									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;"> 받은메일함</span>
 									<span> | </span> 
 									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${messages}</span>
@@ -229,7 +229,7 @@ ul {
 									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${messages}</span>
 			
 									<a href="list?page=1"><img src="../resources/assets/img/refresh4.png"></a>
-								</div>
+								</div> --%>
 				</div>
 
 				<div class="row">
@@ -288,6 +288,9 @@ ul {
 
 
 	<input type="hidden" name="to_email" value=${emaildetail.to_email }>
+								<input type="hidden" name="message" value="${sendCount }"/> 
+						<input type="hidden" name="message" value=${message } > 
+						
 									<input type="hidden" name="from_email" value=${emaildetail.from_email }>
 									<input type="hidden" name="subject" value=${emaildetail.subject }>
 										<input type="hidden" name="content" value=${emaildetail.content }>

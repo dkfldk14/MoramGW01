@@ -319,10 +319,10 @@ border-radius: 70px;
                                  class="label label-danger">${count_ap }</span>
                               </a> 
                               
-                              <a class="quick-btn" href="email/list" id="col1_btn2"> 
+                              <a class="quick-btn" href="email/list?page=1" id="col1_btn2"> 
                               <i class="icon-envelope icon-2x"></i> 
                                  <span><img src="resources/assets/img/home_img/mail (1).png" style="width: 80px"; height="60px;"/></span> <span
-                                 class="label label-success">456</span>
+                                 class="label label-success">${emailCount}</span>
                               </a> 
                               
                               <a class="quick-btn" href="draft/approval-finish" id="col1_btn3"> 

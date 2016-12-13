@@ -257,9 +257,9 @@ ul {
 					<div style="display: inline-block;">
 									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;"> 보낸메일함</span>
 									<span> | </span> 
-									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${messages}</span>
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${messagecount}</span>
 									<span> ／ </span> 
-									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${messages}</span>
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${messagecount}</span>
 			
 									<a href="list?page=1"><img src="../resources/assets/img/refresh4.png"></a>
 								</div>

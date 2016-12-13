@@ -441,6 +441,7 @@ div.center {text-align: center;}
 					</div>
 					<form id="pageForm">
 						<input type="hidden" name="num"/> 
+						<input type="hidden" name="message" value="${sendCount }"/> 
 						<input type="hidden" name="page" value="${pageMaker.criteria2.page}" /> 
 						<input type="hidden" name="perPage" value="${pageMaker.criteria2.perPage }" />
 

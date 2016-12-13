@@ -396,7 +396,8 @@ div.center {text-align: center;}
 
 							</table>
 							<input type="hidden" name=email_from/>
-	
+							<input type="hidden" name="message" value="${messages}"/> 
+						
 							<p>
 							<div id="labelcenter">
 								<label for="1"></label> <label class="text" for="1"> </label>

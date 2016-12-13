@@ -72,9 +72,10 @@ public class EmailController {
 	private String gwEmail=null;
 	private Message[] messages;	
 	private int sendmailct=200;
-	private int countNewMail;
+	
 	
 	@RequestMapping(value="/list")
+	
 	public void EmailList(Integer page,Model model,HttpServletRequest request){
 		HttpSession session=request.getSession();
 		String userid=(String) session.getAttribute("login_id");
@@ -87,7 +88,7 @@ public class EmailController {
 		emaillist = new ArrayList<EmailVO>();
 	try {
 		logger.info("try 시작");
-
+		int countNewMail=0;
 		// create properties field
 		Properties properties = new Properties();
 		properties.put("mail.pop3.host", HOST);
@@ -157,7 +158,7 @@ public class EmailController {
 			emaillist.add(vo);
 			
 		}
-		logger.info("///// 나와랏! countNewMail"+countNewMail);
+		logger.info("///// 나와랏! countNewMail : "+countNewMail);
 		/*
 		for (int i = end; i > start; i--) {
 			EmailVO vo = new EmailVO();
@@ -277,13 +278,13 @@ public class EmailController {
 		
 		EmailVO volist=emaillist.get(num - 1 - (page-1) * 10);
 			model.addAttribute("emaildetail", volist);
-			
+				
 
 	}
 
 	
 	@RequestMapping(value = "/detail-other", method = RequestMethod.GET)
-	public void detailother(int num, int page, Model model, EmailVO vo) {
+	public void detailother(int num, int page, Model model, EmailVO vo, int message) {
 		logger.info("detail jsp 실행 ");
 		logger.info("num" + num);
 		EmailVO volist=emailServiceDAO.detailEmail(num);
@@ -291,6 +292,7 @@ public class EmailController {
 		/*logger.info("delete subject : "+volist.getSubject());
 		logger.info("delete content : "+volist.getContent());
 		*/model.addAttribute("emaillist", volist);
+			model.addAttribute("messagecount", message);
 			
 	
 	}
