@@ -550,11 +550,9 @@ th, td {
 
 		<script>
 
+
 		
-<<<<<<< HEAD
-	
-=======
-		$(document).ready(function(){
+	$(document).ready(function(){
 			
          
 ///////////////팀 별 게시판 권한 부여 ////////////////////
@@ -582,7 +580,7 @@ th, td {
 				});
 			}
 			///////////////////////////////////////////////////////
->>>>>>> refs/remotes/MoramGW/master
+	});
 		
 
 		var admin = "<%=type%>";
@@ -658,11 +656,7 @@ th, td {
 				$("#popLayer").hide();
 				$("#disableDiv").hide();
 			}
-			
-<<<<<<< HEAD
-		
-		
-=======
+
 			
 			var name = "${name}";
 			var url = '/groupware/checktime/myimage/'+name;
@@ -678,8 +672,8 @@ th, td {
 				};
 			});
 			
-		});	
->>>>>>> refs/remotes/MoramGW/master
+	
+
 		</script>
            <!-- jQuery CDN -->
             <script
