@@ -554,10 +554,11 @@ th, td {
 
 		<script>
 
+
+
+
 		
-
-
-		$(document).ready(function(){
+	$(document).ready(function(){
 			
          
 ///////////////팀 별 게시판 권한 부여 ////////////////////
@@ -586,6 +587,9 @@ th, td {
 			}
 			///////////////////////////////////////////////////////
 
+
+
+	});
 		
 
 		var admin = "<%=type%>";
@@ -661,7 +665,7 @@ th, td {
 				$("#popLayer").hide();
 				$("#disableDiv").hide();
 			}
-			
+
 
 			
 			var name = "${name}";
@@ -678,7 +682,6 @@ th, td {
 				};
 			});
 			
-		});	
 
 		</script>
            <!-- jQuery CDN -->

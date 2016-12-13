@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Free Bootstrap Admin Template : Main-Home</title>
+<title>MORAM Groupware : Main-Home</title>
 <!-- BOOTSTRAP STYLES-->
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
 	rel="stylesheet" />
@@ -325,10 +325,10 @@ border-radius: 70px;
                                  class="label label-success">456</span>
                               </a> 
                               
-                              <a class="quick-btn" href="#" id="col1_btn3"> 
+                              <a class="quick-btn" href="draft/approval-finish" id="col1_btn3"> 
                               <i class="icon-signal icon-2x"></i> 
                               <span><img src="resources/assets/img/home_img/folder (1).png" style="width: 80px"; height="60px;"/></span> <span
-                                 class="label label-warning">+25</span>
+                                 class="label label-warning">${count_fin }</span>
                               </a> 
                               
                               <a class="quick-btn" href="notice_board/list" id="col1_btn4"> 

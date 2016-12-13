@@ -370,7 +370,12 @@
 		where draft_index = #{draft_index}
 
 	</select>
-	
+   <select id="count_finish" resultType="integer">
+     select count(*) from moram_approval_finish
+  where (id = #{id} or final_id1 = #{final_id1} or final_id2 = #{final_id2} or final_id3 = #{final_id3} or final_id4 = #{final_id4} or final_id5 = #{final_id5}) and to_char(enddate, 'YYYY/MM/DD') between TO_CHAR(SYSDATE,'YYYY/MM/DD') 
+	and TO_CHAR(SYSDATE,'YYYY/MM/DD HH24:MI:SS') 
+  order by draft_index
+   </select>
 
 
 </mapper>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>MORAM Groupware</title>
 <!-- BOOTSTRAP STYLES-->
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
    rel="stylesheet" />

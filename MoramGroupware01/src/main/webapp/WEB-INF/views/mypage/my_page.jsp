@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MORAM Groupware</title>
 
 <!-- BOOTSTRAP STYLES-->
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
@@ -185,11 +185,11 @@ table.type09 td {
 						<table class="type09">
 							<thead>
 								<tr>
-									<th scope="cols">췤</th>
-									<th scope="cols">췤췤</th>
-									<th scope="cols">암더코리안탑클라스</th>
-									<th scope="cols">힙합모범 노블레스</th>
-									<th scope="cols">페이블러스 터블런스</th>
+									<th scope="cols">번호</th>
+									<th scope="cols">작성일</th>
+									<th scope="cols">출근시간</th>
+									<th scope="cols">퇴근시간</th>
+									<th scope="cols">출결 현황</th>
 								</tr>
 							</thead>
 							<tbody id="check_all">
