@@ -422,31 +422,36 @@ th, td {
 					<hr />
 					<div class="row">
 						<div class="col-md-12">
-							<table class="table-style">
-								<tr class="trstyle">
-									<th style="width: 80px" align="center">보낸사람</th>
-									<td class="tdstyle" colspan="2"><input type="text"
-										style="width: 950px" value="${name }<${gwemail }>"></input></td>
+		<table class="table-style" width="1050px">
+                        <tr class="trstyle">
+                           <th width="10%" align="center">보낸사람</th>
+                           <td class="tdstyle" colspan="2">
+                              <input type="text"
+                              style="width: 100%" value="${name }<${gwemail }>"></input>
+                           </td>
 
-								</tr>
-								<tr class="trstyle">
-									<th style="width: 80px" align="center">받는사람</th>
-									<td class="tdstyle"><input type="text"
-										style="width: 860px" name="to_email" id="textInput" value="${to_email }"></input></td>
-									<td><a href="javascript:;" onclick="javascript:showPopup()">주소록</a>
-								</td>
-							
-								</tr>
-								<tr class="trstyle">
-									<th style="width: 80px" align="center">제목</th>
-									<td class="tdstyle" colspan="2"><input type="text"
-										style="width: 950px" name="subject"></input></td>
-								</tr>
-								<tr class="trstyle">
-									<th style="width: 80px" align="center">파일첨부</th>
-									<td colspan="2"></td>
-								</tr>
-							</table>
+                        </tr>
+                        <tr class="trstyle">
+                           <th align="center">받는사람</th>
+                           <td class="tdstyle">
+                              <input type="text"
+                              style="width: 100%" name="to_email" id="textInput" value="${to_email }">
+                              </input>
+                           </td>
+                           <td style="width: 6%;"><a href="javascript:;" onclick="javascript:showPopup()">주소록</a>
+                        </td>
+                     
+                        </tr>
+                        <tr class="trstyle">
+                           <th align="center">제목</th>
+                           <td class="tdstyle" colspan="2"><input type="text"
+                              style="width: 100%" name="subject"></input></td>
+                        </tr>
+                        <tr class="trstyle">
+                           <th align="center">파일첨부</th>
+                           <td colspan="2"></td>
+                        </tr>
+                     </table>
 							<div id="loadingDiv" class="loadingDiv" style="display: none" >
 							<br /> <img src="http://couponsedge.com/img/processing.gif" />
 						</div>
@@ -462,8 +467,7 @@ th, td {
 
 							<form>
 								<textarea id="editor" rows="10" cols="100"
-									style="width: 1030px; height: 412px; font-size: 130%;" name="content"  >
-										${emailforward }</textarea>
+									style="width: 1030px; height: 412px; font-size: 130%;" name="content"  >${emailforward }</textarea>
 								
 							</form>
 						</div>
@@ -551,9 +555,8 @@ th, td {
 		<script>
 
 		
-<<<<<<< HEAD
-	
-=======
+
+
 		$(document).ready(function(){
 			
          
@@ -582,7 +585,7 @@ th, td {
 				});
 			}
 			///////////////////////////////////////////////////////
->>>>>>> refs/remotes/MoramGW/master
+
 		
 
 		var admin = "<%=type%>";
@@ -659,10 +662,7 @@ th, td {
 				$("#disableDiv").hide();
 			}
 			
-<<<<<<< HEAD
-		
-		
-=======
+
 			
 			var name = "${name}";
 			var url = '/groupware/checktime/myimage/'+name;
@@ -679,7 +679,7 @@ th, td {
 			});
 			
 		});	
->>>>>>> refs/remotes/MoramGW/master
+
 		</script>
            <!-- jQuery CDN -->
             <script

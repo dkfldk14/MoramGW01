@@ -287,8 +287,10 @@ public class EmailController {
 		logger.info("detail jsp 실행 ");
 		logger.info("num" + num);
 		EmailVO volist=emailServiceDAO.detailEmail(num);
-		
-		model.addAttribute("emaildetail", volist);
+		System.out.println(volist.getSubject());
+		/*logger.info("delete subject : "+volist.getSubject());
+		logger.info("delete content : "+volist.getContent());
+		*/model.addAttribute("emaillist", volist);
 			
 	
 	}
@@ -394,8 +396,7 @@ public class EmailController {
 		
 		String host = "192.168.11.100";// change accordingly
 			String mailStoreType = "pop3";
-			//String user = "dkfldk14@moram.com";// change accordingly
-			//String password = "dkfldk14";
+			
 			try {
 				// get the session object
 				Properties properties = new Properties();
@@ -669,14 +670,15 @@ public class EmailController {
 		
 		HttpSession session=request.getSession();
 		String userid=(String) session.getAttribute("login_id");
+		System.out.println("안나오고 있나1");
 		
 		MemberVO mvo=emailServiceDAO.member_one(userid);
 		//String from_email = mvo.getGroupemail();
 		logger.info("이메일:"+mvo.getGroupemail());
-		
+		System.out.println(mvo.getGroupemail());
 		String from_email = mvo.getGroupemail();
 		logger.info("delete from_email : " + from_email);
-		
+		System.out.println("안나오고 있나2");
 		NewPaginationCriteria c2 = new NewPaginationCriteria();
 		/*String gwMail="dkfldk14@moram.com";*/
 		logger.info("listpage delete : page="+page);

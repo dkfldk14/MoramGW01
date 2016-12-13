@@ -44,7 +44,7 @@ where (from_email = #{groupemail} or to_email=#{groupemail}) and state = 2 order
  
  <select id="detail_Email" resultType="project.spring.groupware.email.domain.EmailVO">
  select * from moram_group_email
- where num = #{num} and state = 1
+ where num = #{num} and (state = 1 or state = 2)
  </select>
 <!-- 
 <select id="selectByBno" resultType="project.spring.groupware.email.domain.EmailVO">
@@ -77,13 +77,13 @@ order by senddate desc) a
  
   
 <select id="addressListdelete" resultType="project.spring.groupware.email.domain.EmailVO">
-	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=2 and from_email = #{from_email} order by senddate desc) a 
+	select b.* from(select rownum rn, a.* from(select * from moram_group_email where state=2 and to_email = #{from_email} order by senddate desc) a 
 	)b where rn between #{start} and #{end}
 </select>
  
 <select id="totalAddressListdelete" resultType="Integer">
 select count (*) from 
-(select b.* from(select rownum rn, a.* from(select * from moram_group_email where state = 2 and from_email = #{from_email}
+(select b.* from(select rownum rn, a.* from(select * from moram_group_email where state = 2 and to_email = #{from_email}
 order by senddate desc) a 
 	)b)
 </select>

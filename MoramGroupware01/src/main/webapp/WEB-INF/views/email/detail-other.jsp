@@ -51,21 +51,26 @@ ul {
 	padding: 0;
 }
  .button {
-    background-color: white; /* Green */
-    border: 1px solid #A5DBCE;
-    color: black;
+  background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+  
     padding: 6px 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 10px;
+   
     cursor: pointer;
     float: left;
 } 
 
 .button:hover {
-    background-color: #A5DBCE;
-}
+ background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;}
 
 .buttonreturn {
   background-color: white;
@@ -249,20 +254,29 @@ ul {
 			
 				<div class="row">
 				
+					<div style="display: inline-block;">
+									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;"> 보낸메일함</span>
+									<span> | </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${messages}</span>
+									<span> ／ </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${messages}</span>
 			
-					<div class="col-md-12">
+									<a href="list?page=1"><img src="../resources/assets/img/refresh4.png"></a>
+								</div>
+			
 					
-							<div style="padding-bottom: 10px;">
-								<input type="button" class="buttonreturn" id="buttonreturn" value="답장"/>
-								<input type="submit" value="전달" class="buttonforward" id="buttonforward"/>
-								
-							</div>
-					</div>
-				</div>
+							
+				
 
 				<div class="row">
 					<div class="col-md-12">
-				
+								
+						<div style="margin-top: 20px;">
+						<div style="padding-bottom: 10px; display: inline-block;">
+								<input type="button" width="47px" height="28" class="button" id="buttonreturn" value="답장"/>
+								<input type="submit" width="47px" height="28" value="전달" class="button" id="buttonforward"/>
+								
+						</div>
 			
 						<div id="btndiv">
 						
@@ -270,6 +284,7 @@ ul {
 							<button class="button" id="listup">▲</button>
 							<button class="button" id="listdown">▼</button>
 
+						</div>
 						</div>
 						<div class="row">
 						<div class="col-md-12">
@@ -283,20 +298,20 @@ ul {
 
 									<div class="col-md-12">
 										<div id="timesone">
-											<h3>${emaildetail.subject }</h3>
+											<h3>${emaillist.subject }</h3>
 										</div>
 										<div id="timestwo">
-											<h5>${emaildetail.senddate }</h5>
+											<h5>${emaillist.senddate }</h5>
 										</div>
 
 										<div id="thred">
 											<ul>
-												<li>보낸사람</li>
-												<li>${emaildetail.from_email }</li>
+												<li style="font-weight: 800">보낸사람</li>
+												<li>${emaillist.from_email }</li>
 											</ul>
 											<ul>
-												<li>받는사람</li>
-												<li>${emaildetail.to_email }</li>
+												<li style="font-weight: 800">받는사람</li>
+												<li>${emaillist.to_email }</li>
 											</ul>
 										</div>
 
@@ -305,15 +320,15 @@ ul {
 											
 									<input type="hidden" name="page" value="${page }" />
 							</div>
-							<div>${emaildetail.content }</div>
+							<div>${emaillist.content }</div>
 						</div>
-									<input type="hidden" name="to_email" value=${emaildetail.to_email }>
-									<input type="hidden" name="from_email" value=${emaildetail.from_email }>
-									<input type="hidden" name="subject" value=${emaildetail.subject }>
-										<input type="hidden" name="content" value=${emaildetail.content }>
+									<input type="hidden" name="to_email" value=${emaillist.to_email }>
+									<input type="hidden" name="from_email" value=${emaillist.from_email }>
+									<input type="hidden" name="subject" value=${emaillist.subject }>
+										<input type="hidden" name="content" value=${emaillist.content }>
 									
-									<input type="hidden" name="senddate" value=${emaildetail.senddate }>
-									
+									<input type="hidden" name="senddate" value=${emaillist.senddate }>
+									<input type="hidden" name="message" value=${message } > 
 						
 						</div>
 			</div>
@@ -380,7 +395,7 @@ $(document).ready(function(){
     });
     
     $("#buttonreturn").click(function(){
-    	location="write?to_email=${emaildetail.from_email}";
+    	location="write?to_email=${emaillist.from_email}";
     })
     
   /*   $("#buttonforward").click(function(){

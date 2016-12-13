@@ -51,21 +51,27 @@ ul {
 	padding: 0;
 }
  .button {
-    background-color: white; /* Green */
-    border: 1px solid #A5DBCE;
-    color: black;
+  background-color: white;
+   color: #a8abad;
+   font-weight : 850;
+    font-size: 13px;
+   border: 1px solid #d6d6d6;
+  
     padding: 6px 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 10px;
+   
     cursor: pointer;
     float: left;
 } 
 
 .button:hover {
-    background-color: #A5DBCE;
-}
+ background-color: #edf8ff;
+   color: #3a3939;
+   font: bold;
+   font-weight: 900;}
+
 
 .buttondelete:hover {
   background-color: #edf8ff;
@@ -215,19 +221,26 @@ ul {
 			<form action="/groupware/email/write" id="fowardemail" method="post">
 			
 				<div class="row">
-					<div class="col-md-12">
-						
-						<div style="padding-bottom: 10px;">
-								<input type="button" class="buttonreturn" id="buttonreturn" value="답장"/>
-								<input type="submit" value="전달" class="buttonforward" id="buttonforward"/>
-								
-							</div>
-						
-					</div>
+								<div style="display: inline-block;">
+									<span style="font-size: 12px; font-weight: 600; padding-left: 5px;"> 받은메일함</span>
+									<span> | </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: green;">${messages}</span>
+									<span> ／ </span> 
+									<span style="font-size: 12px; font-weight: 700; padding-left: 5px; color: black;">${messages}</span>
+			
+									<a href="list?page=1"><img src="../resources/assets/img/refresh4.png"></a>
+								</div>
 				</div>
 
 				<div class="row">
 					<div class="col-md-12">
+						<div style="margin-top: 20px;">
+						<div style="padding-bottom: 10px; display: inline-block;">
+								<input type="button" width="47px" height="28" class="button" id="buttonreturn" value="답장"/>
+								<input type="submit" width="47px" height="28" value="전달" class="button" id="buttonforward"/>
+								
+						</div>
+			
 						<div id="btndiv">
 						
 							<button class="button" id="listclick">list</button>
@@ -235,12 +248,12 @@ ul {
 							<button class="button" id="listdown">▼</button>
 
 						</div>
+						</div>
 						<div class="row">
 						<div class="col-md-12">
 							<hr />
 							</div>
 						</div>
-
 						<div>
 					<div class="row">
 									<div class="col-md-12">
@@ -253,8 +266,8 @@ ul {
 
 										<div id="thred">
 											<ul>
-												<li>보낸사람</li>
-												<li>${emaildetail.from_email }</li>
+												<li style="font-weight: 700">보낸사람</li>
+												<li style="font-weight: 700">${emaildetail.from_email }</li>
 											</ul>
 											<ul>
 												<li>받는사람</li>

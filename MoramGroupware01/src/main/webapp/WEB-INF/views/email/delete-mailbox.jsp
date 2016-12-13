@@ -491,7 +491,7 @@ div.center {text-align: center;}
 			
 			console.log("${Gemail}")
 
-			var admin = "<%=type%>";
+			var admin = "<%=type%>"
 
 			function tabSetting() {
 				// 탭 컨텐츠 hide 후 현재 탭메뉴 페이지만 show
@@ -519,11 +519,13 @@ div.center {text-align: center;}
 					$('table tr td a').click(function() {
 						event.preventDefault();
 						//bno 의 값은 클릭한 this 의 값에 bno가 들어가 있음. 
-						var bno = $(this).attr('href');
+						var num = $(this).attr('href');
+						alert(num);
 						//페이지가 바뀌지 않기 때문에 아래랑 조금 다름
-						frm.find('[name="num"]').val(bno);
+						frm.find('[name="num"]').val(num);
 						frm.attr('action', 'detail-other');
 						frm.attr('method', 'get');
+						alert(num);
 						frm.submit();
 
 					});
@@ -531,7 +533,6 @@ div.center {text-align: center;}
 					//클래스 pageLinks 태그 안의 li 태그 안의 a 태그를 찾아서 click 이벤트를 커스터마이징
 
 					$('.pagination li a').click(function() {
-						$(this).css('background-color','gray');
 						event.preventDefault(); //기본 이벤트 처리 방식을 방지 (막음)
 						//pageForm 안에 있는 name="page"인 요소를 찾아서 이동할 페이지 번호를 세팅
 						var targetPage = $(this).attr('href');
