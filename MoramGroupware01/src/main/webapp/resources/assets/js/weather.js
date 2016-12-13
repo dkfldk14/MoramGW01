@@ -252,6 +252,8 @@ $(document).ready(function(){
 			success: function(result) {
 				if (result == 1) {
 					alert('입실 완료');
+					location.reload();
+					
 				}
 			}
 		});
@@ -268,7 +270,6 @@ $(document).ready(function(){
 		$("#check-in-text").text(time);
 		// 넣었으니 disabled
 		$("#check-in").attr("disabled","disabled")
-		
 	});
 	
 	$(".check-out").click(function(){

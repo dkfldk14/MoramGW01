@@ -404,7 +404,9 @@ $(document).ready(function(){
     }) */
     
 	var name = "${name}";
-	var url = '/groupware/checktime/myimage/'+name;
+	
+	alert(name);
+	var url = '/groupsware/checktime/myimage/'+name;
 	$.getJSON(url, function(data){
 		var profileimage='';
 

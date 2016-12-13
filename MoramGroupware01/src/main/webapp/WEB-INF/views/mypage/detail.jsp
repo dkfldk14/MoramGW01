@@ -30,11 +30,66 @@
 <link href='<c:url value="/resources/assets/css/bootstrap.min.css"/>'
 	rel="stylesheet" />	
 	
-	<style type="text/css">
-	.form-group{
-	 	
-	}
-	</style>
+ <style type="text/css">
+.where {
+  display: block;
+  margin: 25px 15px;
+  font-size: 11px;
+  color: #000;
+  text-decoration: none;
+  font-family: verdana;
+  font-style: italic;
+} 
+
+.filebox input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip:rect(0,0,0,0);
+    border: 0;
+}
+
+.filebox label {
+    display: inline-block;
+    padding: .5em .75em;
+    color: #999;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #fdfdfd;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
+
+/* named upload */
+.filebox .upload-name {
+    display: inline-block;
+    padding: .5em .75em;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+  border: 1px solid #ebebeb;
+  border-bottom-color: #e2e2e2;
+  border-radius: .25em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.filebox.bs3-primary label {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+   </style>
+
 	
 </head>
 <body>
@@ -194,11 +249,19 @@
 				
 				
 				<!-- 내 사진 수정  -->
-				<div class="form-group">
-					<label for="birth">내 사진</label><br>
-					<img src="http://dy.gnch.or.kr/img/no-image.jpg" id="image" width="150px" height="150px"/>
-					<input id="input_file" type="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png"/>
-				</div>
+            	<div class="form-group">
+               		<label for="birth">내 사진</label><br>
+               
+              		<img src="http://dy.gnch.or.kr/img/no-image.jpg" id="image" width="150px" height="150px"/>
+               
+              		<div class="filebox bs3-primary" style="margin-top: 10px;">
+               
+                    	<input class="upload-name" value="파일선택" disabled="disabled">
+
+                   	 	<label for="ex_filename">업로드</label> 
+                    	<input type="file" id="ex_filename" class="upload-hidden" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png"> 
+                    </div>
+                </div>
 				<!-- ---------- -->
 				
 				
@@ -404,7 +467,7 @@
 				
 				
 				
-				var file = document.getElementById('input_file');
+				var file = document.getElementById('ex_filename');
 				var target = event.currentTarget;
 				var xmlHttpRequest = new XMLHttpRequest();
 				xmlHttpRequest.open('POST', 'https://api.imgur.com/3/image/', true);
@@ -477,7 +540,7 @@
 
 			<!-- /* 내 사진 */ -->
 			<script type="text/javascript">
-			var file = document.getElementById('input_file');
+			var file = document.getElementById('ex_filename');
 			var image = document.getElementById('image'); 
 			file.onchange = function (event) {
 			 var target = event.currentTarget;
@@ -569,7 +632,7 @@
 			        h: 200
 			    };
 			 
-			    $('#input_file').setPreview(opt);
+			    $('#ex_filename').setPreview(opt);
 			});
 
 
@@ -590,6 +653,20 @@
 			        if(!upload) return false;
 			    }
 			}
+			
+			
+			var fileTarget = $('.filebox .upload-hidden');
+
+            fileTarget.on('change', function(){
+                if(window.FileReader){
+                    var filename = $(this)[0].files[0].name;
+                } else {
+                    var filename = $(this).val().split('/').pop().split('\\').pop();
+                }
+
+                $(this).siblings('.upload-name').val(filename);
+            });
+
 			
 			
 			var name = "${name}";
