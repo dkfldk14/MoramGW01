@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Free Bootstrap Admin Template : Main-Home</title>
+<title>MORAM Groupware : Main-Home</title>
 <!-- BOOTSTRAP STYLES-->
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
 	rel="stylesheet" />

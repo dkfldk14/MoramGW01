@@ -460,7 +460,7 @@ $(document).ready(function(){
 		      
 		      // 타이틀, 높이, 길이 정보
 		      // Set chart options
-		      var options = {'title':'Today Modram in ',
+		      var options = {'title':'Today Moram in ',
 		                     'width':440,
 		                     'height':420,
 		                     slices: {
